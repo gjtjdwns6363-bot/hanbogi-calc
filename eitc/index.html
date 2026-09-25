@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>근로장려금·자녀장려금 계산기 2026 (2025년 소득분) | 한눈 계산기</title>
+<meta name="description" content="가구 유형, 부부합산 소득, 자녀 수, 재산만 넣으면 근로장려금과 자녀장려금 예상액을 바로 계산합니다. 조세특례제한법 산정표 기준, 기한 후 신청 95%·재산 감액까지 반영.">
+<link rel="canonical" href="https://calc.hanbogi.com/eitc/">
+<meta property="og:title" content="근로장려금·자녀장려금 계산기 2026">
+<meta property="og:description" content="소득·자녀·재산만 넣으면 예상 수령액을 바로 계산해요.">
+<meta property="og:url" content="https://calc.hanbogi.com/eitc/">
+<link rel="stylesheet" href="/style.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5424435978828190" crossorigin="anonymous"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"근로장려금은 최대 얼마까지 받나요?","acceptedAnswer":{"@type":"Answer","text":"2025년 소득분 기준 단독가구 165만 원, 홑벌이가구 285만 원, 맞벌이가구 330만 원이 최대입니다."}},
+{"@type":"Question","name":"자녀장려금은 자녀 1명당 얼마인가요?","acceptedAnswer":{"@type":"Answer","text":"부부합산 총소득 7,000만 원 미만 가구에 자녀 1명당 최대 100만 원이며, 소득이 늘면 약 50만 원까지 줄어듭니다."}},
+{"@type":"Question","name":"기한 후 신청하면 얼마나 줄어드나요?","acceptedAnswer":{"@type":"Answer","text":"정기신청 기간이 지나 기한 후 신청하면 산정액의 95%를 받습니다. 2025년 소득분 기한 후 신청은 2026년 12월 1일까지입니다."}}]}</script>
+</head>
+<body>
+<header><a href="/">한눈 계산기</a></header>
+<main>
+<h1>근로장려금·자녀장려금 계산기</h1>
+<p class="lead">2025년 소득분(2026년 신청) 기준입니다. 입력값은 서버로 보내지 않고 이 화면에서만 계산해요.</p>
+
+<form class="card" id="f" onsubmit="event.preventDefault();run()">
+<label>배우자가 있나요?</label>
+<div class="seg"><label><input type="radio" name="sp" value="no" checked><span>없음</span></label><label><input type="radio" name="sp" value="yes"><span>있음</span></label></div>
+
+<div id="spBox" style="display:none">
+<label>배우자의 2025년 근로·사업소득 <span class="hint">(연간, 세전)</span></label>
+<div class="seg"><label><input type="radio" name="spInc" value="lt" checked><span>300만 원 미만</span></label><label><input type="radio" name="spInc" value="ge"><span>300만 원 이상</span></label></div>
+</div>
+
+<label>부양자녀 수 <span class="hint">(18세 미만, 연소득 100만 원 이하)</span></label>
+<select id="kids"><option value="0">없음</option><option value="1">1명</option><option value="2">2명</option><option value="3">3명</option><option value="4">4명</option><option value="5">5명 이상</option></select>
+
+<div id="parBox">
+<label>함께 사는 70세 이상 부모님을 부양하나요? <span class="hint">(부모님 각자 소득 100만 원 이하)</span></label>
+<div class="seg"><label><input type="radio" name="par" value="no" checked><span>아니요</span></label><label><input type="radio" name="par" value="yes"><span>예</span></label></div>
+</div>
+
+<label>부부합산 2025년 근로소득 <span class="hint">(만 원, 비과세 제외 총급여)</span></label>
+<input type="number" id="wage" inputmode="numeric" min="0" placeholder="예: 1800">
+
+<label>사업소득이 있다면 연 매출 <span class="hint">(만 원, 없으면 비워 두기)</span></label>
+<input type="number" id="biz" inputmode="numeric" min="0" placeholder="예: 3000">
+<select id="bizRate" style="margin-top:8px">
+<option value="0.3">업종 선택 (기본: 기타 30%)</option>
+<option value="0.2">도매 (20%)</option><option value="0.25">농림어업·소매 (25%)</option>
+<option value="0.4">제조·음식점 (40%)</option><option value="0.45">건설 등 (45%)</option>
+<option value="0.55">숙박·운수·주점 (55%)</option><option value="0.6">정보서비스 (60%)</option>
+<option value="0.7">금융·예술·수리 (70%)</option><option value="0.75">전문·교육·보건 (75%)</option>
+<option value="0.9">인적용역·부동산임대 (90%)</option></select>
+
+<label>가구원 재산 합계 <span class="hint">(2025년 6월 1일 기준: 집·전세금·차·예금 등)</span></label>
+<select id="asset"><option value="low">1억 7천만 원 미만</option><option value="mid">1억 7천만 ~ 2억 4천만 원 미만</option><option value="high">2억 4천만 원 이상</option></select>
+
+<label>신청 시기</label>
+<div class="seg"><label><input type="radio" name="late" value="0"><span>정기신청 (5월)</span></label><label><input type="radio" name="late" value="1" checked><span>기한 후 신청 (~12월 1일)</span></label></div>
+
+<button type="submit">예상 장려금 계산하기</button>
+</form>
+
+<div class="card result" id="res" aria-live="polite">
+<div id="type" class="hint"></div>
+<div>예상 수령액 합계</div>
+<div class="big" id="total">0원</div>
+<table><tr><th>근로장려금</th><td id="e">0원</td></tr><tr><th>자녀장려금</th><td id="c">0원</td></tr></table>
+<p id="notes" class="hint"></p>
+<p class="warn">⚠️ 참고용 예상액이에요. 실제 금액은 국세청이 소득·재산 자료를 확인해 정하며, 자녀세액공제를 받았거나 국세 체납이 있으면 줄어들 수 있어요. 월평균 근로소득 500만 원 이상 상용근로자와 전문직 사업자는 근로장려금 대상이 아니에요.</p>
+<p>👉 신청 방법과 일정: <a href="https://benefit.hanbogi.com/5">근로·자녀장려금 기한 후 신청 총정리</a> · <a href="https://www.hometax.go.kr" rel="nofollow">홈택스</a></p>
+</div>
+
+<h2>금액은 이렇게 계산돼요</h2>
+<div class="card">
+<table>
+<tr><th>가구 유형</th><th>최대 금액</th><th>최대 받는 소득 구간</th><th>소득 상한</th></tr>
+<tr><td>단독</td><td>165만 원</td><td>400만~900만 원</td><td>2,200만 원 미만</td></tr>
+<tr><td>홑벌이</td><td>285만 원</td><td>700만~1,400만 원</td><td>3,200만 원 미만</td></tr>
+<tr><td>맞벌이</td><td>330만 원</td><td>800만~1,700만 원</td><td>4,400만 원 미만</td></tr>
+</table>
+<p>소득이 구간보다 적으면 소득에 비례해 늘고, 구간을 넘으면 서서히 줄어요. <b>자녀장려금</b>은 부부합산 총소득 7,000만 원 미만일 때 자녀 1명당 최대 100만 원(홑벌이 2,100만·맞벌이 2,500만 원 미만)이고, 그 위로는 약 50만 원까지 줄어요.</p>
+<p><b>가구 유형:</b> 배우자·부양자녀·70세 이상 부양 부모가 모두 없으면 단독, 배우자 소득이 300만 원 미만이거나 배우자 없이 부양자녀·부모가 있으면 홑벌이, 부부 모두 300만 원 이상이면 맞벌이예요.</p>
+<p><b>감액:</b> 재산 1억 7천만 원 이상이면 50%, 기한 후 신청이면 95%를 받아요. 사업소득은 매출에 업종별 조정률을 곱해 소득으로 봐요.</p>
+<p class="hint">근거: 조세특례제한법 제100조의3~제100조의31, 같은 법 시행령 별표 11·11의2 (2026년 9월 기준). 이 계산기는 산정표 구간(근로 10만 원, 자녀 50만 원 단위)을 반영했어요.</p>
+</div>
+
+<h2>자주 묻는 질문</h2>
+<div class="card">
+<p><b>Q. 5월에 신청을 못 했는데 지금도 받을 수 있나요?</b><br>2025년 소득분은 2026년 12월 1일까지 기한 후 신청이 가능하고, 산정액의 95%를 받아요.</p>
+<p><b>Q. 소득은 어떤 금액을 넣나요?</b><br>근로소득 원천징수영수증의 총급여(비과세 제외)를 부부 합산해서 넣으세요. 이자·배당·연금 소득이 많다면 실제 대상 여부가 달라질 수 있어요.</p>
+<p><b>Q. 재산에는 무엇이 들어가나요?</b><br>주택·토지·건물, 전세·임차보증금, 자동차, 예금·적금·주식 등이 들어가요. 부채는 빼지 않아요.</p>
+</div>
+</main>
+<footer>© 한눈 계산기 · <a href="/">다른 계산기</a> · <a href="/privacy.html">개인정보처리방침</a></footer>
+<script src="calc.js"></script>
+<script>
+const $=s=>document.querySelector(s), val=n=>(document.querySelector('input[name='+n+']:checked')||{}).value;
+const won=v=>Math.round(v).toLocaleString('ko-KR')+'원';
+document.querySelectorAll('input[name=sp]').forEach(r=>r.onchange=()=>{$('#spBox').style.display=val('sp')==='yes'?'block':'none';$('#parBox').style.display=val('sp')==='yes'?'none':'block'});
+function run(){
+  const kids=+$('#kids').value, sp=val('sp')==='yes';
+  let type; if(sp) type=val('spInc')==='ge'?'two':'one'; else type=(kids>0||val('par')==='yes')?'one':'single';
+  const income=((+$('#wage').value||0)+(+$('#biz').value||0)*(+$('#bizRate').value))*10000;
+  const r=calc({type,income,kids,asset:$('#asset').value,late:val('late')==='1',childCredit:0});
+  $('#type').textContent={single:'단독가구',one:'홑벌이가구',two:'맞벌이가구'}[type]+' · 총급여액등 '+Math.round(income/10000).toLocaleString('ko-KR')+'만 원'+(val('late')==='1'?' · 기한 후 신청(95%)':'');
+  $('#e').textContent=won(r.eitc); $('#c').textContent=won(r.ctc); $('#total').textContent=won(r.eitc+r.ctc);
+  $('#notes').textContent=r.notes.join(' '); $('#res').classList.add('show'); $('#res').scrollIntoView({behavior:'smooth',block:'start'});
+}
+</script>
+</body></html>
