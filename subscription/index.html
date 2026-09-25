@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="naver-site-verification" content="21421c877a507dea4b5be99d5ec0d9e9fd8d7b50" />
+<title>청약 가점 계산기 2026 | 84점 만점 무주택·부양가족·통장 점수 | 한눈 계산기</title>
+<meta name="description" content="생년월일, 혼인신고일, 부양가족 수, 청약통장 가입일만 넣으면 민영주택 청약 가점(84점 만점)을 바로 계산합니다. 배우자 통장 기간 합산(최대 3점)과 무주택기간 산정 기준까지 반영.">
+<link rel="canonical" href="https://calc.hanbogi.com/subscription/">
+<meta property="og:title" content="청약 가점 계산기 2026">
+<meta property="og:description" content="무주택기간·부양가족·통장 가입기간으로 84점 만점 가점을 바로 계산해요.">
+<meta property="og:url" content="https://calc.hanbogi.com/subscription/">
+<link rel="stylesheet" href="/style.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5424435978828190" crossorigin="anonymous"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"청약 가점은 몇 점 만점인가요?","acceptedAnswer":{"@type":"Answer","text":"84점 만점입니다. 무주택기간 32점, 부양가족 수 35점, 청약통장 가입기간 17점을 더합니다."}},
+{"@type":"Question","name":"무주택기간은 언제부터 세나요?","acceptedAnswer":{"@type":"Answer","text":"만 30세가 되는 날부터 셉니다. 만 30세 전에 혼인했다면 혼인신고일부터 세고, 집을 가졌던 적이 있으면 마지막으로 무주택자가 된 날부터 셉니다."}},
+{"@type":"Question","name":"배우자 청약통장 기간도 점수에 들어가나요?","acceptedAnswer":{"@type":"Answer","text":"2024년 3월 25일부터 배우자 통장 가입기간의 50%를 인정해 최대 3점을 더할 수 있습니다. 본인 점수와 합쳐도 최대 17점입니다."}}]}</script>
+</head>
+<body>
+<header><a href="/">한눈 계산기</a></header>
+<main>
+<h1>청약 가점 계산기</h1>
+<p class="lead">민영주택 일반공급 가점제(84점 만점) 기준이에요. 입력값은 서버로 보내지 않고 이 화면에서만 계산해요.</p>
+
+<form class="card" id="f" onsubmit="event.preventDefault();run()">
+<label>기준일 <span class="hint">(입주자모집공고일, 모르면 오늘)</span></label>
+<input type="date" id="base">
+
+<label>생년월일</label>
+<input type="date" id="birth" required>
+
+<label>혼인 여부</label>
+<div class="seg"><label><input type="radio" name="mar" value="no" checked><span>미혼</span></label><label><input type="radio" name="mar" value="yes"><span>기혼</span></label></div>
+<div id="marBox" style="display:none">
+<label>혼인신고일 <span class="hint">(혼인관계증명서 기준)</span></label>
+<input type="date" id="marriage">
+<label>배우자 청약통장 가입일 <span class="hint">(없으면 비워 두기)</span></label>
+<input type="date" id="spAcct">
+</div>
+
+<label>본인이나 배우자가 집을 가진 적이 있나요? <span class="hint">(지금은 세대원 모두 무주택이어야 해요)</span></label>
+<div class="seg"><label><input type="radio" name="own" value="no" checked><span>없음</span></label><label><input type="radio" name="own" value="yes"><span>있었음</span></label></div>
+<div id="ownBox" style="display:none">
+<label>마지막으로 무주택자가 된 날 <span class="hint">(집을 판 날)</span></label>
+<input type="date" id="since">
+</div>
+
+<label>부양가족 수 <span class="hint">(본인 제외, 같은 등본의 배우자·부모·미혼 자녀 등)</span></label>
+<select id="deps"><option value="0">0명</option><option value="1">1명</option><option value="2">2명</option><option value="3">3명</option><option value="4">4명</option><option value="5">5명</option><option value="6">6명 이상</option></select>
+
+<label>본인 청약통장 가입일 <span class="hint">(최초 가입일)</span></label>
+<input type="date" id="acct">
+
+<button type="submit">청약 가점 계산하기</button>
+</form>
+
+<div class="card result" id="res" aria-live="polite">
+<div class="hint" id="rsum"></div>
+<div>내 청약 가점</div><div class="big" id="total"></div>
+<table id="rtab"></table>
+<p id="notes" class="hint"></p>
+<p class="warn">⚠️ 참고용이에요. 부양가족 인정 여부(등재 기간·주택 소유·해외 체류 등)와 소형·저가주택 무주택 인정은 서류로 판정돼요. 최종 점수는 <a href="https://www.applyhome.co.kr" rel="nofollow">청약홈</a>에서 꼭 확인하세요. 가점을 잘못 넣어 당첨되면 부적격 처리돼요.</p>
+<p>👉 <a href="/loan/">주택담보대출 계산기</a> · 👉 <a href="https://benefit.hanbogi.com/category/%EC%A3%BC%EA%B1%B0%C2%B7%EC%B2%AD%EC%95%BD">혜택 알리미 주거·청약</a></p>
+</div>
+
+<h2>청약 가점 점수표</h2>
+<div class="card">
+<table>
+<tr><th>무주택기간 (32점)</th><th>점수</th></tr>
+<tr><td>만 30세 미만 미혼 · 유주택자</td><td>0점</td></tr>
+<tr><td>1년 미만</td><td>2점</td></tr>
+<tr><td>1년 이상마다 1년씩</td><td>+2점 (1~2년 4점, 2~3년 6점 …)</td></tr>
+<tr><td>15년 이상</td><td>32점</td></tr>
+</table>
+<table style="margin-top:12px">
+<tr><th>부양가족 수 (35점)</th><th>점수</th></tr>
+<tr><td>0명</td><td>5점</td></tr>
+<tr><td>1명 · 2명 · 3명 · 4명 · 5명</td><td>10 · 15 · 20 · 25 · 30점</td></tr>
+<tr><td>6명 이상</td><td>35점</td></tr>
+</table>
+<table style="margin-top:12px">
+<tr><th>청약통장 가입기간 (17점)</th><th>점수</th></tr>
+<tr><td>6개월 미만</td><td>1점</td></tr>
+<tr><td>6개월 이상 ~ 1년 미만</td><td>2점</td></tr>
+<tr><td>1년 이상마다 1년씩</td><td>+1점 (1~2년 3점, 2~3년 4점 …)</td></tr>
+<tr><td>15년 이상</td><td>17점</td></tr>
+<tr><td>배우자 통장 (가입기간의 50% 적용)</td><td>1년 미만 1점 · 1~2년 2점 · 2년 이상 3점</td></tr>
+</table>
+<p class="hint">배우자 점수를 더해도 통장 항목은 최대 17점이에요.</p>
+</div>
+
+<h2>계산 방법</h2>
+<div class="card">
+<p><b>무주택기간</b>은 신청자와 배우자를 기준으로, 신청자가 <b>만 30세가 되는 날</b>부터 계속 무주택인 기간이에요. 만 30세 전에 혼인했다면 <b>혼인신고일</b>부터 세요(둘 중 빠른 날). 본인이나 배우자가 집을 가졌던 적이 있으면 그 집을 처분해 <b>마지막으로 무주택자가 된 날</b>부터 다시 세요.</p>
+<p><b>부양가족</b>은 모집공고일 현재 같은 주민등록등본에 있는 세대원이에요. 부모·조부모(배우자 쪽 포함)는 신청자가 세대주이고 <b>최근 3년 이상</b> 계속 같은 등본에 있어야 하고, 둘 중 한 명이라도 집이 있으면 둘 다 빠져요. 자녀는 미혼만 인정되고, 만 30세 이상 자녀는 <b>최근 1년 이상</b> 같은 등본에 있어야 해요.</p>
+<p><b>청약통장</b>은 최초 가입일부터 세요. 2024년 3월 25일부터 배우자 통장 가입기간의 절반을 점수표에 넣어 최대 3점까지 더할 수 있어요.</p>
+<p class="hint">근거: 주택공급에 관한 규칙 별표1 가점제 적용기준 (국토교통부령, 2026년 6월 15일 시행본 기준). 기준일 2026년 9월. 만 30세 이상 자녀 등재 요건을 1년에서 3년으로 늘리는 개정안이 2026년 4월 입법예고됐지만, 이 페이지 작성 시점에는 아직 시행되지 않았어요.</p>
+</div>
+
+<h2>자주 묻는 질문</h2>
+<div class="card">
+<p><b>Q. 30살 전에 결혼했는데 무주택기간은 언제부터인가요?</b><br>혼인신고일부터 세요. 결혼식 날이 아니라 혼인관계증명서에 적힌 신고일이 기준이에요.</p>
+<p><b>Q. 부모님이 집을 갖고 계시면요?</b><br>같은 등본에 3년 이상 있어도 부양가족으로 인정되지 않아요. 다만 따로 사는 부모님의 집은 내 무주택 여부와 상관없어요.</p>
+<p><b>Q. 배우자도 통장이 있으면 꼭 넣어야 하나요?</b><br>선택이에요. 넣으면 최대 3점이 올라가니, 배우자 통장이 있다면 청약할 때 합산을 선택하세요.</p>
+</div>
+</main>
+<footer>© 한눈 계산기 · <a href="/">다른 계산기</a> · <a href="/privacy.html">개인정보처리방침</a></footer>
+<script src="calc.js"></script>
+<script>
+const $=s=>document.querySelector(s), val=n=>(document.querySelector('input[name='+n+']:checked')||{}).value;
+const d=new Date(); $('#base').value=new Date(d-d.getTimezoneOffset()*6e4).toISOString().slice(0,10);
+document.querySelectorAll('input[name=mar]').forEach(r=>r.onchange=()=>$('#marBox').style.display=val('mar')==='yes'?'block':'none');
+document.querySelectorAll('input[name=own]').forEach(r=>r.onchange=()=>$('#ownBox').style.display=val('own')==='yes'?'block':'none');
+const ym=m=>(m>=12?Math.floor(m/12)+'년 ':'')+(m%12?m%12+'개월':m<12?'0개월':'').trim();
+function run(){
+  const base=$('#base').value, birth=$('#birth').value, married=val('mar')==='yes', owned=val('own')==='yes';
+  if(!base||!birth){alert('기준일과 생년월일을 입력해 주세요');return;}
+  if(married&&!$('#marriage').value){alert('혼인신고일을 입력해 주세요');return;}
+  if(owned&&!$('#since').value){alert('무주택자가 된 날을 입력해 주세요');return;}
+  const r=calc({base,birth,married,marriage:$('#marriage').value,owned,homelessSince:$('#since').value,deps:+$('#deps').value,acct:$('#acct').value,spouseAcct:$('#spAcct').value});
+  $('#rsum').textContent='기준일 '+base+' · 무주택기간 기산일 '+r.start;
+  $('#total').textContent=r.total+'점 / 84점';
+  $('#rtab').innerHTML=`<tr><th>무주택기간</th><td>${r.home}점 / 32 <span class="hint">(${ym(r.homeMonths)})</span></td></tr>`+
+   `<tr><th>부양가족 수</th><td>${r.dep}점 / 35</td></tr>`+
+   `<tr><th>청약통장 가입기간</th><td>${r.acct}점 / 17${r.sp?` <span class="hint">(본인 ${r.own} + 배우자 ${r.sp})</span>`:''}</td></tr>`+
+   `<tr><th>합계</th><td><b>${r.total}점</b></td></tr>`;
+  $('#notes').textContent=r.notes.join(' ')+($('#acct').value?'':' 본인 청약통장이 없으면 청약할 수 없어요.');
+  $('#res').classList.add('show'); $('#res').scrollIntoView({behavior:'smooth',block:'start'});
+}
+</script>
+</body></html>

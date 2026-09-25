@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="naver-site-verification" content="21421c877a507dea4b5be99d5ec0d9e9fd8d7b50" />
+<title>퇴직금 계산기 2026 | 퇴직소득세·세후 실수령액까지 | 한눈 계산기</title>
+<meta name="description" content="입사일, 퇴사일, 최근 3개월 급여, 상여금, 연차수당만 넣으면 1일 평균임금과 예상 퇴직금, 퇴직소득세(2023년 개정 근속연수공제 반영)·지방소득세, 세후 퇴직금을 바로 계산합니다.">
+<link rel="canonical" href="https://calc.hanbogi.com/severance/">
+<meta property="og:title" content="퇴직금 계산기 2026">
+<meta property="og:description" content="평균임금·퇴직금·퇴직소득세·세후 수령액을 한 번에 계산해요.">
+<meta property="og:url" content="https://calc.hanbogi.com/severance/">
+<link rel="stylesheet" href="/style.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5424435978828190" crossorigin="anonymous"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"퇴직금은 어떻게 계산하나요?","acceptedAnswer":{"@type":"Answer","text":"1일 평균임금 × 30일 × (재직일수 ÷ 365)입니다. 1일 평균임금은 퇴직 전 3개월 임금총액에 연간 상여금과 연차수당의 3/12을 더해 그 3개월의 총일수로 나눈 금액입니다."}},
+{"@type":"Question","name":"1년 미만 근무하면 퇴직금을 못 받나요?","acceptedAnswer":{"@type":"Answer","text":"네. 근로자퇴직급여 보장법에 따라 계속근로기간이 1년 이상이고 4주 평균 주 15시간 이상 일한 근로자만 퇴직금 지급 대상입니다."}},
+{"@type":"Question","name":"퇴직금에도 세금이 붙나요?","acceptedAnswer":{"@type":"Answer","text":"퇴직소득세와 그 10%인 지방소득세가 원천징수됩니다. 근속연수공제와 환산급여공제 덕분에 근무 기간이 길수록 세 부담이 크게 줄어듭니다."}}]}</script>
+<style>.sub{font-size:.85rem;color:var(--muted)}</style>
+</head>
+<body>
+<header><a href="/">한눈 계산기</a></header>
+<main>
+<h1>퇴직금 계산기</h1>
+<p class="lead">예상 퇴직금과 퇴직소득세, 세후 수령액까지 한 번에 계산해요. 입력값은 서버로 보내지 않고 이 화면에서만 계산해요.</p>
+
+<form class="card" id="f" onsubmit="event.preventDefault();run()">
+<label>입사일</label>
+<input type="date" id="start">
+
+<label>퇴직일 <span class="hint">(마지막 근무일의 <b>다음날</b>)</span></label>
+<input type="date" id="end">
+<div class="hint">예: 9월 30일까지 일했다면 퇴직일은 10월 1일이에요. 고용노동부 계산 방식과 같아요.</div>
+
+<label>퇴직 전 3개월 급여 <span class="hint">(세전, 기본급+각종 수당, 상여·연차수당 제외)</span></label>
+<div class="seg"><label><input type="radio" name="wmode" value="sum" checked><span>3개월 합계</span></label><label><input type="radio" name="wmode" value="month"><span>월급으로 입력</span></label></div>
+<input type="text" id="wage" class="num" inputmode="numeric" placeholder="3개월 합계 (원) 예: 9,000,000" style="margin-top:8px">
+<div class="hint" id="wageHint"></div>
+
+<label>연간 상여금 <span class="hint">(퇴직 전 12개월 동안 받은 상여 합계, 원)</span></label>
+<input type="text" id="bonus" class="num" inputmode="numeric" placeholder="없으면 비워 두기">
+
+<label>연차수당 <span class="hint">(퇴직 전년도에 못 쓴 연차로 받은 수당, 원)</span></label>
+<input type="text" id="leave" class="num" inputmode="numeric" placeholder="없으면 비워 두기">
+
+<button type="submit">퇴직금 계산하기</button>
+</form>
+
+<div class="card result" id="res" aria-live="polite">
+<div class="hint" id="rsum"></div>
+<div id="rlabel">예상 퇴직금 (세전)</div><div class="big" id="rpay"></div>
+<table id="rtab"></table>
+<p class="hint" id="rnote"></p>
+<p class="warn" style="margin-top:12px">⚠️ 참고용이에요. 실제 퇴직금은 회사의 임금 산정(미산입 기간, 통상임금 여부 등)에 따라 달라지고, 퇴직연금(DC형)·IRP 이전, 비과세 소득, 중간정산 이력이 있으면 세금도 달라져요. 정확한 금액은 회사나 고용노동부(국번 없이 1350)에 확인하세요.</p>
+</div>
+<p>👉 <a href="/salary/">연봉 실수령액 계산기</a> · 👉 <a href="https://benefit.hanbogi.com">혜택 알리미</a></p>
+
+<h2>계산 방법</h2>
+<div class="card">
+<p><b>① 1일 평균임금</b> = (3개월 임금총액 + 연간 상여금 × 3/12 + 연차수당 × 3/12) ÷ 3개월 총일수(89~92일)<br>
+<b>② 퇴직금</b> = 1일 평균임금 × 30일 × (재직일수 ÷ 365)</p>
+<p class="hint">3개월은 퇴직일 전날부터 거꾸로 3개월이에요. 평균임금은 전(錢) 단위 올림, 퇴직금은 원 단위 반올림으로 고용노동부 퇴직금 계산기와 같게 맞췄어요. 근거: 근로자퇴직급여 보장법 제4조·제8조, 근로기준법 제2조.</p>
+<p><b>③ 퇴직소득세</b> (2023년 1월 1일 이후 퇴직분)</p>
+<table>
+<tr><th>근속연수</th><th>근속연수공제</th></tr>
+<tr><td>5년 이하</td><td>100만 원 × 근속연수</td></tr>
+<tr><td>10년 이하</td><td>500만 원 + 200만 원 × (근속연수 − 5)</td></tr>
+<tr><td>20년 이하</td><td>1,500만 원 + 250만 원 × (근속연수 − 10)</td></tr>
+<tr><td>20년 초과</td><td>4,000만 원 + 300만 원 × (근속연수 − 20)</td></tr>
+</table>
+<p>환산급여 = (퇴직금 − 근속연수공제) ÷ 근속연수 × 12</p>
+<table>
+<tr><th>환산급여</th><th>환산급여공제</th></tr>
+<tr><td>800만 원 이하</td><td>전액</td></tr>
+<tr><td>7,000만 원 이하</td><td>800만 원 + 800만 원 초과분의 60%</td></tr>
+<tr><td>1억 원 이하</td><td>4,520만 원 + 7,000만 원 초과분의 55%</td></tr>
+<tr><td>3억 원 이하</td><td>6,170만 원 + 1억 원 초과분의 45%</td></tr>
+<tr><td>3억 원 초과</td><td>1억 5,170만 원 + 3억 원 초과분의 35%</td></tr>
+</table>
+<p>과세표준 = 환산급여 − 환산급여공제 → 기본세율(6~45%)을 적용한 환산산출세액 ÷ 12 × 근속연수 = <b>퇴직소득세</b>. 지방소득세는 퇴직소득세의 10%예요.</p>
+<table>
+<tr><th>과세표준</th><th>세율</th><th>누진공제</th></tr>
+<tr><td>1,400만 원 이하</td><td>6%</td><td>—</td></tr>
+<tr><td>5,000만 원 이하</td><td>15%</td><td>126만 원</td></tr>
+<tr><td>8,800만 원 이하</td><td>24%</td><td>576만 원</td></tr>
+<tr><td>1억 5천만 원 이하</td><td>35%</td><td>1,544만 원</td></tr>
+<tr><td>3억 원 이하</td><td>38%</td><td>1,994만 원</td></tr>
+<tr><td>5억 원 이하</td><td>40%</td><td>2,594만 원</td></tr>
+<tr><td>10억 원 이하</td><td>42%</td><td>3,594만 원</td></tr>
+<tr><td>10억 원 초과</td><td>45%</td><td>6,594만 원</td></tr>
+</table>
+<p class="hint">근속연수는 입사일부터 퇴직일까지이고 1년 미만 끝수는 1년으로 쳐요. 세금은 10원 미만을 버렸어요. 근거: 소득세법 제48조(2023. 1. 1. 시행)·제55조, 국세청 「퇴직소득세 계산방법」 (기준일 2026년 9월).</p>
+</div>
+
+<h2>자주 묻는 질문</h2>
+<div class="card">
+<p><b>Q. 퇴직일은 마지막 출근일인가요?</b><br>아니요. 마지막으로 근무한 날의 다음날이에요. 9월 30일까지 일했다면 퇴직일은 10월 1일로 넣어야 재직일수와 3개월 기간이 맞게 계산돼요.</p>
+<p><b>Q. 평균임금이 통상임금보다 낮으면요?</b><br>휴업·결근 등으로 3개월 임금이 줄어 1일 평균임금이 1일 통상임금보다 적으면, 통상임금을 평균임금으로 해서 퇴직금을 계산해요(근로기준법 제2조 제2항). 이 계산기는 입력한 급여로만 계산하니 이런 경우는 실제 퇴직금이 더 많을 수 있어요.</p>
+<p><b>Q. 1년 미만이면 퇴직금이 전혀 없나요?</b><br>네. 계속근로기간 1년 이상, 4주 평균 주 15시간 이상 일해야 법정 퇴직금 대상이에요. 계약직·아르바이트도 이 조건을 채우면 받을 수 있어요.</p>
+<p><b>Q. IRP로 받으면 세금이 어떻게 되나요?</b><br>퇴직금을 IRP 계좌로 받으면 퇴직소득세를 바로 떼지 않고 나중에 연금으로 받을 때 과세돼요. 연금으로 받으면 수령 10년 차까지는 퇴직소득세의 70%만 내고, 그 뒤로는 더 줄어요(소득세법 제129조).</p>
+</div>
+</main>
+<footer>© 한눈 계산기 · <a href="/">다른 계산기</a> · <a href="/privacy.html">개인정보처리방침</a></footer>
+<script src="calc.js"></script>
+<script>
+const $=s=>document.querySelector(s), val=n=>(document.querySelector('input[name='+n+']:checked')||{}).value;
+const num=v=>+String(v).replace(/[^0-9.]/g,'')||0, won=v=>Math.round(v).toLocaleString('ko-KR')+'원';
+const man=v=>(v>=10000?(v/10000).toLocaleString('ko-KR',{maximumFractionDigits:2})+'억 ':'')+(v%10000?(v%10000).toLocaleString('ko-KR')+'만':'')+' 원';
+document.querySelectorAll('input.num').forEach(el=>el.addEventListener('input',()=>{const n=num(el.value);el.value=n?n.toLocaleString('ko-KR'):'';wh();}));
+function wh(){ const m=val('wmode')==='month', w=num($('#wage').value); $('#wageHint').textContent=m&&w?'3개월 합계 '+won(w*3)+'으로 계산해요 (달마다 급여가 다르면 합계로 넣으세요)':''; }
+document.querySelectorAll('input[name=wmode]').forEach(r=>r.onchange=()=>{$('#wage').placeholder=val('wmode')==='month'?'월급 (원) 예: 3,000,000':'3개월 합계 (원) 예: 9,000,000';wh();});
+function run(){
+  const start=$('#start').value, end=$('#end').value, w=num($('#wage').value);
+  if(!start||!end){alert('입사일과 퇴직일을 입력해 주세요');return;} if(end<=start){alert('퇴직일이 입사일보다 뒤여야 해요');return;}
+  if(!w){alert('퇴직 전 3개월 급여를 입력해 주세요');return;}
+  const wage3=val('wmode')==='month'?w*3:w, r=calc({start,end,wage3,bonus:num($('#bonus').value),leave:num($('#leave').value)});
+  $('#rsum').textContent=start+' ~ '+end+' (퇴직일) · 재직 '+r.workDays.toLocaleString('ko-KR')+'일';
+  const avg=`<tr><th>재직일수</th><td>${r.workDays.toLocaleString('ko-KR')}일</td></tr><tr><th>1일 평균임금</th><td>${r.daily.toLocaleString('ko-KR',{minimumFractionDigits:2})}원 <span class="sub">(3개월 ${r.d3}일 기준)</span></td></tr>`;
+  if(!r.eligible){
+    $('#rlabel').textContent='퇴직금 지급 대상이 아니에요'; $('#rpay').textContent='0원'; $('#rtab').innerHTML=avg;
+    $('#rnote').textContent='계속근로기간이 1년 미만이면 법정 퇴직금 대상이 아니에요(근로자퇴직급여 보장법 제4조). 회사 규정으로 따로 주는 경우는 예외예요.';
+  } else {
+    const t=r.t; $('#rlabel').textContent='예상 퇴직금 (세전)'; $('#rpay').textContent=won(r.pay);
+    $('#rtab').innerHTML=avg+`<tr><th>근속연수</th><td>${t.years}년 <span class="sub">(1년 미만 올림)</span></td></tr>`+
+     `<tr><th>근속연수공제</th><td>${won(t.td)}</td></tr><tr><th>환산급여</th><td>${won(t.conv)}</td></tr><tr><th>환산급여공제</th><td>${won(t.cd)}</td></tr>`+
+     `<tr><th>과세표준</th><td>${won(t.base)}</td></tr><tr><th>퇴직소득세</th><td>${won(t.tax)}</td></tr><tr><th>지방소득세</th><td>${won(t.local)}</td></tr>`+
+     `<tr><th>세후 퇴직금</th><td><b>${won(r.net)}</b> <span class="sub">세금 합계 ${won(t.tax+t.local)}</span></td></tr>`;
+    $('#rnote').textContent='1일 평균임금이 1일 통상임금보다 적으면 통상임금으로 계산해야 해서 실제 퇴직금이 더 많을 수 있어요.';
+  }
+  $('#res').classList.add('show'); $('#res').scrollIntoView({behavior:'smooth',block:'start'});
+}
+</script>
+</body></html>

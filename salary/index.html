@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="naver-site-verification" content="21421c877a507dea4b5be99d5ec0d9e9fd8d7b50" />
+<title>연봉 실수령액 계산기 2026 | 4대보험·소득세 공제 후 월급 | 한눈 계산기</title>
+<meta name="description" content="연봉이나 월급을 넣으면 국민연금 9.5%, 건강보험 7.19%, 장기요양, 고용보험, 간이세액표 소득세까지 빼고 매달 받는 실수령액을 계산합니다. 2026년 개정 간이세액표·자녀 공제 반영, 연봉별 실수령액 표 제공.">
+<link rel="canonical" href="https://calc.hanbogi.com/salary/">
+<meta property="og:title" content="연봉 실수령액 계산기 2026">
+<meta property="og:description" content="4대보험·소득세를 빼고 매달 통장에 들어오는 금액을 바로 계산해요.">
+<meta property="og:url" content="https://calc.hanbogi.com/salary/">
+<link rel="stylesheet" href="/style.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5424435978828190" crossorigin="anonymous"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"2026년 월급에서 빠지는 4대보험 요율은 얼마인가요?","acceptedAnswer":{"@type":"Answer","text":"근로자 부담 기준으로 국민연금 4.75%(전체 9.5%), 건강보험 3.595%(전체 7.19%), 장기요양보험은 건강보험료의 13.14%(0.9448% ÷ 7.19%), 고용보험 0.9%입니다."}},
+{"@type":"Question","name":"실수령액 계산에서 소득세는 어떻게 정하나요?","acceptedAnswer":{"@type":"Answer","text":"회사는 소득세법 시행령 별표2 근로소득 간이세액표에 따라 비과세를 뺀 월급여와 공제대상가족 수로 소득세를 떼고, 8세 이상 20세 이하 자녀가 있으면 1명 20,830원, 2명 45,830원, 3명부터 1명당 33,330원을 더 뺍니다. 지방소득세는 소득세의 10%입니다."}},
+{"@type":"Question","name":"연말정산을 하면 실수령액이 달라지나요?","acceptedAnswer":{"@type":"Answer","text":"매달 떼는 소득세는 간이세액표에 따른 미리 내는 세금이라, 연말정산에서 실제 공제를 반영해 환급받거나 더 낼 수 있습니다."}}]}</script>
+<style>.sub{font-size:.85rem;color:var(--muted)}#stab td,#stab th{font-size:.85rem;text-align:right}#stab th:first-child,#stab td:first-child{text-align:left}</style>
+</head>
+<body>
+<header><a href="/">한눈 계산기</a></header>
+<main>
+<h1>연봉 실수령액 계산기</h1>
+<p class="lead">4대보험과 소득세를 빼고 매달 통장에 들어오는 월급을 계산해요. 2026년 9월 기준 요율이에요. 입력값은 서버로 보내지 않고 이 화면에서만 계산해요.</p>
+
+<form class="card" id="f" onsubmit="event.preventDefault();run()">
+<label>입력 기준</label>
+<div class="seg"><label><input type="radio" name="mode" value="year" checked><span>연봉</span></label><label><input type="radio" name="mode" value="month"><span>월급</span></label></div>
+
+<label><span id="amtLabel">연봉</span> <span class="hint">(만 원, 비과세 포함 세전 금액 · 퇴직금 제외)</span></label>
+<input type="text" id="amt" class="num" inputmode="numeric" placeholder="예: 4,000">
+
+<label>월 비과세액 <span class="hint">(만 원 · 식대는 월 20만 원까지 비과세)</span></label>
+<input type="text" id="nontax" class="num" inputmode="numeric" value="20">
+
+<label>공제대상가족 수 <span class="hint">(본인 포함 · 배우자, 부양 자녀·부모 등)</span></label>
+<select id="fam"><option value="1">1명 (본인만)</option><option value="2">2명</option><option value="3">3명</option><option value="4">4명</option><option value="5">5명</option><option value="6">6명</option><option value="7">7명</option><option value="8">8명</option><option value="9">9명</option><option value="10">10명</option><option value="11">11명</option></select>
+
+<label>그중 8세 이상 20세 이하 자녀 수 <span class="hint">(자녀 공제가 추가로 들어가요)</span></label>
+<select id="kids"><option value="0">없음</option><option value="1">1명</option><option value="2">2명</option><option value="3">3명</option><option value="4">4명</option><option value="5">5명</option></select>
+
+<button type="submit">실수령액 계산하기</button>
+</form>
+
+<div class="card result" id="res" aria-live="polite">
+<div class="hint" id="rsum"></div>
+<div>월 실수령액</div><div class="big" id="rnet"></div>
+<table id="rtab"></table>
+<p class="warn" style="margin-top:12px">⚠️ 참고용이에요. 회사가 신고한 보수월액·기준소득월액, 간이세액표 80%·120% 선택, 상여금 지급 방식에 따라 실제 공제액은 조금씩 달라요. 매달 떼는 소득세는 미리 내는 세금이라 연말정산에서 환급받거나 더 낼 수 있어요.</p>
+<p>👉 <a href="/severance/">퇴직금 계산기</a> · 👉 <a href="https://benefit.hanbogi.com">혜택 알리미</a></p>
+</div>
+
+<h2>연봉별 실수령액 표</h2>
+<div class="card">
+<p class="hint" id="scond"></p>
+<div style="overflow-x:auto"><table id="stab"></table></div>
+</div>
+
+<h2>계산 방법</h2>
+<div class="card">
+<table>
+<tr><th>항목</th><th>근로자 부담</th><th>계산 기준</th></tr>
+<tr><td>국민연금</td><td>4.75%</td><td>기준소득월액(천 원 미만 버림) × 4.75%, 하한 41만·상한 659만 원 (2026.7~2027.6)</td></tr>
+<tr><td>건강보험</td><td>3.595%</td><td>보수월액 × 7.19%의 절반</td></tr>
+<tr><td>장기요양보험</td><td>건강보험료의 13.14%</td><td>건강보험료 × (0.9448% ÷ 7.19%)</td></tr>
+<tr><td>고용보험</td><td>0.9%</td><td>보수월액 × 0.9% (실업급여 계정)</td></tr>
+<tr><td>소득세</td><td>간이세액표</td><td>월급여(비과세 제외)·공제대상가족 수로 표에서 찾고, 8~20세 자녀 1명 20,830원·2명 45,830원·3명부터 1명당 33,330원 추가 공제</td></tr>
+<tr><td>지방소득세</td><td>소득세의 10%</td><td>—</td></tr>
+</table>
+<p>보수월액은 월급에서 비과세액을 뺀 금액으로 봤고, 보험료는 10원 미만을 버렸어요. 연봉을 넣으면 12로 나눈 금액을 월급으로 계산해요. 월급여 1,000만 원 초과분은 별표2의 초과 구간 산식을 그대로 적용했어요.</p>
+<p class="hint">기준일 2026년 9월 26일. 근거: 소득세법 시행령 [별표 2] 근로소득 간이세액표(2026. 2. 27. 개정, 2026. 3. 1. 이후 원천징수분), 국민연금 보험료율 9.5%(2026년)·기준소득월액 상·하한액 보건복지부 발표, 국민건강보험공단 2026년도 보험료율 안내(건강 7.19%, 장기요양 0.9448%), 고용보험 실업급여 보험료율 1.8%(근로자 0.9%). 건강보험료 상한(고소득 월 1억 원대 이상)은 반영하지 않았어요.</p>
+</div>
+
+<h2>자주 묻는 질문</h2>
+<div class="card">
+<p><b>Q. 공제대상가족 수에는 누구를 넣나요?</b><br>본인과 배우자, 그리고 기본공제를 받는 부양가족(소득 요건을 채운 자녀·부모 등)을 모두 세요. 8세 이상 20세 이하 자녀는 가족 수에도 넣고, 아래 자녀 수에도 한 번 더 넣으면 돼요.</p>
+<p><b>Q. 비과세액에는 무엇이 들어가나요?</b><br>식대(월 20만 원까지), 자가운전보조금(월 20만 원까지), 6세 이하 자녀 보육수당(월 20만 원까지) 등이에요. 급여명세서의 비과세 항목을 합쳐 넣으세요.</p>
+<p><b>Q. 연말정산을 하면 실수령액이 달라지나요?</b><br>매달 떼는 소득세는 간이세액표로 미리 내는 금액이에요. 연말정산에서 신용카드·보험료·의료비 등 실제 공제를 반영해 환급받거나 더 낼 수 있어요.</p>
+</div>
+</main>
+<footer>© 한눈 계산기 · <a href="/">다른 계산기</a> · <a href="/privacy.html">개인정보처리방침</a></footer>
+<script src="table.js"></script><script src="calc.js"></script>
+<script>
+const $=s=>document.querySelector(s), val=n=>(document.querySelector('input[name='+n+']:checked')||{}).value;
+const num=v=>+String(v).replace(/[^0-9.]/g,'')||0, won=v=>Math.round(v).toLocaleString('ko-KR')+'원';
+const man=v=>(v>=10000?(v/10000).toLocaleString('ko-KR',{maximumFractionDigits:2})+'억 ':'')+(v%10000?(v%10000).toLocaleString('ko-KR')+'만':'')+' 원';
+document.querySelectorAll('input.num').forEach(el=>el.addEventListener('input',()=>{const n=num(el.value);el.value=n?n.toLocaleString('ko-KR'):'';}));
+document.querySelectorAll('input[name=mode]').forEach(r=>r.onchange=()=>{const y=val('mode')==='year';$('#amtLabel').textContent=y?'연봉':'월급';$('#amt').placeholder=y?'예: 4,000':'예: 300';});
+function opts(){ const fam=+$('#fam').value, kids=Math.min(+$('#kids').value,fam-1); return {nontax:num($('#nontax').value)*10000,fam,kids}; }
+function table(){
+  const o=opts(); $('#scond').textContent='월 비과세 '+man(o.nontax/10000).trim()+' · 공제대상가족 '+o.fam+'명'+(o.kids?' · 8~20세 자녀 '+o.kids+'명':'')+' 기준 (위 계산기 조건을 바꾸면 표도 바뀌어요)';
+  let h='<tr><th>연봉</th><th>월 공제 합계</th><th>월 실수령액</th><th>연 실수령액</th></tr>';
+  for(let y=3000;y<=10000;y+=500){ const r=net({gross:Math.round(y*10000/12),...o}); h+=`<tr><td>${man(y)}</td><td>${won(r.total)}</td><td><b>${won(r.net)}</b></td><td>${won(r.net*12)}</td></tr>`; }
+  $('#stab').innerHTML=h;
+}
+function run(){
+  const a=num($('#amt').value); if(!a){alert('금액을 입력해 주세요');return;}
+  const y=val('mode')==='year', gross=Math.round(y?a*10000/12:a*10000), o=opts();
+  if(+$('#kids').value>o.kids) alert('자녀 수는 공제대상가족 수(본인 제외)보다 많을 수 없어 '+o.kids+'명으로 계산해요.');
+  const r=net({gross,...o});
+  $('#rsum').textContent=(y?'연봉 '+man(a)+' → 월 '+won(gross):'월급 '+man(a))+' · 비과세 '+won(Math.min(o.nontax,gross))+' · 가족 '+o.fam+'명'+(o.kids?' · 자녀 '+o.kids+'명':'');
+  $('#rnet').textContent=won(r.net);
+  const row=(k,v,s)=>`<tr><th>${k}</th><td>${won(v)}${s?` <span class="sub">${s}</span>`:''}</td></tr>`;
+  $('#rtab').innerHTML=row('국민연금',r.pension,'4.75%')+row('건강보험',r.health,'3.595%')+row('장기요양',r.care,'건보료의 13.14%')+row('고용보험',r.employ,'0.9%')+
+    row('소득세',r.income,'간이세액표')+row('지방소득세',r.local,'소득세의 10%')+`<tr><th>공제 합계</th><td><b>${won(r.total)}</b></td></tr>`+
+    `<tr><th>연 실수령액</th><td><b>${won(r.net*12)}</b> <span class="sub">월 실수령액 × 12</span></td></tr>`;
+  $('#res').classList.add('show'); $('#res').scrollIntoView({behavior:'smooth',block:'start'}); table();
+}
+table();
+</script>
+</body></html>
