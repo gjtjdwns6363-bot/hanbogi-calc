@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>디딤돌·보금자리론·신생아 특례 대출이자 계산기 2026 | 우대금리 반영</title>
+<meta name="description" content="디딤돌대출, 신생아 특례 디딤돌, 보금자리론 금리를 소득·만기·우대금리(청약저축, 신혼, 자녀 등)로 자동 계산하고 월 상환액과 총이자를 보여줍니다. 일반 주택담보대출도 계산 가능.">
+<link rel="canonical" href="https://calc.hanbogi.com/loan/">
+<meta property="og:title" content="디딤돌·보금자리론 대출이자 계산기 2026">
+<meta property="og:description" content="우대금리까지 넣고 월 상환액·총이자를 바로 계산해요.">
+<link rel="stylesheet" href="/style.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5424435978828190" crossorigin="anonymous"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"디딤돌대출 금리는 얼마인가요?","acceptedAnswer":{"@type":"Answer","text":"2026년 9월 기준 부부합산 소득과 만기에 따라 연 2.85~4.15%이고, 우대금리는 최대 0.5%p(다자녀 0.7%p), 최저 연 1.5%입니다."}},
+{"@type":"Question","name":"보금자리론 금리는 얼마인가요?","acceptedAnswer":{"@type":"Answer","text":"2026년 9월 아낌e 보금자리론은 만기 10~50년 연 4.90~5.20%이며, 우대금리는 최대 1.0%p입니다."}},
+{"@type":"Question","name":"신생아 특례 디딤돌대출 금리는?","acceptedAnswer":{"@type":"Answer","text":"소득과 만기에 따라 연 1.80~4.50%이며, 우대금리 최대 0.5%p, 최저 연 1.2%입니다. 특례금리는 기본 5년 적용됩니다."}}]}</script>
+<style>.chk{display:flex;gap:8px;align-items:flex-start;font-weight:400;margin:8px 0}.chk input{margin-top:5px}.rate{font-size:1.5rem;font-weight:800;color:var(--brand)}.tabs{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.sched{max-height:360px;overflow:auto}</style>
+</head>
+<body>
+<header><a href="/">한눈 계산기</a></header>
+<main>
+<h1>주택담보대출 이자 계산기<br><span class="hint" style="font-size:1rem">디딤돌 · 신생아 특례 · 보금자리론 · 일반 주담대</span></h1>
+<p class="lead">소득·만기·우대금리를 고르면 적용금리를 자동으로 계산하고, 월 상환액과 총이자를 보여줘요. <span class="hint">금리 기준일: <span id="upd"></span></span></p>
+
+<form class="card" id="f" onsubmit="event.preventDefault();run()">
+<label>대출 상품</label>
+<div class="seg tabs">
+<label><input type="radio" name="prod" value="didimdol" checked><span>디딤돌</span></label>
+<label><input type="radio" name="prod" value="newborn"><span>신생아 특례</span></label>
+<label><input type="radio" name="prod" value="bogeumjari"><span>보금자리론</span></label>
+<label><input type="radio" name="prod" value="custom"><span>일반 주담대</span></label>
+</div>
+
+<div id="policy">
+<label>부부합산 연소득 <span class="hint">(만 원, 세전)</span></label>
+<input type="number" id="inc" inputmode="numeric" placeholder="예: 5500">
+<label id="dualL" style="display:none" class="chk"><input type="checkbox" id="dual"> 맞벌이 (신생아 특례 소득 기준 2억 원 적용)</label>
+<label>만기</label>
+<select id="term"></select>
+<div id="extra"></div>
+</div>
+
+<div id="customBox" style="display:none">
+<label>대출 금리 <span class="hint">(연 %)</span></label>
+<input type="number" id="crate" step="0.01" inputmode="decimal" placeholder="예: 4.2">
+<label>만기 <span class="hint">(년)</span></label>
+<input type="number" id="cterm" inputmode="numeric" value="30">
+</div>
+
+<label>대출 금액 <span class="hint">(만 원)</span></label>
+<input type="number" id="amt" inputmode="numeric" placeholder="예: 20000">
+<label>상환 방식</label>
+<div class="seg"><label><input type="radio" name="how" value="equalPay" checked><span>원리금균등</span></label><label><input type="radio" name="how" value="equalPrin"><span>원금균등</span></label><label><input type="radio" name="how" value="bullet"><span>만기일시</span></label></div>
+<label>거치기간 <span class="hint">(이자만 내는 기간)</span></label>
+<select id="grace"><option value="0">없음</option><option value="12">1년</option></select>
+<button type="submit">월 상환액 계산하기</button>
+</form>
+
+<div class="card result" id="res" aria-live="polite">
+<div class="hint" id="rsum"></div>
+<div>적용 금리</div><div class="rate" id="rrate"></div>
+<div style="margin-top:10px">월 상환액</div><div class="big" id="rpay"></div>
+<table id="rtab"></table>
+<p id="rnote" class="warn" style="margin-top:12px"></p>
+<details><summary>연도별 상환 내역 보기</summary><div class="sched"><table id="sched"></table></div></details>
+<p>👉 <a href="https://benefit.hanbogi.com/6">신혼부부 주택 대출 4가지 한눈에 비교</a> · <a href="https://nhuf.molit.go.kr" rel="nofollow">주택도시기금</a> · <a href="https://www.hf.go.kr" rel="nofollow">한국주택금융공사</a></p>
+</div>
+
+<h2>상품별 금리 한눈에 (2026년 9월)</h2>
+<div class="card">
+<table>
+<tr><th>상품</th><th>기본 금리</th><th>우대 최대</th><th>한도</th></tr>
+<tr><td>디딤돌</td><td>연 2.85~4.15%</td><td>0.5%p (다자녀 0.7)</td><td>2억 (생애최초 2.4억, 신혼·2자녀 3.2억)</td></tr>
+<tr><td>신생아 특례</td><td>연 1.80~4.50%</td><td>0.5%p</td><td>4억</td></tr>
+<tr><td>보금자리론</td><td>연 4.90~5.30%</td><td>1.0%p</td><td>3.6억 (다자녀 4억, 생애최초 4.2억)</td></tr>
+</table>
+<p class="hint">출처: 주택도시기금(nhuf.molit.go.kr) 상품 안내, 한국주택금융공사 2026년 9월 1일 금리 공시. 금리는 매달 바뀔 수 있어요.</p>
+</div>
+
+<h2>자주 묻는 질문</h2>
+<div class="card">
+<p><b>Q. 우대금리는 대출 기간 내내 적용되나요?</b><br>아니요. 디딤돌의 신혼·생애최초·청약저축 우대는 최대 5년, 자녀 우대는 자녀 1명당 5년(최대 15년) 적용돼요. 계산기는 우대금리를 전체 기간에 적용한 값이라, 우대가 끝나면 실제 상환액이 늘어날 수 있어요.</p>
+<p><b>Q. 원리금균등과 원금균등 중 뭐가 유리한가요?</b><br>총이자는 원금균등이 적지만 초기 상환액이 커요. 매달 같은 금액을 내고 싶다면 원리금균등이 편해요.</p>
+<p><b>Q. 체증식 상환은 왜 없나요?</b><br>체증식은 기관별 산정 방식이 달라 이 계산기에서는 빼두었어요. 초기 부담이 가장 적고 총이자는 가장 많아요.</p>
+</div>
+</main>
+<footer>© 한눈 계산기 · <a href="/">다른 계산기</a> · <a href="/privacy.html">개인정보처리방침</a></footer>
+<script src="rates.js"></script><script src="amort.js"></script>
+<script>
+const $=s=>document.querySelector(s), val=n=>(document.querySelector('input[name='+n+']:checked')||{}).value;
+const won=v=>Math.round(v).toLocaleString('ko-KR')+'원', man=v=>(v>=10000?(v/10000).toLocaleString('ko-KR',{maximumFractionDigits:2})+'억':v.toLocaleString('ko-KR')+'만')+' 원';
+$('#upd').textContent=RATES.updated;
+const chk=(id,t,v,g)=>`<label class="chk"><input type="checkbox" id="${id}" data-v="${v}" data-g="${g||''}"> ${t} <span class="hint">(−${v}%p)</span></label>`;
+function render(){
+  const p=val('prod'); $('#policy').style.display=p==='custom'?'none':'block'; $('#customBox').style.display=p==='custom'?'block':'none';
+  $('#dualL').style.display=p==='newborn'?'flex':'none'; if(p==='custom') return;
+  const R=RATES[p]; $('#term').innerHTML=R.terms.map((t,i)=>`<option value="${i}" ${t===30?'selected':''}>${t}년</option>`).join('');
+  let h='';
+  if(p==='didimdol'){
+    h+='<label>금리 유형</label><select id="rtype">'+R.rateType.map(([t,v])=>`<option value="${v}">${t}${v?' (+'+v+'%p)':''}</option>`).join('')+'</select>';
+    h+='<label>우대금리 ① 해당 항목 1개 <span class="hint">(중복 불가)</span></label><select id="prefA">'+R.prefA.map(([t,v])=>`<option value="${v}">${t}${v?' (−'+v+'%p)':''}</option>`).join('')+'</select>';
+    h+='<label>우대금리 ② 추가 항목</label>'+R.prefB.map(([t,v,g],i)=>chk('pb'+i,t,v,g)).join('');
+    h+='<label class="chk"><input type="checkbox" id="local"> 수도권 밖(지방) 주택 <span class="hint">(−0.2%p)</span></label>';
+  } else if(p==='newborn'){
+    h+='<label>우대금리 <span class="hint">(중복 가능, 합계 최대 0.5%p)</span></label>'+R.pref.map(([t,v,g],i)=>chk('pn'+i,t,v,g)).join('');
+    h+='<label class="chk"><input type="checkbox" id="local"> 수도권 밖(지방) 주택 <span class="hint">(−0.2%p)</span></label>';
+  } else {
+    h+='<label>신청 방식</label><select id="bprod">'+R.product.map(([t],i)=>`<option value="${i}">${t}</option>`).join('')+'</select>';
+    h+='<label>우대금리 <span class="hint">(합계 최대 1.0%p)</span></label>'+R.pref.map(([t,v,g],i)=>chk('pq'+i,t,v,g)).join('');
+    h+='<label class="chk"><input type="checkbox" id="regul"> 규제지역 주택 <span class="hint">(+0.2%p, 서울 전역·경기 12곳 등)</span></label>';
+  }
+  $('#extra').innerHTML=h;
+  $('#extra').querySelectorAll('input[data-g]').forEach(c=>c.onchange=()=>{ if(c.checked&&c.dataset.g) $('#extra').querySelectorAll(`input[data-g="${c.dataset.g}"]`).forEach(o=>{if(o!==c)o.checked=false}) });
+}
+document.querySelectorAll('input[name=prod]').forEach(r=>r.onchange=render); render();
+function prefSum(){ return [...$('#extra').querySelectorAll('input[type=checkbox][data-v]:checked')].reduce((s,c)=>s+ +c.dataset.v,0); }
+function run(){
+  const p=val('prod'), amtMan=+$('#amt').value||0, notes=[]; let rate, years, parts=[];
+  if(p==='custom'){ rate=+$('#crate').value; years=+$('#cterm').value||30; if(!rate){alert('금리를 입력해 주세요');return;} parts.push('직접 입력 금리'); }
+  else {
+    const R=RATES[p], ti=+$('#term').value, inc=+$('#inc').value||0; years=R.terms[ti];
+    if(p==='bogeumjari'){
+      rate=R.product[+$('#bprod').value][1][ti]; parts.push('기본 '+rate.toFixed(2)+'%');
+      const pr=Math.min(prefSum(),R.prefCap); if(pr){rate-=pr;parts.push('우대 −'+pr.toFixed(1))}
+      if($('#regul').checked){rate+=R.regulated;parts.push('규제지역 +0.2')}
+      if(inc>R.incomeCap) notes.push('보금자리론 소득 기준은 7천만 원 이하예요(신혼 8,500만·1자녀 9천만·다자녀 1억).');
+      if(amtMan>R.limitFirst) notes.push('보금자리론 한도는 3.6억(다자녀 4억, 생애최초 4.2억)이에요.');
+      notes.push('주택가격 6억 원 이하, LTV 최대 70%·DTI 60% 안에서 한도가 정해져요.');
+    } else {
+      const cap=p==='newborn'?($('#dual').checked?R.incomeCapDual:R.incomeCap):R.incomeCap.newlywed;
+      if(inc>cap){ notes.push('입력한 소득이 '+R.name+' 소득 기준을 넘어요.'); }
+      rate=baseRate(R,Math.min(inc,cap),ti); parts.push('기본 '+rate.toFixed(2)+'%');
+      if(p==='didimdol'){ const a=+$('#prefA').value, b=prefSum(), capP=a>=0.7?R.prefCapMulti:R.prefCap, pr=Math.min(a+b,capP); if(pr){rate-=pr;parts.push('우대 −'+pr.toFixed(1))}
+        const rt=+$('#rtype').value; const add=(rt===0.2&&years===10)?0.3:rt; if(add){rate+=add;parts.push('금리유형 +'+add)}
+        if(inc>R.incomeCap.base) notes.push('디딤돌 기본 소득 기준은 6천만 원(생애최초·2자녀 7천만, 신혼 8,500만)이에요.');
+        if(amtMan>R.limit.newlywed) notes.push('디딤돌 한도는 2억(생애최초 2.4억, 신혼·2자녀 이상 3.2억)이에요.');
+        notes.push('우대금리는 항목별로 최대 5년(자녀 우대는 1명당 5년) 적용돼요.');
+      } else { const pr=Math.min(prefSum(),R.prefCap); if(pr){rate-=pr;parts.push('우대 −'+pr.toFixed(1))}
+        if(amtMan>R.limit) notes.push('신생아 특례 한도는 4억 원이에요.'); notes.push('특례금리는 기본 5년(추가 출산 1명당 5년 연장, 최장 15년) 적용 후 바뀌어요.'); }
+      if($('#local').checked){rate-=R.local;parts.push('지방 −0.2')}
+      if(rate<R.floor){rate=R.floor;parts.push('최저금리 '+R.floor+'% 적용')}
+    }
+  }
+  rate=Math.round(rate*100)/100; if(!amtMan){alert('대출 금액을 입력해 주세요');return;}
+  const how=val('how'), grace=+$('#grace').value, s=schedule(amtMan*10000,rate,years*12,how,grace);
+  $('#rsum').textContent=(p==='custom'?'일반 주담대':RATES[p].name)+' · '+man(amtMan)+' · '+years+'년 · '+{equalPay:'원리금균등',equalPrin:'원금균등',bullet:'만기일시'}[how]+(grace?' · 거치 1년':'');
+  $('#rrate').textContent='연 '+rate.toFixed(2)+'%'; $('#rrate').title=parts.join(' ');
+  $('#rpay').textContent=how==='equalPrin'?won(s.firstPay)+' → '+won(s.lastPay):won(s.firstPay);
+  $('#rtab').innerHTML=`<tr><th>금리 계산</th><td>${parts.join(' / ')}</td></tr>`+(grace?`<tr><th>거치기간 월 이자</th><td>${won(s.gracePay)}</td></tr>`:'')+`<tr><th>총 이자</th><td>${won(s.totalInt)}</td></tr><tr><th>총 상환액</th><td>${won(s.totalInt+amtMan*10000)}</td></tr>`;
+  $('#rnote').textContent='⚠️ 참고용이에요. '+notes.join(' ')+' 실제 금리·한도는 심사 결과와 신청 시점 고시 금리로 정해져요.';
+  let rows='<tr><th>연차</th><th>낸 원금</th><th>낸 이자</th><th>남은 원금</th></tr>';
+  for(let y=0;y<years;y++){const yr=s.rows.slice(y*12,y*12+12);rows+=`<tr><td>${y+1}년</td><td>${won(yr.reduce((a,r)=>a+r.prin,0))}</td><td>${won(yr.reduce((a,r)=>a+r.int,0))}</td><td>${won(yr[yr.length-1].bal)}</td></tr>`}
+  $('#sched').innerHTML=rows; $('#res').classList.add('show'); $('#res').scrollIntoView({behavior:'smooth',block:'start'});
+}
+</script>
+</body></html>
