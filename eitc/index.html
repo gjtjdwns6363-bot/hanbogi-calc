@@ -37,10 +37,10 @@
 </div>
 
 <label>부부합산 2025년 근로소득 <span class="hint">(만 원, 비과세 제외 총급여)</span></label>
-<input type="number" id="wage" inputmode="numeric" min="0" placeholder="예: 1800">
+<input type="text" id="wage" class="num" inputmode="numeric" placeholder="예: 1,800">
 
 <label>사업소득이 있다면 연 매출 <span class="hint">(만 원, 없으면 비워 두기)</span></label>
-<input type="number" id="biz" inputmode="numeric" min="0" placeholder="예: 3000">
+<input type="text" id="biz" class="num" inputmode="numeric" placeholder="예: 3,000">
 <select id="bizRate" style="margin-top:8px">
 <option value="0.3">업종 선택 (기본: 기타 30%)</option>
 <option value="0.2">도매 (20%)</option><option value="0.25">농림어업·소매 (25%)</option>
@@ -93,12 +93,14 @@
 <script src="calc.js"></script>
 <script>
 const $=s=>document.querySelector(s), val=n=>(document.querySelector('input[name='+n+']:checked')||{}).value;
+const num=v=>+String(v).replace(/[^0-9.]/g,"")||0;
+document.querySelectorAll("input.num").forEach(el=>el.addEventListener("input",()=>{const n=num(el.value);el.value=n?n.toLocaleString("ko-KR"):"";}));
 const won=v=>Math.round(v).toLocaleString('ko-KR')+'원';
 document.querySelectorAll('input[name=sp]').forEach(r=>r.onchange=()=>{$('#spBox').style.display=val('sp')==='yes'?'block':'none';$('#parBox').style.display=val('sp')==='yes'?'none':'block'});
 function run(){
   const kids=+$('#kids').value, sp=val('sp')==='yes';
   let type; if(sp) type=val('spInc')==='ge'?'two':'one'; else type=(kids>0||val('par')==='yes')?'one':'single';
-  const income=((+$('#wage').value||0)+(+$('#biz').value||0)*(+$('#bizRate').value))*10000;
+  const income=((num($('#wage').value))+(num($('#biz').value))*(+$('#bizRate').value))*10000;
   const r=calc({type,income,kids,asset:$('#asset').value,late:val('late')==='1',childCredit:0});
   $('#type').textContent={single:'단독가구',one:'홑벌이가구',two:'맞벌이가구'}[type]+' · 총급여액등 '+Math.round(income/10000).toLocaleString('ko-KR')+'만 원'+(val('late')==='1'?' · 기한 후 신청(95%)':'');
   $('#e').textContent=won(r.eitc); $('#c').textContent=won(r.ctc); $('#total').textContent=won(r.eitc+r.ctc);
