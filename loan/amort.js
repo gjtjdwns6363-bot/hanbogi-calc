@@ -2,11 +2,13 @@
 // 체증식 증가율은 기관마다 달라 기본 연 2%로 두고 화면에서 바꿀 수 있게 한다.
 var GRAD_RATE = 0.02;
 // schedule(원금, 연이율%, 총개월, 방식, 거치개월) → {rows:[{m,pay,prin,int,bal}], totalInt, firstPay, lastPay}
-function schedule(P, ratePct, n, method, grace = 0) {
+// balloon: 만기에 한 번에 갚을 유예원금(원). 원리금균등에서만 쓴다(자동차 유예할부).
+function schedule(P, ratePct, n, method, grace = 0, balloon = 0) {
   const r = ratePct / 100 / 12, rows = [];
   let bal = P, totalInt = 0;
   const payN = n - grace; // 원금을 갚는 개월 수
-  const annuity = r === 0 ? P / payN : P * r / (1 - Math.pow(1 + r, -payN));
+  const vN = Math.pow(1 + r, -payN);
+  const annuity = r === 0 ? (P - balloon) / payN : (P - balloon * vN) * r / (1 - vN);
   // 체증식: 상환 시작 후 매년 월 상환액이 g만큼 늘어나고, 만기에 잔액 0이 되도록 첫해 월 상환액을 정한다.
   let grad = 0;
   if (method === 'graduated') {
