@@ -29,3 +29,4 @@ th{background:#eef2f5}
 .tools a{display:block;text-decoration:none;color:inherit}
 footer{max-width:720px;margin:24px auto;padding:16px;color:var(--muted);font-size:.85rem}
 @media (prefers-color-scheme:dark){:root{--bg:#12161b;--card:#1b2128;--ink:#e8edf2;--muted:#9aa7b4;--line:#2b333d}th{background:#222a33}.seg label:has(input:checked){background:#16302f}.warn{background:#2a2414;border-color:#5c4a1a}input[type=number],input[type=text],select{background:#12161b;color:var(--ink)}}
+.tools .card{margin:0}
