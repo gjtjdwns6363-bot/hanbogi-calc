@@ -2,7 +2,7 @@
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="naver-site-verification" content="21421c877a507dea4b5be99d5ec0d9e9fd8d7b50" />
 <title>알바 시급·주휴수당 계산기 2026 | 최저시급 10,320원 주급·월급 | 한눈 계산기</title>
-<meta name="description" content="시급과 근무 시간(10분 단위)을 넣으면 하루 급여, 주휴수당 포함 주급, 월 예상 급여와 3.3%·4대보험 공제 후 금액을 계산합니다. 2026년 최저시급 10,320원, 주 15시간 주휴 조건, 야간·연장·휴일 가산 반영.">
+<meta name="description" content="시급과 근무 시간(1분 단위)을 넣으면 하루 급여, 주휴수당 포함 주급, 월 예상 급여와 3.3%·4대보험 공제 후 금액을 계산합니다. 2026년 최저시급 10,320원, 주 15시간 주휴 조건, 야간·연장·휴일 가산 반영.">
 <link rel="canonical" href="https://calc.hanbogi.com/hourly/">
 <meta property="og:title" content="알바 시급·주휴수당 계산기 2026">
 <meta property="og:description" content="근무 시간만 넣으면 주휴수당이 나오는지, 주급·월급이 얼마인지 바로 계산해요.">
@@ -31,27 +31,27 @@
 <div class="seg"><label><input type="radio" name="mode" value="same" checked><span>매일 같은 시간</span></label><label><input type="radio" name="mode" value="each"><span>요일별로 다름</span></label><label><input type="radio" name="mode" value="dated"><span>날짜별로 입력</span></label><label><input type="radio" name="mode" value="total"><span>총 시간만 입력</span></label></div>
 
 <div id="sameBox">
-<label>출근 · 퇴근 <span class="hint">(10분 단위 · 퇴근이 출근보다 이르면 다음 날 퇴근)</span></label>
-<div class="tsel"><select id="s0" class="tm"></select>~<select id="e0" class="tm"></select></div>
+<label>출근 · 퇴근 <span class="hint">(1분 단위 · 퇴근이 출근보다 이르면 다음 날 퇴근)</span></label>
+<div class="tsel"><input type="time" step="60" id="s0" value="09:00">~<input type="time" step="60" id="e0" value="14:00"></div>
 <label>휴게시간 <span class="hint">(하루, 급여에서 빠지는 시간)</span></label>
-<select id="b0" class="brk"></select>
+<div class="tsel"><input type="number" id="b0" min="0" max="600" step="1" inputmode="numeric" value="0"> 분</div>
 <label>주 근무일수</label>
 <select id="nd"><option value="1">1일</option><option value="2">2일</option><option value="3">3일</option><option value="4">4일</option><option value="5" selected>5일</option><option value="6">6일</option><option value="7">7일</option></select>
 </div>
 
 <div id="eachBox" hidden>
-<label>요일별 근무 <span class="hint">(근무하는 요일만 체크 · 10분 단위)</span></label>
+<label>요일별 근무 <span class="hint">(근무하는 요일만 체크 · 1분 단위)</span></label>
 <div style="overflow-x:auto"><table id="week"></table></div>
 </div>
 
 <div id="datedBox" hidden>
-<label>날짜별 근무 <span class="hint">(출퇴근이 날마다 다를 때 · 일한 날마다 한 줄 · 10분 단위)</span></label>
+<label>날짜별 근무 <span class="hint">(출퇴근이 날마다 다를 때 · 일한 날마다 한 줄 · 1분 단위)</span></label>
 <div style="overflow-x:auto"><table id="dlist"></table></div>
 <button type="button" id="addDay" style="margin-top:8px;background:#fff;color:var(--brand);border:1px solid var(--brand)">+ 하루 추가</button>
 </div>
 
 <div id="totalBox" hidden>
-<label>총 근무시간 <span class="hint">(휴게 뺀 실제 근무 · 10분 단위)</span></label>
+<label>총 근무시간 <span class="hint">(휴게 뺀 실제 근무 · 1분 단위)</span></label>
 <div class="tsel"><select id="th"></select><select id="tmm"></select></div>
 <p class="hint">하루하루 시간을 모르니 야간(22~06시)·하루 8시간 초과 가산은 빼고, 주 40시간 초과분만 연장으로 계산해요.</p>
 </div>
@@ -96,7 +96,7 @@
 <div class="card">
 <table>
 <tr><th>항목</th><th>계산 기준</th></tr>
-<tr><td>기본급</td><td>실제 근무시간(휴게 제외) × 시급 · 10분 단위로 합산</td></tr>
+<tr><td>기본급</td><td>실제 근무시간(휴게 제외) × 시급 · 1분 단위로 합산</td></tr>
 <tr><td>주휴수당</td><td>1주 소정근로시간 15시간 이상 + 개근이면 (소정근로시간 ÷ 40) × 8 × 시급. 40시간을 넘으면 40시간으로 계산</td></tr>
 <tr><td>연장근로</td><td>하루 8시간 또는 주 40시간을 넘은 시간 × 시급 × 50% 가산 (5인 이상)</td></tr>
 <tr><td>야간근로</td><td>오후 10시~오전 6시 근무 × 시급 × 50% 가산 (5인 이상, 연장과 겹치면 둘 다 가산)</td></tr>
@@ -128,22 +128,21 @@ const num=v=>+String(v).replace(/[^0-9.]/g,'')||0, won=v=>Math.round(v).toLocale
 const man=v=>(v>=10000?(v/10000).toLocaleString('ko-KR',{maximumFractionDigits:2})+'억 ':'')+(v%10000?(v%10000).toLocaleString('ko-KR')+'만':'')+' 원';
 document.querySelectorAll('input.num').forEach(el=>el.addEventListener('input',()=>{const n=num(el.value);el.value=n?n.toLocaleString('ko-KR'):'';}));
 const pad=n=>String(n).padStart(2,'0'), opt=(v,t,sel)=>`<option value="${v}"${sel?' selected':''}>${t}</option>`;
-const tOpts=d=>{let h='';for(let m=0;m<1440;m+=10)h+=opt(m,pad(m/60|0)+':'+pad(m%60),m===d);return h;};
-const bOpts=d=>{let h='';for(let m=0;m<=180;m+=10)h+=opt(m,m?hm(m):'없음',m===d);return h;};
+const hhmm=m=>pad(m/60|0)+':'+pad(m%60), M=el=>el.type==='time'?(el.value?+el.value.slice(0,2)*60+ +el.value.slice(3,5):0):+el.value||0;
+const tIn=(a,d)=>`<input type="time" step="60" ${a} value="${hhmm(d)}">`, bIn=(a,d)=>`<input type="number" min="0" max="600" step="1" inputmode="numeric" ${a} value="${d}" style="width:5.5em"> 분`;
 const DAYS=['월','화','수','목','금','토','일'];
-$('#s0').innerHTML=tOpts(540); $('#e0').innerHTML=tOpts(840); $('#b0').innerHTML=bOpts(0);
-$('#week').innerHTML='<tr><th>요일</th><th>출근</th><th>퇴근</th><th>휴게</th></tr>'+DAYS.map((d,i)=>`<tr><td><label style="margin:0;font-weight:500"><input type="checkbox" id="w${i}"${i<5?' checked':''}> ${d}</label></td><td><select id="s${i+1}">${tOpts(540)}</select></td><td><select id="e${i+1}">${tOpts(840)}</select></td><td><select id="b${i+1}">${bOpts(0)}</select></td></tr>`).join('');
-{let h='';for(let i=0;i<=24;i++)h+=opt(i,i+'시간');$('#hh').innerHTML=h;h='';for(let m=0;m<60;m+=10)h+=opt(m,m+'분');$('#hm').innerHTML=h;}
-{let h='';for(let i=0;i<=300;i++)h+=opt(i,i+'시간',i===60);$('#th').innerHTML=h;h='';for(let m=0;m<60;m+=10)h+=opt(m,m+'분');$('#tmm').innerHTML=h;}
+$('#week').innerHTML='<tr><th>요일</th><th>출근</th><th>퇴근</th><th>휴게</th></tr>'+DAYS.map((d,i)=>`<tr><td><label style="margin:0;font-weight:500"><input type="checkbox" id="w${i}"${i<5?' checked':''}> ${d}</label></td><td>${tIn(`id="s${i+1}"`,540)}</td><td>${tIn(`id="e${i+1}"`,840)}</td><td>${bIn(`id="b${i+1}"`,0)}</td></tr>`).join('');
+{let h='';for(let i=0;i<=24;i++)h+=opt(i,i+'시간');$('#hh').innerHTML=h;h='';for(let m=0;m<60;m++)h+=opt(m,m+'분');$('#hm').innerHTML=h;}
+{let h='';for(let i=0;i<=300;i++)h+=opt(i,i+'시간',i===60);$('#th').innerHTML=h;h='';for(let m=0;m<60;m++)h+=opt(m,m+'분');$('#tmm').innerHTML=h;}
 let dn=0;
-function addDay(s=540,e=840,b=0){dn++;const tr=document.createElement('tr');tr.className='drow';tr.innerHTML=`<td class="dno"></td><td><select class="ds">${tOpts(s)}</select></td><td><select class="de">${tOpts(e)}</select></td><td><select class="db">${bOpts(b)}</select></td><td><button type="button" class="del" style="padding:4px 10px;background:#fff;color:#c33;border:1px solid #ddd">삭제</button></td>`;
+function addDay(s=540,e=840,b=0){dn++;const tr=document.createElement('tr');tr.className='drow';tr.innerHTML=`<td class="dno"></td><td>${tIn('class="ds"',s)}</td><td>${tIn('class="de"',e)}</td><td>${bIn('class="db"',b)}</td><td><button type="button" class="del" style="padding:4px 10px;background:#fff;color:#c33;border:1px solid #ddd">삭제</button></td>`;
   tr.querySelector('.del').onclick=()=>{tr.remove();renum();};$('#dlist').appendChild(tr);renum();}
 function renum(){document.querySelectorAll('#dlist .drow').forEach((r,i)=>r.querySelector('.dno').textContent=(i+1)+'일차');}
 $('#dlist').innerHTML='<tr><th>날짜</th><th>출근</th><th>퇴근</th><th>휴게</th><th></th></tr>';
 [[540,840],[600,960],[1080,1320]].forEach(([s,e])=>addDay(s,e));
 $('#addDay').onclick=()=>addDay();
 document.querySelectorAll('input[name=mode]').forEach(r=>r.onchange=()=>{const m=val('mode');$('#sameBox').hidden=m!=='same';$('#eachBox').hidden=m!=='each';$('#datedBox').hidden=m!=='dated';$('#totalBox').hidden=m!=='total';$('#periodBox').hidden=!(m==='dated'||m==='total');});
-const day=i=>({start:+$('#s'+i).value,end:+$('#e'+i).value,brk:+$('#b'+i).value});
+const day=i=>({start:M($('#s'+i)),end:M($('#e'+i)),brk:M($('#b'+i))});
 function days(){ if(val('mode')==='same') return Array(+$('#nd').value).fill(day(0)); return DAYS.map((_,i)=>$('#w'+i).checked?day(i+1):null).filter(Boolean); }
 function table(wage){
   $('#jcond').textContent='시급 '+won(wage)+' · 개근 기준 (위 시급을 바꾸면 표도 바뀌어요)';
@@ -180,7 +179,7 @@ function run(){
 }
 function runPeriod(wage,mode){
   const five=val('five')==='1', full=val('full')==='1', tax=val('tax'), weeks=+$('#weeks').value;
-  const ds=mode==='dated'?[...document.querySelectorAll('#dlist .drow')].map(r=>({start:+r.querySelector('.ds').value,end:+r.querySelector('.de').value,brk:+r.querySelector('.db').value})):null;
+  const ds=mode==='dated'?[...document.querySelectorAll('#dlist .drow')].map(r=>({start:M(r.querySelector('.ds')),end:M(r.querySelector('.de')),brk:M(r.querySelector('.db'))})):null;
   const r=periodPay({days:ds,totalMin:mode==='total'?+$('#th').value*60+ +$('#tmm').value:0,weeks,wage,holiday:+$('#hh').value*60+ +$('#hm').value,five,full});
   if(!r.work&&!r.holiday){alert('근무 시간을 입력해 주세요');return;}
   if(wage<HOURLY.wage) alert('입력한 시급이 2026년 최저시급 '+won(HOURLY.wage)+'보다 낮아요. 수습(3개월 이내, 1년 이상 계약, 단순노무 제외) 등 예외가 아니면 최저임금 위반일 수 있어요.');
