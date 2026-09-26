@@ -46,4 +46,19 @@ eq(weekPay({ days: [], holiday: 600 }).sched, 0, '휴일근로는 주휴 산정 
 eq(deduct(1000000, 'biz').net, 967000, '3.3%');
 // 4대보험: salary 계산기와 같은 값 (월 300만, 비과세 0)
 eq(deduct(3000000, 'ins').pension, 142500, '국민연금 4.75%');
+// 기간 계산: 날짜별 3일(4h30·6h·4h)을 1주로 보면 14h30 → 주휴 없음
+const { periodPay } = require('./calc.js');
+const p1 = periodPay({ days: [{ start: 540, end: 810 }, { start: 600, end: 960 }, { start: 1080, end: 1320 }], weeks: 1, wage: 10000, five: false });
+eq(p1.work, 870, '날짜별 합산 14h30');
+eq(p1.juhuOk, false, '주 14h30 주휴 없음');
+eq(Math.round(p1.total), 145000, '날짜별 급여');
+// 총 60시간 / 4주 → 주 평균 15시간 → 주휴 주당 30,000 × 4
+const p2 = periodPay({ totalMin: 3600, weeks: 4, wage: 10000, five: true });
+eq(p2.juhuOk, true, '주 평균 15h 주휴');
+eq(Math.round(p2.juhu), 120000, '4주 주휴');
+eq(Math.round(p2.total), 720000, '총시간 급여');
+// 총 180시간 / 4주 → 주 45h → 주휴는 40h 상한, 초과 20h는 연장 50% 가산(5인 이상)
+const p3 = periodPay({ totalMin: 10800, weeks: 4, wage: 10000, five: true });
+eq(Math.round(p3.prem), 100000, '주 40h 초과 연장 가산');
+eq(Math.round(p3.juhuWeek), 80000, '주휴 40h 상한');
 console.log('ok', { b, c: { juhu: c.juhu, month: Math.round(c.month) } });

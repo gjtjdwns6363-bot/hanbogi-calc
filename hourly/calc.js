@@ -44,6 +44,27 @@ function weekPay({ days, wage = HOURLY.wage, holiday = 0, five = true, full = tr
     week: base + prem, weekJ: base + prem + juhu, month: (base + prem + juhu) * HOURLY.weekToMonth };
 }
 
+// 기간 계산: 날짜별 기록(days) 또는 총 근무시간(totalMin)을 weeks 주 동안 일한 것으로 본다.
+// 주휴는 주 평균 소정근로시간으로 판단(4주 평균 기준과 같은 방식). 총 시간 입력은 하루 단위를 몰라 야간·일 8시간 초과를 알 수 없다.
+// ponytail: 주별 연장은 평균으로 나눠 계산, 주마다 편차가 크면 주 단위로 따로 넣어야 정확하다.
+function periodPay({ days = null, totalMin = 0, weeks = 1, wage = HOURLY.wage, holiday = 0, five = true, full = true }) {
+  const d = days ? days.map(dayWork) : [];
+  const work = days ? d.reduce((s, x) => s + x.work, 0) : totalMin;
+  const reg = days ? d.reduce((s, x) => s + Math.min(x.work, HOURLY.dayCap), 0) : totalMin;
+  const night = d.reduce((s, x) => s + x.night, 0);
+  const avgSched = Math.min(reg / weeks, HOURLY.weekCap);                     // 주 평균 소정근로시간
+  const ext = Math.max(work - avgSched * weeks, 0);
+  const h8 = Math.min(holiday, HOURLY.dayCap * weeks), hOver = holiday - h8;
+  const perMin = wage / 60;
+  const base = (work + holiday) * perMin;
+  const prem = five ? (ext * HOURLY.plus + night * HOURLY.plus + h8 * HOURLY.plus + hOver * 2 * HOURLY.plus) * perMin : 0;
+  const juhuOk = avgSched >= HOURLY.juhuMin && full;
+  const juhuWeek = juhuOk ? avgSched / HOURLY.weekCap * 8 * wage : 0;
+  const nDays = days ? d.filter(x => x.work > 0).length : 0;
+  return { work, avgSched, ext, night, holiday, nDays, base, prem, juhuOk, juhuWeek, juhu: juhuWeek * weeks,
+    total: base + prem + juhuWeek * weeks, weeks };
+}
+
 // 세금: none | biz(3.3%) | ins(4대보험 + 근로소득 간이세액표, 본인 1명)
 function deduct(month, mode) {
   const g = Math.round(month);
@@ -53,4 +74,4 @@ function deduct(month, mode) {
 }
 const hm = m => (m >= 60 ? Math.floor(m / 60) + '시간' : '') + (m % 60 ? (m >= 60 ? ' ' : '') + m % 60 + '분' : m ? '' : '0시간');
 
-if (typeof module !== 'undefined') module.exports = { HOURLY, dayWork, weekPay, deduct, hm };
+if (typeof module !== 'undefined') module.exports = { HOURLY, dayWork, weekPay, periodPay, deduct, hm };

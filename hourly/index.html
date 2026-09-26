@@ -28,7 +28,7 @@
 <input type="text" id="wage" class="num" inputmode="numeric" value="10,320">
 
 <label>근무 시간 입력</label>
-<div class="seg"><label><input type="radio" name="mode" value="same" checked><span>매일 같은 시간</span></label><label><input type="radio" name="mode" value="each"><span>요일별로 다름</span></label></div>
+<div class="seg"><label><input type="radio" name="mode" value="same" checked><span>매일 같은 시간</span></label><label><input type="radio" name="mode" value="each"><span>요일별로 다름</span></label><label><input type="radio" name="mode" value="dated"><span>날짜별로 입력</span></label><label><input type="radio" name="mode" value="total"><span>총 시간만 입력</span></label></div>
 
 <div id="sameBox">
 <label>출근 · 퇴근 <span class="hint">(10분 단위 · 퇴근이 출근보다 이르면 다음 날 퇴근)</span></label>
@@ -42,6 +42,23 @@
 <div id="eachBox" hidden>
 <label>요일별 근무 <span class="hint">(근무하는 요일만 체크 · 10분 단위)</span></label>
 <div style="overflow-x:auto"><table id="week"></table></div>
+</div>
+
+<div id="datedBox" hidden>
+<label>날짜별 근무 <span class="hint">(출퇴근이 날마다 다를 때 · 일한 날마다 한 줄 · 10분 단위)</span></label>
+<div style="overflow-x:auto"><table id="dlist"></table></div>
+<button type="button" id="addDay" style="margin-top:8px;background:#fff;color:var(--brand);border:1px solid var(--brand)">+ 하루 추가</button>
+</div>
+
+<div id="totalBox" hidden>
+<label>총 근무시간 <span class="hint">(휴게 뺀 실제 근무 · 10분 단위)</span></label>
+<div class="tsel"><select id="th"></select><select id="tmm"></select></div>
+<p class="hint">하루하루 시간을 모르니 야간(22~06시)·하루 8시간 초과 가산은 빼고, 주 40시간 초과분만 연장으로 계산해요.</p>
+</div>
+
+<div id="periodBox" hidden>
+<label>위 시간은 몇 주 동안 일한 건가요? <span class="hint">(주휴수당은 주 평균 시간으로 판단)</span></label>
+<select id="weeks"><option value="1">1주</option><option value="2">2주</option><option value="3">3주</option><option value="4" selected>4주</option><option value="4.345">한 달 (4.345주)</option></select>
 </div>
 
 <label>이번 주 개근 여부</label>
@@ -85,6 +102,7 @@
 <tr><td>야간근로</td><td>오후 10시~오전 6시 근무 × 시급 × 50% 가산 (5인 이상, 연장과 겹치면 둘 다 가산)</td></tr>
 <tr><td>휴일근로</td><td>8시간 이내 50%, 8시간 초과 100% 가산 (5인 이상)</td></tr>
 <tr><td>월 예상 급여</td><td>주휴 포함 주급 × 4.345주 (365일 ÷ 7 ÷ 12)</td></tr>
+<tr><td>날짜별·총 시간 입력</td><td>입력한 기간(1~4주·한 달)의 주 평균 근무시간으로 주휴수당을 판단하고 기간만큼 곱해요. 총 시간만 넣으면 야간·하루 8시간 초과 가산은 빼요</td></tr>
 <tr><td>3.3%</td><td>사업소득 원천징수 3% + 지방소득세 0.3% (10원 미만 버림)</td></tr>
 <tr><td>4대보험</td><td>국민연금 4.75%, 건강보험 3.595%, 장기요양 건보료의 13.14%, 고용보험 0.9%, 소득세 간이세액표 (<a href="/salary/">연봉 계산기</a>와 같은 방식)</td></tr>
 </table>
@@ -116,7 +134,15 @@ const DAYS=['월','화','수','목','금','토','일'];
 $('#s0').innerHTML=tOpts(540); $('#e0').innerHTML=tOpts(840); $('#b0').innerHTML=bOpts(0);
 $('#week').innerHTML='<tr><th>요일</th><th>출근</th><th>퇴근</th><th>휴게</th></tr>'+DAYS.map((d,i)=>`<tr><td><label style="margin:0;font-weight:500"><input type="checkbox" id="w${i}"${i<5?' checked':''}> ${d}</label></td><td><select id="s${i+1}">${tOpts(540)}</select></td><td><select id="e${i+1}">${tOpts(840)}</select></td><td><select id="b${i+1}">${bOpts(0)}</select></td></tr>`).join('');
 {let h='';for(let i=0;i<=24;i++)h+=opt(i,i+'시간');$('#hh').innerHTML=h;h='';for(let m=0;m<60;m+=10)h+=opt(m,m+'분');$('#hm').innerHTML=h;}
-document.querySelectorAll('input[name=mode]').forEach(r=>r.onchange=()=>{const s=val('mode')==='same';$('#sameBox').hidden=!s;$('#eachBox').hidden=s;});
+{let h='';for(let i=0;i<=300;i++)h+=opt(i,i+'시간',i===60);$('#th').innerHTML=h;h='';for(let m=0;m<60;m+=10)h+=opt(m,m+'분');$('#tmm').innerHTML=h;}
+let dn=0;
+function addDay(s=540,e=840,b=0){dn++;const tr=document.createElement('tr');tr.className='drow';tr.innerHTML=`<td class="dno"></td><td><select class="ds">${tOpts(s)}</select></td><td><select class="de">${tOpts(e)}</select></td><td><select class="db">${bOpts(b)}</select></td><td><button type="button" class="del" style="padding:4px 10px;background:#fff;color:#c33;border:1px solid #ddd">삭제</button></td>`;
+  tr.querySelector('.del').onclick=()=>{tr.remove();renum();};$('#dlist').appendChild(tr);renum();}
+function renum(){document.querySelectorAll('#dlist .drow').forEach((r,i)=>r.querySelector('.dno').textContent=(i+1)+'일차');}
+$('#dlist').innerHTML='<tr><th>날짜</th><th>출근</th><th>퇴근</th><th>휴게</th><th></th></tr>';
+[[540,840],[600,960],[1080,1320]].forEach(([s,e])=>addDay(s,e));
+$('#addDay').onclick=()=>addDay();
+document.querySelectorAll('input[name=mode]').forEach(r=>r.onchange=()=>{const m=val('mode');$('#sameBox').hidden=m!=='same';$('#eachBox').hidden=m!=='each';$('#datedBox').hidden=m!=='dated';$('#totalBox').hidden=m!=='total';$('#periodBox').hidden=!(m==='dated'||m==='total');});
 const day=i=>({start:+$('#s'+i).value,end:+$('#e'+i).value,brk:+$('#b'+i).value});
 function days(){ if(val('mode')==='same') return Array(+$('#nd').value).fill(day(0)); return DAYS.map((_,i)=>$('#w'+i).checked?day(i+1):null).filter(Boolean); }
 function table(wage){
@@ -127,6 +153,7 @@ function table(wage){
 }
 function run(){
   const wage=num($('#wage').value); if(!wage){alert('시급을 입력해 주세요');return;}
+  const mode=val('mode'); if(mode==='dated'||mode==='total') return runPeriod(wage,mode);
   const ds=days(), five=val('five')==='1', full=val('full')==='1', tax=val('tax');
   const r=weekPay({days:ds,wage,holiday:+$('#hh').value*60+ +$('#hm').value,five,full});
   if(!r.work&&!r.holiday){alert('근무 시간을 입력해 주세요');return;}
@@ -148,6 +175,30 @@ function run(){
   if(tax==='biz') h+=row('소득세',d.income,'3%')+row('지방소득세',d.local,'0.3%');
   if(tax==='ins') h+=row('국민연금',d.pension,'4.75%')+row('건강보험',d.health,'3.595%')+row('장기요양',d.care,'건보료의 13.14%')+row('고용보험',d.employ,'0.9%')+row('소득세',d.income,'간이세액표')+row('지방소득세',d.local,'소득세의 10%');
   if(tax!=='none') h+=row('공제 합계',d.total)+`<tr><th>세후 월 급여</th><td><b>${won(d.net)}</b></td></tr>`;
+  $('#rtab').innerHTML=h;
+  $('#res').classList.add('show'); $('#res').scrollIntoView({behavior:'smooth',block:'start'}); table(wage);
+}
+function runPeriod(wage,mode){
+  const five=val('five')==='1', full=val('full')==='1', tax=val('tax'), weeks=+$('#weeks').value;
+  const ds=mode==='dated'?[...document.querySelectorAll('#dlist .drow')].map(r=>({start:+r.querySelector('.ds').value,end:+r.querySelector('.de').value,brk:+r.querySelector('.db').value})):null;
+  const r=periodPay({days:ds,totalMin:mode==='total'?+$('#th').value*60+ +$('#tmm').value:0,weeks,wage,holiday:+$('#hh').value*60+ +$('#hm').value,five,full});
+  if(!r.work&&!r.holiday){alert('근무 시간을 입력해 주세요');return;}
+  if(wage<HOURLY.wage) alert('입력한 시급이 2026년 최저시급 '+won(HOURLY.wage)+'보다 낮아요. 수습(3개월 이내, 1년 이상 계약, 단순노무 제외) 등 예외가 아니면 최저임금 위반일 수 있어요.');
+  const wl=weeks===4.345?'한 달':weeks+'주', sh=hm(Math.round(r.avgSched));
+  $('#rsum').textContent='시급 '+won(wage)+' · '+wl+' · 총 근무 '+hm(r.work)+(r.nDays?' ('+r.nDays+'일)':'')+(r.holiday?' · 휴일 '+hm(r.holiday):'')+' · '+(five?'5인 이상':'5인 미만');
+  const j=$('#rjuhu'); j.className='jn '+(r.juhuOk?'ok':'no');
+  j.textContent=r.juhuOk?`✅ 주휴수당 받아요: 주 평균 소정근로 ${sh} → (${sh} ÷ 40) × 8 × 시급, ${wl}치`
+    : r.avgSched<HOURLY.juhuMin?`❌ 주휴수당 없어요: 주 평균 ${sh} → 15시간 미만이라 주휴수당이 없어요`
+    : `❌ 주휴수당 없어요: 주 평균 ${sh}로 15시간 이상이지만 결근한 날이 있으면 그 주 주휴수당은 없어요`;
+  const d=deduct(r.total,tax);
+  $('#rlabel').textContent=wl+' 급여 '+(tax==='none'?'(세전)':'(세후)'); $('#rnet').textContent=won(d.net);
+  const row=(k,v,s)=>`<tr><th>${k}</th><td>${won(v)}${s?` <span class="sub">${s}</span>`:''}</td></tr>`;
+  let h=(r.nDays?row('하루 평균 급여',(r.base+r.prem)/r.nDays,r.nDays+'일 기준'):'')+row('기본급',r.base,hm(r.work+r.holiday)+' × 시급')+
+    (five?row('가산수당',r.prem,[r.ext&&'연장 '+hm(Math.round(r.ext)),r.night&&'야간 '+hm(r.night),r.holiday&&'휴일 '+hm(r.holiday)].filter(Boolean).join(' · ')||'해당 없음'):'')+
+    row('주휴수당',r.juhu,r.juhuOk?'주당 '+won(r.juhuWeek)+' × '+wl:'미지급')+`<tr><th>${wl} 급여 (세전)</th><td><b>${won(r.total)}</b></td></tr>`;
+  if(tax==='biz') h+=row('소득세',d.income,'3%')+row('지방소득세',d.local,'0.3%');
+  if(tax==='ins') h+=row('국민연금',d.pension,'4.75%')+row('건강보험',d.health,'3.595%')+row('장기요양',d.care,'건보료의 13.14%')+row('고용보험',d.employ,'0.9%')+row('소득세',d.income,'간이세액표')+row('지방소득세',d.local,'소득세의 10%');
+  if(tax!=='none') h+=row('공제 합계',d.total)+`<tr><th>세후 ${wl} 급여</th><td><b>${won(d.net)}</b></td></tr>`;
   $('#rtab').innerHTML=h;
   $('#res').classList.add('show'); $('#res').scrollIntoView({behavior:'smooth',block:'start'}); table(wage);
 }
