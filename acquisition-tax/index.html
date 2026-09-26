@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="naver-site-verification" content="21421c877a507dea4b5be99d5ec0d9e9fd8d7b50" />
+<title>주택 취득세 계산기 2026 | 다주택 중과·생애최초 감면·지방교육세·농특세 | 한눈 계산기</title>
+<meta name="description" content="집값, 전용면적, 취득 후 주택 수, 조정대상지역 여부만 넣으면 주택 매매 취득세(1~3%, 6~9억 구간 산식), 다주택 중과(8%·12%), 생애최초 감면(200만·300만 원 한도), 지방교육세·농어촌특별세까지 합친 총액을 계산합니다.">
+<link rel="canonical" href="https://calc.hanbogi.com/acquisition-tax/">
+<meta property="og:title" content="주택 취득세 계산기 2026">
+<meta property="og:description" content="취득세·지방교육세·농특세 총액을 한 번에, 다주택 중과와 생애최초 감면까지.">
+<meta property="og:url" content="https://calc.hanbogi.com/acquisition-tax/">
+<link rel="stylesheet" href="/style.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5424435978828190" crossorigin="anonymous"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"주택 취득세율은 얼마인가요?","acceptedAnswer":{"@type":"Answer","text":"1주택(또는 중과 대상이 아닌 경우) 매매 취득세는 6억 원 이하 1%, 9억 원 초과 3%이고, 6억 초과 9억 이하는 (취득가액 × 2/3억 − 3)%로 1%에서 3%까지 올라갑니다. 여기에 지방교육세(취득세의 10%)와 85㎡ 초과 주택은 농어촌특별세 0.2%가 붙습니다."}},
+{"@type":"Question","name":"다주택자 취득세 중과는 몇 %인가요?","acceptedAnswer":{"@type":"Answer","text":"취득 후 조정대상지역 2주택은 8%, 3주택 이상은 12%입니다. 비조정대상지역은 3주택 8%, 4주택 이상 12%입니다. 일시적 2주택과 공시가격 1억 원(지방은 2억 원) 이하 주택 등은 중과에서 빠집니다."}},
+{"@type":"Question","name":"생애최초 주택 취득세 감면은 얼마인가요?","acceptedAnswer":{"@type":"Answer","text":"본인과 배우자 모두 집을 가진 적이 없고 12억 원 이하 주택을 사면 취득세를 200만 원 한도로 감면합니다. 전용 60㎡ 이하·3억 원(수도권 6억 원) 이하 빌라 등 아파트가 아닌 소형주택이나 인구감소지역 주택은 300만 원 한도이며 2028년 12월 31일 취득분까지 적용됩니다."}}]}</script>
+<style>.sub{font-size:.85rem;color:var(--muted)}</style>
+</head>
+<body>
+<header><a href="/">한눈 계산기</a></header>
+<main>
+<h1>주택 취득세 계산기</h1>
+<p class="lead">집을 살 때 내는 취득세, 지방교육세, 농어촌특별세를 합친 총액을 계산해요. 다주택 중과와 생애최초 감면도 반영해요.</p>
+
+<form class="card" id="f" onsubmit="event.preventDefault();run()">
+<label>취득가액 <span class="hint">(만 원, 실제 매매가격)</span></label>
+<input type="text" id="price" class="num" inputmode="numeric" placeholder="예: 70,000 (7억 원)">
+<div class="hint" id="priceHint"></div>
+
+<label>전용면적</label>
+<div class="seg"><label><input type="radio" name="area" value="small" checked><span>85㎡ 이하</span></label><label><input type="radio" name="area" value="big"><span>85㎡ 초과</span></label></div>
+<div class="hint">85㎡ 이하(국민주택규모)면 농어촌특별세가 없어요.</div>
+
+<label>이 집을 사고 나면 우리 세대 주택 수</label>
+<div class="seg"><label><input type="radio" name="houses" value="1" checked><span>1주택</span></label><label><input type="radio" name="houses" value="2"><span>2주택</span></label><label><input type="radio" name="houses" value="3"><span>3주택</span></label><label><input type="radio" name="houses" value="4"><span>4주택 이상</span></label></div>
+<div class="hint">이사 등으로 기존 집을 3년 안에 팔 <b>일시적 2주택</b>이나, 공시가격 1억 원(수도권 밖은 2억 원) 이하 주택은 주택 수와 상관없이 1주택 세율이라 <b>1주택</b>으로 두세요.</div>
+
+<label>사는 집이 조정대상지역인가요?</label>
+<div class="seg"><label><input type="radio" name="adj" value="n" checked><span>아니요</span></label><label><input type="radio" name="adj" value="y"><span>예</span></label></div>
+<div class="hint">2025년 10월 16일 지정 기준 서울 25개 구 전역, 경기 과천·광명·성남(분당·수정·중원)·수원(영통·장안·팔달)·안양 동안·용인 수지·의왕·하남이에요.</div>
+
+<div id="firstBox">
+<label>생애최초 주택 구입인가요? <span class="hint">(본인·배우자 모두 집을 가진 적 없음)</span></label>
+<div class="seg"><label><input type="radio" name="first" value="n" checked><span>아니요</span></label><label><input type="radio" name="first" value="y"><span>예</span></label></div>
+<div id="smallBox" style="display:none">
+<label>감면 한도</label>
+<div class="seg"><label><input type="radio" name="small" value="n" checked><span>일반 (200만 원)</span></label><label><input type="radio" name="small" value="y"><span>소형주택·인구감소지역 (300만 원)</span></label></div>
+<div class="hint">300만 원 한도: 전용 60㎡ 이하이면서 3억 원(수도권 6억 원) 이하인 <b>아파트가 아닌</b> 공동주택·도시형 생활주택·다가구주택, 또는 인구감소지역 주택이에요.</div>
+</div>
+</div>
+
+<button type="submit">취득세 계산하기</button>
+</form>
+
+<div class="card result" id="res" aria-live="polite">
+<div class="hint" id="rsum"></div>
+<div>내야 할 세금 합계</div><div class="big" id="rpay"></div>
+<table id="rtab"></table>
+<p class="hint" id="rnote"></p>
+<p class="warn" style="margin-top:12px">⚠️ 참고용이에요. 주택 수 산정(분양권·입주권·오피스텔 포함 여부, 세대 분리), 일시적 2주택, 중과 제외 주택, 감면 요건(3개월 내 전입, 3년 안에 팔거나 임대하면 추징)에 따라 세금이 달라져요. 실제 신고 전에는 관할 시·군·구청 세무과나 위택스, 세무사에게 꼭 확인하세요.</p>
+</div>
+<p>👉 <a href="/loan/">주택담보대출 계산기</a> · 👉 <a href="https://benefit.hanbogi.com">혜택 알리미</a> (주거·청약 지원)</p>
+
+<h2>계산 방법</h2>
+<div class="card">
+<p class="hint">기준일 <span id="upd"></span></p>
+<p><b>① 취득세율</b> (주택 유상거래)</p>
+<table>
+<tr><th>구분</th><th>취득세</th><th>지방교육세</th><th>농특세 (85㎡ 초과만)</th></tr>
+<tr><td>6억 원 이하</td><td>1%</td><td>0.1%</td><td>0.2%</td></tr>
+<tr><td>6억 초과 9억 이하</td><td>(가액 × 2/3억 − 3)%</td><td>취득세의 10%</td><td>0.2%</td></tr>
+<tr><td>9억 원 초과</td><td>3%</td><td>0.3%</td><td>0.2%</td></tr>
+<tr><td>중과 8%</td><td>8%</td><td>0.4%</td><td>0.6%</td></tr>
+<tr><td>중과 12%</td><td>12%</td><td>0.4%</td><td>1.0%</td></tr>
+</table>
+<p class="hint">6억~9억 구간 세율은 소수점 다섯째 자리에서 반올림해요(예: 7억 원 → 1.6667%). 근거: 지방세법 제11조 제1항 제8호, 제151조, 농어촌특별세법 제4조·제5조.</p>
+<p><b>② 다주택 중과</b> (취득 후 주택 수 기준)</p>
+<table>
+<tr><th>주택 수</th><th>조정대상지역</th><th>그 밖의 지역</th></tr>
+<tr><td>1주택</td><td>1~3%</td><td>1~3%</td></tr>
+<tr><td>2주택</td><td>8%</td><td>1~3%</td></tr>
+<tr><td>3주택</td><td>12%</td><td>8%</td></tr>
+<tr><td>4주택 이상</td><td>12%</td><td>12%</td></tr>
+</table>
+<p class="hint">일시적 2주택, 공시가격 1억 원 이하 주택(수도권 밖은 2025년 1월 2일 취득분부터 2억 원 이하)은 중과하지 않아요. 법인은 주택 수와 상관없이 12%예요. 근거: 지방세법 제13조의2, 같은 법 시행령 제28조의2.</p>
+<p><b>③ 생애최초 감면</b> — 취득가액 12억 원 이하, 2028년 12월 31일 취득분까지. 취득세가 한도 이하면 전액 면제, 넘으면 한도만큼 빼 줘요.</p>
+<table>
+<tr><th>대상</th><th>감면 한도</th></tr>
+<tr><td>전용 60㎡ 이하·3억 원(수도권 6억 원) 이하 아파트 외 공동주택·도시형 생활주택·다가구, 인구감소지역 주택</td><td>300만 원</td></tr>
+<tr><td>그 밖의 주택</td><td>200만 원</td></tr>
+</table>
+<p class="hint">지방교육세는 취득세가 줄어든 비율만큼 함께 줄여서 계산했어요(지방세법 제151조 제1항 제1호 다목). 85㎡ 초과 주택은 감면받은 세액의 20%를 농어촌특별세로 내요(농어촌특별세법 제5조). 세금은 10원 미만을 버렸어요. 근거: 지방세특례제한법 제36조의3.</p>
+<p class="hint">📌 2026년 8월 행정안전부가 40세 미만 청년 생애최초 한도 300만 원 상향, 주거용 오피스텔 포함 등을 담은 지방세법 개정안을 입법예고했어요. 국회 통과 전이라 이 계산기에는 반영하지 않았어요.</p>
+</div>
+
+<h2>자주 묻는 질문</h2>
+<div class="card">
+<p><b>Q. 취득세는 언제까지 내나요?</b><br>잔금일(취득일)로부터 60일 안에 집이 있는 시·군·구청에 신고하고 내야 해요. 늦으면 신고불성실 가산세(최대 20%)와 납부지연 가산세가 붙어요. 위택스에서 온라인으로 신고할 수 있어요.</p>
+<p><b>Q. 일시적 2주택은 어떻게 되나요?</b><br>이사 등으로 새 집을 먼저 사고 기존 집을 3년 안에 팔면 새 집도 1주택 세율(1~3%)을 적용해요. 기한 안에 팔지 않으면 중과세율과의 차액을 추징해요.</p>
+<p><b>Q. 생애최초 감면받으면 조건이 있나요?</b><br>취득일부터 3개월 안에 전입해야 하고, 3년 안에 팔거나 증여·임대하면 감면받은 세금을 다시 내야 해요.</p>
+</div>
+<p>🧮 함께 쓰는 계산기: <a href="/loan/">주택담보대출 계산기</a> · <a href="/brokerage/">중개수수료 계산기</a></p>
+</main>
+<footer>© 한눈 계산기 · <a href="/">다른 계산기</a> · <a href="/privacy.html">개인정보처리방침</a></footer>
+<script src="calc.js"></script>
+<script>
+const $=s=>document.querySelector(s), val=n=>(document.querySelector('input[name='+n+']:checked')||{}).value;
+const num=v=>+String(v).replace(/[^0-9.]/g,'')||0, won=v=>Math.round(v).toLocaleString('ko-KR')+'원';
+const man=v=>(v>=10000?(v/10000).toLocaleString('ko-KR',{maximumFractionDigits:2})+'억 ':'')+(v%10000?(v%10000).toLocaleString('ko-KR')+'만':'')+' 원';
+document.querySelectorAll('input.num').forEach(el=>el.addEventListener('input',()=>{const n=num(el.value);el.value=n?n.toLocaleString('ko-KR'):'';$('#priceHint').textContent=n?man(n):'';}));
+$('#upd').textContent=RULES.updated;
+function sync(){ const one=val('houses')==='1'; $('#firstBox').style.display=one?'block':'none'; $('#smallBox').style.display=one&&val('first')==='y'?'block':'none'; }
+document.querySelectorAll('input[name=houses],input[name=first]').forEach(r=>r.onchange=sync);
+const pct=r=>(Math.round(r*1e6)/1e4)+'%';
+function run(){
+  const p=num($('#price').value); if(!p){alert('취득가액을 입력해 주세요');return;}
+  const houses=+val('houses'), i={price:p*10000,big:val('area')==='big',houses,adjusted:val('adj')==='y',first:houses===1&&val('first')==='y',small:val('small')==='y'};
+  const r=calc(i);
+  $('#rsum').textContent=man(p)+' · '+(i.big?'85㎡ 초과':'85㎡ 이하')+' · '+(houses>=4?'4주택 이상':houses+'주택')+(i.adjusted?' · 조정대상지역':'')+(r.firstOk?' · 생애최초':'');
+  $('#rpay').textContent=won(r.total);
+  $('#rtab').innerHTML=`<tr><th>적용 세율</th><td>${pct(r.rate)}${r.lv?' <span class="sub">(다주택 중과)</span>':''}</td></tr>`+
+   `<tr><th>취득세</th><td>${won(r.acq)}${r.cut?` <span class="sub">(산출 ${won(r.tax)} − 생애최초 감면 ${won(r.cut)})</span>`:''}</td></tr>`+
+   `<tr><th>지방교육세</th><td>${won(r.edu)}</td></tr><tr><th>농어촌특별세</th><td>${won(r.rural)}${i.big?'':' <span class="sub">(85㎡ 이하 비과세)</span>'}</td></tr>`+
+   `<tr><th>합계</th><td><b>${won(r.total)}</b> <span class="sub">취득가액의 ${(r.total/i.price*100).toFixed(2)}%</span></td></tr>`;
+  $('#rnote').textContent=i.first&&!r.firstOk?'취득가액이 12억 원을 넘어 생애최초 감면을 받을 수 없어요.':r.lv?'일시적 2주택이나 중과 제외 주택이면 1주택 세율이 적용돼 세금이 크게 줄어요.':'';
+  $('#res').classList.add('show'); $('#res').scrollIntoView({behavior:'smooth',block:'start'});
+}
+</script>
+</body></html>

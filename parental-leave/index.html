@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="naver-site-verification" content="21421c877a507dea4b5be99d5ec0d9e9fd8d7b50" />
+<title>육아휴직 급여 계산기 2026 | 월 250만 원·6+6 부모육아휴직 450만 원 | 한눈 계산기</title>
+<meta name="description" content="월 통상임금과 휴직 개월 수, 배우자 육아휴직 여부만 넣으면 2026년 기준 육아휴직 급여(1~3개월 250만 원, 4~6개월 200만 원, 7개월부터 160만 원)와 6+6 부모육아휴직제 특례 금액을 월별 표와 총액으로 계산합니다.">
+<link rel="canonical" href="https://calc.hanbogi.com/parental-leave/">
+<meta property="og:title" content="육아휴직 급여 계산기 2026">
+<meta property="og:description" content="월별 육아휴직 급여와 총액, 6+6 부모육아휴직 특례까지 한 번에 계산해요.">
+<meta property="og:url" content="https://calc.hanbogi.com/parental-leave/">
+<link rel="stylesheet" href="/style.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5424435978828190" crossorigin="anonymous"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"2026년 육아휴직 급여는 얼마인가요?","acceptedAnswer":{"@type":"Answer","text":"1~3개월째는 통상임금 100%(월 상한 250만 원), 4~6개월째는 통상임금 100%(월 상한 200만 원), 7개월째부터는 통상임금 80%(월 상한 160만 원)이고, 모든 구간 하한은 월 70만 원입니다. 2025년 1월부터 사후지급금이 폐지돼 휴직 중에 전액 받습니다."}},
+{"@type":"Question","name":"6+6 부모육아휴직제는 얼마를 더 주나요?","acceptedAnswer":{"@type":"Answer","text":"자녀 생후 18개월 안에 부모가 모두(동시 또는 순차) 육아휴직을 하면 각자 첫 6개월 동안 통상임금 100%를 주고, 월 상한이 250만·250만·300만·350만·400만·450만 원으로 올라갑니다. 특례는 부모가 공통으로 쓴 개월 수까지만 적용됩니다."}},
+{"@type":"Question","name":"육아휴직은 최대 몇 개월 쓸 수 있나요?","acceptedAnswer":{"@type":"Answer","text":"기본 1년이고, 2025년 2월 23일부터 부모가 각각 3개월 이상 쓰거나 한부모·중증장애아동 부모이면 1년 6개월까지 쓸 수 있습니다."}}]}</script>
+<style>.sub{font-size:.85rem;color:var(--muted)}#rtab td,#rtab th,#stab td,#stab th{text-align:right}#rtab th:first-child,#rtab td:first-child,#stab th:first-child,#stab td:first-child{text-align:left}</style>
+</head>
+<body>
+<header><a href="/">한눈 계산기</a></header>
+<main>
+<h1>육아휴직 급여 계산기</h1>
+<p class="lead">월 통상임금과 휴직 기간으로 매달 받는 육아휴직 급여와 총액을 계산해요. 2025년 개편 기준(사후지급금 폐지, 6+6 부모육아휴직제)이 2026년에도 그대로 적용돼요. 입력값은 서버로 보내지 않고 이 화면에서만 계산해요.</p>
+
+<form class="card" id="f" onsubmit="event.preventDefault();run()">
+<label>월 통상임금 <span class="hint">(세전, 기본급+고정수당. 상여·성과급·연장수당 제외)</span></label>
+<input type="text" id="wage" class="num" inputmode="numeric" placeholder="예: 3,000,000">
+
+<label>내 육아휴직 개월 수</label>
+<input type="number" id="months" min="1" max="18" value="12" inputmode="numeric">
+
+<label>배우자 육아휴직</label>
+<div class="seg">
+<label><input type="radio" name="mode" value="solo" checked><span>혼자 사용</span></label>
+<label><input type="radio" name="mode" value="both18"><span>부모 모두 (생후 18개월 안)</span></label>
+<label><input type="radio" name="mode" value="bothLater"><span>부모 모두 (18개월 이후)</span></label>
+<label><input type="radio" name="mode" value="single"><span>한부모</span></label>
+</div>
+<div class="hint" id="modeHint"></div>
+
+<div id="spouseBox" style="display:none">
+<label>배우자 육아휴직 개월 수 <span class="hint">(동시든 순차든 같아요)</span></label>
+<input type="number" id="smonths" min="1" max="18" value="6" inputmode="numeric">
+<label>배우자 월 통상임금 <span class="hint">(선택 — 넣으면 부부 합계도 보여 줘요)</span></label>
+<input type="text" id="swage" class="num" inputmode="numeric" placeholder="비워 두면 내 급여만 계산">
+</div>
+
+<button type="submit">육아휴직 급여 계산하기</button>
+</form>
+
+<div class="card result" id="res" aria-live="polite">
+<div class="hint" id="rsum"></div>
+<div id="rlabel">내 육아휴직 급여 총액</div><div class="big" id="rtotal"></div>
+<table id="rtab"></table>
+<div id="sbox"><p style="margin-top:12px"><b id="slabel"></b></p><table id="stab"></table></div>
+<p class="hint" id="rnote"></p>
+<p class="warn" style="margin-top:12px">⚠️ 참고용이에요. 실제 급여는 육아휴직 시작일 기준 통상임금으로 고용센터가 정하고, 한 달이 안 되는 기간은 일할 계산해요. 휴직 중 회사에서 받은 금품이 있으면 줄어들 수 있고, 고용보험 가입기간(피보험단위기간)이 180일 이상이어야 받을 수 있어요. 정확한 금액은 고용24나 고용노동부(국번 없이 1350)에 확인하세요.</p>
+<p>👉 <a href="https://benefit.hanbogi.com">혜택 알리미</a>에서 출산·육아 지원금도 확인해 보세요 · <a href="https://www.work24.go.kr" rel="nofollow">고용24</a></p>
+<p>🧮 함께 쓰는 계산기: <a href="/salary/">연봉 실수령액 계산기</a> · <a href="/severance/">퇴직금 계산기</a></p>
+</div>
+
+<h2>계산 방법</h2>
+<div class="card">
+<p>매달 급여 = 월 통상임금 × 지급률, 다만 상한을 넘으면 상한, 70만 원보다 적으면 70만 원이에요.</p>
+<table>
+<tr><th>휴직 개월</th><th>일반</th><th>6+6 부모 함께</th><th>한부모</th></tr>
+<tr><td>1개월째</td><td>100%, 250만 원</td><td>100%, 250만 원</td><td>100%, 300만 원</td></tr>
+<tr><td>2개월째</td><td>100%, 250만 원</td><td>100%, 250만 원</td><td>100%, 300만 원</td></tr>
+<tr><td>3개월째</td><td>100%, 250만 원</td><td>100%, 300만 원</td><td>100%, 300만 원</td></tr>
+<tr><td>4개월째</td><td>100%, 200만 원</td><td>100%, 350만 원</td><td>100%, 200만 원</td></tr>
+<tr><td>5개월째</td><td>100%, 200만 원</td><td>100%, 400만 원</td><td>100%, 200만 원</td></tr>
+<tr><td>6개월째</td><td>100%, 200만 원</td><td>100%, 450만 원</td><td>100%, 200만 원</td></tr>
+<tr><td>7개월째~</td><td>80%, 160만 원</td><td>80%, 160만 원</td><td>80%, 160만 원</td></tr>
+</table>
+<p class="hint">표의 금액은 월 상한이에요. 하한은 모든 구간 월 70만 원. 6+6 특례는 자녀 생후 18개월 안에 부모가 모두 육아휴직(동시·순차 모두)을 할 때, 부모가 <b>공통으로 쓴 개월 수</b>까지만 적용돼요. 예를 들어 엄마 12개월, 아빠 3개월이면 두 사람 모두 3개월째까지만 특례(250·250·300만 원)이고, 엄마의 4개월째부터는 일반 기준이에요.</p>
+<p class="hint">기준일 2026년 9월 26일. 근거: 고용보험법 제70조·제73조, 고용보험법 시행령 제95조(일반)·제95조의3(부모 함께 육아휴직·한부모 특례), 남녀고용평등법 제19조(기간 1년 6개월, 2025. 2. 23. 시행), 고용노동부 「2025년 확 달라지는 육아지원제도」(사후지급금 폐지, 2025. 1. 1. 시행), 찾기쉬운 생활법령정보 「육아휴직 급여」(2026. 8. 15. 기준), 고용24 육아휴직급여 제도안내. 7개월째부터의 80% 금액은 원 미만을 버렸어요.</p>
+</div>
+
+<h2>자주 묻는 질문</h2>
+<div class="card">
+<p><b>Q. 사후지급금은 이제 없나요?</b><br>네. 2025년 1월 1일부터 폐지돼서 휴직 중에 급여 전액을 매달 받아요. 예전에는 급여의 25%를 복직해 6개월 일한 뒤에 받았어요. 2024년에 쓴 휴직분은 예전 규정대로 사후지급금이 남아 있어요.</p>
+<p><b>Q. 먼저 휴직한 사람도 6+6 특례를 받나요?</b><br>네. 부모의 휴직 기간이 겹치지 않고 순차여도 특례는 부모 각각에게 적용돼요(시행령 제95조의3). 먼저 쓴 사람은 배우자가 아직 휴직 전이라 처음엔 일반 기준으로 받을 수 있으니, 특례 차액을 언제 어떻게 받는지는 고용센터에 확인하세요.</p>
+<p><b>Q. 육아휴직 급여에도 세금이 붙나요?</b><br>아니요. 고용보험법에 따른 육아휴직 급여는 소득세 비과세라 계산된 금액이 그대로 들어와요. 다만 휴직 기간에도 건강보험료 등은 따로 정산될 수 있어요.</p>
+<p><b>Q. 1년 넘게 쓰려면요?</b><br>부모가 각각 3개월 이상 육아휴직을 쓰거나, 한부모 또는 중증장애아동의 부모이면 최대 1년 6개월까지 쓸 수 있어요. 7개월째 이후 급여는 월 최대 160만 원이에요.</p>
+</div>
+</main>
+<footer>© 한눈 계산기 · <a href="/">다른 계산기</a> · <a href="/privacy.html">개인정보처리방침</a></footer>
+<script src="calc.js"></script>
+<script>
+const $=s=>document.querySelector(s), val=n=>(document.querySelector('input[name='+n+']:checked')||{}).value;
+const num=v=>+String(v).replace(/[^0-9.]/g,'')||0, won=v=>Math.round(v).toLocaleString('ko-KR')+'원';
+const man=v=>(v>=10000?(v/10000).toLocaleString('ko-KR',{maximumFractionDigits:2})+'억 ':'')+(v%10000?(v%10000).toLocaleString('ko-KR')+'만':'')+' 원';
+document.querySelectorAll('input.num').forEach(el=>el.addEventListener('input',()=>{const n=num(el.value);el.value=n?n.toLocaleString('ko-KR'):'';}));
+const HINT={solo:'',both18:'자녀 생후 18개월 안에 부모 모두 육아휴직을 하면 첫 6개월 동안 6+6 특례가 적용돼요.',bothLater:'자녀가 생후 18개월이 지난 뒤라 6+6 특례는 없지만, 부모 각각 3개월 이상이면 1년 6개월까지 쓸 수 있어요.',single:'한부모가족지원법상 한부모는 첫 3개월 상한이 300만 원이고, 1년 6개월까지 쓸 수 있어요.'};
+document.querySelectorAll('input[name=mode]').forEach(r=>r.onchange=()=>{const m=val('mode');$('#modeHint').textContent=HINT[m];$('#spouseBox').style.display=m.startsWith('both')?'':'none';});
+const rowsHtml=r=>'<tr><th>개월</th><th>지급률 · 상한</th><th>받는 금액</th></tr>'+r.rows.map(x=>`<tr><td>${x.m}개월째${x.type!=='일반'?' <span class="sub">'+x.type+'</span>':''}</td><td class="sub">${x.rate*100}% · ${(x.cap/10000).toLocaleString('ko-KR')}만</td><td>${won(x.pay)}</td></tr>`).join('')+`<tr><th>합계</th><th></th><th>${won(r.total)}</th></tr>`;
+function run(){
+  const wage=num($('#wage').value), months=Math.floor(+$('#months').value), mode=val('mode'), both=mode.startsWith('both');
+  const smonths=both?Math.floor(+$('#smonths').value):0, swage=both?num($('#swage').value):0;
+  if(!wage){alert('월 통상임금을 입력해 주세요');return;}
+  if(!(months>=1)){alert('휴직 개월 수를 1 이상으로 입력해 주세요');return;}
+  if(both&&!(smonths>=1)){alert('배우자 육아휴직 개월 수를 입력해 주세요');return;}
+  const max=maxMonths({mode,months,spouseMonths:smonths});
+  if(months>max){alert(max===12?'육아휴직은 기본 12개월까지예요. 부모가 각각 3개월 이상 쓰거나 한부모면 18개월까지 가능해요.':'육아휴직은 최대 18개월까지예요.');return;}
+  if(both&&smonths>18){alert('배우자 육아휴직도 최대 18개월까지예요.');return;}
+  const r=calc({wage,months,mode,spouseMonths:smonths});
+  $('#rsum').textContent='월 통상임금 '+man(Math.round(wage/10000))+' · '+months+'개월'+(both?' · 배우자 '+smonths+'개월':'');
+  $('#rtab').innerHTML=rowsHtml(r);
+  let note=r.special?'6+6 특례는 부모가 함께 쓴 '+r.special+'개월까지 적용했어요.':'';
+  if(swage){
+    const s=calc({wage:swage,months:smonths,mode,spouseMonths:months});
+    $('#slabel').textContent='배우자 육아휴직 급여 (월 통상임금 '+man(Math.round(swage/10000))+')'; $('#stab').innerHTML=rowsHtml(s); $('#sbox').style.display='';
+    $('#rlabel').textContent='부부 육아휴직 급여 합계'; $('#rtotal').textContent=won(r.total+s.total);
+    note+=' 내 급여 '+won(r.total)+' + 배우자 급여 '+won(s.total)+'.';
+  } else { $('#sbox').style.display='none'; $('#rlabel').textContent='내 육아휴직 급여 총액'; $('#rtotal').textContent=won(r.total); }
+  $('#rnote').textContent=(note+' 육아휴직 급여는 비과세라 이 금액 그대로 받아요.').trim();
+  $('#res').classList.add('show'); $('#res').scrollIntoView({behavior:'smooth',block:'start'});
+}
+</script>
+</body></html>

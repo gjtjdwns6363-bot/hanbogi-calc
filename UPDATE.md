@@ -13,8 +13,12 @@
 8. **퇴직소득세**(소득세법 제48·55조) 개정 여부 → `severance/calc.js`
 9. **청약 가점**(주택공급에 관한 규칙 별표1·제23조) → `subscription/`. 만 30세 이상 자녀 등재 1년→3년 개정안(2026-04 입법예고)이 시행되면 문구 수정
 
+10. **실업급여·육아휴직**(고용보험법 시행령, 최저임금 매년 1월) → `unemployment/calc.js`·`parental-leave/calc.js` RATES
+11. **취득세·양도세**(지방세법, 소득세법, 조정대상지역 지정·해제, 다주택 중과·세제개편안 국회 통과 여부) → `acquisition-tax/calc.js`·`capital-gains/calc.js`
+12. **중개보수**(공인중개사법 시행규칙 별표) → `brokerage/calc.js`
+13. **연말정산**(소득세법·조특법 개정, 자녀세액공제 나이 부칙, 카드 공제 한도) → `year-end-tax/calc.js`. 해가 바뀌면 귀속연도 갱신
 ## 절차
 - 바뀐 값만 고치고 `updated` 날짜를 오늘로 바꾼다. 확인 못 한 값은 추측하지 않는다.
-- 로컬 확인: `node`로 amort.js·calc.js 테스트(원리금균등 3억 4% 30년 = 1,432,246원, 단독 1,500만원 = 889,000원), `node salary/test.js`·`severance/test.js`·`subscription/test.js`·`rent/test.js` 모두 통과.
+- 로컬 확인: `node`로 amort.js·calc.js 테스트(원리금균등 3억 4% 30년 = 1,432,246원, 단독 1,500만원 = 889,000원), `node salary/test.js`·`severance/test.js`·`subscription/test.js`·`rent/test.js`, unemployment·parental-leave·acquisition-tax·capital-gains·brokerage·year-end-tax 의 test.js 모두 통과.
 - `sitemap.xml` lastmod 갱신 → `git commit` → `git push`(GitHub Pages 자동 배포, gh 로그인 gjtjdwns6363-bot).
 - 결과를 사용자에게 한국어로 짧게 보고(무엇이 바뀌었는지).

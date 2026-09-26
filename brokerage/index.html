@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="naver-site-verification" content="21421c877a507dea4b5be99d5ec0d9e9fd8d7b50" />
+<title>부동산 중개수수료 계산기 2026 | 매매·전세·월세 중개보수 상한 | 한눈 계산기</title>
+<meta name="description" content="매매가나 보증금·월세만 넣으면 법정 상한요율과 한도액으로 최대 중개보수(복비)를 계산합니다. 2021년 10월 개편 요율, 월세 환산보증금, 주거용 오피스텔 요율, 부가세 10% 포함 금액까지 한 번에.">
+<link rel="canonical" href="https://calc.hanbogi.com/brokerage/">
+<meta property="og:title" content="부동산 중개수수료 계산기 2026">
+<meta property="og:description" content="매매·전세·월세 중개보수 상한과 부가세 포함 금액을 바로 계산해요.">
+<meta property="og:url" content="https://calc.hanbogi.com/brokerage/">
+<link rel="stylesheet" href="/style.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5424435978828190" crossorigin="anonymous"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"월세 중개수수료는 어떻게 계산하나요?","acceptedAnswer":{"@type":"Answer","text":"보증금에 월세×100을 더한 금액을 거래금액으로 보고 임대차 요율을 곱합니다. 이렇게 더한 금액이 5천만 원 미만이면 월세×70으로 다시 계산합니다(공인중개사법 시행규칙 제20조제5항)."}},
+{"@type":"Question","name":"중개수수료에 부가세가 붙나요?","acceptedAnswer":{"@type":"Answer","text":"법정 상한요율은 부가가치세를 뺀 금액입니다. 중개사무소가 일반과세자이면 중개보수의 10%를 부가세로 따로 낼 수 있고, 간이과세자이면 부가세 부담이 적거나 없습니다."}},
+{"@type":"Question","name":"오피스텔 중개수수료 요율은 얼마인가요?","acceptedAnswer":{"@type":"Answer","text":"전용면적 85㎡ 이하이고 전용 부엌·수세식 화장실·목욕시설을 갖춘 주거용 오피스텔은 매매·교환 0.5%, 임대차 0.4%가 상한입니다. 그 밖의 오피스텔과 토지·상가는 0.9% 이내에서 협의합니다."}}]}</script>
+<style>.sub{font-size:.85rem;color:var(--muted)}</style>
+</head>
+<body>
+<header><a href="/">한눈 계산기</a></header>
+<main>
+<h1>부동산 중개수수료 계산기</h1>
+<p class="lead">매매·전세·월세 거래에서 공인중개사에게 줄 수 있는 최대 중개보수(복비)를 계산해요. 2026년 9월 기준 법정 상한요율이에요. 입력값은 서버로 보내지 않고 이 화면에서만 계산해요.</p>
+
+<form class="card" id="f" onsubmit="event.preventDefault();run()">
+<label>매물 종류</label>
+<div class="seg"><label><input type="radio" name="kind" value="house" checked><span>주택</span></label><label><input type="radio" name="kind" value="officetel"><span>주거용 오피스텔</span></label><label><input type="radio" name="kind" value="other"><span>그 밖 (토지·상가 등)</span></label></div>
+<div class="hint" id="kindHint">아파트·빌라·단독주택과 주택 분양권이에요.</div>
+
+<label>거래 종류</label>
+<div class="seg"><label><input type="radio" name="deal" value="sale" checked><span>매매·교환</span></label><label><input type="radio" name="deal" value="jeonse"><span>전세</span></label><label><input type="radio" name="deal" value="wolse"><span>월세</span></label></div>
+
+<div id="saleBox">
+<label>매매가 <span class="hint">(만 원 · 교환은 둘 중 큰 금액)</span></label>
+<input type="text" id="price" class="num" inputmode="numeric" placeholder="예: 50,000 (5억 원)">
+</div>
+<div id="leaseBox" style="display:none">
+<label>보증금 <span class="hint">(만 원)</span></label>
+<input type="text" id="deposit" class="num" inputmode="numeric" placeholder="예: 20,000 (2억 원)">
+<div id="monthlyBox" style="display:none">
+<label>월세 <span class="hint">(만 원)</span></label>
+<input type="text" id="monthly" class="num" inputmode="numeric" placeholder="예: 50">
+</div>
+</div>
+
+<label>부가세 10% <span class="hint">(중개사무소가 일반과세자면 따로 붙어요)</span></label>
+<div class="seg"><label><input type="radio" name="vat" value="0" checked><span>빼고 보기</span></label><label><input type="radio" name="vat" value="1"><span>포함해서 보기</span></label></div>
+
+<button type="submit">중개수수료 계산하기</button>
+</form>
+
+<div class="card result" id="res" aria-live="polite">
+<div class="hint" id="rsum"></div>
+<div id="rlabel">최대 중개보수</div><div class="big" id="rfee"></div>
+<table id="rtab"></table>
+<p class="hint" id="rnote"></p>
+<p class="warn" style="margin-top:12px">⚠️ 참고용이에요. 표의 금액은 법이 정한 <b>상한</b>이고, 실제 중개보수는 이 안에서 중개사와 협의해 정해요. 사무소가 있는 시·도의 조례 요율이 적용되고, 매수인·매도인(임차인·임대인)이 각각 내는 금액이에요. 정확한 요율은 사무소에 게시된 요율표나 시·군·구청에 확인하세요.</p>
+</div>
+<p>🧮 함께 쓰는 계산기: <a href="/rent/">전월세 전환 계산기</a> · <a href="/acquisition-tax/">취득세 계산기</a></p>
+<p>👉 <a href="https://benefit.hanbogi.com">혜택 알리미</a> (청년 월세 지원·전세자금 등)</p>
+
+<h2>계산 방법</h2>
+<div class="card">
+<p><b>중개보수 상한</b> = 거래금액 × 상한요율 (한도액이 있는 구간은 한도액까지). 원 미만은 버렸어요.</p>
+<p><b>① 주택 매매·교환</b></p>
+<table>
+<tr><th>거래금액</th><th>상한요율</th><th>한도액</th></tr>
+<tr><td>5천만 원 미만</td><td>0.6%</td><td>25만 원</td></tr>
+<tr><td>5천만 원 이상 ~ 2억 원 미만</td><td>0.5%</td><td>80만 원</td></tr>
+<tr><td>2억 원 이상 ~ 9억 원 미만</td><td>0.4%</td><td>—</td></tr>
+<tr><td>9억 원 이상 ~ 12억 원 미만</td><td>0.5%</td><td>—</td></tr>
+<tr><td>12억 원 이상 ~ 15억 원 미만</td><td>0.6%</td><td>—</td></tr>
+<tr><td>15억 원 이상</td><td>0.7%</td><td>—</td></tr>
+</table>
+<p><b>② 주택 임대차 (전세·월세)</b></p>
+<table>
+<tr><th>거래금액</th><th>상한요율</th><th>한도액</th></tr>
+<tr><td>5천만 원 미만</td><td>0.5%</td><td>20만 원</td></tr>
+<tr><td>5천만 원 이상 ~ 1억 원 미만</td><td>0.4%</td><td>30만 원</td></tr>
+<tr><td>1억 원 이상 ~ 6억 원 미만</td><td>0.3%</td><td>—</td></tr>
+<tr><td>6억 원 이상 ~ 12억 원 미만</td><td>0.4%</td><td>—</td></tr>
+<tr><td>12억 원 이상 ~ 15억 원 미만</td><td>0.5%</td><td>—</td></tr>
+<tr><td>15억 원 이상</td><td>0.6%</td><td>—</td></tr>
+</table>
+<p><b>③ 월세 거래금액</b> = 보증금 + 월세 × 100. 이 금액이 5천만 원 미만이면 보증금 + 월세 × 70으로 계산해요.</p>
+<p><b>④ 오피스텔</b> 전용 85㎡ 이하 + 전용 입식 부엌·수세식 화장실·목욕시설을 모두 갖췄으면 매매·교환 0.5%, 임대차 0.4% (한도액 없음). 그 밖의 오피스텔과 토지·상가·공장 등은 0.9% 이내에서 협의해요(이 계산기는 0.9%로 계산).</p>
+<p><b>⑤ 부가세</b> 상한요율은 부가세를 뺀 금액이에요. 일반과세자인 중개사무소는 중개보수의 10%를 부가세로 더 받을 수 있어요.</p>
+<p class="hint">기준일 2026년 9월 26일. 근거: 공인중개사법 제32조, 공인중개사법 시행규칙 제20조·[별표 1] 주택 중개보수 상한요율(2021. 10. 19. 신설)·[별표 2] 오피스텔 중개보수 요율(현행 국토교통부령 제1611호, 2026. 8. 28. 시행 기준 확인), 서울특별시 주택 중개보수 등에 관한 조례 별표 1. 주택 요율은 시·도 조례로 정하는데, 서울 등 조례는 시행규칙 별표 1과 같은 요율이에요.</p>
+</div>
+
+<h2>자주 묻는 질문</h2>
+<div class="card">
+<p><b>Q. 중개수수료는 누가 내나요?</b><br>매매는 매도인과 매수인이, 임대차는 임대인과 임차인이 각자 따로 내요. 계산된 금액은 한쪽이 내는 최대 금액이에요.</p>
+<p><b>Q. 상한까지 꼭 내야 하나요?</b><br>아니요. 상한요율 안에서 중개사와 협의해 정해요. 계약 전에 금액을 미리 정해 두면 분쟁을 줄일 수 있어요. 상한을 넘겨 받는 것은 공인중개사법 위반이에요.</p>
+<p><b>Q. 월세인데 환산하니 5천만 원이 안 돼요.</b><br>보증금 + 월세 × 100이 5천만 원 미만이면 월세에 70을 곱해 다시 더해요. 예를 들어 보증금 500만 원·월세 30만 원이면 500만 + 30만 × 70 = 2,600만 원이 거래금액이고, 상한은 0.5%인 13만 원이에요.</p>
+<p><b>Q. 부가세는 꼭 내야 하나요?</b><br>일반과세자 중개사무소라면 중개보수와 별도로 10%를 낼 수 있어요. 간이과세자는 더 적거나 없을 수 있으니 사업자등록 유형을 확인해 보세요. 현금영수증도 꼭 받아 두세요.</p>
+</div>
+</main>
+<footer>© 한눈 계산기 · <a href="/">다른 계산기</a> · <a href="/privacy.html">개인정보처리방침</a></footer>
+<script src="calc.js"></script>
+<script>
+const $=s=>document.querySelector(s), val=n=>(document.querySelector('input[name='+n+']:checked')||{}).value;
+const num=v=>+String(v).replace(/[^0-9.]/g,'')||0, won=v=>Math.round(v).toLocaleString('ko-KR')+'원';
+const man=v=>(v>=10000?(v/10000).toLocaleString('ko-KR',{maximumFractionDigits:2})+'억 ':'')+(v%10000?(v%10000).toLocaleString('ko-KR')+'만':'')+' 원';
+const pct=r=>+(r*100).toFixed(2)+'%';
+document.querySelectorAll('input.num').forEach(el=>el.addEventListener('input',()=>{const n=num(el.value);el.value=n?n.toLocaleString('ko-KR'):'';}));
+const KH={house:'아파트·빌라·단독주택과 주택 분양권이에요.',officetel:'전용 85㎡ 이하이고 전용 부엌·수세식 화장실·목욕시설을 모두 갖춘 오피스텔이에요.',other:'토지·상가·사무실, 85㎡ 초과이거나 주거 시설이 없는 오피스텔이에요.'};
+function ui(){ const d=val('deal'); $('#saleBox').style.display=d==='sale'?'':'none'; $('#leaseBox').style.display=d==='sale'?'none':''; $('#monthlyBox').style.display=d==='wolse'?'':'none'; $('#kindHint').textContent=KH[val('kind')]; }
+document.querySelectorAll('input[name=deal],input[name=kind]').forEach(r=>r.onchange=ui);
+function run(){
+  const kind=val('kind'), deal=val('deal'), vat=val('vat')==='1';
+  const price=num($('#price').value)*1e4, deposit=num($('#deposit').value)*1e4, monthly=num($('#monthly').value)*1e4;
+  if(deal==='sale'&&!price){alert('매매가를 입력해 주세요');return;}
+  if(deal==='jeonse'&&!deposit){alert('보증금을 입력해 주세요');return;}
+  if(deal==='wolse'&&!monthly){alert('월세를 입력해 주세요');return;}
+  const r=calc({kind,deal,price,deposit,monthly,vat});
+  const KN={house:'주택',officetel:'주거용 오피스텔',other:'그 밖 (토지·상가 등)'}, DN={sale:'매매·교환',jeonse:'전세',wolse:'월세'};
+  $('#rsum').textContent=KN[kind]+' · '+DN[deal]+' · 거래금액 '+man(r.amount/1e4).trim();
+  $('#rlabel').textContent=vat?'최대 중개보수 (부가세 포함)':'최대 중개보수 (부가세 별도)';
+  $('#rfee').textContent=won(vat?r.total:r.fee);
+  const row=(k,v)=>`<tr><th>${k}</th><td>${v}</td></tr>`;
+  let h=deal==='wolse'?row('거래금액 (환산보증금)',won(r.amount)+` <span class="sub">보증금 + 월세 × ${deposit+monthly*100<5e7?70:100}</span>`):row('거래금액',won(r.amount));
+  h+=row('적용 상한요율',pct(r.rate)+(kind==='other'?' <span class="sub">이내 협의</span>':''))+row('한도액',r.cap==null?'없음':won(r.cap));
+  h+=row('거래금액 × 요율',won(r.raw)+(r.capped?' <span class="sub">→ 한도액 적용</span>':''))+row('중개보수 상한',`<b>${won(r.fee)}</b>`);
+  h+=row('부가세 10% 포함',won(r.fee+fl(r.fee*0.1))+' <span class="sub">일반과세자 기준</span>');
+  $('#rtab').innerHTML=h;
+  $('#rnote').textContent=deal==='sale'?'매도인과 매수인이 각각 이 금액까지 내요.':'임대인과 임차인이 각각 이 금액까지 내요.';
+  $('#res').classList.add('show'); $('#res').scrollIntoView({behavior:'smooth',block:'start'});
+}
+</script>
+</body></html>
