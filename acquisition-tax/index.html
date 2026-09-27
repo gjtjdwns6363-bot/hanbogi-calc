@@ -61,6 +61,8 @@
 </div>
 <p>👉 <a href="/loan/">주택담보대출 계산기</a> · 👉 <a href="https://benefit.hanbogi.com">혜택 알리미</a> (주거·청약 지원)</p>
 
+<p>📋 금액별로 보기: <a href="/acquisition-tax/list/">집값별 아파트 취득세 (1억~20억)</a></p>
+
 <h2>계산 방법</h2>
 <div class="card">
 <p class="hint">기준일 <span id="upd"></span></p>
@@ -125,5 +127,6 @@ function run(){
   $('#rnote').textContent=i.first&&!r.firstOk?'취득가액이 12억 원을 넘어 생애최초 감면을 받을 수 없어요.':r.lv?'일시적 2주택이나 중과 제외 주택이면 1주택 세율이 적용돼 세금이 크게 줄어요.':'';
   $('#res').classList.add('show'); $('#res').scrollIntoView({behavior:'smooth',block:'start'});
 }
+{const q=+new URLSearchParams(location.search).get("price");if(q>0){$("#price").value=q.toLocaleString("ko-KR");run();}}
 </script>
 </body></html>

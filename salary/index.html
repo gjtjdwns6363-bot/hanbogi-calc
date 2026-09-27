@@ -55,6 +55,8 @@
 <div style="overflow-x:auto"><table id="stab"></table></div>
 </div>
 
+<p>📋 금액별로 보기: <a href="/salary/list/">연봉별 실수령액 (2,000만~1억 5,000만원, 100만원 단위)</a></p>
+
 <h2>계산 방법</h2>
 <div class="card">
 <table>
@@ -106,5 +108,6 @@ function run(){
   $('#res').classList.add('show'); $('#res').scrollIntoView({behavior:'smooth',block:'start'}); table();
 }
 table();
+{const q=+new URLSearchParams(location.search).get("amt");if(q>0){$("#amt").value=q.toLocaleString("ko-KR");run();}}
 </script>
 </body></html>

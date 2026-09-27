@@ -18,8 +18,9 @@
 12. **중개보수**(공인중개사법 시행규칙 별표) → `brokerage/calc.js`
 13. **연말정산**(소득세법·조특법 개정, 자녀세액공제 나이 부칙, 카드 공제 한도) → `year-end-tax/calc.js`. 해가 바뀌면 귀속연도 갱신
 14. **최저시급**(매년 8월 고시, 1월 시행: 2027년 10,700원) → `hourly/calc.js` HOURLY. 해가 바뀌면 기본 시급 교체
+15. **롱테일 페이지 다시 만들기** — 위 1~14에서 `salary`·`acquisition-tax`·`hourly`·`brokerage`의 calc.js(요율·최저시급·세율)를 하나라도 고쳤으면 반드시 `node gen/longtail.js`를 실행해 연봉별·집값별·근무시간별·금액별 페이지 230쪽과 sitemap.xml 생성분을 다시 만들고 `node gen/test.js`로 확인한다. 생성 페이지를 손으로 고치지 말고 `gen/longtail.js`를 고친다.
 ## 절차
 - 바뀐 값만 고치고 `updated` 날짜를 오늘로 바꾼다. 확인 못 한 값은 추측하지 않는다.
-- 로컬 확인: `node`로 amort.js·calc.js 테스트(원리금균등 3억 4% 30년 = 1,432,246원, 단독 1,500만원 = 889,000원), `node salary/test.js`·`severance/test.js`·`subscription/test.js`·`rent/test.js`, unemployment·parental-leave·acquisition-tax·capital-gains·brokerage·year-end-tax·hourly 의 test.js 모두 통과.
+- 로컬 확인: `node`로 amort.js·calc.js 테스트(원리금균등 3억 4% 30년 = 1,432,246원, 단독 1,500만원 = 889,000원), `node salary/test.js`·`severance/test.js`·`subscription/test.js`·`rent/test.js`, unemployment·parental-leave·acquisition-tax·capital-gains·brokerage·year-end-tax·hourly 의 test.js, `gen/test.js` 모두 통과.
 - `sitemap.xml` lastmod 갱신 → `git commit` → `git push`(GitHub Pages 자동 배포, gh 로그인 gjtjdwns6363-bot).
 - 결과를 사용자에게 한국어로 짧게 보고(무엇이 바뀌었는지).

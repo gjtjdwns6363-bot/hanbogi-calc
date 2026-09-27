@@ -1,6 +1,7 @@
 // 월급 실수령액 계산 (2026년 9월 기준). 브라우저에서는 table.js를 먼저 불러온다.
 const T = typeof TAX_TABLE !== 'undefined' ? TAX_TABLE : require('./table.js');
 const RATE = {
+  updated: '2026-09-26',
   pension: 0.0475, pMin: 410000, pMax: 6590000, // 국민연금 9.5%의 절반, 기준소득월액 하·상한 (2026.7~2027.6)
   health: 0.03595,                               // 건강보험 7.19%의 절반
   care: 0.9448 / 7.19,                           // 장기요양 = 건강보험료 × (0.9448% ÷ 7.19%)

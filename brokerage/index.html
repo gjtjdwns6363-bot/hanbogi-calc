@@ -59,6 +59,8 @@
 <p>🧮 함께 쓰는 계산기: <a href="/rent/">전월세 전환 계산기</a> · <a href="/acquisition-tax/">취득세 계산기</a></p>
 <p>👉 <a href="https://benefit.hanbogi.com">혜택 알리미</a> (청년 월세 지원·전세자금 등)</p>
 
+<p>📋 금액별로 보기: <a href="/brokerage/list/">금액별 복비 (매매 1억~20억 · 전세 5천만~10억)</a></p>
+
 <h2>계산 방법</h2>
 <div class="card">
 <p><b>중개보수 상한</b> = 거래금액 × 상한요율 (한도액이 있는 구간은 한도액까지). 원 미만은 버렸어요.</p>
@@ -127,5 +129,7 @@ function run(){
   $('#rnote').textContent=deal==='sale'?'매도인과 매수인이 각각 이 금액까지 내요.':'임대인과 임차인이 각각 이 금액까지 내요.';
   $('#res').classList.add('show'); $('#res').scrollIntoView({behavior:'smooth',block:'start'});
 }
+{const q=new URLSearchParams(location.search), d=q.get("deal"), a=+q.get("amt");
+ if((d==="sale"||d==="jeonse")&&a>0){document.querySelector('input[name=deal][value='+d+']').checked=true;ui();$(d==="sale"?"#price":"#deposit").value=a.toLocaleString("ko-KR");run();}}
 </script>
 </body></html>

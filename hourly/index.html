@@ -92,6 +92,8 @@
 <div style="overflow-x:auto"><table id="jtab"></table></div>
 </div>
 
+<p>📋 금액별로 보기: <a href="/hourly/list/">주 근무시간별 알바 월급 (주 10~40시간)</a></p>
+
 <h2>계산 방법</h2>
 <div class="card">
 <table>
@@ -202,5 +204,6 @@ function runPeriod(wage,mode){
   $('#res').classList.add('show'); $('#res').scrollIntoView({behavior:'smooth',block:'start'}); table(wage);
 }
 table(HOURLY.wage);
+{const h=+new URLSearchParams(location.search).get("h");if(h>0&&h<=40){$("#s0").value="09:00";$("#e0").value=hhmm(540+Math.round(h*12));$("#b0").value=0;$("#nd").value=5;run();}}
 </script>
 </body></html>
