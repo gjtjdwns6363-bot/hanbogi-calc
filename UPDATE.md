@@ -23,6 +23,6 @@
 - 바뀐 값만 고치고 `updated` 날짜를 오늘로 바꾼다. 확인 못 한 값은 추측하지 않는다.
 - 로컬 확인: `node`로 amort.js·calc.js 테스트(원리금균등 3억 4% 30년 = 1,432,246원, 단독 1,500만원 = 889,000원), `node salary/test.js`·`severance/test.js`·`subscription/test.js`·`rent/test.js`, unemployment·parental-leave·acquisition-tax·capital-gains·brokerage·year-end-tax·hourly 의 test.js, `gen/test.js` 모두 통과.
 - `sitemap.xml` lastmod 갱신 → `git commit` → `git push`(GitHub Pages 자동 배포, gh 로그인 gjtjdwns6363-bot).
-- **IndexNow 전송(매 업데이트 후 필수)**: 배포가 끝나면(`gh api repos/{owner}/{repo}/pages/builds/latest`의 status가 built, 또는 바뀐 페이지를 curl로 확인) `node gen/indexnow.js` 실행 → sitemap.xml에서 lastmod가 오늘인 URL만 네이버 서치어드바이저·api.indexnow.org로 보낸다. 특정 URL만: `node gen/indexnow.js /salary/ /loan/`. 전체(`--all`)는 대규모 개편 때만. 200·202면 정상. 키 파일 `/e386846d4b6f939fd1b440af9728c599.txt`는 지우지 않는다.
+- **IndexNow 전송(매 업데이트 후 필수)**: 배포가 끝나면(`gh api repos/{owner}/{repo}/pages/builds/latest`의 status가 built, 또는 바뀐 페이지를 curl로 확인) `node gen/indexnow.js` 실행 → sitemap.xml에서 lastmod가 오늘인 URL만 네이버 서치어드바이저·api.indexnow.org로 보낸다. 특정 URL만: `node gen/indexnow.js /salary/ /loan/`. 전체(`--all`)는 대규모 개편 때만. 200·202면 정상(api.indexnow.org가 `403 SiteVerificationNotCompleted`면 키 확인 대기라 몇 분 뒤 다시 실행). 키 파일 `/e386846d4b6f939fd1b440af9728c599.txt`는 지우지 않는다.
 - 새 페이지를 손으로 만들면 기존 계산기 index.html처럼 og 태그(og:image `/og.png` 포함)·네트워크 푸터·about 링크를 똑같이 넣고 sitemap.xml에 추가한다. 롱테일 페이지는 `gen/longtail.js`의 `OG`·`FOOTER`가 넣어 준다.
 - 결과를 사용자에게 한국어로 짧게 보고(무엇이 바뀌었는지).
