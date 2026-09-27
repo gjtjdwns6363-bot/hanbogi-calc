@@ -1,11 +1,11 @@
 <!doctype html>
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="naver-site-verification" content="21421c877a507dea4b5be99d5ec0d9e9fd8d7b50" />
-<title>자동차 할부·대출 계산기 2026 | 은행별 오토론 금리 비교·취득세 포함</title>
-<meta name="description" content="차량 가격, 선수금, 할부 기간, 금리를 넣으면 월 납입금과 총이자를 계산합니다. 유예할부, 취득세(경차·전기차 감면), 주요 은행 자동차 대출 금리 비교까지 한 번에.">
+<title>자동차 할부·리스·장기렌트 계산기 2026 | 차종별 가격·전기차 보조금·은행 금리</title>
+<meta name="description" content="제조사·차종·트림을 고르면 차량 가격이 자동으로 들어가고, 할부·운용리스·장기렌트 월 납입금과 총비용을 비교합니다. 전기차 국고·지자체 보조금, 취득세(경차·전기차 감면), 신차·중고차 은행 금리까지.">
 <link rel="canonical" href="https://calc.hanbogi.com/car/">
-<meta property="og:title" content="자동차 할부·대출 계산기 2026">
-<meta property="og:description" content="월 납입금·총이자·취득세를 한 번에, 은행별 오토론 금리 비교까지.">
+<meta property="og:title" content="자동차 할부·리스·장기렌트 계산기 2026">
+<meta property="og:description" content="차종별 가격 자동 입력, 전기차 지역별 보조금, 할부·리스·렌트 월 납입금 비교.">
 <meta property="og:url" content="https://calc.hanbogi.com/car/">
 <meta property="og:type" content="website"><meta property="og:site_name" content="한눈 계산기"><meta property="og:locale" content="ko_KR">
 <meta property="og:image" content="https://calc.hanbogi.com/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image">
@@ -13,32 +13,52 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5424435978828190" crossorigin="anonymous"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-19F8RF6971"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-19F8RF6971");</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"자동차 취득세는 얼마인가요?","acceptedAnswer":{"@type":"Answer","text":"비영업용 승용차는 공급가액(부가세 제외)의 7%입니다. 경차는 4%에 최대 75만 원 감면(2027년 말까지), 전기차는 최대 140만 원 감면(2026년 말까지)됩니다."}},
+{"@type":"Question","name":"자동차 취득세는 얼마인가요?","acceptedAnswer":{"@type":"Answer","text":"비영업용 승용차는 공급가액(부가세 제외)의 7%입니다. 경차는 4%에 최대 75만 원 감면(2027년 말까지), 전기차는 최대 140만 원 감면(2026년 말까지)됩니다. 중고차는 거래가격이 과세표준입니다."}},
+{"@type":"Question","name":"할부, 리스, 장기렌트 중 무엇이 싼가요?","acceptedAnswer":{"@type":"Answer","text":"계약 기간 동안 낸 돈만 보면 리스·렌트가 적어 보이지만 만기에 차가 남지 않습니다. 할부는 차가 내 것이 되므로 만기 차량 가치를 빼고 비교해야 합니다. 렌트는 보험료·자동차세·정비가 포함된 대신 금리(수수료)가 더 높은 편입니다."}},
 {"@type":"Question","name":"유예할부는 무엇인가요?","acceptedAnswer":{"@type":"Answer","text":"차값의 일부를 만기에 한 번에 갚기로 미뤄 두고, 나머지만 매달 나눠 내는 할부입니다. 월 납입금은 줄지만 유예금에도 이자가 붙어 총이자는 늘어납니다."}}]}</script>
-<style>.sub{font-size:.85rem;color:var(--muted)}.prodlist td,.prodlist th{font-size:.85rem}.pick{cursor:pointer}.pick:hover{background:#eaf4f4}</style>
+<style>.sub{font-size:.85rem;color:var(--muted)}.prodlist td,.prodlist th{font-size:.85rem}.pick{cursor:pointer}.pick:hover{background:#eaf4f4}.row2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}.row2 label{margin-top:8px}td.n,th.n{text-align:right;white-space:nowrap}details summary{cursor:pointer;font-weight:600;margin-top:14px}@media (prefers-color-scheme:dark){.pick:hover{background:#16302f}}</style>
 </head>
 <body>
 <header><a href="/">한눈 계산기</a></header>
 <main>
-<h1>자동차 할부·대출 계산기</h1>
-<p class="lead">월 납입금, 총이자, 취득세까지 한 번에 계산해요. 아래 은행 상품을 누르면 금리가 자동으로 들어가요.</p>
+<h1>자동차 할부·리스·장기렌트 계산기</h1>
+<p class="lead">차종을 고르면 가격이 자동으로 들어가고, 할부·운용리스·장기렌트 월 납입금을 한 번에 비교해요. 전기차는 사는 지역의 보조금을 빼고 계산해요.</p>
 
 <form class="card" id="f" onsubmit="event.preventDefault();run()">
-<label>차량 가격 <span class="hint">(만 원, 옵션·부가세 포함 판매가)</span></label>
+<label>구분</label>
+<div class="seg"><label><input type="radio" name="cond" value="new" checked><span>신차</span></label><label><input type="radio" name="cond" value="used"><span>중고차</span></label></div>
+
+<div id="newBox">
+<div class="row2"><div><label for="maker">제조사</label><select id="maker"></select></div><div><label for="model">차종</label><select id="model"></select></div></div>
+<label for="trim">트림</label><select id="trim"></select>
+<div class="hint" id="trimSrc"></div>
+<label>옵션·탁송 추가 금액 <span class="hint">(만 원, 선택 옵션·탁송료 등 직접 입력)</span></label>
+<input type="text" id="opt" class="num" inputmode="numeric" placeholder="예: 150">
+</div>
+
+<label>차량 가격 <span class="hint" id="priceHint">(만 원, 트림을 고르면 자동 입력 · 직접 고쳐도 돼요)</span></label>
 <input type="text" id="price" class="num" inputmode="numeric" placeholder="예: 4,500">
 <div class="seg" style="margin-top:6px"><label onclick="add('price',500)"><span>+500만</span></label><label onclick="add('price',1000)"><span>+1천만</span></label><label onclick="setv('price',0)"><span>초기화</span></label></div>
 
 <label>차종 <span class="hint">(취득세 계산용)</span></label>
 <div class="seg"><label><input type="radio" name="kind" value="normal" checked><span>일반 승용</span></label><label><input type="radio" name="kind" value="light"><span>경차</span></label><label><input type="radio" name="kind" value="ev"><span>전기차</span></label></div>
 
+<div id="evBox" style="display:none">
+<label>전기차 보조금 지역 <span class="hint">(주소지 기준)</span></label>
+<div class="row2"><select id="sido"></select><select id="sigungu"></select></div>
+<div class="hint" id="subInfo"></div>
+<label>보조금 <span class="hint">(만 원, 국고+지자체 · 자동 입력 · 직접 고쳐도 돼요)</span></label>
+<input type="text" id="subsidy" class="num" inputmode="numeric" placeholder="0">
+</div>
+
 <label>선수금 <span class="hint">(먼저 내는 돈)</span></label>
 <div class="seg"><label><input type="radio" name="down" value="0" checked><span>0%</span></label><label><input type="radio" name="down" value="10"><span>10%</span></label><label><input type="radio" name="down" value="20"><span>20%</span></label><label><input type="radio" name="down" value="30"><span>30%</span></label><label><input type="radio" name="down" value="custom"><span>직접</span></label></div>
 <input type="text" id="downAmt" class="num" inputmode="numeric" placeholder="선수금 (만 원)" style="display:none;margin-top:8px">
 
-<label>할부 기간</label>
+<label>기간 <span class="hint">(할부·리스·렌트 공통)</span></label>
 <select id="months"><option>12</option><option>24</option><option selected>36</option><option>48</option><option>60</option><option>72</option></select>
 
-<label>금리 <span class="hint">(연 %) · 아래 표에서 상품을 누르면 자동 입력</span></label>
+<label>할부 금리 <span class="hint">(연 %) · 아래 표에서 상품을 누르면 자동 입력</span></label>
 <input type="number" id="rate" step="0.01" inputmode="decimal" placeholder="예: 5.5">
 <div class="hint" id="rateSrc"></div>
 
@@ -47,21 +67,39 @@
 <div id="balBox" style="display:none"><label>만기에 한 번에 낼 금액 <span class="hint">(차량 가격 대비)</span></label>
 <select id="balPct"><option value="30">30%</option><option value="40">40%</option><option value="50" selected>50%</option><option value="60">60%</option></select></div>
 
+<details id="asm"><summary>리스·장기렌트 가정 바꾸기</summary>
+<div class="row2">
+<div><label>리스 금리 <span class="hint">(연 %)</span></label><input type="number" id="lrate" step="0.01" inputmode="decimal"></div>
+<div><label>렌트 금리 <span class="hint">(연 %, 수수료 포함 환산)</span></label><input type="number" id="rrate" step="0.01" inputmode="decimal"></div>
+<div><label>보증금 <span class="hint">(차값 대비 %)</span></label><input type="number" id="dep" step="1" inputmode="numeric" value="0"></div>
+<div><label>잔존가치 <span class="hint">(차값 대비 %)</span></label><input type="number" id="resid" step="1" inputmode="numeric"></div>
+</div>
+<label>보험료·자동차세·정비비 <span class="hint">(월 만 원 · 렌트는 포함, 할부·리스는 따로 낸다고 가정)</span></label>
+<input type="number" id="extra" step="1" inputmode="numeric" value="12">
+<p class="hint" id="asmSrc"></p>
+</details>
+
 <button type="submit">월 납입금 계산하기</button>
 </form>
 
 <div class="card result" id="res" aria-live="polite">
 <div class="hint" id="rsum"></div>
-<div>월 납입금</div><div class="big" id="rpay"></div>
+<div>할부 월 납입금</div><div class="big" id="rpay"></div>
 <table id="rtab"></table>
-<p class="warn" style="margin-top:12px">⚠️ 참고용이에요. 실제 금리는 신용점수·소득·차종·딜러 프로모션에 따라 달라지고, 취득세 외에 공채 매입·번호판·탁송비 등이 더 들 수 있어요.</p>
+<h2 style="margin-top:20px">할부 vs 리스 vs 장기렌트 <span class="hint">예상치(회사별 견적과 다름)</span></h2>
+<div style="overflow-x:auto"><table id="ctab"></table></div>
+<p class="hint" id="cnote"></p>
+<p class="warn" style="margin-top:12px">⚠️ 참고용이에요. 실제 금리·리스료·렌트료는 신용점수·회사·차종·프로모션·잔존가치 설정에 따라 달라지고, 취득세 외에 공채 매입·번호판·탁송비 등이 더 들 수 있어요. 계약 전에 회사별 견적을 꼭 받아 보세요.</p>
 </div>
 
-<h2>은행별 자동차 대출 금리</h2>
+<h2>은행별 자동차 대출 금리 <span class="hint" id="pcond"></span></h2>
 <div class="card">
-<p class="hint">상품을 누르면 최저 금리가 계산기에 들어가요. 기준일 <span id="pupd"></span>, 각 은행 공식 안내 기준이며 실제 적용 금리는 심사 후 정해져요.</p>
+<p class="hint">상품을 누르면 최저 금리가 계산기에 들어가요. 기준일 <span id="pupd"></span>, 각 은행 공식 안내 기준이며 실제 적용 금리는 심사 후 정해져요. 신차·중고차에 따라 표가 바뀌어요.</p>
 <div style="overflow-x:auto"><table class="prodlist" id="plist"></table></div>
 </div>
+
+<h2>차종별 가격·월 납입금 표</h2>
+<div class="card"><p>제조사 공식 가격표 기준 트림별 가격과 할부·리스·렌트 예상 월 납입금, 전기차는 지역별 실구매가를 차종마다 정리했어요. <a href="/car/list/">차종별 전체 목록 보기 →</a></p></div>
 
 <h2>취득세는 이렇게 계산돼요</h2>
 <div class="card">
@@ -70,46 +108,111 @@
 <tr><td>일반 승용 (비영업용)</td><td>7%</td><td>—</td></tr>
 <tr><td>경차 (1,000cc 미만)</td><td>4%</td><td>최대 75만 원 (2027년 12월 31일까지)</td></tr>
 <tr><td>전기차</td><td>7%</td><td>최대 140만 원 (2026년 12월 31일까지)</td></tr>
+<tr><td>픽업트럭 등 화물 (비영업용)</td><td>5%</td><td>— (무쏘·타스만 등, 차종을 고르면 자동 반영)</td></tr>
+<tr><td>장기렌트 (영업용)</td><td>4%</td><td>렌트 회사가 내고 렌트료에 포함</td></tr>
 </table>
-<p class="hint">과세표준은 부가세를 뺀 공급가액(판매가 ÷ 1.1)으로 계산했어요. 근거: 지방세법 제12조, 지방세특례제한법 제66조.</p>
+<p class="hint">신차는 부가세를 뺀 공급가액(판매가 ÷ 1.1), 중고차는 거래가격으로 계산했어요(시가표준액이 더 높으면 그 금액). 전기차 보조금은 과세표준에서 빠지지 않아요. 근거: 지방세법 제12조, 지방세특례제한법 제66·67조.</p>
 </div>
 
 <h2>자주 묻는 질문</h2>
 <div class="card">
+<p><b>Q. 할부·리스·장기렌트는 뭐가 다른가요?</b><br>할부는 내 명의로 차를 사고 돈을 나눠 갚아요. 운용리스는 리스사 명의 차를 빌려 쓰고, 만기에 반납하거나 잔존가치를 내고 인수해요. 장기렌트는 렌트사 차(허·하·호 번호판)를 빌리는 대신 보험료·자동차세·정비가 렌트료에 들어 있어요.</p>
+<p><b>Q. 리스·렌트 월 납입금은 어떻게 계산했나요?</b><br>취득세를 더한 취득원가에서 보증금을 빼고, 만기 잔존가치까지만 원리금균등으로 나눴어요(반납 기준). 렌트는 영업용 취득세 4%와 보험·세금·정비 월 비용을 더했어요. 잔존가치·금리는 회사마다 달라 위 '가정 바꾸기'에서 고칠 수 있어요.</p>
+<p><b>Q. 전기차 보조금은 언제 빠지나요?</b><br>출고·등록 때 국고·지자체 보조금이 차값에서 바로 빠져요. 지자체 예산이 떨어지면 받을 수 없으니 구매 전에 무공해차 통합누리집에서 남은 대수를 확인하세요.</p>
 <p><b>Q. 캐피탈 할부와 은행 대출 중 뭐가 나은가요?</b><br>보통 신용점수가 좋으면 은행 오토론 금리가 낮아요. 캐피탈 할부는 딜러 프로모션(무이자·저금리)이 붙을 때 유리할 수 있으니 두 가지를 모두 계산해 보세요.</p>
-<p><b>Q. 유예할부는 언제 쓰나요?</b><br>월 부담을 줄이고 만기에 차를 팔거나 재할부할 계획일 때 써요. 유예금에도 이자가 붙어 총이자는 일반 할부보다 많아요.</p>
 </div>
-<p>🧮 함께 쓰는 계산기: <a href="/salary/">연봉 실수령액 계산기</a> · <a href="/loan/">주택담보대출 계산기</a></p>
+<p>🧮 함께 쓰는 계산기: <a href="/car/list/">차종별 가격표</a> · <a href="/salary/">연봉 실수령액 계산기</a> · <a href="/loan/">주택담보대출 계산기</a></p>
 </main>
 <footer>© 한눈 계산기 · <a href="/">다른 계산기</a> · <a href="/about.html">사이트 소개·계산 근거</a> · <a href="/privacy.html">개인정보처리방침</a>
 <p class="net">한보기 네트워크: <a href="https://home.hanbogi.com">부동산 알리미</a> · <a href="https://grant.hanbogi.com">정부 지원금 찾기</a> · <a href="https://benefit.hanbogi.com">혜택 알리미</a> · <a href="https://license.hanbogi.com">자격증 한눈에</a> · <a href="https://hanbogi.com">오늘의 게임</a> · <a href="https://stay.hanbogi.com">오늘의 숙소</a> · <a href="https://gadget.hanbogi.com">기기 비교소</a></p></footer>
-<script src="/loan/amort.js"></script><script src="products.js"></script>
+<script src="/loan/amort.js"></script><script src="products.js"></script><script src="models.js"></script><script src="compare.js"></script>
 <script>
 const $=s=>document.querySelector(s), val=n=>(document.querySelector('input[name='+n+']:checked')||{}).value;
 const num=v=>+String(v).replace(/[^0-9.]/g,'')||0, won=v=>Math.round(v).toLocaleString('ko-KR')+'원';
-const man=v=>(v>=10000?(v/10000).toLocaleString('ko-KR',{maximumFractionDigits:2})+'억 ':'')+(v%10000?(v%10000).toLocaleString('ko-KR')+'만':'')+' 원';
-document.querySelectorAll('input.num').forEach(el=>el.addEventListener('input',()=>{const n=num(el.value);el.value=n?n.toLocaleString('ko-KR'):'';}));
-function setv(id,v){$('#'+id).value=v?v.toLocaleString('ko-KR'):'';} function add(id,v){setv(id,num($('#'+id).value)+v);}
+const man=v=>!v?'0원':(v>=10000?(v/10000).toLocaleString('ko-KR',{maximumFractionDigits:2})+'억 ':'')+(v%10000?(+(v%10000).toFixed(1)).toLocaleString('ko-KR')+'만':'')+' 원';
+const fmt=el=>{const s=el.value,n=num(s);el.value=n?n.toLocaleString('ko-KR',{maximumFractionDigits:1})+(/\.$/.test(s)?'.':''):'';};
+document.querySelectorAll('input.num').forEach(el=>el.addEventListener('input',()=>fmt(el)));
+function setv(id,v){$('#'+id).value=v?(+v.toFixed(1)).toLocaleString('ko-KR'):'';} function add(id,v){setv(id,num($('#'+id).value)+v);}
+const setRadio=(n,v)=>{const r=document.querySelector(`input[name=${n}][value="${v}"]`); if(r){r.checked=true; r.dispatchEvent(new Event('change'));}};
+const opts=(el,list,sel)=>{el.innerHTML=list.map(([v,t])=>`<option value="${v}"${v===sel?' selected':''}>${t}</option>`).join('');};
+const M=CAR_MODELS.list, makers=[...new Set(M.map(m=>m.maker))];
+const curModel=()=>M.find(m=>m.slug===$('#model').value), curTrim=()=>{const m=curModel();return m&&m.trims[$('#trim').value];};
+
+// 신차·중고차
+function cond(){ const used=val('cond')==='used';
+  $('#newBox').style.display=used?'none':'block';
+  $('#priceHint').textContent=used?'(만 원, 중고차는 거래 가격을 직접 입력)':'(만 원, 트림을 고르면 자동 입력 · 직접 고쳐도 돼요)';
+  if(used){ setv('price',0); setRadio('kind','normal'); } else fillPrice();
+  evShow(); plist(); }
+document.querySelectorAll('input[name=cond]').forEach(r=>r.onchange=cond);
+document.querySelectorAll('input[name=kind]').forEach(r=>r.onchange=evShow);
 document.querySelectorAll('input[name=down]').forEach(r=>r.onchange=()=>$('#downAmt').style.display=val('down')==='custom'?'block':'none');
 document.querySelectorAll('input[name=how]').forEach(r=>r.onchange=()=>$('#balBox').style.display=val('how')==='balloon'?'block':'none');
-function tax(priceWon,kind){ const base=priceWon/1.1; let t=Math.floor(base*(kind==='light'?0.04:0.07)/10)*10, cut=0;
-  if(kind==='light') cut=Math.min(t,750000); if(kind==='ev') cut=Math.min(t,1400000); return [t,cut,t-cut]; }
-// 상품표
-$('#pupd').textContent=CAR_PRODUCTS.updated;
-$('#plist').innerHTML='<tr><th>은행·상품</th><th>대상</th><th>금리(연)</th><th>최대 기간</th></tr>'+CAR_PRODUCTS.list.map((p,i)=>`<tr class="pick" onclick="pick(${i})"><td><b>${p.bank}</b> ${p.name}${p.url?` <a href="${p.url}" target="_blank" rel="nofollow noopener" onclick="event.stopPropagation()">↗</a>`:''}</td><td>${p.target}</td><td>${p.rate}</td><td>${p.term||'—'}</td></tr>`).join('');
+
+// 제조사 → 차종 → 트림
+function fillMaker(mk,md,tr){ opts($('#maker'),makers.map(x=>[x,x]),mk); fillModel(md,tr); }
+function fillModel(md,tr){ const list=M.filter(m=>m.maker===$('#maker').value); opts($('#model'),list.map(m=>[m.slug,m.model]),md); fillTrim(tr); }
+function fillTrim(tr){ const m=curModel(); opts($('#trim'),m.trims.map((t,i)=>[String(i),`${t.name} · ${(t.price/1e4).toLocaleString('ko-KR')}만`]),tr);
+  $('#trimSrc').innerHTML=`${m.maker} 공식 가격표 기준 (확인 ${m.checked}${m.taxNote?', '+m.taxNote:''}) <a href="${m.src}" target="_blank" rel="nofollow noopener">출처↗</a> · <a href="/car/${m.slug}/">${m.model} 트림별 표</a>`;
+  fillPrice(); }
+function fillPrice(){ const t=curTrim(), m=curModel(); if(!t||val('cond')==='used') return;
+  setv('price',t.price/1e4+num($('#opt').value)); setRadio('kind',t.fuel==='전기'||t.fuel==='수소'?'ev':m.light?'light':'normal'); evShow(); }
+$('#maker').onchange=()=>fillModel(); $('#model').onchange=()=>fillTrim(); $('#trim').onchange=fillPrice; $('#opt').addEventListener('input',fillPrice);
+
+// 전기차 보조금 (ev_subsidy.js는 전기차를 고를 때만 불러온다)
+function evShow(){ const on=val('kind')==='ev'&&val('cond')==='new'; $('#evBox').style.display=on?'block':'none'; if(!on) return;
+  if(window.EV_SUBSIDY) return subsidy(); if(evShow.busy) return; evShow.busy=1;
+  const s=document.createElement('script'); s.src='ev_subsidy.js'; s.onload=()=>{ const S=EV_SUBSIDY, sd=[...new Set(S.regions.map(r=>r[0]))];
+    opts($('#sido'),sd.map(x=>[x,x]),'서울특별시'); sigungu(); }; document.head.appendChild(s); }
+function sigungu(){ const S=EV_SUBSIDY; opts($('#sigungu'),S.regions.map((r,i)=>[String(i),r[1]]).filter(([i])=>S.regions[i][0]===$('#sido').value)); subsidy(); }
+$('#sido').onchange=sigungu; $('#sigungu').onchange=()=>subsidy();
+let SUB=null; // {nat, loc}
+function subsidy(){ const S=EV_SUBSIDY, t=val('cond')==='new'&&curTrim(), k=t&&t.ev!=null?S.keys.indexOf(t.ev):-1, reg=S.regions[$('#sigungu').value];
+  if(k<0||!reg){ SUB=null; $('#subInfo').innerHTML=(t&&t.fuel==='전기'?'이 트림은 보조금 표에서 찾지 못했어요. 금액을 직접 입력하세요. ':'목록에서 전기차 트림을 고르면 보조금이 자동으로 들어가요. ')+`<a href="${S.src}" target="_blank" rel="nofollow noopener">무공해차 통합누리집↗</a>`; return; }
+  const nat=S.national[k]||0, none=reg[2][k]==null, loc=reg[2][k]||0; SUB={nat,loc,reg:reg[1]}; setv('subsidy',(nat+loc)/1e4);
+  $('#subInfo').innerHTML=`국고 ${won(nat)} + ${reg[1]} ${won(loc)} = <b>${won(nat+loc)}</b>${none?' (이 지역 공고에 이 차종이 없어 지자체 보조금 0으로 계산)':''} · 휠·옵션에 따라 몇만 원 다를 수 있음 (${S.asOf} 기준, 지자체 예산이 소진되면 지급 안 됨) <a href="${S.src}" target="_blank" rel="nofollow noopener">출처↗</a>`; }
+
+// 은행 상품표 (신차·중고차별)
+function plist(){ const used=val('cond')==='used', L=CAR_PRODUCTS.list.map((p,i)=>[p,i]).filter(([p])=>p.target.includes(used?'중고':'신차'));
+  $('#pcond').textContent=used?'· 중고차':'· 신차'; $('#pupd').textContent=CAR_PRODUCTS.updated;
+  $('#plist').innerHTML='<tr><th>은행·상품</th><th>대상</th><th>금리(연)</th><th>최대 기간</th></tr>'+L.map(([p,i])=>`<tr class="pick" onclick="pick(${i})"><td><b>${p.bank}</b> ${p.name}${p.url?` <a href="${p.url}" target="_blank" rel="nofollow noopener" onclick="event.stopPropagation()">↗</a>`:''}</td><td>${p.target}</td><td>${p.rate}</td><td>${p.term||'—'}</td></tr>`).join(''); }
 function pick(i){const p=CAR_PRODUCTS.list[i]; if(p.min==null){alert('이 상품은 공식 금리가 공개되지 않아 직접 입력해 주세요.');return;} $('#rate').value=p.min; $('#rateSrc').textContent=p.bank+' '+p.name+' 최저 금리 기준 (실제 금리는 심사 후 결정)'; $('#rate').scrollIntoView({behavior:'smooth',block:'center'});}
+
+// 리스·렌트 가정
+const A=CAR_MODELS.assume; $('#lrate').value=A.lease; $('#rrate').value=A.rent; $('#asmSrc').innerHTML=A.note;
+let residTouched=false; $('#resid').oninput=()=>residTouched=true;
+const residSync=()=>{ if(!residTouched) $('#resid').value=RESIDUAL[$('#months').value]; }; $('#months').addEventListener('change',residSync); residSync();
+
 function run(){
-  const price=num($('#price').value), rate=+$('#rate').value, n=+$('#months').value, kind=val('kind');
-  if(!price){alert('차량 가격을 입력해 주세요');return;} if(!rate&&rate!==0){alert('금리를 입력해 주세요');return;}
-  const downMan=val('down')==='custom'?num($('#downAmt').value):Math.round(price*val('down')/100);
-  const loan=(price-downMan)*10000, how=val('how'), bal=how==='balloon'?Math.min(price*10000*$('#balPct').value/100,loan):0;
-  const s=schedule(loan,rate,n,'equalPay',0,bal), [t,cut,tNet]=tax(price*10000,kind);
-  $('#rsum').textContent=man(price)+' · 선수금 '+man(downMan)+' · '+n+'개월 · 연 '+rate+'%'+(bal?' · 유예 '+$('#balPct').value+'%':'');
-  $('#rpay').textContent=won(s.firstPay);
-  $('#rtab').innerHTML=`<tr><th>할부 원금</th><td>${won(loan)}</td></tr>`+(bal?`<tr><th>만기 일시 상환</th><td>${won(bal)} (마지막 달 합계 ${won(s.lastPay)})</td></tr>`:'')+
-   `<tr><th>총 이자</th><td>${won(s.totalInt)}</td></tr><tr><th>취득세</th><td>${won(tNet)}${cut?` <span class="sub">(감면 ${won(cut)} 반영)</span>`:''}</td></tr>`+
-   `<tr><th>총 비용</th><td><b>${won(price*10000+s.totalInt+tNet)}</b> <span class="sub">차값+이자+취득세</span></td></tr>`;
+  const price=num($('#price').value)*1e4, rate=+$('#rate').value, n=+$('#months').value, kind=val('kind'), used=val('cond')==='used';
+  if(!price){alert('차량 가격을 입력해 주세요');return;} if($('#rate').value===''){alert('할부 금리를 입력해 주세요 (아래 은행 표를 누르면 자동 입력)');return;}
+  const t=!used&&curTrim(), m=!used&&curModel(), truck=!!(m&&m.truck);
+  const sub=kind==='ev'&&!used?num($('#subsidy').value)*1e4:0, net=price-sub;
+  const down=val('down')==='custom'?num($('#downAmt').value)*1e4:Math.round(net*val('down')/100);
+  const bal=val('how')==='balloon'?Math.round(price*$('#balPct').value/100):0;
+  const I=installment({price,subsidy:sub,down,rate,months:n,balloon:bal,kind,used,truck}), T=acqTax(price,kind,{used,truck});
+    $('#rsum').textContent=(t?`${m.maker} ${m.model} ${t.name} · `:used?'중고차 · ':'')+man(price/1e4)+(sub?' · 보조금 '+man(sub/1e4):'')+' · 선수금 '+man(down/1e4)+' · '+n+'개월 · 연 '+rate+'%'+(bal?' · 유예 '+$('#balPct').value+'%':'');
+  $('#rpay').textContent=won(I.pay);
+  const row=(k,v)=>`<tr><th>${k}</th><td>${v}</td></tr>`;
+  $('#rtab').innerHTML=(sub?row('차량 가격',won(price))+row('전기차 보조금',`− ${won(sub)}${SUB?` <span class="sub">(국고 ${won(SUB.nat)} + ${SUB.reg} ${won(SUB.loc)})</span>`:''}`)+row('실구매가',`<b>${won(net)}</b>`):'')+
+   row('할부 원금',won(I.loan))+(bal?row('만기 일시 상환',`${won(Math.min(bal,I.loan))} (마지막 달 합계 ${won(I.last)})`):'')+row('총 이자',won(I.totalInt))+
+   row('취득세',`${won(T.net)}${T.cut?` <span class="sub">(감면 ${won(T.cut)} 반영)</span>`:''}`)+row('총 비용',`<b>${won(net+I.totalInt+T.net)}</b> <span class="sub">${sub?'실구매가':'차값'}+이자+취득세</span>`);
+  // 비교
+  const ex=(+$('#extra').value||0)*1e4, dep=+$('#dep').value||0, res=+$('#resid').value||0, lr=+$('#lrate').value, rr=+$('#rrate').value;
+  const L=lease({price,subsidy:sub,kind,months:n,rate:lr,depositPct:dep,residualPct:res,truck}), R=lease({price,subsidy:sub,kind,months:n,rate:rr,depositPct:dep,residualPct:res,extra:ex,biz:true,truck});
+  const c=(name,pay,first,total,after)=>`<tr><td><b>${name}</b></td><td class="n">${won(pay)}</td><td class="n">${won(first)}</td><td class="n">${won(total)}</td><td>${after}</td></tr>`;
+  $('#ctab').innerHTML='<tr><th>방식</th><th class="n">월 납입</th><th class="n">처음 낼 돈</th><th class="n">기간 총지출<br><span class="sub">보험·세금·정비 포함</span></th><th>만기 후</th></tr>'+
+   c('할부',I.pay,down+T.net,down+T.net+I.pay*(n-1)+I.last+ex*n,`차가 내 것 (잔존가치 약 ${man(Math.round(L.residual/1e4))})`)+
+   c('운용리스',L.pay,L.deposit,L.pay*n+ex*n,`반납 시 보증금 환급 · 인수하려면 ${won(L.residual)}`)+
+   c('장기렌트',R.pay,R.deposit,R.outlay,`반납 시 보증금 환급 · 보험·세금·정비 포함`);
+  $('#cnote').innerHTML=`가정: 리스 연 ${lr}%, 렌트 연 ${rr}%(수수료 포함 환산), 보증금 ${dep}%, 잔존가치 ${res}%(${n}개월), 보험·세금·정비 월 ${won(ex)}(할부·리스는 따로 낸다고 보고 총지출에 더함). 리스는 취득세 ${truck?5:kind==='light'?4:7}%(감면 반영), 렌트는 영업용 4%를 회사가 내고 월 납입에 나눠 넣었어요. 할부는 만기에 차가 남으니 총지출에서 차 가치를 빼고 비교하세요.${used?' 중고차 리스·렌트는 상품이 적고 조건 차이가 커요.':''}`;
   $('#res').classList.add('show'); $('#res').scrollIntoView({behavior:'smooth',block:'start'});
 }
+
+// 주소 파라미터로 미리 채우기: ?maker=현대&model=avante&trim=0 (trim은 번호 또는 이름)
+const q=new URLSearchParams(location.search), qm=M.find(m=>m.slug===q.get('model'));
+const qt=qm&&q.get('trim')!=null?String(/^\d+$/.test(q.get('trim'))?q.get('trim'):Math.max(0,qm.trims.findIndex(t=>t.name===q.get('trim')))):undefined;
+fillMaker(qm?qm.maker:(makers.includes(q.get('maker'))?q.get('maker'):makers[0]),qm&&qm.slug,qt);
+if(q.get('cond')==='used') setRadio('cond','used'); plist();
 </script>
 </body></html>
