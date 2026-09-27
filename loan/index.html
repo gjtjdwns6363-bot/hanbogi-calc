@@ -165,5 +165,7 @@ function run(){
   for(let y=0;y<years;y++){const yr=s.rows.slice(y*12,y*12+12);rows+=`<tr><td>${y+1}년</td><td>${won(yr.reduce((a,r)=>a+r.prin,0))}</td><td>${won(yr.reduce((a,r)=>a+r.int,0))}</td><td>${won(yr[yr.length-1].bal)}</td></tr>`}
   $('#sched').innerHTML=rows; $('#res').classList.add('show'); $('#res').scrollIntoView({behavior:'smooth',block:'start'});
 }
+// 다른 사이트에서 ?amt=(만원)로 넘어오면 금액을 채우고 바로 계산
+{const q=+new URLSearchParams(location.search).get("amt");if(q>0){document.querySelector("#amt").value=q.toLocaleString("ko-KR");run();}}
 </script>
 </body></html>
