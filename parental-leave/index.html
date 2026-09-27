@@ -15,7 +15,14 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
 {"@type":"Question","name":"2026년 육아휴직 급여는 얼마인가요?","acceptedAnswer":{"@type":"Answer","text":"1~3개월째는 통상임금 100%(월 상한 250만 원), 4~6개월째는 통상임금 100%(월 상한 200만 원), 7개월째부터는 통상임금 80%(월 상한 160만 원)이고, 모든 구간 하한은 월 70만 원입니다. 2025년 1월부터 사후지급금이 폐지돼 휴직 중에 전액 받습니다."}},
 {"@type":"Question","name":"6+6 부모육아휴직제는 얼마를 더 주나요?","acceptedAnswer":{"@type":"Answer","text":"자녀 생후 18개월 안에 부모가 모두(동시 또는 순차) 육아휴직을 하면 각자 첫 6개월 동안 통상임금 100%를 주고, 월 상한이 250만·250만·300만·350만·400만·450만 원으로 올라갑니다. 특례는 부모가 공통으로 쓴 개월 수까지만 적용됩니다."}},
-{"@type":"Question","name":"육아휴직은 최대 몇 개월 쓸 수 있나요?","acceptedAnswer":{"@type":"Answer","text":"기본 1년이고, 2025년 2월 23일부터 부모가 각각 3개월 이상 쓰거나 한부모·중증장애아동 부모이면 1년 6개월까지 쓸 수 있습니다."}}]}</script>
+{"@type":"Question","name":"육아휴직은 최대 몇 개월 쓸 수 있나요?","acceptedAnswer":{"@type":"Answer","text":"기본 1년이고, 2025년 2월 23일부터 부모가 각각 3개월 이상 쓰거나 한부모·중증장애아동 부모이면 1년 6개월까지 쓸 수 있습니다."}},
+{"@type":"Question","name":"육아기 근로시간 단축 급여는 얼마인가요?","acceptedAnswer":{"@type":"Answer","text":"매주 처음 10시간 단축분은 월 통상임금 100%(상한 250만 원) × 10 ÷ 단축 전 주 근로시간, 나머지 단축분은 통상임금 80%(상한 160만 원) × 나머지 시간 ÷ 단축 전 근로시간입니다. 하한은 50만 원입니다. 월 250만 원 근로자가 주 40시간에서 30시간으로 줄이면 월 62만 5천 원을 받습니다."}},
+{"@type":"Question","name":"배우자 출산휴가 급여는 얼마인가요?","acceptedAnswer":{"@type":"Answer","text":"배우자 출산휴가는 20일 유급입니다. 우선지원대상기업(중소기업) 근로자는 20일 전부 고용보험에서 통상임금을 지원하며 상한은 20일 1,684,210원입니다. 대기업은 회사가 통상임금을 지급합니다."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"육아휴직 급여 계산하는 법","step":[
+{"@type":"HowToStep","name":"월 통상임금 확인","text":"기본급과 매달 고정으로 받는 수당을 더한 세전 월 통상임금을 넣습니다. 상여·성과급·연장수당은 뺍니다."},
+{"@type":"HowToStep","name":"휴직 개월과 배우자 휴직 고르기","text":"내 휴직 개월 수와 배우자 육아휴직 여부(생후 18개월 안 부모 모두, 18개월 이후, 한부모)를 고릅니다."},
+{"@type":"HowToStep","name":"월별 급여와 부부 합계 확인","text":"1~3개월 250만, 4~6개월 200만, 7개월부터 160만 원 상한과 6+6 특례가 반영된 월별 금액, 부부 휴직 조합별 총액을 봅니다."},
+{"@type":"HowToStep","name":"고용24에서 신청","text":"휴직 시작 1개월 뒤부터 매달 또는 한꺼번에 고용24에서 신청하고, 휴직이 끝난 뒤 12개월 안에 신청해야 합니다."}]}</script>
 <style>.sub{font-size:.85rem;color:var(--muted)}#rtab td,#rtab th,#stab td,#stab th{text-align:right}#rtab th:first-child,#rtab td:first-child,#stab th:first-child,#stab td:first-child{text-align:left}</style>
 </head>
 <body>
@@ -55,12 +62,37 @@
 <div id="rlabel">내 육아휴직 급여 총액</div><div class="big" id="rtotal"></div>
 <table id="rtab"></table>
 <div id="sbox"><p style="margin-top:12px"><b id="slabel"></b></p><table id="stab"></table></div>
+<div id="combo" style="display:none"><p style="margin-top:12px"><b>부부 휴직 조합별 총액</b> <span class="sub" id="comboSub"></span></p><table id="ctab"></table></div>
 <p class="hint" id="rnote"></p>
 <p class="warn" style="margin-top:12px">⚠️ 참고용이에요. 실제 급여는 육아휴직 시작일 기준 통상임금으로 고용센터가 정하고, 한 달이 안 되는 기간은 일할 계산해요. 휴직 중 회사에서 받은 금품이 있으면 줄어들 수 있고, 고용보험 가입기간(피보험단위기간)이 180일 이상이어야 받을 수 있어요. 정확한 금액은 고용24나 고용노동부(국번 없이 1350)에 확인하세요.</p>
 <p>👉 <a href="https://benefit.hanbogi.com">혜택 알리미</a>에서 출산·육아 지원금도 확인해 보세요 · <a href="https://www.work24.go.kr" rel="nofollow">고용24</a></p>
-<p>🔎 <a href="https://grant.hanbogi.com/t/%EC%B6%9C%EC%82%B0-%EC%82%B0%EB%AA%A8/">정부 지원금 찾기 · 출산·산모 지원금 모음</a>에서 출산·육아 지원금을 지역별로 확인해 보세요</p>
+<p>🔎 정부 지원금 찾기: <a href="https://grant.hanbogi.com/t/%EC%B6%9C%EC%82%B0-%EC%82%B0%EB%AA%A8/">출산·산모</a> · <a href="https://grant.hanbogi.com/t/%EC%9E%84%EC%82%B0%EB%B6%80/">임산부</a> · <a href="https://grant.hanbogi.com/t/%EC%98%81%EC%9C%A0%EC%95%84/">영유아</a> · <a href="https://grant.hanbogi.com/t/%EC%8B%A0%ED%98%BC%EB%B6%80%EB%B6%80/">신혼부부</a> · <a href="https://grant.hanbogi.com/t/%ED%95%9C%EB%B6%80%EB%AA%A8/">한부모</a> 지원금 모음에서 출산·육아 지원금을 지역별로 확인해 보세요</p>
 <p>🧮 함께 쓰는 계산기: <a href="/salary/">연봉 실수령액 계산기</a> · <a href="/severance/">퇴직금 계산기</a></p>
 </div>
+
+<h2>육아기 근로시간 단축 급여 · 배우자 출산휴가 급여</h2>
+<form class="card" id="f2" onsubmit="event.preventDefault();run2()">
+<label>월 통상임금 <span class="hint">(위에 넣었으면 그대로 써요)</span></label>
+<input type="text" id="wage2" class="num" inputmode="numeric" placeholder="예: 3,000,000">
+<div class="row2" style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+<div><label>단축 전 주 근로시간</label><input type="number" id="before" min="16" max="40" value="40" inputmode="numeric"></div>
+<div><label>단축 후 주 근로시간 <span class="hint">(15~35)</span></label><input type="number" id="after" min="15" max="35" value="30" inputmode="numeric"></div>
+</div>
+<label>회사 규모 <span class="hint">(배우자 출산휴가 급여 지원 대상)</span></label>
+<div class="seg"><label><input type="radio" name="sme" value="1" checked><span>우선지원대상기업 (중소기업)</span></label><label><input type="radio" name="sme" value="0"><span>대규모 기업</span></label></div>
+<button type="submit">단축 급여·출산휴가 급여 계산하기</button>
+</form>
+<div class="card result" id="res2" aria-live="polite">
+<div>육아기 근로시간 단축 급여 (월)</div><div class="big" id="r2pay"></div>
+<table id="r2tab"></table>
+<p style="margin-top:14px"><b>배우자 출산휴가 20일</b></p>
+<table id="r3tab"></table>
+<p class="hint">근로시간 단축 급여: 매주 처음 10시간 단축분은 통상임금 100%(상한 250만·하한 50만 원), 그 넘는 단축분은 80%(상한 160만·하한 50만 원)를 단축 전 근로시간으로 나눠 계산해요. 한 달이 안 되면 일할 계산해요. 대상 자녀는 만 12세 이하 또는 초등학교 6학년 이하예요. 배우자 출산휴가는 20일 유급이고, 출산 예정일 50일 전부터 출산 후 120일 안에 네 번까지 나눠 쓸 수 있어요(고용노동부 일생활균형 안내). 우선지원대상기업은 20일 전부 고용보험이 상한 1,684,210원까지 주고 넘는 부분은 회사가, 대규모 기업은 회사가 전액 줘요. 20일분 통상임금은 월 통상임금 ÷ 209시간 × 8시간 × 20일로 계산했어요(주 40시간 기준).</p>
+<p class="hint">근거: 고용보험법 제73조의2·시행령 제104조의2(근로시간 단축 급여), 남녀고용평등법 제18조의2·고용보험법 제75조(배우자 출산휴가), 출산전후휴가 급여등 상한액 고시(고용노동부고시 제2025-124호, 2026. 1. 1. 시행), 찾기쉬운 생활법령정보(2026. 8. 15. 기준). 2026년 9월 27일 확인.</p>
+</div>
+
+<h2>월급별 육아휴직 급여 표</h2>
+<div class="card"><p>월 통상임금 200만~500만 원(10만 원 단위)마다 월별 육아휴직 급여, 6+6 부모육아휴직 총액, 근로시간 단축 급여, 배우자 출산휴가 급여를 한 쪽에 정리했어요. <a href="/parental-leave/wage/">월급별 전체 목록 보기 →</a></p></div>
 
 <h2>계산 방법</h2>
 <div class="card">
@@ -85,6 +117,9 @@
 <p><b>Q. 먼저 휴직한 사람도 6+6 특례를 받나요?</b><br>네. 부모의 휴직 기간이 겹치지 않고 순차여도 특례는 부모 각각에게 적용돼요(시행령 제95조의3). 먼저 쓴 사람은 배우자가 아직 휴직 전이라 처음엔 일반 기준으로 받을 수 있으니, 특례 차액을 언제 어떻게 받는지는 고용센터에 확인하세요.</p>
 <p><b>Q. 육아휴직 급여에도 세금이 붙나요?</b><br>아니요. 고용보험법에 따른 육아휴직 급여는 소득세 비과세라 계산된 금액이 그대로 들어와요. 다만 휴직 기간에도 건강보험료 등은 따로 정산될 수 있어요.</p>
 <p><b>Q. 1년 넘게 쓰려면요?</b><br>부모가 각각 3개월 이상 육아휴직을 쓰거나, 한부모 또는 중증장애아동의 부모이면 최대 1년 6개월까지 쓸 수 있어요. 7개월째 이후 급여는 월 최대 160만 원이에요.</p>
+<p><b>Q. 부부가 같이 쓰면 총 얼마나 받나요?</b><br>계산기에서 '부모 모두 (생후 18개월 안)'을 고르고 배우자 통상임금을 넣으면 월별 표와 함께 '부부 휴직 조합별 총액'(한 명만 12개월, 12+3, 12+6, 6+6, 12+12, 18+18개월)이 나와요. 두 사람 모두 월 450만 원 이상이면 6+6만으로 부부 합계 4,000만 원이에요.</p>
+<p><b>Q. 육아휴직 대신 근로시간을 줄이면 얼마를 받나요?</b><br>주 40시간에서 30시간으로 줄이면 월 통상임금 × 10/40(최대 62만 5천 원)을 받아요. 줄어든 월급 대부분을 채워 주는 셈이에요. 위의 '육아기 근로시간 단축 급여' 계산기에서 시간을 바꿔 보세요.</p>
+<p><b>Q. 배우자 출산휴가 급여는 누가 주나요?</b><br>20일 모두 유급이에요. 중소기업(우선지원대상기업) 근로자는 고용보험이 20일분 통상임금을 1,684,210원까지 주고, 넘는 부분은 회사가 줘요. 대규모 기업은 회사가 전부 줘요. 휴가가 끝나기 전 고용보험 가입기간이 180일 이상이어야 하고, 휴가 시작 1개월 뒤부터 끝난 뒤 12개월 안에 신청해요.</p>
 </div>
 </main>
 <footer>© 한눈 계산기 · <a href="/">다른 계산기</a> · <a href="/about.html">사이트 소개·계산 근거</a> · <a href="/privacy.html">개인정보처리방침</a>
@@ -117,8 +152,28 @@ function run(){
     $('#rlabel').textContent='부부 육아휴직 급여 합계'; $('#rtotal').textContent=won(r.total+s.total);
     note+=' 내 급여 '+won(r.total)+' + 배우자 급여 '+won(s.total)+'.';
   } else { $('#sbox').style.display='none'; $('#rlabel').textContent='내 육아휴직 급여 총액'; $('#rtotal').textContent=won(r.total); }
+  if(mode!=='single'){ const b=swage||wage; $('#comboSub').textContent='(내 '+man(Math.round(wage/10000))+' · 배우자 '+man(Math.round(b/10000))+(swage?'':' — 배우자 통상임금을 넣지 않아 같은 금액으로 가정')+', 생후 18개월 안)';
+    $('#ctab').innerHTML='<tr><th>나 + 배우자</th><th>내 급여</th><th>배우자 급여</th><th>합계</th></tr>'+combos(wage,b).map(c=>`<tr><td>${c.m1}개월 + ${c.m2}개월${c.m2&&c.m1>=6&&c.m2>=6?' <span class="sub">6+6</span>':''}</td><td>${won(c.me)}</td><td>${won(c.sp)}</td><td><b>${won(c.total)}</b></td></tr>`).join('');
+    $('#combo').style.display=''; } else $('#combo').style.display='none';
   $('#rnote').textContent=(note+' 육아휴직 급여는 비과세라 이 금액 그대로 받아요.').trim();
   $('#res').classList.add('show'); $('#res').scrollIntoView({behavior:'smooth',block:'start'});
+}
+{const w=+new URLSearchParams(location.search).get('wage'); if(w>0){ $('#wage').value=w.toLocaleString('ko-KR'); $('#wage2').value=w.toLocaleString('ko-KR'); }}
+document.querySelectorAll('input[name=sme]').forEach(r=>r.onchange=()=>$('#res2').classList.contains('show')&&run2());
+function run2(){
+  const wage=num($('#wage2').value)||num($('#wage').value), before=Math.floor(+$('#before').value), after=Math.floor(+$('#after').value);
+  if(!wage){alert('월 통상임금을 입력해 주세요');return;}
+  if(!(before>after)){alert('단축 후 근로시간은 단축 전보다 적어야 해요');return;}
+  if(after<SHORT.minAfter||after>SHORT.maxAfter){alert('단축 후 근로시간은 주 15시간 이상 35시간 이하여야 해요');return;}
+  if(!num($('#wage2').value)) $('#wage2').value=wage.toLocaleString('ko-KR');
+  const s=shortHours({wage,before,after}), row=(k,v)=>`<tr><th>${k}</th><td>${v}</td></tr>`;
+  $('#r2pay').textContent=won(s.pay);
+  $('#r2tab').innerHTML=row('줄이는 시간',`주 ${s.cut}시간 (${before} → ${after}시간)`)+row('처음 10시간 단축분',`${won(s.pay1)} <span class="sub">(${won(Math.min(Math.max(wage,SHORT.floor),SHORT.cap1))} × ${s.h1}/${before})</span>`)+
+    (s.h2?row('나머지 단축분',`${won(s.pay2)} <span class="sub">(${won(Math.min(Math.max(wage*0.8,SHORT.floor),SHORT.cap2))} × ${s.h2}/${before})</span>`):'')+
+    row('회사 월급 (시간 비례 가정)',won(s.keep))+row('월급 + 단축 급여',`<b>${won(s.keep+s.pay)}</b> <span class="sub">(단축 전 ${won(wage)}의 ${Math.round((s.keep+s.pay)/wage*100)}%)</span>`);
+  const sp=spouseLeave(wage,val('sme')==='1');
+  $('#r3tab').innerHTML=row('20일분 통상임금',won(sp.full))+row('고용보험 지원',won(sp.gov)+(val('sme')==='1'?' <span class="sub">(상한 1,684,210원)</span>':' <span class="sub">(대규모 기업은 지원 없음)</span>'))+row('회사가 주는 금액',won(sp.employer));
+  $('#res2').classList.add('show'); $('#res2').scrollIntoView({behavior:'smooth',block:'start'});
 }
 </script>
 </body></html>

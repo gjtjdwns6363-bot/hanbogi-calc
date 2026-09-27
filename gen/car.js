@@ -113,6 +113,8 @@ const keep = new Set(['index.html', 'products.js', 'models.js', 'ev_subsidy.js',
 for (const d of fs.readdirSync(path.join(ROOT, 'car'))) if (!keep.has(d)) fs.rmSync(path.join(ROOT, 'car', d), { recursive: true });
 for (const [url, html] of out) { const d = path.join(ROOT, url); fs.mkdirSync(d, { recursive: true }); fs.writeFileSync(path.join(d, 'index.html'), html); }
 const today = new Date().toLocaleDateString('sv-SE'), smPath = path.join(ROOT, 'sitemap.xml');
-const sm = fs.readFileSync(smPath, 'utf8').replace(/<!-- car -->[\s\S]*<!-- \/car -->\n/, '');
-fs.writeFileSync(smPath, sm.replace('</urlset>', '<!-- car -->\n' + out.map(([u]) => `<url><loc>${SITE}${u}</loc><lastmod>${today}</lastmod></url>`).join('\n') + '\n<!-- /car -->\n</urlset>'));
+// <!-- car --> 구간만 제자리에서 바꾼다(다른 구간 순서·내용은 그대로). 구간이 없으면 </urlset> 앞에 붙인다.
+const block = '<!-- car -->\n' + out.map(([u]) => `<url><loc>${SITE}${u}</loc><lastmod>${today}</lastmod></url>`).join('\n') + '\n<!-- /car -->\n';
+const sm = fs.readFileSync(smPath, 'utf8'), RE = /<!-- car -->[\s\S]*?<!-- \/car -->\n/;
+fs.writeFileSync(smPath, RE.test(sm) ? sm.replace(RE, () => block) : sm.replace('</urlset>', block + '</urlset>'));
 console.log(`생성 ${out.length}쪽: 차종 ${M.length} (전기 ${M.filter(m => m.trims.some(t => t.fuel === '전기')).length}), 목록 1`);

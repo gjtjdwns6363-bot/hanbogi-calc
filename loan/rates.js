@@ -32,4 +32,79 @@ function baseRate(p, income, termIdx) {
   for (const [cap, row] of p.table) if (income <= cap) return row[termIdx];
   return null; // 소득 기준 초과
 }
-if (typeof module !== 'undefined') module.exports = { RATES, baseRate };
+
+// ---------- 대출 한도 규제 (주택구입 목적 주담대, 은행권) ----------
+// 출처(모두 금융위원회·국토교통부 공식 발표문, 확인 2026-09-27):
+//  - 금융위 「3단계 스트레스 DSR 시행방안」(2025-05-20, 2025-07-01 시행): 혼합·주기형 적용비율, DSR 은행 40%·2금융 50%, 공식 예시
+//  - 금융위 「가계부채 관리 강화 방안」(2025-06-27, 06-28 시행): 수도권·규제 유주택 추가구입 LTV 0, 생애최초 70%, 만기 30년
+//  - 관계부처 「주택시장 안정화 대책」(2025-10-15, 10-16 시행): 규제지역 확대, 규제지역 LTV 40%, 가격별 한도 6·4·2억, 수도권·규제 ST금리 3.0%
+//  - 금융위 「3단계 스트레스 DSR 행정지도 변경시행 예고」(2026-06-18): 지방 주담대 = 산출 ST금리 × 50%, 2026-12-31까지
+// 규제지역(조정대상·투기과열) = 서울 25개 구 전역 + 경기 과천·광명·성남(분당·수정·중원)·수원(영통·장안·팔달)·안양동안·의왕·하남·용인수지.
+const REG = {
+  updated: '2026-09-27',
+  dsr: { bank: 40, second: 50 },
+  // LTV(%) [지역][주택 수]. dispose = 기존 1주택 6개월 안 처분 조건, own = 처분 안 하는 유주택(추가 구입)
+  ltv: {
+    reg:   { none: 40, dispose: 40, own: 0, first: 70 },
+    metro: { none: 70, dispose: 70, own: 0, first: 70 },
+    local: { none: 70, dispose: 70, own: 60, first: 80 },
+  },
+  // 수도권·규제지역 주택구입 주담대 최대 한도(만원): 시가 15억 이하 6억, 25억 이하 4억, 초과 2억 (정책대출 제외)
+  cap: [[150000, 60000], [250000, 40000], [Infinity, 20000]],
+  maxTermMetro: 30,
+  // 스트레스 금리(%p): 수도권·규제지역 주담대 3.0(하한), 지방 주담대 0.75(하한 1.5 × 50%, 2026-12-31까지)
+  stress: { reg: 3.0, metro: 3.0, local: 0.75 },
+  // 혼합형·주기형 적용비율(%) — 고정기간(또는 변동주기)/만기 비중 30% 미만 · 30~50% · 50~70%. 70% 이상 미적용, 고정 5년 미만은 100%
+  ratio: { mixed: [80, 60, 40], cycle: [40, 30, 20] },
+  ratioLocal: { mixed: [60, 40, 20], cycle: [30, 20, 10] }, // 지방은 2단계 비율 유지
+};
+// 스트레스 가산금리(%p). type: var(변동)·mixed(혼합)·cycle(주기)·fixed(순수고정), fix: 고정기간·변동주기(년), term: 만기(년)
+function stressAdd(area, type, fix, term, base = REG.stress[area]) {
+  if (type === 'fixed') return 0;
+  if (type === 'var' || fix < 5) return base;
+  const share = fix / term; if (share >= 0.7) return 0;
+  const i = share < 0.3 ? 0 : share < 0.5 ? 1 : 2;
+  return Math.round(base * (area === 'local' ? REG.ratioLocal : REG.ratio)[type][i] * 100) / 10000;
+}
+// 원리금균등 1원당 연 상환액
+const annualPer = (ratePct, years) => { const r = ratePct / 1200, n = years * 12; return 12 * (r ? r / (1 - Math.pow(1 + r, -n)) : 1 / n); };
+// DSR 한도(만원): (연소득 × DSR − 기존 대출 연 원리금) ÷ (가산 후 금리로 본 1원당 연 상환액)
+function dsrMax(income, rate, years, add = 0, existing = 0, dsr = REG.dsr.bank) {
+  return Math.max(0, (income * dsr / 100 - existing) / annualPer(rate + add, years));
+}
+// 최대 대출액(만원) = min(LTV, 수도권·규제 가격별 한도, DSR)
+function loanLimit({ income, price, area, owned = 'none', first = false, type = 'var', fix = 0, rate, years, existing = 0, dsr = REG.dsr.bank }) {
+  const L = REG.ltv[area], ltv = first && owned === 'none' ? L.first : L[owned];
+  const term = area === 'local' ? years : Math.min(years, REG.maxTermMetro);
+  const add = stressAdd(area, type, fix, term);
+  const byLtv = Math.floor(price * ltv / 100), byCap = area === 'local' ? Infinity : REG.cap.find(([p]) => price <= p)[1];
+  const byDsr = Math.floor(dsrMax(income, rate, term, add, existing, dsr));
+  const max = Math.min(byLtv, byCap, byDsr);
+  return { max, ltv, byLtv, byCap, byDsr, add, term, by: max === byLtv ? 'LTV' : max === byCap ? '가격별 한도' : 'DSR' };
+}
+
+// ---------- 은행별 주담대 평균금리 ----------
+// 은행연합회 소비자포털 가계대출금리 은행별 비교공시(portal.kfb.or.kr/compare/loan_household_new.php)
+// 분할상환방식 주택담보대출(만기 10년 이상), 신규취급액 기준. 2026년 8월 공시 = 2026년 7월 중 신규취급분.
+// [은행, 평균금리, 신용 951~1000점 금리, 평균 신용점수(KCB·NICE)]. 이 공시는 고정·변동을 나누지 않는다.
+// 2026년 공시일: 9/30, 10/29, 11/25, 12/29 — 공시 뒤 이 표를 바꾼다. (한국산업은행·토스뱅크는 취급 없음)
+const BANKS = {
+  updated: '2026-08-26', month: '2026년 7월 신규취급',
+  src: 'https://portal.kfb.or.kr/compare/loan_household_new.php',
+  list: [
+    ['Sh수협은행', 4.03, 3.86, 949], ['IBK기업은행', 4.21, 4.17, 942], ['BNK부산은행', 4.26, 4.21, 959], ['우리은행', 4.40, 4.36, 959],
+    ['케이뱅크', 4.49, 4.46, 969], ['SC제일은행', 4.51, 4.49, 950], ['하나은행', 4.51, 4.48, 947], ['KB국민은행', 4.55, 4.53, 957],
+    ['BNK경남은행', 4.66, 4.58, 946], ['카카오뱅크', 4.71, 4.69, 964], ['NH농협은행', 4.81, 4.72, 953], ['광주은행', 4.98, 4.94, 925],
+    ['신한은행', 5.01, 4.96, 938], ['iM뱅크', 5.03, 5.04, 923], ['제주은행', 5.19, 5.79, 913], ['전북은행', 5.55, 5.60, 862],
+  ],
+};
+// 5대 은행(KB·신한·하나·우리·NH) 평균금리 — 롱테일 표 기본 금리
+BANKS.big5 = Math.round(['KB국민은행', '신한은행', '하나은행', '우리은행', 'NH농협은행'].reduce((s, b) => s + BANKS.list.find(x => x[0] === b)[1], 0) / 5 * 100) / 100;
+
+// ---------- 중도상환수수료 ----------
+// 대출 후 3년이 지나면 받을 수 없고(금융소비자보호법 제20조), 3년 안에는 남은 기간에 비례해 줄어든다(잔존기간 슬라이딩).
+// 기본 수수료율 0.65% = 5대 은행 주담대 평균(금융위 2025-01-13 개편, 신규 대출 고정 1.4→0.65·변동 1.2→0.65). 은행마다 다르다.
+const PREPAY = { rate: 0.65, years: 3 };
+const prepayFee = (amount, month, rate = PREPAY.rate) => Math.round(amount * rate / 100 * Math.max(0, PREPAY.years * 12 - month) / (PREPAY.years * 12));
+
+if (typeof module !== 'undefined') module.exports = { RATES, baseRate, REG, stressAdd, annualPer, dsrMax, loanLimit, BANKS, PREPAY, prepayFee };

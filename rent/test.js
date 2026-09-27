@@ -16,4 +16,11 @@ a.strictEqual(calc('adj', { deposit: 10000, monthly: 10, newDeposit: 20000 }, 5)
 const c = compare(20000, 5, 4); a.strictEqual(c.interest, 800); a.strictEqual(c.rent, 1000); a.strictEqual(c.cheaper, 'jeonse');
 a.strictEqual(compare(20000, 5, 6).cheaper, 'wolse');
 a.strictEqual(calc('w2j', { deposit: 10000, monthly: 100 }, 9).over, false);
+// 기회비용: 2억을 예금 3%에 넣으면 세후 600만 × (1 − 15.4%) = 507.6만 < 월세 1,000만 → 전세가 유리
+const o = compare(20000, 5, 4, 3); a.ok(Math.abs(o.opportunity - 507.6) < 1e-9); a.strictEqual(o.cheaperOwn, 'jeonse');
+a.strictEqual(compare(20000, 5, 4).opportunity, undefined);
+// 갱신 5% 상한 (제7조②): 보증금 3억 → 3억 1,500만, 월세 100만 → 105만
+const { renew } = require('./calc.js');
+let n = renew({ deposit: 30000, monthly: 0 }, 5); a.strictEqual(n.maxDeposit, 31500); a.strictEqual(n.upDeposit, 1500);
+n = renew({ deposit: 10000, monthly: 100 }, 5); a.strictEqual(n.maxMonthly, 105); a.ok(Math.abs(n.base - 34000) < 1e-6); a.ok(Math.abs(n.maxBase - 35700) < 1e-6);
 console.log('rent: all tests passed');

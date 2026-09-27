@@ -9,6 +9,7 @@ const HOURLY = {
   weekCap: 40 * 60,     // 법정근로시간 1주 40시간 (제50조제1항) — 주휴 산정 상한
   dayCap: 8 * 60,       // 1일 8시간 (제50조제2항) — 넘는 시간은 연장근로
   plus: 0.5,            // 연장·야간·휴일(8시간 이내) 가산 50%, 휴일 8시간 초과 100% (제56조)
+  probation: 0.9,       // 수습 3개월 이내(1년 이상 계약)는 최저임금의 90% 가능 — 최저임금법 제5조제2항·시행령 제3조 (법제처, 2026-09-27 확인). 단순노무직 제외(법 제5조제2항 단서)
   biz: 0.03, local: 0.1 // 사업소득 원천징수 3% (소득세법 제129조제1항제3호) + 지방소득세 10% = 3.3%
 };
 const salaryNet = typeof net !== 'undefined' ? net : require('../salary/calc.js').net;
@@ -72,6 +73,8 @@ function deduct(month, mode) {
   if (mode === 'ins') return salaryNet({ gross: g });
   return { total: 0, net: g };
 }
+// 같은 세전 금액을 공제 없음·3.3%·4대보험으로 뗐을 때 비교
+const compareTax = month => ({ none: deduct(month, 'none'), biz: deduct(month, 'biz'), ins: deduct(month, 'ins') });
 const hm = m => (m >= 60 ? Math.floor(m / 60) + '시간' : '') + (m % 60 ? (m >= 60 ? ' ' : '') + m % 60 + '분' : m ? '' : '0시간');
 
-if (typeof module !== 'undefined') module.exports = { HOURLY, dayWork, weekPay, periodPay, deduct, hm };
+if (typeof module !== 'undefined') module.exports = { HOURLY, dayWork, weekPay, periodPay, deduct, compareTax, hm };

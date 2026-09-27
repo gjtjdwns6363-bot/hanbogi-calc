@@ -1,11 +1,11 @@
 <!doctype html>
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="naver-site-verification" content="21421c877a507dea4b5be99d5ec0d9e9fd8d7b50" />
-<title>전월세 전환 계산기 2026 | 전세↔월세·보증금 조정, 법정 전환율 상한</title>
-<meta name="description" content="전세를 월세로, 월세를 전세로 바꾸면 얼마인지 바로 계산합니다. 보증금을 올리거나 내릴 때 월세, 주택임대차보호법 법정 전환율 상한(기준금리+2%p) 초과 여부, 전세대출 이자와 월세 비교까지.">
+<title>전월세 전환 계산기 2026 | 전세↔월세·갱신 5% 상한·법정 전환율·기회비용 비교</title>
+<meta name="description" content="전세를 월세로, 월세를 전세로 바꾸면 얼마인지 바로 계산합니다. 보증금을 올리거나 내릴 때 월세, 주택임대차보호법 법정 전환율 상한(기준금리+2%p) 초과 여부, 갱신·증액 5% 상한, 전세대출 이자·예금 기회비용과 월세 비교까지.">
 <link rel="canonical" href="https://calc.hanbogi.com/rent/">
 <meta property="og:title" content="전월세 전환 계산기 2026">
-<meta property="og:description" content="전세↔월세 전환 금액과 법정 전환율 상한 초과 여부를 바로 계산해요.">
+<meta property="og:description" content="전세↔월세 전환 금액, 법정 전환율 상한, 갱신 5% 상한, 전세 vs 월세 기회비용까지 바로 계산해요.">
 <meta property="og:url" content="https://calc.hanbogi.com/rent/">
 <meta property="og:type" content="website"><meta property="og:site_name" content="한눈 계산기"><meta property="og:locale" content="ko_KR">
 <meta property="og:image" content="https://calc.hanbogi.com/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image">
@@ -15,7 +15,13 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
 {"@type":"Question","name":"전월세 전환율 법정 상한은 얼마인가요?","acceptedAnswer":{"@type":"Answer","text":"주택임대차보호법 제7조의2와 시행령 제9조에 따라 연 10%와 한국은행 기준금리+연 2%p 중 낮은 비율입니다. 기준금리가 3.00%(2026년 8월 27일부터)이면 상한은 연 5.0%입니다."}},
 {"@type":"Question","name":"전세를 월세로 바꾸면 월세는 어떻게 계산하나요?","acceptedAnswer":{"@type":"Answer","text":"월세로 바꾸는 금액(전세금-남길 보증금)에 전환율을 곱하고 12로 나눕니다. 예를 들어 2억 원을 연 5%로 전환하면 월세는 약 83만 3천 원입니다."}},
-{"@type":"Question","name":"법정 상한은 월세를 전세로 바꿀 때도 적용되나요?","acceptedAnswer":{"@type":"Answer","text":"아니요. 법정 상한은 보증금을 월세로 바꿀 때(월세가 늘어나는 방향) 적용됩니다. 월세를 보증금으로 바꾸는 비율은 당사자가 합의해 정합니다."}}]}</script>
+{"@type":"Question","name":"법정 상한은 월세를 전세로 바꿀 때도 적용되나요?","acceptedAnswer":{"@type":"Answer","text":"아니요. 법정 상한은 보증금을 월세로 바꿀 때(월세가 늘어나는 방향) 적용됩니다. 월세를 보증금으로 바꾸는 비율은 당사자가 합의해 정합니다."}},
+{"@type":"Question","name":"계약 갱신 때 보증금·월세는 얼마까지 올릴 수 있나요?","acceptedAnswer":{"@type":"Answer","text":"증액 청구는 약정한 차임이나 보증금의 20분의 1(5%)을 넘을 수 없습니다(주택임대차보호법 제7조제2항). 보증금 3억 원이면 최대 3억 1,500만 원, 월세 100만 원이면 최대 105만 원입니다. 증액 후 1년 안에는 다시 올릴 수 없습니다."}},
+{"@type":"Question","name":"전세와 월세 중 무엇이 유리한가요?","acceptedAnswer":{"@type":"Answer","text":"전세금을 대출로 마련하면 대출 이자, 내 돈이면 그 돈을 예금에 넣었을 때의 세후 이자(기회비용)를 1년 월세와 비교합니다. 대출 금리나 세후 예금 금리가 전환율보다 낮으면 전세가 유리합니다."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"전세를 월세로 바꿀 때 월세 계산하는 법","step":[
+{"@type":"HowToStep","name":"전환 금액 구하기","text":"지금 전세금에서 바꾼 뒤 남길 보증금을 뺍니다."},
+{"@type":"HowToStep","name":"전환율 곱하기","text":"전환 금액에 전환율(연 %, 법정 상한은 min(10%, 기준금리+2%p))을 곱하고 12로 나누면 월세입니다."},
+{"@type":"HowToStep","name":"전세와 비교","text":"전환 금액의 대출 이자 또는 예금 세후 이자를 1년 월세와 비교합니다."}]}</script>
 </head>
 <body>
 <header><a href="/">한눈 계산기</a></header>
@@ -25,7 +31,7 @@
 
 <form class="card" id="f" onsubmit="event.preventDefault();run()">
 <label>무엇을 계산할까요?</label>
-<div class="seg"><label><input type="radio" name="mode" value="j2w" checked><span>전세→월세</span></label><label><input type="radio" name="mode" value="w2j"><span>월세→전세</span></label><label><input type="radio" name="mode" value="adj"><span>보증금 조정</span></label></div>
+<div class="seg"><label><input type="radio" name="mode" value="j2w" checked><span>전세→월세</span></label><label><input type="radio" name="mode" value="w2j"><span>월세→전세</span></label><label><input type="radio" name="mode" value="adj"><span>보증금 조정</span></label><label><input type="radio" name="mode" value="renew"><span>갱신 5% 상한</span></label></div>
 
 <div id="jBox"><label>지금 전세금 <span class="hint">(만 원)</span></label>
 <input type="text" id="jeonse" class="num" inputmode="numeric" placeholder="예: 30,000"></div>
@@ -45,6 +51,8 @@
 
 <label>전세대출 금리 <span class="hint">(연 %, 비교용 · 비워 두면 생략)</span></label>
 <input type="number" id="loanRate" step="0.01" inputmode="decimal" placeholder="예: 3.8">
+<label>예금 금리 <span class="hint">(연 %, 내 돈으로 전세금을 낼 때 기회비용 · 비워 두면 생략)</span></label>
+<input type="number" id="depRate" step="0.01" inputmode="decimal" placeholder="예: 2.8">
 
 <button type="submit">계산하기</button>
 </form>
@@ -66,16 +74,20 @@
 <tr><td>전세→월세</td><td>월세 = (전세금 − 남길 보증금) × 전환율 ÷ 12</td></tr>
 <tr><td>월세→전세</td><td>전세금 = 보증금 + 월세 × 12 ÷ 전환율</td></tr>
 <tr><td>보증금 조정</td><td>새 월세 = 지금 월세 − (새 보증금 − 지금 보증금) × 전환율 ÷ 12</td></tr>
+<tr><td>갱신 5% 상한</td><td>최대 보증금 = 지금 보증금 × 1.05, 최대 월세 = 지금 월세 × 1.05</td></tr>
 </table>
 <p><b>법정 전환율 상한:</b> 보증금을 월세로 바꿀 때는 <b>연 10%</b>와 <b>한국은행 기준금리 + 연 2%p</b> 중 낮은 비율을 넘을 수 없어요. 지금 기준금리는 <b id="bokRate"></b>(<span id="bokDate"></span> 결정)라 상한은 <b id="capRate"></b>예요.</p>
-<p><b>대출 vs 월세:</b> 전환 금액을 전세대출로 마련하면 1년 이자는 금액 × 대출 금리, 월세로 내면 1년치는 금액 × 전환율이에요. 대출 금리가 전환율보다 낮으면 전세가 유리해요.</p>
-<p class="hint">근거: 주택임대차보호법 제7조의2, 같은 법 시행령 제9조(연 1할, 연 2퍼센트). 기준금리: <a href="https://www.bok.or.kr/portal/singl/baseRate/list.do?dataSeCd=01&menuNo=200643" rel="nofollow">한국은행 기준금리 추이</a>. 실제 시장 전환율은 한국부동산원 전월세전환율 통계(R-ONE)에서 지역별로 볼 수 있어요. 기준일 2026년 9월 26일.</p>
+<p><b>갱신·증액 상한:</b> 계약 중 증액이나 계약갱신요구권으로 갱신할 때 보증금·월세는 약정 금액의 <b>5%(20분의 1)</b>까지만 올릴 수 있고, 올린 뒤 1년 안에는 다시 올릴 수 없어요(주택임대차보호법 제6조의3 제3항·제7조, 시행령 제8조). 새로 맺는 계약은 이 상한이 없어요.</p>
+<p><b>대출 vs 월세:</b> 전환 금액을 전세대출로 마련하면 1년 이자는 금액 × 대출 금리, 월세로 내면 1년치는 금액 × 전환율이에요. 대출 금리가 전환율보다 낮으면 전세가 유리해요. 내 돈으로 전세금을 낸다면 그 돈을 예금에 넣었을 때 받을 이자(이자소득세 15.4%를 뺀 세후)가 전세의 비용(기회비용)이에요.</p>
+<p class="hint">근거: 주택임대차보호법 제7조의2, 같은 법 시행령 제9조(연 1할, 연 2퍼센트). 기준금리: <a href="https://www.bok.or.kr/portal/singl/baseRate/list.do?dataSeCd=01&menuNo=200643" rel="nofollow">한국은행 기준금리 추이</a>. 실제 시장 전환율은 한국부동산원 전월세전환율 통계(R-ONE)에서 지역별로 볼 수 있어요. 기준일 2026년 9월 27일.</p>
 </div>
 
 <h2>자주 묻는 질문</h2>
 <div class="card">
 <p><b>Q. 집주인이 상한보다 높은 전환율을 요구하면요?</b><br>계약 기간 중이나 갱신 때 보증금을 월세로 바꾸는 경우라면 상한을 넘는 월세 부분은 효력이 없어요. 이미 냈다면 돌려 달라고 할 수 있고, 주택임대차분쟁조정위원회에 조정을 신청할 수 있어요.</p>
 <p><b>Q. 월세를 전세로 바꿀 때도 상한이 있나요?</b><br>아니요. 상한은 보증금 → 월세 방향에만 있어요. 월세를 보증금으로 바꾸는 비율은 서로 합의해서 정해요.</p>
+<p><b>Q. 계약 갱신 때 얼마까지 올릴 수 있나요?</b><br>약정한 보증금이나 월세의 5%(20분의 1)까지예요. 보증금 3억 원이면 3억 1,500만 원, 월세 100만 원이면 105만 원이 최대예요. 위에서 <b>갱신 5% 상한</b>을 고르면 바로 계산돼요.</p>
+<p><b>Q. 내 돈으로 전세를 사는 것도 비용인가요?</b><br>네. 전세금을 예금에 넣었다면 받았을 이자가 기회비용이에요. 예금 금리를 넣으면 세후 이자(15.4% 원천징수 후)와 1년 월세를 비교해 줘요.</p>
 <p><b>Q. 기준금리가 바뀌면 상한도 바뀌나요?</b><br>네. 한국은행이 기준금리를 바꾸면 상한(기준금리 + 2%p)도 함께 바뀌어요. 이 계산기는 2주마다 기준금리를 확인해 반영해요.</p>
 </div>
 </main>
@@ -92,13 +104,25 @@ $('#rate').value=cap; $('#capNote').textContent='법정 상한 '+pct(cap)+' = mi
 $('#bokRate').textContent='연 '+BOK.rate.toFixed(2)+'%'; $('#bokDate').textContent=BOK.updated; $('#capRate').textContent=pct(cap);
 function mode(){const m=val('mode');
   $('#jBox').style.display=m==='j2w'?'block':'none'; $('#mBox').style.display=m==='j2w'?'none':'block'; $('#nBox').style.display=m==='adj'?'block':'none';
+  $('#mBox').querySelector('label').firstChild.textContent=m==='renew'?'지금 월세 (없으면 비워 두기) ':'지금 월세 ';
   $('#depLbl').firstChild.textContent=m==='j2w'?'바꾼 뒤 남길 보증금 ':'지금 보증금 ';}
 document.querySelectorAll('input[name=mode]').forEach(r=>r.onchange=mode);
+function renewRun(i,rate){ const n=renew(i,rate);
+  $('#rlbl').textContent='갱신 때 올릴 수 있는 최대 금액'; $('#rbig').textContent=i.deposit?man(n.maxDeposit):won(n.maxMonthly*10000)+' / 월';
+  $('#rsum').textContent='지금 보증금 '+man(i.deposit)+(i.monthly?' + 월세 '+man(i.monthly):'')+' · 5% 상한';
+  let rows='';
+  if(i.deposit) rows+=`<tr><th>보증금 최대</th><td>${man(n.maxDeposit)} <span class="hint">(+${man(n.upDeposit)})</span></td></tr>`;
+  if(i.monthly) rows+=`<tr><th>월세 최대</th><td>${won(n.maxMonthly*10000)} <span class="hint">(+${won(n.upMonthly*10000)})</span></td></tr>`;
+  if(i.deposit&&i.monthly) rows+=`<tr><th>환산보증금 (참고)</th><td>${man(n.base)} → 5% 올리면 ${man(n.maxBase)} <span class="hint">월세를 전환율 ${pct(rate)}로 보증금에 환산</span></td></tr>`;
+  $('#rtab').innerHTML=rows; $('#rover').className='hint';
+  $('#rover').textContent='증액은 약정한 보증금이나 월세의 20분의 1(5%)까지예요(주택임대차보호법 제7조 제2항). 계약갱신요구권으로 갱신할 때도 이 범위 안에서만 올릴 수 있고, 증액 후 1년 안에는 다시 올릴 수 없어요. 보증금과 월세를 섞어 올릴 때 쓰는 환산보증금은 참고용이에요.';
+  $('#res').classList.add('show'); $('#res').scrollIntoView({behavior:'smooth',block:'start'}); }
 function run(){
   const m=val('mode'), rate=+$('#rate').value, lr=$('#loanRate').value;
   const i={jeonse:num($('#jeonse').value),deposit:num($('#deposit').value),monthly:num($('#monthly').value),newDeposit:num($('#newDep').value)};
   if(!(rate>0)){alert('전환율을 입력해 주세요');return;}
   if(m==='j2w'&&!i.jeonse){alert('전세금을 입력해 주세요');return;} if(m==='j2w'&&i.deposit>=i.jeonse){alert('남길 보증금은 전세금보다 적어야 해요');return;}
+  if(m==='renew'){ if(!i.deposit&&!i.monthly){alert('지금 보증금이나 월세를 입력해 주세요');return;} return renewRun(i,rate); }
   if(m!=='j2w'&&!i.monthly){alert('월세를 입력해 주세요');return;} if(m==='adj'&&!$('#newDep').value){alert('바꿀 보증금을 입력해 주세요');return;}
   const r=calc(m,i,rate); let rows='';
   if(m==='j2w'){$('#rlbl').textContent='예상 월세'; $('#rbig').textContent=won(r.monthly*10000);
@@ -109,9 +133,11 @@ function run(){
     $('#rsum').textContent='보증금 '+man(i.deposit)+' → '+man(i.newDeposit)+' · 지금 월세 '+man(i.monthly); rows=`<tr><th>월세 변화</th><td>${(r.monthly>=i.monthly?'+':'−')+won(Math.abs(r.monthly-i.monthly)*10000)} / 월</td></tr>`;
     if(r.monthly===0) rows+='<tr><td colspan="2">보증금 인상분이 월세보다 커서 월세가 0원이 돼요.</td></tr>';}
   rows+=`<tr><th>적용 전환율</th><td>${pct(rate)} <span class="hint">(법정 상한 ${pct(cap)})</span></td></tr>`;
-  if(lr!==''&&r.converted>0){const c=compare(r.converted*10000,rate,+lr);
-    rows+=`<tr><th>전세대출 이자 (${pct(lr)}, 1년)</th><td>${won(c.interest)}</td></tr><tr><th>월세 부담 (1년)</th><td>${won(c.rent)}</td></tr>`+
-     `<tr><th>더 싼 쪽</th><td><b>${{jeonse:'전세(대출)',wolse:'월세',same:'같아요'}[c.cheaper]}</b>${c.cheaper==='same'?'':' · 1년 '+won(Math.abs(c.rent-c.interest))+' 차이'}</td></tr>`;}
+  const dr=$('#depRate').value;
+  if((lr!==''||dr!=='')&&r.converted>0){const c=compare(r.converted*10000,rate,lr===''?0:+lr,dr===''?undefined:+dr), W={jeonse:'전세',wolse:'월세',same:'같아요'};
+    rows+=`<tr><th>월세 부담 (1년)</th><td>${won(c.rent)}</td></tr>`;
+    if(lr!=='') rows+=`<tr><th>전세대출 이자 (${pct(lr)}, 1년)</th><td>${won(c.interest)} → <b>${W[c.cheaper]}${c.cheaper==='same'?'':'가 유리'}</b>${c.cheaper==='same'?'':' · 1년 '+won(Math.abs(c.rent-c.interest))+' 차이'}</td></tr>`;
+    if(dr!=='') rows+=`<tr><th>내 돈 기회비용 (예금 ${pct(dr)}, 세후 1년)</th><td>${won(c.opportunity)} → <b>${W[c.cheaperOwn]}${c.cheaperOwn==='same'?'':'가 유리'}</b> <span class="hint">이자소득세 15.4% 뺌</span></td></tr>`;}
   $('#rtab').innerHTML=rows;
   const conv=m==='j2w'||(m==='adj'&&i.newDeposit<i.deposit);
   $('#rover').className=r.over?'warn':'hint';

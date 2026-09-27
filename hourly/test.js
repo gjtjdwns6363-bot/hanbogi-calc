@@ -61,4 +61,10 @@ eq(Math.round(p2.total), 720000, '총시간 급여');
 const p3 = periodPay({ totalMin: 10800, weeks: 4, wage: 10000, five: true });
 eq(Math.round(p3.prem), 100000, '주 40h 초과 연장 가산');
 eq(Math.round(p3.juhuWeek), 80000, '주휴 40h 상한');
+// 수습 90%: 2026 최저시급 10,320 × 0.9 = 9,288원 (최저임금법 시행령 제3조)
+eq(Math.round(HOURLY.wage * HOURLY.probation), 9288, '수습 최저시급');
+// 3.3% vs 4대보험 비교: 월 200만 → 3.3%는 66,000 공제, 4대보험은 salary 계산기와 같은 값
+const { compareTax } = require('./calc.js');
+const cmp = compareTax(2000000);
+eq(cmp.none.net, 2000000, '공제 없음'); eq(cmp.biz.total, 66000, '3.3% 공제'); eq(cmp.ins.total, require('../salary/calc.js').net({ gross: 2000000 }).total, '4대보험 공제');
 console.log('ok', { b, c: { juhu: c.juhu, month: Math.round(c.month) } });

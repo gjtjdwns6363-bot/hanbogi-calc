@@ -30,4 +30,10 @@ a.strictEqual(f({ kind: 'other', price: 5e8 }), 4500000);
 // 부가세 10%
 const v = calc({ price: 5e8, vat: true }); a.strictEqual(v.vatAmt, 200000); a.strictEqual(v.total, 2200000);
 a.strictEqual(calc({ price: 5e8 }).total, 2000000);
+// 협의 요율: 5억 매매를 0.3%로 협의 → 150만, 상한보다 높게 적으면 상한(0.4%)
+a.strictEqual(calc({ price: 5e8, agreed: 0.3 }).fee, 1500000); a.strictEqual(calc({ price: 5e8, agreed: 0.3 }).maxRate, 0.004);
+a.strictEqual(calc({ price: 5e8, agreed: 0.9 }).fee, 2000000);
+a.strictEqual(calc({ price: 1.9e8, agreed: 0.45 }).fee, 800000);   // 85.5만 → 한도 80만은 그대로
+// 상가 월세도 환산보증금 (제20조⑤): 보증금 3천만 + 월세 150만 × 100 = 1억 8천만 × 0.9% = 162만
+a.strictEqual(f({ kind: 'other', deal: 'wolse', deposit: 3e7, monthly: 1.5e6 }), 1620000);
 console.log('ok');

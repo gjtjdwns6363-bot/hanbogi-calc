@@ -150,7 +150,9 @@ document.querySelectorAll('input[name=down]').forEach(r=>r.onchange=()=>$('#down
 document.querySelectorAll('input[name=how]').forEach(r=>r.onchange=()=>$('#balBox').style.display=val('how')==='balloon'?'block':'none');
 
 // 제조사 → 차종 → 트림
-function fillMaker(mk,md,tr){ opts($('#maker'),makers.map(x=>[x,x]),mk); fillModel(md,tr); }
+const DOMESTIC=['현대','기아','제네시스','KGM','르노코리아','쉐보레'];
+function fillMaker(mk,md,tr){ const g=(label,l)=>l.length?`<optgroup label="${label}">${l.map(x=>`<option value="${x}"${x===mk?' selected':''}>${x}</option>`).join('')}</optgroup>`:'';
+  $('#maker').innerHTML=g('국산',makers.filter(x=>DOMESTIC.includes(x)))+g('수입',makers.filter(x=>!DOMESTIC.includes(x))); fillModel(md,tr); }
 function fillModel(md,tr){ const list=M.filter(m=>m.maker===$('#maker').value); opts($('#model'),list.map(m=>[m.slug,m.model]),md); fillTrim(tr); }
 function fillTrim(tr){ const m=curModel(); opts($('#trim'),m.trims.map((t,i)=>[String(i),`${t.name} · ${(t.price/1e4).toLocaleString('ko-KR')}만`]),tr);
   $('#trimSrc').innerHTML=`${m.maker} 공식 가격표 기준 (확인 ${m.checked}${m.taxNote?', '+m.taxNote:''}) <a href="${m.src}" target="_blank" rel="nofollow noopener">출처↗</a> · <a href="/car/${m.slug}/">${m.model} 트림별 표</a>`;

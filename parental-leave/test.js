@@ -26,4 +26,24 @@ assert.strictEqual(maxMonths({ mode: 'bothLater', months: 12, spouseMonths: 2 })
 assert.strictEqual(maxMonths({ mode: 'single', months: 1 }), 18);
 // 18개월 전부: 250×3+200×3+160×12
 assert.strictEqual(calc({ wage: 5e6, months: 18, mode: 'bothLater', spouseMonths: 6 }).total, 32.7e6);
+// 육아기 근로시간 단축 급여 (시행령 제104조의2)
+const { shortHours, spouseLeave } = require('./calc.js');
+// 월 250만, 주 40→30시간(하루 2시간): 250만 × 10/40 = 625,000원 (고용노동부 예시, 매일신문 2026.9.22.)
+assert.strictEqual(shortHours({ wage: 2.5e6, after: 30 }).pay, 625000);
+// 월 400만, 40→20시간: 첫 10시간 250만(상한)×10/40 = 625,000 + 나머지 10시간 160만(80% 상한)×10/40 = 400,000
+let s = shortHours({ wage: 4e6, after: 20 }); assert.deepStrictEqual([s.pay1, s.pay2, s.pay], [625000, 400000, 1025000]);
+// 월 180만, 40→25: 180만×10/40 = 450,000 + 144만×5/40 = 180,000
+s = shortHours({ wage: 1.8e6, after: 25 }); assert.deepStrictEqual([s.pay1, s.pay2], [450000, 180000]);
+// 하한 50만: 월 40만(단시간) 20→15 → 50만 × 5/20 = 125,000
+assert.strictEqual(shortHours({ wage: 4e5, before: 20, after: 15 }).pay, 125000);
+// 배우자 출산휴가 20일: 월 220만 → 1,684,210원 = 고시 상한과 같음
+assert.strictEqual(spouseLeave(2.2e6).full, 1684210);
+s = spouseLeave(4e6); assert.strictEqual(s.gov, 1684210); assert.strictEqual(s.gov + s.employer, s.full);
+assert.strictEqual(spouseLeave(4e6, false).gov, 0);
+// 부부 조합: 둘 다 500만 → 6+6 = 2,000만 × 2 = 4,000만, 혼자 12개월 = 250×3+200×3+160×6 = 2,310만
+const { combos } = require('./calc.js'), cb = combos(5e6, 5e6);
+assert.strictEqual(cb.find(c => c.m1 === 6 && c.m2 === 6).total, 40e6);
+assert.strictEqual(cb.find(c => c.m2 === 0).total, 23.1e6);
+// 12+3: 나 250·250·300 + 200×3 + 160×6 = 2,360만, 배우자 3개월 250·250·300 = 800만
+assert.deepStrictEqual((({ me, sp }) => [me, sp])(cb.find(c => c.m1 === 12 && c.m2 === 3)), [23.6e6, 8e6]);
 console.log('ok');

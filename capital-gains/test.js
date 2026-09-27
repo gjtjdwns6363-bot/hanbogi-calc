@@ -29,4 +29,21 @@ r = c({ kind: 'h2', sale: 6e8, buy: 5e8 }); assert.deepStrictEqual([r.ltcg, r.ba
 r = c({ kind: 'h3', sale: 6e8, buy: 5e8, acq: '2026-01-01' }); assert.strictEqual(r.tax, Math.floor(9.75e7 * 0.7)); // 70% 6,825만 > 중과 4,793.5만
 // 손실이면 세금 없음
 assert.strictEqual(c({ sale: 4e8, buy: 5e8, kind: 'multi' }).status, 'loss');
+// 일시적 2주택 (시행령 제155조①): 종전 취득 1년 뒤 신규 취득, 신규 취득일부터 3년 안 양도
+const { tempOk } = require('./calc.js');
+assert.strictEqual(tempOk('2020-01-01', '2024-06-01', '2027-06-01'), true);  // 딱 3년째 날까지
+assert.strictEqual(tempOk('2020-01-01', '2024-06-01', '2027-06-02'), false); // 3년 넘김
+assert.strictEqual(tempOk('2024-01-01', '2024-12-31', '2026-01-01'), false); // 종전 취득 1년이 안 돼 신규 취득
+assert.strictEqual(tempOk('2024-01-01', '2025-01-01', '2026-01-01'), true);
+assert.strictEqual(tempOk('2024-01-01', '', '2026-01-01'), false);
+// 일시적 2주택 요건을 채우면 1주택처럼 12억 이하 비과세
+assert.strictEqual(c({ kind: 'one', sale: 9e8, buy: 5e8, acq: '2020-01-01' }).status, 'free');
+// 장특공 표2 보유·거주 각 연 4% (10년 이상 40%+40%), 거주 2년 8%는 보유 3년 이상일 때만
+assert.strictEqual(+ltRate(10, 2, true).toFixed(2), 0.48); assert.strictEqual(+ltRate(7, 7, true).toFixed(2), 0.56);
+// 국세청 사례와 같은 고가주택을 조정 2주택 중과로 팔면: 장특공 없이 과세표준 6억 7천 − 250만, (42%+20%) − 3,594만
+r = c({ kind: 'h2', sale: 15e8, buy: 8e8, cost: 3e7, acq: '2006-05-07', date: '2026-06-01' });
+assert.deepStrictEqual([r.ltcg, r.base, r.tax, r.local], [0, 667500000, Math.floor(667500000 * 0.62 - 3.594e7), Math.floor(Math.floor(667500000 * 0.62 - 3.594e7) / 10)]);
+// 생성 페이지(node gen/capital-gains.js)의 숫자가 calc()와 같은지: 양도차익 1억·10년 보유 = 위 12,840,000 + 1,284,000
+const fs = require('fs'), p = require('path').join(__dirname, 'gain-10000', 'index.html');
+if (fs.existsSync(p)) assert.strictEqual(fs.readFileSync(p, 'utf8').match(/id="r10">([^<]+)</)[1], '14,124,000원');
 console.log('ok');

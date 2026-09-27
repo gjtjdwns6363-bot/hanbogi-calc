@@ -1,11 +1,11 @@
 <!doctype html>
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="naver-site-verification" content="21421c877a507dea4b5be99d5ec0d9e9fd8d7b50" />
-<title>주택 취득세 계산기 2026 | 다주택 중과·생애최초 감면·지방교육세·농특세 | 한눈 계산기</title>
-<meta name="description" content="집값, 전용면적, 취득 후 주택 수, 조정대상지역 여부만 넣으면 주택 매매 취득세(1~3%, 6~9억 구간 산식), 다주택 중과(8%·12%), 생애최초 감면(200만·300만 원 한도), 지방교육세·농어촌특별세까지 합친 총액을 계산합니다.">
+<title>취득세 계산기 2026 | 조정대상지역 자동 판정·다주택 중과·생애최초·출산 감면·오피스텔·상가 | 한눈 계산기</title>
+<meta name="description" content="집값과 지역(시·도→시·군·구)만 고르면 조정대상지역을 자동으로 판정해 주택 취득세(1~3%), 다주택·법인 중과(8%·12%), 생애최초(200만·300만)·출산 감면(500만), 오피스텔·상가·토지 4%와 지방교육세·농어촌특별세 총액을 계산합니다.">
 <link rel="canonical" href="https://calc.hanbogi.com/acquisition-tax/">
-<meta property="og:title" content="주택 취득세 계산기 2026">
-<meta property="og:description" content="취득세·지방교육세·농특세 총액을 한 번에, 다주택 중과와 생애최초 감면까지.">
+<meta property="og:title" content="취득세 계산기 2026 — 조정대상지역 자동 판정">
+<meta property="og:description" content="취득세·지방교육세·농특세 총액을 한 번에. 다주택·법인 중과, 생애최초·출산 감면, 오피스텔·상가까지.">
 <meta property="og:url" content="https://calc.hanbogi.com/acquisition-tax/">
 <meta property="og:type" content="website"><meta property="og:site_name" content="한눈 계산기"><meta property="og:locale" content="ko_KR">
 <meta property="og:image" content="https://calc.hanbogi.com/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image">
@@ -14,40 +14,62 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-19F8RF6971"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-19F8RF6971");</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
 {"@type":"Question","name":"주택 취득세율은 얼마인가요?","acceptedAnswer":{"@type":"Answer","text":"1주택(또는 중과 대상이 아닌 경우) 매매 취득세는 6억 원 이하 1%, 9억 원 초과 3%이고, 6억 초과 9억 이하는 (취득가액 × 2/3억 − 3)%로 1%에서 3%까지 올라갑니다. 여기에 지방교육세(취득세의 10%)와 85㎡ 초과 주택은 농어촌특별세 0.2%가 붙습니다."}},
-{"@type":"Question","name":"다주택자 취득세 중과는 몇 %인가요?","acceptedAnswer":{"@type":"Answer","text":"취득 후 조정대상지역 2주택은 8%, 3주택 이상은 12%입니다. 비조정대상지역은 3주택 8%, 4주택 이상 12%입니다. 일시적 2주택과 공시가격 1억 원(지방은 2억 원) 이하 주택 등은 중과에서 빠집니다."}},
-{"@type":"Question","name":"생애최초 주택 취득세 감면은 얼마인가요?","acceptedAnswer":{"@type":"Answer","text":"본인과 배우자 모두 집을 가진 적이 없고 12억 원 이하 주택을 사면 취득세를 200만 원 한도로 감면합니다. 전용 60㎡ 이하·3억 원(수도권 6억 원) 이하 빌라 등 아파트가 아닌 소형주택이나 인구감소지역 주택은 300만 원 한도이며 2028년 12월 31일 취득분까지 적용됩니다."}}]}</script>
-<style>.sub{font-size:.85rem;color:var(--muted)}</style>
+{"@type":"Question","name":"다주택자 취득세 중과는 몇 %인가요?","acceptedAnswer":{"@type":"Answer","text":"취득 후 조정대상지역 2주택은 8%, 3주택 이상은 12%입니다. 비조정대상지역은 3주택 8%, 4주택 이상 12%입니다. 법인은 주택 수와 상관없이 12%입니다. 일시적 2주택과 공시가격 1억 원(지방은 2억 원) 이하 주택 등은 중과에서 빠집니다."}},
+{"@type":"Question","name":"지금 조정대상지역은 어디인가요?","acceptedAnswer":{"@type":"Answer","text":"2026년 7월 1일 기준 서울 25개 구 전역과 경기 과천·광명·의왕·하남·구리, 성남 분당·수정·중원, 수원 영통·장안·팔달, 안양 동안, 용인 수지·기흥, 화성 동탄구 등 40곳입니다(국토교통부 2026. 6. 30. 발표)."}},
+{"@type":"Question","name":"생애최초 주택 취득세 감면은 얼마인가요?","acceptedAnswer":{"@type":"Answer","text":"본인과 배우자 모두 집을 가진 적이 없고 12억 원 이하 주택을 사면 취득세를 200만 원 한도로 감면합니다. 전용 60㎡ 이하·3억 원(수도권 6억 원) 이하 빌라 등 아파트가 아닌 소형주택이나 인구감소지역 주택은 300만 원 한도이며 2028년 12월 31일 취득분까지 적용됩니다."}},
+{"@type":"Question","name":"아이를 낳으면 취득세 감면이 있나요?","acceptedAnswer":{"@type":"Answer","text":"2028년 12월 31일까지 자녀를 출산한 부모가 출산일 전 1년부터 출산 후 5년 안에 12억 원 이하 1가구 1주택을 사면 취득세를 500만 원 한도로 감면합니다(지방세특례제한법 제36조의5). 생애최초 감면과 겹치면 감면액이 큰 것 하나만 받습니다."}},
+{"@type":"Question","name":"오피스텔·상가·토지 취득세는 얼마인가요?","acceptedAnswer":{"@type":"Answer","text":"주택이 아닌 오피스텔·상가·토지를 사면 취득세 4%, 지방교육세 0.4%, 농어촌특별세 0.2%로 합계 4.6%입니다. 농지는 취득세 3%에 교육세·농특세 각 0.2%로 3.4%입니다."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"취득세 계산하는 법","step":[
+{"@type":"HowToStep","name":"물건 종류 고르기","text":"개인 주택, 법인 주택, 오피스텔·상가·토지, 농지 중에서 고릅니다."},
+{"@type":"HowToStep","name":"지역 고르기","text":"시·도와 시·군·구를 고르면 조정대상지역인지 자동으로 판정됩니다."},
+{"@type":"HowToStep","name":"주택 수·감면 입력","text":"취득 후 세대 주택 수, 전용 85㎡ 초과 여부, 생애최초·출산 감면 대상인지 고릅니다."},
+{"@type":"HowToStep","name":"세액 확인","text":"취득세, 지방교육세, 농어촌특별세와 합계를 확인하고 잔금일부터 60일 안에 위택스에서 신고합니다."}]}</script>
+<style>.sub{font-size:.85rem;color:var(--muted)}.row2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}.adjy{color:#b3261e;font-weight:600}.adjn{color:#1b7f5a;font-weight:600}</style>
 </head>
 <body>
 <header><a href="/">한눈 계산기</a></header>
 <main>
-<h1>주택 취득세 계산기</h1>
-<p class="lead">집을 살 때 내는 취득세, 지방교육세, 농어촌특별세를 합친 총액을 계산해요. 다주택 중과와 생애최초 감면도 반영해요.</p>
+<h1>취득세 계산기</h1>
+<p class="lead">집·오피스텔·상가·토지를 살 때 내는 취득세, 지방교육세, 농어촌특별세를 합친 총액을 계산해요. 지역을 고르면 조정대상지역인지 자동으로 판정하고, 다주택·법인 중과와 생애최초·출산 감면도 반영해요.</p>
 
 <form class="card" id="f" onsubmit="event.preventDefault();run()">
+<label>무엇을 사나요?</label>
+<div class="seg"><label><input type="radio" name="type" value="house" checked><span>주택 (개인)</span></label><label><input type="radio" name="type" value="corp"><span>주택 (법인)</span></label><label><input type="radio" name="type" value="other"><span>오피스텔·상가·토지</span></label><label><input type="radio" name="type" value="farm"><span>농지</span></label></div>
+<div class="hint" id="typeHint"></div>
+
 <label>취득가액 <span class="hint">(만 원, 실제 매매가격)</span></label>
 <input type="text" id="price" class="num" inputmode="numeric" placeholder="예: 70,000 (7억 원)">
 <div class="hint" id="priceHint"></div>
+
+<div id="houseBox">
+<label>집이 있는 지역 <span class="hint">(조정대상지역 자동 판정)</span></label>
+<div class="row2"><select id="sido" aria-label="시·도"></select><select id="sigungu" aria-label="시·군·구"></select></div>
+<div class="hint" id="regInfo"></div>
 
 <label>전용면적</label>
 <div class="seg"><label><input type="radio" name="area" value="small" checked><span>85㎡ 이하</span></label><label><input type="radio" name="area" value="big"><span>85㎡ 초과</span></label></div>
 <div class="hint">85㎡ 이하(국민주택규모)면 농어촌특별세가 없어요.</div>
 
+<div id="indivBox">
 <label>이 집을 사고 나면 우리 세대 주택 수</label>
 <div class="seg"><label><input type="radio" name="houses" value="1" checked><span>1주택</span></label><label><input type="radio" name="houses" value="2"><span>2주택</span></label><label><input type="radio" name="houses" value="3"><span>3주택</span></label><label><input type="radio" name="houses" value="4"><span>4주택 이상</span></label></div>
-<div class="hint">이사 등으로 기존 집을 3년 안에 팔 <b>일시적 2주택</b>이나, 공시가격 1억 원(수도권 밖은 2억 원) 이하 주택은 주택 수와 상관없이 1주택 세율이라 <b>1주택</b>으로 두세요.</div>
+<div class="hint">이사 등으로 기존 집을 3년 안에 팔 <b>일시적 2주택</b>이나, 공시가격 1억 원(수도권 밖은 2억 원) 이하 주택은 주택 수와 상관없이 1주택 세율이라 <b>1주택</b>으로 두세요. 주거용 오피스텔·분양권·입주권도 주택 수에 들어가요.</div>
 
-<label>사는 집이 조정대상지역인가요?</label>
+<label>조정대상지역인가요? <span class="hint">(지역을 고르면 자동 선택 · 직접 바꿔도 돼요)</span></label>
 <div class="seg"><label><input type="radio" name="adj" value="n" checked><span>아니요</span></label><label><input type="radio" name="adj" value="y"><span>예</span></label></div>
-<div class="hint">2025년 10월 16일 지정 기준 서울 25개 구 전역, 경기 과천·광명·성남(분당·수정·중원)·수원(영통·장안·팔달)·안양 동안·용인 수지·의왕·하남이에요.</div>
 
 <div id="firstBox">
 <label>생애최초 주택 구입인가요? <span class="hint">(본인·배우자 모두 집을 가진 적 없음)</span></label>
 <div class="seg"><label><input type="radio" name="first" value="n" checked><span>아니요</span></label><label><input type="radio" name="first" value="y"><span>예</span></label></div>
 <div id="smallBox" style="display:none">
-<label>감면 한도</label>
+<label>생애최초 감면 한도</label>
 <div class="seg"><label><input type="radio" name="small" value="n" checked><span>일반 (200만 원)</span></label><label><input type="radio" name="small" value="y"><span>소형주택·인구감소지역 (300만 원)</span></label></div>
-<div class="hint">300만 원 한도: 전용 60㎡ 이하이면서 3억 원(수도권 6억 원) 이하인 <b>아파트가 아닌</b> 공동주택·도시형 생활주택·다가구주택, 또는 인구감소지역 주택이에요.</div>
+<div class="hint" id="smallHint">300만 원 한도: 전용 60㎡ 이하이면서 3억 원(수도권 6억 원) 이하인 <b>아파트가 아닌</b> 공동주택·도시형 생활주택·다가구주택, 또는 인구감소지역 주택이에요.</div>
+</div>
+<label>출산·양육 주택인가요? <span class="hint">(2028년까지 출산, 출산 전 1년~출산 후 5년 안에 취득)</span></label>
+<div class="seg"><label><input type="radio" name="birth" value="n" checked><span>아니요</span></label><label><input type="radio" name="birth" value="y"><span>예 (500만 원 한도)</span></label></div>
+<div class="hint">생애최초와 둘 다 해당하면 감면액이 큰 쪽 하나만 적용해요(자동 계산).</div>
+</div>
 </div>
 </div>
 
@@ -62,39 +84,54 @@
 <p class="warn" style="margin-top:12px">⚠️ 참고용이에요. 주택 수 산정(분양권·입주권·오피스텔 포함 여부, 세대 분리), 일시적 2주택, 중과 제외 주택, 감면 요건(3개월 내 전입, 3년 안에 팔거나 임대하면 추징)에 따라 세금이 달라져요. 실제 신고 전에는 관할 시·군·구청 세무과나 위택스, 세무사에게 꼭 확인하세요.</p>
 </div>
 <p>👉 <a href="/loan/">주택담보대출 계산기</a> · 👉 <a href="https://benefit.hanbogi.com">혜택 알리미</a> (주거·청약 지원)</p>
-<p>🏠 <a href="https://home.hanbogi.com/">부동산 알리미</a>에서 우리 동네 아파트 실거래가·전세가율 보기 · <a href="https://home.hanbogi.com/subscription/">이번 달 청약 일정</a></p>
+<p id="homeLink">🏠 <a href="https://home.hanbogi.com/">부동산 알리미</a>에서 우리 동네 아파트 실거래가·전세가율 보기 · <a href="https://home.hanbogi.com/subscription/">이번 달 청약 일정</a></p>
 
 <p>📋 금액별로 보기: <a href="/acquisition-tax/list/">집값별 아파트 취득세 (1억~20억)</a></p>
+
+<h2>조정대상지역 현황 <span class="hint" id="adjAsOf"></span></h2>
+<div class="card">
+<div style="overflow-x:auto"><table id="adjTab"><tr><th>시·도</th><th>지역</th><th>지정 효력일</th></tr></table></div>
+<p class="hint">출처: 국토교통부 보도참고자료 「투기과열지구 및 조정대상지역 추가 지정」(2026. 6. 30.) 참고2 현황표. 조정대상지역 지정 전에 매매계약을 하고 계약금을 낸 사실이 증빙되면 지정 전에 취득한 것으로 봐요(지방세법 제13조의2 제4항). 지정·해제는 반기마다 다시 검토하니, 계약 전 <a href="https://www.molit.go.kr/" rel="nofollow noopener" target="_blank">국토교통부</a> 발표를 꼭 확인하세요.</p>
+</div>
 
 <h2>계산 방법</h2>
 <div class="card">
 <p class="hint">기준일 <span id="upd"></span></p>
-<p><b>① 취득세율</b> (주택 유상거래)</p>
+<p><b>① 주택 취득세율</b> (주택 유상거래)</p>
 <table>
-<tr><th>구분</th><th>취득세</th><th>지방교육세</th><th>농특세 (85㎡ 초과만)</th></tr>
-<tr><td>6억 원 이하</td><td>1%</td><td>0.1%</td><td>0.2%</td></tr>
-<tr><td>6억 초과 9억 이하</td><td>(가액 × 2/3억 − 3)%</td><td>취득세의 10%</td><td>0.2%</td></tr>
-<tr><td>9억 원 초과</td><td>3%</td><td>0.3%</td><td>0.2%</td></tr>
-<tr><td>중과 8%</td><td>8%</td><td>0.4%</td><td>0.6%</td></tr>
-<tr><td>중과 12%</td><td>12%</td><td>0.4%</td><td>1.0%</td></tr>
+<tr><th>구분</th><th>취득세</th><th>지방교육세</th><th>농특세 (85㎡ 초과만)</th><th>합계 (85㎡ 이하 / 초과)</th></tr>
+<tr><td>6억 원 이하</td><td>1%</td><td>0.1%</td><td>0.2%</td><td>1.1% / 1.3%</td></tr>
+<tr><td>6억 초과 9억 이하</td><td>(가액 × 2/3억 − 3)%</td><td>취득세의 10%</td><td>0.2%</td><td>1.1~3.3% / 1.3~3.5%</td></tr>
+<tr><td>9억 원 초과</td><td>3%</td><td>0.3%</td><td>0.2%</td><td>3.3% / 3.5%</td></tr>
+<tr><td>중과 8%</td><td>8%</td><td>0.4%</td><td>0.6%</td><td>8.4% / 9.0%</td></tr>
+<tr><td>중과 12% (법인 포함)</td><td>12%</td><td>0.4%</td><td>1.0%</td><td>12.4% / 13.4%</td></tr>
 </table>
 <p class="hint">6억~9억 구간 세율은 소수점 다섯째 자리에서 반올림해요(예: 7억 원 → 1.6667%). 근거: 지방세법 제11조 제1항 제8호, 제151조, 농어촌특별세법 제4조·제5조.</p>
-<p><b>② 다주택 중과</b> (취득 후 주택 수 기준)</p>
+<p><b>② 다주택·법인 중과</b> (취득 후 주택 수 기준)</p>
 <table>
 <tr><th>주택 수</th><th>조정대상지역</th><th>그 밖의 지역</th></tr>
 <tr><td>1주택</td><td>1~3%</td><td>1~3%</td></tr>
 <tr><td>2주택</td><td>8%</td><td>1~3%</td></tr>
 <tr><td>3주택</td><td>12%</td><td>8%</td></tr>
 <tr><td>4주택 이상</td><td>12%</td><td>12%</td></tr>
+<tr><td>법인</td><td>12%</td><td>12%</td></tr>
 </table>
-<p class="hint">일시적 2주택, 공시가격 1억 원 이하 주택(수도권 밖은 2025년 1월 2일 취득분부터 2억 원 이하)은 중과하지 않아요. 법인은 주택 수와 상관없이 12%예요. 근거: 지방세법 제13조의2, 같은 법 시행령 제28조의2.</p>
-<p><b>③ 생애최초 감면</b> — 취득가액 12억 원 이하, 2028년 12월 31일 취득분까지. 취득세가 한도 이하면 전액 면제, 넘으면 한도만큼 빼 줘요.</p>
+<p class="hint">일시적 2주택, 공시가격 1억 원 이하 주택(수도권 밖은 2025년 1월 2일 취득분부터 2억 원 이하)은 중과하지 않아요. 근거: 지방세법 제13조의2, 같은 법 시행령 제28조의2.</p>
+<p><b>③ 주택이 아닌 부동산</b> (매매)</p>
+<table>
+<tr><th>구분</th><th>취득세</th><th>지방교육세</th><th>농특세</th><th>합계</th></tr>
+<tr><td>오피스텔·상가·사무실·토지(농지 외)</td><td>4%</td><td>0.4%</td><td>0.2%</td><td><b>4.6%</b></td></tr>
+<tr><td>농지 (논·밭·과수원)</td><td>3%</td><td>0.2%</td><td>0.2%</td><td><b>3.4%</b></td></tr>
+</table>
+<p class="hint">오피스텔은 살 때 주택이 아니라 건축물로 보고 4%를 내요(주거용으로 쓰면 그 뒤 다른 주택을 살 때 주택 수에는 들어가요). 지방교육세는 (세율 − 2%) × 20%, 농특세는 2% 기준 세액의 10%예요. 자경농민 농지 감면 등은 반영하지 않았어요. 근거: 지방세법 제11조 제1항 제7호, 제13조의3, 제151조.</p>
+<p><b>④ 생애최초 감면</b> — 취득가액 12억 원 이하, 2028년 12월 31일 취득분까지. 취득세가 한도 이하면 전액 면제, 넘으면 한도만큼 빼 줘요.</p>
 <table>
 <tr><th>대상</th><th>감면 한도</th></tr>
 <tr><td>전용 60㎡ 이하·3억 원(수도권 6억 원) 이하 아파트 외 공동주택·도시형 생활주택·다가구, 인구감소지역 주택</td><td>300만 원</td></tr>
 <tr><td>그 밖의 주택</td><td>200만 원</td></tr>
 </table>
-<p class="hint">지방교육세는 취득세가 줄어든 비율만큼 함께 줄여서 계산했어요(지방세법 제151조 제1항 제1호 다목). 85㎡ 초과 주택은 감면받은 세액의 20%를 농어촌특별세로 내요(농어촌특별세법 제5조). 세금은 10원 미만을 버렸어요. 근거: 지방세특례제한법 제36조의3.</p>
+<p><b>⑤ 출산·양육 주택 감면</b> — 2028년 12월 31일까지 자녀를 낳은 부모가 출산일 전 1년부터 출산 후 5년 안에 취득가액 12억 원 이하 1가구 1주택(취득 후 3개월 안에 1주택이 되는 경우 포함)을 사면 취득세를 <b>500만 원</b> 한도로 감면해요. 자녀 1명당 1채이고, 3년 안에 팔거나 임대하면 추징돼요. 근거: 지방세특례제한법 제36조의5.</p>
+<p class="hint">생애최초와 출산 감면이 함께 해당하면 감면액이 큰 것 하나만 적용해요(지방세특례제한법 제180조). 지방교육세는 취득세가 줄어든 비율만큼 함께 줄여서 계산했어요(지방세법 제151조 제1항 제1호 다목). 85㎡ 초과 주택은 감면받은 세액의 20%를 농어촌특별세로 내요(농어촌특별세법 제5조). 세금은 10원 미만을 버렸어요. 근거: 지방세특례제한법 제36조의3.</p>
 <p class="hint">📌 2026년 8월 행정안전부가 40세 미만 청년 생애최초 한도 300만 원 상향, 주거용 오피스텔 포함 등을 담은 지방세법 개정안을 입법예고했어요. 국회 통과 전이라 이 계산기에는 반영하지 않았어요.</p>
 </div>
 
@@ -103,34 +140,66 @@
 <p><b>Q. 취득세는 언제까지 내나요?</b><br>잔금일(취득일)로부터 60일 안에 집이 있는 시·군·구청에 신고하고 내야 해요. 늦으면 신고불성실 가산세(최대 20%)와 납부지연 가산세가 붙어요. 위택스에서 온라인으로 신고할 수 있어요.</p>
 <p><b>Q. 일시적 2주택은 어떻게 되나요?</b><br>이사 등으로 새 집을 먼저 사고 기존 집을 3년 안에 팔면 새 집도 1주택 세율(1~3%)을 적용해요. 기한 안에 팔지 않으면 중과세율과의 차액을 추징해요.</p>
 <p><b>Q. 생애최초 감면받으면 조건이 있나요?</b><br>취득일부터 3개월 안에 전입해야 하고, 3년 안에 팔거나 증여·임대하면 감면받은 세금을 다시 내야 해요.</p>
+<p><b>Q. 계약한 뒤에 조정대상지역으로 지정됐어요.</b><br>지정 공고일 전에 매매계약을 하고 계약금을 낸 사실이 증빙되면 지정 전에 취득한 것으로 봐서 비조정대상지역 세율을 적용해요. 2026년 7월 1일 새로 지정된 화성 동탄구·용인 기흥구·구리시라면 계약서와 계약금 이체 내역을 챙겨 두세요.</p>
+<p><b>Q. 오피스텔을 사면 주택 수에 들어가나요?</b><br>오피스텔을 살 때는 4.6%를 내고, 그 오피스텔이 주택분 재산세를 내는 주거용이면 나중에 다른 주택을 살 때 주택 수에 더해져요(지방세법 제13조의3).</p>
 </div>
-<p>🧮 함께 쓰는 계산기: <a href="/loan/">주택담보대출 계산기</a> · <a href="/brokerage/">중개수수료 계산기</a></p>
+<p>🧮 함께 쓰는 계산기: <a href="/capital-gains/">양도소득세 계산기</a> · <a href="/brokerage/">중개수수료 계산기</a> · <a href="/loan/">주택담보대출 계산기</a></p>
 </main>
 <footer>© 한눈 계산기 · <a href="/">다른 계산기</a> · <a href="/about.html">사이트 소개·계산 근거</a> · <a href="/privacy.html">개인정보처리방침</a>
 <p class="net">한보기 네트워크: <a href="https://home.hanbogi.com">부동산 알리미</a> · <a href="https://grant.hanbogi.com">정부 지원금 찾기</a> · <a href="https://benefit.hanbogi.com">혜택 알리미</a> · <a href="https://license.hanbogi.com">자격증 한눈에</a> · <a href="https://hanbogi.com">오늘의 게임</a> · <a href="https://stay.hanbogi.com">오늘의 숙소</a> · <a href="https://gadget.hanbogi.com">기기 비교소</a></p></footer>
-<script src="calc.js"></script>
+<script src="calc.js"></script><script src="regions.js"></script>
 <script>
 const $=s=>document.querySelector(s), val=n=>(document.querySelector('input[name='+n+']:checked')||{}).value;
 const num=v=>+String(v).replace(/[^0-9.]/g,'')||0, won=v=>Math.round(v).toLocaleString('ko-KR')+'원';
 const man=v=>(v>=10000?(v/10000).toLocaleString('ko-KR',{maximumFractionDigits:2})+'억 ':'')+(v%10000?(v%10000).toLocaleString('ko-KR')+'만':'')+' 원';
+const ymd=s=>{const [y,m,d]=s.split('-');return `${y}. ${+m}. ${+d}.`;};
+const setRadio=(n,v)=>{const r=document.querySelector(`input[name=${n}][value="${v}"]`); if(r) r.checked=true;};
+const opts=(el,list,sel)=>{el.innerHTML=list.map(([v,t])=>`<option value="${v}"${v===sel?' selected':''}>${t}</option>`).join('');};
 document.querySelectorAll('input.num').forEach(el=>el.addEventListener('input',()=>{const n=num(el.value);el.value=n?n.toLocaleString('ko-KR'):'';$('#priceHint').textContent=n?man(n):'';}));
 $('#upd').textContent=RULES.updated;
-function sync(){ const one=val('houses')==='1'; $('#firstBox').style.display=one?'block':'none'; $('#smallBox').style.display=one&&val('first')==='y'?'block':'none'; }
-document.querySelectorAll('input[name=houses],input[name=first]').forEach(r=>r.onchange=sync);
+// 지역: 시·도 → 시·군·구 (코드 = 법정동코드 5자리, 부동산 알리미와 같음)
+const R=REGIONS;
+function fillSigungu(code){ const si=R.sido.indexOf($('#sido').value); opts($('#sigungu'),R.list.filter(r=>r[1]===si).map(r=>[r[0],r[2]]),code); region(); }
+function region(){ const g=regionOf($('#sigungu').value); if(!g) return;
+  setRadio('adj',g.adj?'y':'n');
+  $('#regInfo').innerHTML=(g.adj?`<span class="adjy">조정대상지역</span> (${ymd(g.adj)} 지정)`:`<span class="adjn">조정대상지역 아님</span>`)+` · ${g.capital?'수도권':'수도권 밖'} · ${R.asOf} 기준 <a href="${R.src}" target="_blank" rel="nofollow noopener">국토부 발표↗</a>`+(g.adj==='2026-07-01'?'<br>2026년 7월 1일 전에 계약하고 계약금을 냈다면 비조정대상지역으로 봐요(지방세법 제13조의2 제4항).':'');
+  $('#smallHint').innerHTML=`300만 원 한도: 전용 60㎡ 이하이면서 <b>${g.capital?'6억':'3억'} 원</b>(${g.capital?'수도권':'수도권 밖'}) 이하인 <b>아파트가 아닌</b> 공동주택·도시형 생활주택·다가구주택, 또는 인구감소지역 주택이에요.`;
+  $('#homeLink').innerHTML=`🏠 <a href="https://home.hanbogi.com/r/${g.code}/">부동산 알리미</a>에서 ${g.name} 아파트 실거래가·전세가율 보기 · <a href="https://home.hanbogi.com/subscription/">이번 달 청약 일정</a>`; }
+opts($('#sido'),R.sido.map(s=>[s,s]),'서울특별시'); fillSigungu();
+$('#sido').onchange=()=>fillSigungu(); $('#sigungu').onchange=region;
+// 조정대상지역 현황 표
+$('#adjAsOf').textContent=R.asOf+' 기준';
+{ const g={}; for(const [c,d] of Object.entries(R.adj)){const x=regionOf(c),k=x.sido+'|'+d;(g[k]=g[k]||[]).push(x.name);}
+  $('#adjTab').innerHTML+=Object.entries(g).sort(([a],[b])=>a.split('|')[1]<b.split('|')[1]?-1:1).map(([k,v])=>{const [s,d]=k.split('|');return `<tr><td>${s}</td><td>${v.join(', ')}</td><td>${ymd(d)}</td></tr>`;}).join(''); }
+const TH={house:'개인이 아파트·빌라·단독주택을 살 때예요.',corp:'법인이 주택을 사면 주택 수와 상관없이 12%예요(감면 없음).',other:'오피스텔·상가·사무실·토지(농지 외) 매매는 4%예요. 주택 수·지역과 상관없어요.',farm:'논·밭·과수원 등 농지 매매는 3%예요.'};
+function sync(){ const t=val('type'), house=t==='house'||t==='corp', one=val('houses')==='1';
+  $('#typeHint').textContent=TH[t]; $('#houseBox').style.display=house?'block':'none'; $('#indivBox').style.display=t==='house'?'block':'none';
+  $('#firstBox').style.display=one?'block':'none'; $('#smallBox').style.display=one&&val('first')==='y'?'block':'none'; }
+document.querySelectorAll('input[name=houses],input[name=first],input[name=type]').forEach(r=>r.addEventListener('change',sync)); sync();
 const pct=r=>(Math.round(r*1e6)/1e4)+'%';
 function run(){
   const p=num($('#price').value); if(!p){alert('취득가액을 입력해 주세요');return;}
-  const houses=+val('houses'), i={price:p*10000,big:val('area')==='big',houses,adjusted:val('adj')==='y',first:houses===1&&val('first')==='y',small:val('small')==='y'};
-  const r=calc(i);
-  $('#rsum').textContent=man(p)+' · '+(i.big?'85㎡ 초과':'85㎡ 이하')+' · '+(houses>=4?'4주택 이상':houses+'주택')+(i.adjusted?' · 조정대상지역':'')+(r.firstOk?' · 생애최초':'');
+  const type=val('type'), g=regionOf($('#sigungu').value), houses=type==='house'?+val('houses'):1;
+  const i={type,price:p*10000,big:val('area')==='big',houses,adjusted:val('adj')==='y',first:houses===1&&val('first')==='y',small:val('small')==='y',birth:houses===1&&val('birth')==='y'};
+  const r=calc(i), house=type==='house'||type==='corp';
+  const TN={house:'',corp:'법인 주택',other:'오피스텔·상가·토지',farm:'농지'};
+  $('#rsum').textContent=[man(p).trim(),TN[type],house&&g?g.sido+' '+g.name:'',house?(i.big?'85㎡ 초과':'85㎡ 이하'):'',type==='house'?(houses>=4?'4주택 이상':houses+'주택'):'',house&&i.adjusted?'조정대상지역':'',r.relief==='first'?'생애최초':r.relief==='birth'?'출산·양육 감면':''].filter(Boolean).join(' · ');
   $('#rpay').textContent=won(r.total);
-  $('#rtab').innerHTML=`<tr><th>적용 세율</th><td>${pct(r.rate)}${r.lv?' <span class="sub">(다주택 중과)</span>':''}</td></tr>`+
-   `<tr><th>취득세</th><td>${won(r.acq)}${r.cut?` <span class="sub">(산출 ${won(r.tax)} − 생애최초 감면 ${won(r.cut)})</span>`:''}</td></tr>`+
-   `<tr><th>지방교육세</th><td>${won(r.edu)}</td></tr><tr><th>농어촌특별세</th><td>${won(r.rural)}${i.big?'':' <span class="sub">(85㎡ 이하 비과세)</span>'}</td></tr>`+
+  const RN={first:'생애최초 감면',birth:'출산·양육 감면'};
+  $('#rtab').innerHTML=`<tr><th>적용 세율</th><td>${pct(r.rate)}${r.lv?` <span class="sub">(${type==='corp'?'법인 중과':'다주택 중과'})</span>`:''}</td></tr>`+
+   `<tr><th>취득세</th><td>${won(r.acq)}${r.cut?` <span class="sub">(산출 ${won(r.tax)} − ${RN[r.relief]} ${won(r.cut)})</span>`:''}</td></tr>`+
+   `<tr><th>지방교육세</th><td>${won(r.edu)}</td></tr><tr><th>농어촌특별세</th><td>${won(r.rural)}${house&&!i.big?' <span class="sub">(85㎡ 이하 비과세)</span>':''}</td></tr>`+
    `<tr><th>합계</th><td><b>${won(r.total)}</b> <span class="sub">취득가액의 ${(r.total/i.price*100).toFixed(2)}%</span></td></tr>`;
-  $('#rnote').textContent=i.first&&!r.firstOk?'취득가액이 12억 원을 넘어 생애최초 감면을 받을 수 없어요.':r.lv?'일시적 2주택이나 중과 제외 주택이면 1주택 세율이 적용돼 세금이 크게 줄어요.':'';
+  const notes=[];
+  if((i.first&&!r.firstOk||i.birth&&!r.birthOk)&&i.price>RULES.firstMax) notes.push('취득가액이 12억 원을 넘어 생애최초·출산 감면을 받을 수 없어요.');
+  if(i.first&&i.birth&&r.cut) notes.push(`생애최초와 출산 감면 중 감면액이 큰 ${RN[r.relief]}을 적용했어요.`);
+  if(r.lv&&type==='house') notes.push('일시적 2주택이나 중과 제외 주택이면 1주택 세율이 적용돼 세금이 크게 줄어요.');
+  if(type==='house'&&houses===2&&!i.adjusted) notes.push('비조정대상지역 2주택은 중과 없이 1~3%예요.');
+  $('#rnote').textContent=notes.join(' ');
   $('#res').classList.add('show'); $('#res').scrollIntoView({behavior:'smooth',block:'start'});
 }
-{const q=+new URLSearchParams(location.search).get("price");if(q>0){$("#price").value=q.toLocaleString("ko-KR");run();}}
+{const q=new URLSearchParams(location.search), rc=regionOf(q.get('region')||'');
+ if(rc){$('#sido').value=rc.sido; fillSigungu(rc.code);}
+ const qp=+q.get("price");if(qp>0){$("#price").value=qp.toLocaleString("ko-KR");run();}}
 </script>
 </body></html>

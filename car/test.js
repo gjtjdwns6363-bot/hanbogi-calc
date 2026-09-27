@@ -47,6 +47,26 @@ for (const m of CAR_MODELS.list) {
 const { EV_SUBSIDY } = require('./ev_subsidy.js');
 for (const m of CAR_MODELS.list) for (const t of m.trims) if (t.ev) assert(EV_SUBSIDY.national[EV_SUBSIDY.keys.indexOf(t.ev)] > 0, `${m.model} ${t.name} 보조금 키 ${t.ev}`);
 assert(EV_SUBSIDY.regions.every(r => r[2].length === EV_SUBSIDY.keys.length), '지역별 보조금 칸 수');
+// 8,500만 원 이상 전기 트림은 보조금 대상이 아니므로 ev 키가 없어야 한다
+for (const m of CAR_MODELS.list) for (const t of m.trims) if (t.fuel === '전기' && t.price >= 85e6) assert(!t.ev, `${m.model} ${t.name} 8500만 이상인데 보조금 연결`);
+// 수입 브랜드: 가격 자동 입력값(트림 price)과 보조금 연결 규칙
+const byS = s => CAR_MODELS.list.find(m => m.slug === s), tr = (s, n) => byS(s).trims.find(t => t.name === n);
+assert.strictEqual(tr('bmw-i5', 'i5 eDrive40').price, 84900000); assert.strictEqual(tr('bmw-i5', 'i5 eDrive40').ev, 'BMW|i5 eDrive 40');
+assert(!tr('bmw-i5', 'i5 eDrive40 M 스포츠').ev, 'i5 M 스포츠 9,700만은 보조금 제외');
+assert.strictEqual(tr('benz-eqa', 'EQA 250 Progressive').price, 70800000);
+assert(EV_SUBSIDY.national[EV_SUBSIDY.keys.indexOf(tr('benz-eqa', 'EQA 250 Progressive').ev)] === 1900000, 'EQA 국고');
+assert(byS('benz-eqe').trims.every(t => !t.ev), 'EQE 1억 1천만 보조금 제외');
+// BYD: ev.or.kr 보조금 표에서 '(단종)'으로만 올라 있어 연결하지 않는다(새 연식 등재되면 ev 추가)
+assert.strictEqual(tr('byd-atto-3', 'BYD ATTO 3 Plus').price, 34900000);
+assert(CAR_MODELS.list.filter(m => m.maker === 'BYD').every(m => m.trims.every(t => !t.ev)), 'BYD 보조금 미연결');
+assert.strictEqual(tr('polestar-4', 'Rear motor').ev, '폴스타오토모티브코리아|Polestar 4 Coupe Rear Motor');
+assert(!tr('polestar-3', 'Dual motor').ev, '폴스타 3 Dual 8,590만 보조금 제외');
+assert.strictEqual(tr('mini-cooper-electric', 'SE Classic').ev, 'BMW|MINI Cooper SE');
+assert.strictEqual(tr('audi-q4-e-tron', '45 e-tron').price, 66300000);
+assert(byS('gmc-sierra').truck && byS('jeep-gladiator').truck, '수입 픽업 truck');
+// 제조사 선택: 국산/수입 optgroup
+const html = require('fs').readFileSync(__dirname + '/index.html', 'utf8');
+assert(html.includes("g('국산'") && html.includes("g('수입'"), '제조사 optgroup');
 // 생성 페이지(node gen/car.js 후): 아이오닉5 첫 트림 할부 월 = installment 결과
 const fs = require('fs'), p = __dirname + '/ioniq5/index.html';
 if (fs.existsSync(p)) {

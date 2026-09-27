@@ -1,4 +1,4 @@
-const assert = require('assert'), { calc, retireTax, serviceYears, days3m } = require('./calc.js');
+const assert = require('assert'), { calc, retireTax, serviceYears, days3m, irpTax } = require('./calc.js');
 // 국세청 예시: 근속 20년, 퇴직급여 1억 → 근속연수공제 4,000만, 환산급여 3,600만, 환산급여공제 2,480만, 과표 1,120만, 환산산출세액 672,000, 산출세액 1,120,000
 const t = retireTax(1e8, 20);
 assert.deepStrictEqual([t.td, t.conv, t.cd, t.base, t.convTax, t.tax, t.local], [4e7, 3.6e7, 2.48e7, 1.12e7, 672000, 1120000, 112000]);
@@ -24,4 +24,15 @@ assert.strictEqual(days3m('2026-05-31'), 91); assert.strictEqual(days3m('2026-07
 assert.strictEqual(calc({ start: '2023-03-02', end: '2024-03-01', wage3: 9e6, bonus: 0, leave: 0 }).eligible, false);
 // 공제가 퇴직금보다 크면 세금 0
 assert.strictEqual(retireTax(3e6, 3).tax, 0);
+// 상여·연차수당 생략 가능(0으로 봄)
+assert.strictEqual(calc({ start: '2014-10-02', end: '2017-09-16', wage3: 7080000 }).daily, Math.ceil(7080000 / 92 * 100) / 100);
+// IRP 연금 수령 (소득세법 제129조제1항제5호의3): 국세청 예시 세액 1,120,000 + 지방 112,000 = 1,232,000 → 70% 862,400 · 60% 739,200 · 50% 616,000
+assert.deepStrictEqual(irpTax(t).map(x => x.tax), [862400, 739200, 616000]);
+// 생성 페이지(node gen/severance.js) 숫자가 calc와 같은지: 근속 N년, 월급 300만, 퇴직일 2026-10-01
+const fs = require('fs'), path = require('path');
+for (const n of [1, 10, 30]) {
+  const f = path.join(__dirname, 'year-' + n, 'index.html'); if (!fs.existsSync(f)) continue;
+  const m = fs.readFileSync(f, 'utf8').match(/id="r300">([^<]+)</);
+  assert.strictEqual(m && m[1], Math.round(calc({ start: (2026 - n) + '-10-01', end: '2026-10-01', wage3: 9e6 }).pay).toLocaleString('ko-KR') + '원', 'year-' + n);
+}
 console.log('ok');

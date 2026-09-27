@@ -2,7 +2,7 @@
 // 근거: 소득세법 제89조(1세대1주택 비과세)·제95조(장기보유특별공제, 고가주택)·제103조(기본공제)·제104조(세율)·제55조(기본세율),
 //       소득세법 시행령 제154조(보유·거주 요건)·제156조(고가주택 12억)·제160조(고가주택 양도차익), 지방세법 제103조의3(지방소득세 10%)
 const RULES = {
-  updated: '2026-09-26',
+  updated: '2026-09-27',
   highPrice: 1200000000,  // 고가주택 기준 12억 (실거래 양도가액)
   basicCut: 2500000,      // 양도소득 기본공제 연 250만
   short: [0.7, 0.6],      // 주택 보유 1년 미만 70%, 2년 미만 60%
@@ -22,6 +22,13 @@ function ltRate(hold, reside, table2) {
   if (hold < 3) return 0;
   if (table2) return Math.min(hold, 10) * 0.04 + (reside >= 3 ? Math.min(reside, 10) * 0.04 : 0.08);
   return Math.min(hold, 15) * 0.02;
+}
+// 일시적 2주택 (소득세법 시행령 제155조①): 종전 주택 취득 1년 이상 뒤 신규 주택 취득, 신규 취득일부터 3년 안에 종전 주택 양도
+// → 1세대 1주택으로 보고 비과세·장특공 표2를 적용 (kind: 'one'으로 계산). 날짜는 'YYYY-MM-DD'
+function tempOk(acq, newAcq, date) {
+  if (!newAcq || newAcq < acq || date < newAcq) return false;
+  const [y, m, d] = newAcq.split('-').map(Number);
+  return fullYears(acq, newAcq) >= 1 && utc(date) <= Date.UTC(y + 3, m - 1, d);
 }
 // in: {sale, buy, cost(원), acq, date('YYYY-MM-DD'), reside(년), kind: one|multi|h2|h3, adjBuy(2017.8.3 이후 조정지역에서 취득)}
 function calc(i) {
@@ -44,4 +51,4 @@ function calc(i) {
   out.status = 'tax';
   return out;
 }
-if (typeof module !== 'undefined') module.exports = { calc, fullYears, ltRate, progTax, RULES };
+if (typeof module !== 'undefined') module.exports = { calc, tempOk, fullYears, ltRate, progTax, RULES };

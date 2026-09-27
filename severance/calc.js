@@ -2,6 +2,12 @@
 // 퇴직금: 근로자퇴직급여 보장법 제8조, 근로기준법 제2조(평균임금), 고용노동부 퇴직금 계산 안내
 // 퇴직소득세: 소득세법 제48조(2023.1.1. 시행 근속연수공제)·제55조 세율, 국세청 퇴직소득세 계산방법
 const DAY = 86400000;
+const SEV = {
+  updated: '2026-09-27',
+  // IRP로 옮겨 연금으로 받을 때 세율: 연금외수령 원천징수세율(=퇴직소득세)의 70%(실제 수령 10년 이하)·60%(10년 초과 20년 이하)·50%(20년 초과)
+  // — 소득세법 제129조제1항제5호의3 (2026.7.1 시행본, 법제처 2026-09-27 확인)
+  irp: [[10, 0.7], [20, 0.6], [Infinity, 0.5]],
+};
 const utc = s => { const [y, m, d] = s.split('-').map(Number); return Date.UTC(y, m - 1, d); };
 // 퇴직일(마지막 근무일 다음날) 이전 3개월 = 3개월 전 같은 날 ~ 퇴직일 전날 (고용노동부 계산기 retire_cal.js와 같은 규칙:
 // 같은 날이 없으면 그 달 말일, 단 2월이면 3월 1일부터)
@@ -47,7 +53,7 @@ function retireTax(pay, years) {
 // in: {start, end(퇴직일=마지막 근무일 다음날), wage3(3개월 임금총액), bonus(연간 상여), leave(연차수당)}
 function calc(i) {
   const workDays = (utc(i.end) - utc(i.start)) / DAY, d3 = days3m(i.end);
-  const daily = Math.ceil((i.wage3 + i.bonus * 3 / 12 + i.leave * 3 / 12) / d3 * 100 - 1e-9) / 100; // 노동부 계산기처럼 전(錢) 단위 올림
+  const daily = Math.ceil((i.wage3 + (i.bonus || 0) * 3 / 12 + (i.leave || 0) * 3 / 12) / d3 * 100 - 1e-9) / 100; // 노동부 계산기처럼 전(錢) 단위 올림
   const out = { workDays, d3, daily, eligible: addYear(i.start) <= utc(i.end) }; // 계속근로 1년 이상
   if (!out.eligible) return out;
   out.pay = Math.round(daily * 30 * workDays / 365); // 노동부 계산기: 원 단위 반올림
@@ -55,4 +61,6 @@ function calc(i) {
   out.net = out.pay - out.t.tax - out.t.local;
   return out;
 }
-if (typeof module !== 'undefined') module.exports = { calc, retireTax, serviceYears, days3m };
+// IRP 연금 수령 시 낼 세금(퇴직소득세+지방소득세 합계 기준): 몇 년차에 받느냐에 따라 70·60·50%
+function irpTax(t) { const all = t.tax + t.local; return SEV.irp.map(([y, r]) => ({ upto: y, rate: r, tax: Math.floor(all * r / 10) * 10 })); }
+if (typeof module !== 'undefined') module.exports = { SEV, calc, retireTax, serviceYears, days3m, irpTax };
