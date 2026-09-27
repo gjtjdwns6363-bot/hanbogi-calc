@@ -32,3 +32,4 @@ footer{max-width:720px;margin:24px auto;padding:16px;color:var(--muted);font-siz
 .tools .card{margin:0}
 .cta{display:block;text-align:center;margin:16px 0;padding:14px;border-radius:12px;background:var(--accent);color:#fff;font-size:1.05rem;font-weight:700;text-decoration:none}
 .pn{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:16px 0}
+footer .net{margin:8px 0 0}

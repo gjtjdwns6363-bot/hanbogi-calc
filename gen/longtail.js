@@ -21,7 +21,19 @@ const pct = r => +(r * 100).toFixed(4) + '%';
 const BRK_SALE = [10000, 15000, 20000, 25000, 30000, 35000, 40000, 50000, 60000, 70000, 80000, 90000, 100000, 110000, 120000, 130000, 140000, 150000, 170000, 200000];
 const BRK_JEON = [5000, 7000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 50000, 60000, 70000, 80000, 90000, 100000];
 
-function page({ url, title, desc, ogTitle, body }) {
+// 공유 미리보기(og)·네트워크 푸터 — 계산기 index.html·about.html·privacy.html에도 같은 내용이 들어 있다
+const OG = `<meta property="og:type" content="website"><meta property="og:site_name" content="한눈 계산기"><meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="${SITE}/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image">`;
+const FOOTER = `<footer>© 한눈 계산기 · <a href="/">다른 계산기</a> · <a href="/about.html">사이트 소개·계산 근거</a> · <a href="/privacy.html">개인정보처리방침</a>
+<p class="net">한보기 네트워크: <a href="https://home.hanbogi.com">부동산 알리미</a> · <a href="https://grant.hanbogi.com">정부 지원금 찾기</a> · <a href="https://benefit.hanbogi.com">혜택 알리미</a> · <a href="https://license.hanbogi.com">자격증 한눈에</a> · <a href="https://hanbogi.com">오늘의 게임</a> · <a href="https://stay.hanbogi.com">오늘의 숙소</a> · <a href="https://gadget.hanbogi.com">기기 비교소</a></p></footer>`;
+const HOME_LINK = '<p>🏠 <a href="https://home.hanbogi.com/">부동산 알리미</a>에서 우리 동네 아파트 실거래가·전세가율 보기 · <a href="https://home.hanbogi.com/subscription/">이번 달 청약 일정</a></p>';
+// 홈 › 계산기 › 이 페이지 (BreadcrumbList)
+const crumbs = (list, url, title) => '<script type="application/ld+json">' + JSON.stringify({ '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+  itemListElement: [['한눈 계산기', '/'], ...list, [title, url]].map(([name, u], i) => ({ '@type': 'ListItem', position: i + 1, name, item: SITE + u })) }).replace(/</g, '\\u003c') + '</script>';
+const CALC = { salary: ['연봉 실수령액 계산기', '연봉별 실수령액 표'], 'acquisition-tax': ['취득세 계산기', '집값별 취득세 표'], hourly: ['알바 시급·주휴수당 계산기', '근무시간별 알바 월급 표'], brokerage: ['중개수수료 계산기', '금액별 복비 표'] };
+
+function page({ url, title, desc, ogTitle, body, crumb }) {
+  const dir = url.split('/')[1], [cn, ln] = CALC[dir], calc = [cn, `/${dir}/`];
   return `<!doctype html>
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="naver-site-verification" content="21421c877a507dea4b5be99d5ec0d9e9fd8d7b50" />
@@ -31,6 +43,8 @@ function page({ url, title, desc, ogTitle, body }) {
 <meta property="og:title" content="${esc(ogTitle || title)}">
 <meta property="og:description" content="${esc(desc)}">
 <meta property="og:url" content="${SITE}${url}">
+${OG}
+${crumbs(url.endsWith('/list/') ? [calc] : [calc, [ln, `/${dir}/list/`]], url, crumb || title.split(' — ')[0])}
 <link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/favicon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/style.css">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5424435978828190" crossorigin="anonymous"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-19F8RF6971"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-19F8RF6971");</script>
@@ -41,7 +55,7 @@ function page({ url, title, desc, ogTitle, body }) {
 <main>
 ${body}
 </main>
-<footer>© 한눈 계산기 · <a href="/">다른 계산기</a> · <a href="/privacy.html">개인정보처리방침</a></footer>
+${FOOTER}
 </body></html>
 `;
 }
@@ -154,7 +168,8 @@ ACQ.forEach((m, i) => {
 <p class="hint">기준일 ${ymd(acq.RULES.updated)}. 근거: 지방세법 제11조 제1항 제8호(1~3%), 제13조의2(다주택 중과), 제151조(지방교육세), 농어촌특별세법 제4조·제5조, 지방세특례제한법 제36조의3(생애최초 감면, 2028년 12월 31일 취득분까지). 실제 신고 전에는 관할 시·군·구청이나 위택스에서 확인하세요.</p>
 </div>
 ${nav(ACQ, i, acqHref, v => kr(v, true), '/acquisition-tax/list/', '집값별 전체 표')}
-<p>🧮 함께 쓰는 계산기: <a href="/acquisition-tax/">취득세 계산기</a> · <a href="/brokerage/sale-${BRK_SALE.includes(m) ? m : 50000}/">${BRK_SALE.includes(m) ? name : '5억'} 매매 복비</a> · <a href="/loan/">주택담보대출 계산기</a></p>`
+<p>🧮 함께 쓰는 계산기: <a href="/acquisition-tax/">취득세 계산기</a> · <a href="/brokerage/sale-${BRK_SALE.includes(m) ? m : 50000}/">${BRK_SALE.includes(m) ? name : '5억'} 매매 복비</a> · <a href="/loan/">주택담보대출 계산기</a></p>
+${HOME_LINK}`
   }));
 });
 
@@ -256,7 +271,8 @@ const brkHref = (deal, m) => `/brokerage/${deal}-${m}/`;
 <p class="hint">기준일 ${ymd(brk.RATES.updated)}. 근거: 공인중개사법 제32조, 같은 법 시행규칙 제20조·[별표 1] 주택 중개보수 상한요율·[별표 2] 오피스텔 요율(국토교통부령 제1611호, 2026. 8. 28. 시행 기준 확인), 서울특별시 주택 중개보수 등에 관한 조례. 실제 요율은 중개사무소가 있는 시·도 조례를 따라요.</p>
 </div>
 ${nav(LIST, i, v => brkHref(deal, v), v => kr(v, true), '/brokerage/list/', '금액별 전체 표')}
-<p>🧮 함께 쓰는 계산기: <a href="/brokerage/">중개수수료 계산기</a>${other}${deal === 'sale' && ACQ.includes(m) ? ` · <a href="${acqHref(m)}">${name} 취득세</a>` : ' · <a href="/acquisition-tax/">취득세 계산기</a>'} · <a href="/rent/">전월세 전환 계산기</a></p>`
+<p>🧮 함께 쓰는 계산기: <a href="/brokerage/">중개수수료 계산기</a>${other}${deal === 'sale' && ACQ.includes(m) ? ` · <a href="${acqHref(m)}">${name} 취득세</a>` : ' · <a href="/acquisition-tax/">취득세 계산기</a>'} · <a href="/rent/">전월세 전환 계산기</a></p>
+${HOME_LINK}`
     }));
   });
 });
