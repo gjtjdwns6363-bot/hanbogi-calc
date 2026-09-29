@@ -42,3 +42,6 @@
 - **IndexNow 전송(매 업데이트 후 필수)**: 배포가 끝나면(`gh api repos/{owner}/{repo}/pages/builds/latest`의 status가 built, 또는 바뀐 페이지를 curl로 확인) `node gen/indexnow.js` 실행 → sitemap.xml에서 lastmod가 오늘인 URL만 네이버 서치어드바이저·api.indexnow.org로 보낸다. 특정 URL만: `node gen/indexnow.js /salary/ /loan/`. 전체(`--all`)는 대규모 개편 때만. 200·202면 정상(api.indexnow.org가 `403 SiteVerificationNotCompleted`면 키 확인 대기라 몇 분 뒤 다시 실행). 키 파일 `/e386846d4b6f939fd1b440af9728c599.txt`는 지우지 않는다.
 - 새 페이지를 손으로 만들면 기존 계산기 index.html처럼 og 태그(og:image `/og.png` 포함)·네트워크 푸터·about 링크를 똑같이 넣고 sitemap.xml에 추가한다. 롱테일 페이지는 `gen/longtail.js`의 `OG`·`FOOTER`가 넣어 준다.
 - 결과를 사용자에게 한국어로 짧게 보고(무엇이 바뀌었는지).
+
+15. **청약 중도금**(모집공고문 통상 비율 10/60/30, 중도금대출 조건) → `down-payment/calc.js` DEFAULTS. 2026-09-29 추가
+16. **전세대출**(정책 상품 금리·한도 예시, 주택도시기금·한국주택금융공사 안내) → `jeonse-loan/rates.js` JEONSE_PRODUCTS, `updated` 날짜 갱신. 2026-09-29 추가

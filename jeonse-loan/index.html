@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="naver-site-verification" content="21421c877a507dea4b5be99d5ec0d9e9fd8d7b50" />
+<title>전세대출 계산기 2026 | 월 이자·공공임대 월 임대료 합산 월 부담·자기 자금</title>
+<meta name="description" content="전세(임대보증금)대출을 받으면 매달 얼마를 내는지 계산합니다. 공공임대는 월 임대료와 대출 이자를 합친 월 납입액까지, 버팀목 등 정책대출 금리·한도 예시, 만기일시·원리금균등 상환, 내 돈으로 마련할 금액을 보여줘요.">
+<link rel="canonical" href="https://calc.hanbogi.com/jeonse-loan/">
+<meta property="og:title" content="전세대출 계산기 2026">
+<meta property="og:description" content="전세대출 월 이자와 공공임대 월 임대료를 합친 월 납입액, 자기 자금을 바로 계산해요.">
+<meta property="og:url" content="https://calc.hanbogi.com/jeonse-loan/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="한눈 계산기"><meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://calc.hanbogi.com/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/favicon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/style.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5424435978828190" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-19F8RF6971"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-19F8RF6971");</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"전세대출 월 이자는 어떻게 계산하나요?","acceptedAnswer":{"@type":"Answer","text":"만기일시상환이면 대출금 × 연 금리 ÷ 12입니다. 예를 들어 8천만 원을 연 4%로 빌리면 월 이자는 약 26만 7천 원입니다. 원리금균등이면 원금이 함께 줄어 월 납입액이 더 커집니다."}},
+{"@type":"Question","name":"공공임대주택은 월 임대료와 대출 이자를 둘 다 내나요?","acceptedAnswer":{"@type":"Answer","text":"임대보증금을 대출로 마련하면 매달 월 임대료와 대출 이자를 함께 냅니다. 보증금만 있는 일반 전세는 월 임대료가 없어 이자만 냅니다. 공고문에 보증금과 월 임대료가 함께 적혀 있는 임대주택이 해당됩니다."}},
+{"@type":"Question","name":"임대보증금을 전부 대출받을 수 있나요?","acceptedAnswer":{"@type":"Answer","text":"대출 상품마다 보증금 대비 비율과 금액 한도가 정해져 있어 보통 전액은 안 됩니다. 나머지는 자기 자금으로 내야 합니다. 이 계산기는 비율과 한도를 직접 넣어 필요한 자기 자금을 보여 줍니다."}}]}</script>
+</head>
+<body>
+<header><a href="/">한눈 계산기</a></header>
+<main>
+<h1>전세대출 계산기</h1>
+<p class="lead">전세·임대보증금을 대출로 마련할 때 <b>매달 얼마를 내는지</b>와 <b>내 돈으로 필요한 금액</b>을 계산해요. 공공임대처럼 월 임대료가 붙는 집은 <b>월 임대료 + 대출 이자</b>를 합쳐 보여 줘요. 입력값은 서버로 보내지 않고 이 화면에서만 계산해요.</p>
+
+<div class="card" id="from" style="display:none"><b id="fromT"></b><div class="hint">공고에서 보증금·월 임대료를 가져왔어요. 공고문의 최종 금액과 다를 수 있으니 확인하고 고쳐 쓰세요. <a id="fromA" href="https://home.hanbogi.com/rental/">← 임대주택 알리미로 돌아가기</a></div></div>
+
+<form class="card" id="f" onsubmit="event.preventDefault();run()">
+<label>임대(전세)보증금 <span class="hint">(만 원)</span></label>
+<input type="text" id="dep" class="num" inputmode="numeric" placeholder="예: 10,000 (1억 원)">
+
+<label>월 임대료 <span class="hint">(만 원 · 공공임대처럼 보증금과 함께 내는 월세가 있을 때만. 일반 전세는 비워 두세요)</span></label>
+<input type="text" id="rent" class="num" inputmode="numeric" placeholder="예: 30 (없으면 비움)">
+
+<label>대출 상품 <span class="hint">(고르면 비율·한도·금리 예시가 채워져요)</span></label>
+<select id="prod"></select>
+<div class="hint" id="prodNote"></div>
+<div id="polBox" style="display:none">
+<label>집 위치</label>
+<div class="seg"><label><input type="radio" name="metro" value="1" checked><span>수도권</span></label><label><input type="radio" name="metro" value="0"><span>수도권 밖</span></label></div>
+<label>부부합산 연소득 <span class="hint">(금리 구간)</span></label>
+<select id="inc"></select>
+<div class="hint" id="polWarn"></div>
+</div>
+
+<label>대출 비율 <span class="hint">(보증금 대비 %)</span></label>
+<input type="number" id="ratio" step="1" inputmode="decimal" value="80">
+<label>대출 한도 <span class="hint">(만 원 · 없으면 비움)</span></label>
+<input type="text" id="cap" class="num" inputmode="numeric" placeholder="예: 12,000">
+<label>대출 금리 <span class="hint">(연 %)</span></label>
+<input type="number" id="rate" step="0.01" inputmode="decimal" placeholder="예: 3.5">
+<label>대출 기간 <span class="hint">(년)</span></label>
+<input type="number" id="years" step="1" inputmode="numeric" value="2">
+<label>상환 방식</label>
+<div class="seg"><label><input type="radio" name="method" value="bullet" checked><span>만기일시</span></label><label><input type="radio" name="method" value="equalPay"><span>원리금균등</span></label><label><input type="radio" name="method" value="equalPrin"><span>원금균등</span></label></div>
+<button type="submit">계산하기</button>
+</form>
+
+<div class="card result" id="res" aria-live="polite">
+<div class="hint" id="rsum"></div>
+<div id="rlbl"></div><div class="big" id="rbig"></div>
+<table id="rtab"></table>
+<p id="rnote" class="hint"></p>
+<p class="warn" style="margin-top:12px">⚠️ 참고용이에요. 실제 금리·한도·보증료·대출 가능 여부는 소득·자산·신용과 은행 심사로 정해져요. 보증료·인지세·중도상환 수수료는 넣지 않았어요.</p>
+<p>👉 <a href="/rent/">전월세 전환 계산기</a> · <a href="/loan/">주택담보대출 계산기</a></p>
+<p>🏘️ <a href="https://home.hanbogi.com/rental/">접수 중인 임대주택 공고</a>에서 내 조건에 맞는 공고를 찾아보세요.</p>
+</div>
+
+<h2>계산 방법</h2>
+<div class="card">
+<table>
+<tr><th>항목</th><th>공식</th></tr>
+<tr><td>대출금</td><td>min(보증금 × 대출 비율, 상품 한도, 보증금)</td></tr>
+<tr><td>자기 자금</td><td>보증금 − 대출금</td></tr>
+<tr><td>월 이자(만기일시)</td><td>대출금 × 연 금리 ÷ 12</td></tr>
+<tr><td>월 부담(공공임대)</td><td>월 임대료 + 월 대출 납입액</td></tr>
+</table>
+<p>일반 전세는 월 임대료가 없어 월 부담이 곧 이자예요. 공공임대는 보증금 외에 월 임대료를 따로 내므로 둘을 더해야 실제 월 부담이 나와요. 원리금균등·원금균등은 <a href="/loan/">주택담보대출 계산기</a>와 같은 상환 계산을 써요.</p>
+</div>
+
+<h2>자주 묻는 질문</h2>
+<div class="card">
+<p><b>Q. 임대료와 이자를 왜 더하나요?</b><br>공공임대는 보증금을 대출로 마련해도 월 임대료는 따로 내요. 매달 통장에서 나가는 돈은 임대료와 이자의 합이라 이 합계로 가계 부담을 봐야 해요. 일반 전세는 임대료가 없어 이자만 봐요.</p>
+<p><b>Q. 보증금 전액을 대출받을 수 있나요?</b><br>대부분 상품이 보증금 대비 비율과 금액 한도를 둬서 전액은 어려워요. 나머지는 내 돈이 필요해요.</p>
+<p><b>Q. 공공임대 임대보증금도 전세대출이 되나요?</b><br>주택도시기금 버팀목 계열 상품 안내에 "공공임대주택에 입주하는 경우 대출신청 물건지가 해당 임대주택이면 대출 가능"이라고 적혀 있어요. 다만 단지·임대 유형별로 가능 여부가 달라서 수탁은행에 꼭 확인하세요. 별도의 공공임대 전용 보증금 대출 상품은 없어요.</p>
+<p><b>Q. 금리는 어디서 확인하나요?</b><br>정책대출은 주택도시기금 기금e든든, 시중은행 상품은 각 은행과 한국주택금융공사 주간 금리 안내에서 확인해요. 상품 예시는 2026-09-29 기준이라 바뀔 수 있어요.</p>
+</div>
+</main>
+<footer>© 한눈 계산기 · <a href="/">다른 계산기</a> · <a href="/about.html">사이트 소개·계산 근거</a> · <a href="/privacy.html">개인정보처리방침</a>
+<p class="net">한보기 네트워크: <a href="https://home.hanbogi.com">부동산 알리미</a> · <a href="https://talk.hanbogi.com">한눈 여행회화</a> · <a href="https://grant.hanbogi.com">정부 지원금 찾기</a> · <a href="https://benefit.hanbogi.com">혜택 알리미</a> · <a href="https://license.hanbogi.com">자격증 한눈에</a> · <a href="https://hanbogi.com">오늘의 게임</a> · <a href="https://stay.hanbogi.com">오늘의 숙소</a> · <a href="https://gadget.hanbogi.com">기기 비교소</a></p></footer>
+<script src="../loan/amort.js"></script>
+<script src="calc.js"></script>
+<script src="rates.js"></script>
+<script>
+const $=s=>document.querySelector(s), val=n=>(document.querySelector('input[name='+n+']:checked')||{}).value;
+const num=v=>+String(v).replace(/[^0-9.]/g,'')||0, won=v=>Math.round(v).toLocaleString('ko-KR')+'원';
+const man=v=>{v=Math.round(v);const e=Math.floor(v/10000),m=v%10000;return [e?e.toLocaleString('ko-KR')+'억':'',m||!e?m.toLocaleString('ko-KR')+'만':''].filter(Boolean).join(' ')+' 원';};
+const fmt=el=>{const n=num(el.value);el.value=n?n.toLocaleString('ko-KR'):'';};
+document.querySelectorAll('input.num').forEach(el=>el.addEventListener('input',()=>fmt(el)));
+$('#prod').innerHTML='<option value="">직접 입력</option>'+JEONSE_PRODUCTS.map((p,i)=>'<option value="'+i+'">'+p.name+'</option>').join('');
+function applyProd(){const p=JEONSE_PRODUCTS[$('#prod').value];$('#prodNote').textContent=p?p.note:'';$('#polBox').style.display=p?'block':'none';if(!p)return;
+  const metro=val('metro')==='1',dep=num($('#dep').value);
+  if($('#inc').dataset.p!==$('#prod').value){$('#inc').innerHTML=p.table?p.table.map(r=>'<option value="'+r[0]+'">연 '+r[0].toLocaleString('ko-KR')+'만 원 이하</option>').join(''):'';$('#inc').dataset.p=$('#prod').value;if(p.table)$('#inc').selectedIndex=p.table.length-1;}
+  $('#inc').style.display=p.table?'':'none';$('#inc').previousElementSibling.style.display=p.table?'':'none';
+  const cap=(metro?p.limit[0]:p.limit[1]),dc=metro?p.depCap[0]:p.depCap[1],r=policyRate(p,+$('#inc').value,dep||0,metro);
+  $('#ratio').value=p.ratio;$('#cap').value=cap?cap.toLocaleString('ko-KR'):'';if(r!=null)$('#rate').value=r;$('#years').value=2;
+  document.querySelector('input[name=method][value=bullet]').checked=true;
+  $('#polWarn').textContent=(dep&&dc&&dep>dc?'⚠️ 보증금이 이 상품의 상한('+man(dc)+')을 넘어 대출이 안 될 수 있어요. ':'')+(r==null?'⚠️ 소득이 이 상품 기준을 넘어요. ':'')+(p.table?'금리는 변동금리 기준표예요('+JEONSE_UPDATED+' 확인)'+(metro?'':', 수도권 밖은 0.2%p 인하 반영')+'. 우대금리·심사 결과에 따라 달라져요.':'');};
+$('#prod').onchange=applyProd;$('#inc').onchange=applyProd;document.querySelectorAll('input[name=metro]').forEach(e=>e.onchange=applyProd);$('#dep').addEventListener('input',()=>{if($('#prod').value!=='')applyProd()});
+// ?dep=만원&rent=만원&ttl=공고명 — 임대주택 알리미 공고에서 넘어올 때
+try{const q=new URLSearchParams(location.search);
+  if(q.get('dep')){$('#dep').value=num(q.get('dep')).toLocaleString('ko-KR');}
+  if(q.get('rent')){$('#rent').value=num(q.get('rent')).toLocaleString('ko-KR');}
+  if(q.get('ttl')){$('#fromT').textContent=q.get('ttl').slice(0,80);$('#from').style.display='block';}
+  if(q.get('dep')){$('#prod').value=String(JEONSE_PRODUCTS.length-1);applyProd();setTimeout(run,0);}}catch(e){}
+function run(){
+  const dep=num($('#dep').value)*1e4, rent=num($('#rent').value)*1e4, rate=+$('#rate').value;
+  if(!dep){alert('보증금을 입력해 주세요');return;} if(!$('#rate').value){alert('대출 금리를 입력해 주세요');return;}
+  const years=Math.max(1,+$('#years').value||2), m=val('method');
+  const r=calc({deposit:dep,rent,ratio:Math.min(100,Math.max(0,+$('#ratio').value)),cap:num($('#cap').value)*1e4,rate,years,method:m});
+  const hasRent=rent>0;
+  $('#rsum').textContent='보증금 '+man(dep/1e4)+(hasRent?' · 월 임대료 '+man(rent/1e4):'')+' · 대출 연 '+rate+'% '+years+'년';
+  $('#rlbl').textContent=hasRent?'월 부담 (임대료 + 대출 이자)':(m==='bullet'?'월 대출 이자':'월 대출 납입액');
+  $('#rbig').textContent=won(r.monthly);
+  let t='';
+  if(hasRent) t+=`<tr><th>월 임대료</th><td>${won(r.rent)}</td></tr>`;
+  t+=`<tr><th>${m==='bullet'?'월 대출 이자':'월 대출 납입액'}</th><td>${won(r.firstPay)}</td></tr>`;
+  if(hasRent) t+=`<tr><th>월 합계 (연 ${won(r.yearly)})</th><td><b>${won(r.monthly)}</b></td></tr>`;
+  t+=`<tr><th>대출금</th><td>${man(r.loan/1e4)} <span class="hint">(보증금의 ${(r.loan/dep*100).toFixed(1).replace(/\.0$/,'')}%)</span></td></tr>`;
+  t+=`<tr><th>내 돈으로 마련할 금액</th><td><b>${man(r.own/1e4)}</b></td></tr>`;
+  if(r.balloon) t+=`<tr><th>만기에 갚을 원금</th><td>${man(r.balloon/1e4)}</td></tr>`;
+  else t+=`<tr><th>${years}년 총 이자</th><td>${won(r.totalInt)}</td></tr>`;
+  $('#rtab').innerHTML=t;
+  $('#rnote').textContent=r.loan<dep*Math.min(100,+$('#ratio').value)/100-1?'대출 한도 때문에 비율보다 적게 빌리는 것으로 계산했어요.':'';
+  $('#res').classList.add('show'); $('#res').scrollIntoView({behavior:'smooth',block:'start'});
+}
+</script>
+</body></html>
