@@ -36,12 +36,13 @@
 <div><label>잔금 <span class="hint">(자동)</span></label><input type="text" id="bal" value="30%" disabled></div>
 </div>
 <div class="row2">
-<div><label>중도금대출 <span class="hint">(분양가의 %, 중도금 이내)</span></label><input type="number" id="loanPct" value="40" step="1" min="0" max="100" inputmode="decimal"></div>
+<div><label>중도금대출 <span class="hint">(분양가의 %, 위 중도금 %까지만 가능 · 나머지는 내 돈)</span></label><input type="number" id="loanPct" value="40" step="1" min="0" max="100" inputmode="decimal"></div>
 <div><label>대출 금리 <span class="hint">(연 %)</span></label><input type="number" id="rate" value="4.5" step="0.01" inputmode="decimal"></div>
 </div>
 <label>이자 <span class="hint">(단지 공고문 확인)</span></label>
 <div class="seg"><label><input type="radio" name="int" value="pay" checked><span>내가 내요</span></label><label><input type="radio" name="int" value="deferred"><span>이자후불제</span></label><label><input type="radio" name="int" value="free"><span>무이자</span></label></div>
-<label>입주 때 받을 주택담보대출 <span class="hint">(만 원, 선택 · 잔금·중도금대출 상환에 쓸 금액)</span></label>
+<label>입주 때 받을 주택담보대출 <span class="hint">(선택 · 잔금·중도금대출 상환에 쓸 금액)</span></label>
+<div class="seg"><label><input type="radio" name="mt" value="won" checked><span>금액 (만 원)</span></label><label><input type="radio" name="mt" value="pct"><span>분양가 대비 %</span></label></div>
 <input type="text" id="mortgage" class="num" inputmode="numeric" placeholder="예: 30,000 (3억 원)">
 <button type="submit">중도금 계산하기</button>
 </form>
@@ -84,6 +85,8 @@ const man=v=>(v>=10000?Math.floor(v/10000).toLocaleString('ko-KR')+'억 ':'')+(v
 document.querySelectorAll('input.num').forEach(el=>el.addEventListener('input',()=>{const n=num(el.value);el.value=n?n.toLocaleString('ko-KR'):'';}));
 const upBal=()=>{$('#bal').value=Math.max(0,100-num($('#down').value)-num($('#mid').value))+'%';};
 ['#down','#mid'].forEach(s=>$(s).addEventListener('input',upBal));
+const mort=price=>val('mt')==='pct'?Math.round(price*Math.min(100,num($('#mortgage').value))/100):num($('#mortgage').value)*1e4;
+document.querySelectorAll('input[name=mt]').forEach(el=>el.addEventListener('change',()=>{const p=val('mt')==='pct';$('#mortgage').placeholder=p?'예: 40 (분양가의 40%)':'예: 30,000 (3억 원)';$('#mortgage').value='';}));
 function run(){
   const price=num($('#price').value)*1e4;
   if(!price){alert('분양가를 입력해 주세요');return;}
@@ -91,7 +94,7 @@ function run(){
   if(dp+mp>1){alert('계약금과 중도금 합이 100%를 넘어요');return;}
   const iv=val('int'), rounds=Math.max(1,Math.round(num($('#rounds').value))||6);
   const r=calc({price,downPct:dp,midPct:mp,rounds,interval:num($('#interval').value)||4,months:num($('#months').value)||36,
-    loanPct:num($('#loanPct').value)/100,rate:num($('#rate').value)/100,free:iv==='free',deferred:iv==='deferred',mortgage:num($('#mortgage').value)*1e4});
+    loanPct:num($('#loanPct').value)/100,rate:num($('#rate').value)/100,free:iv==='free',deferred:iv==='deferred',mortgage:mort(price)});
   $('#rsum').textContent='분양가 '+man(price/1e4).trim()+' · 계약금 '+Math.round(dp*100)+'% · 중도금 '+Math.round(mp*100)+'% ('+rounds+'회) · 잔금 '+Math.round((1-dp-mp)*100)+'%';
   $('#rcash').textContent=won(r.cashNeeded);
   const row=(k,v)=>'<tr><th>'+k+'</th><td class="n">'+v+'</td></tr>';
