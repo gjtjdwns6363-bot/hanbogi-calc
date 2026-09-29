@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="naver-site-verification" content="21421c877a507dea4b5be99d5ec0d9e9fd8d7b50" />
+<title>청약 중도금 계산기 2026 | 계약금·중도금·잔금 일정과 중도금대출 이자</title>
+<meta name="description" content="분양가만 넣으면 계약금 10%·중도금 60%(6회)·잔금 30% 납부 일정, 중도금대출 이자, 입주 때 필요한 잔금과 내 돈이 얼마나 드는지 계산합니다. 무이자·이자후불제, 입주 때 받을 주택담보대출을 빼고 부족한 돈까지.">
+<link rel="canonical" href="https://calc.hanbogi.com/down-payment/">
+<meta property="og:title" content="청약 중도금 계산기 2026">
+<meta property="og:description" content="계약금·중도금·잔금 일정과 중도금대출 이자, 입주 때 필요한 돈을 바로 계산해요.">
+<meta property="og:url" content="https://calc.hanbogi.com/down-payment/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="한눈 계산기"><meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://calc.hanbogi.com/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/favicon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/style.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5424435978828190" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-19F8RF6971"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-19F8RF6971");</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"중도금은 언제, 얼마나 내나요?","acceptedAnswer":{"@type":"Answer","text":"민간 아파트 분양은 보통 계약금 10%, 중도금 60%(6회에 나눠 10%씩, 약 4~6개월 간격), 잔금 30%로 냅니다. 공공분양·조합 물량은 비율과 횟수가 달라 모집공고문의 납부 일정표가 기준입니다."}},
+{"@type":"Question","name":"중도금대출 이자는 어떻게 내나요?","acceptedAnswer":{"@type":"Answer","text":"중도금대출은 회차마다 나눠 실행되고, 실행된 날부터 입주(잔금) 때까지 이자가 붙습니다. 시행사가 이자를 대신 내는 무이자, 입주 때 한꺼번에 내는 이자후불제, 매달 본인이 내는 방식이 있어 단지마다 다릅니다."}},
+{"@type":"Question","name":"입주할 때 중도금대출은 어떻게 되나요?","acceptedAnswer":{"@type":"Answer","text":"입주 때 중도금대출 원금은 갚아야 하고, 보통 주택담보대출(잔금대출)로 갈아탑니다. 이때 LTV·DSR·대출 한도가 새로 적용돼 예상보다 적게 나올 수 있으니 주택담보대출 계산기로 미리 확인해야 합니다."}}]}</script>
+<style>.sub{font-size:.85rem;color:var(--muted)}.row2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}.row2 label{margin-top:8px}td.n,th.n{text-align:right;white-space:nowrap}.chk{display:flex;gap:8px;align-items:flex-start;font-weight:400;margin:8px 0}.chk input{margin-top:5px}</style>
+</head>
+<body>
+<header><a href="/">한눈 계산기</a></header>
+<main>
+<h1>청약 중도금 계산기</h1>
+<p class="lead">분양가를 넣으면 <b>계약금·중도금·잔금 납부 일정</b>, 중도금대출 이자, 입주 때 필요한 돈을 계산해요. 비율은 민간 분양의 일반적인 10% / 60%(6회) / 30%로 채워 뒀고, 단지 모집공고문에 맞게 바꿀 수 있어요. 입력값은 서버로 보내지 않아요.</p>
+
+<form class="card" id="f" onsubmit="event.preventDefault();run()">
+<label>분양가 <span class="hint">(만 원, 선택한 주택형 분양최고가)</span></label>
+<input type="text" id="price" class="num" inputmode="numeric" placeholder="예: 70,000 (7억 원)">
+<div class="row2">
+<div><label>계약금 <span class="hint">(%)</span></label><input type="number" id="down" value="10" step="1" min="0" max="100" inputmode="decimal"></div>
+<div><label>중도금 <span class="hint">(%)</span></label><input type="number" id="mid" value="60" step="1" min="0" max="100" inputmode="decimal"></div>
+<div><label>중도금 회차 <span class="hint">(회)</span></label><input type="number" id="rounds" value="6" step="1" min="1" max="12" inputmode="numeric"></div>
+<div><label>회차 간격 <span class="hint">(개월)</span></label><input type="number" id="interval" value="4" step="1" min="1" max="12" inputmode="numeric"></div>
+<div><label>계약부터 입주까지 <span class="hint">(개월)</span></label><input type="number" id="months" value="36" step="1" min="1" max="72" inputmode="numeric"></div>
+<div><label>잔금 <span class="hint">(자동)</span></label><input type="text" id="bal" value="30%" disabled></div>
+</div>
+<div class="row2">
+<div><label>중도금대출 <span class="hint">(분양가의 %, 중도금 이내)</span></label><input type="number" id="loanPct" value="40" step="1" min="0" max="100" inputmode="decimal"></div>
+<div><label>대출 금리 <span class="hint">(연 %)</span></label><input type="number" id="rate" value="4.5" step="0.01" inputmode="decimal"></div>
+</div>
+<label>이자 <span class="hint">(단지 공고문 확인)</span></label>
+<div class="seg"><label><input type="radio" name="int" value="pay" checked><span>내가 내요</span></label><label><input type="radio" name="int" value="deferred"><span>이자후불제</span></label><label><input type="radio" name="int" value="free"><span>무이자</span></label></div>
+<label>입주 때 받을 주택담보대출 <span class="hint">(만 원, 선택 · 잔금·중도금대출 상환에 쓸 금액)</span></label>
+<input type="text" id="mortgage" class="num" inputmode="numeric" placeholder="예: 30,000 (3억 원)">
+<button type="submit">중도금 계산하기</button>
+</form>
+
+<div class="card result" id="res" aria-live="polite">
+<div class="hint" id="rsum"></div>
+<div>내 돈으로 준비할 총액</div><div class="big" id="rcash"></div>
+<table id="rtab"></table>
+<h3>납부 일정</h3>
+<table id="rsch"></table>
+<p class="hint" id="rnote"></p>
+<p class="warn" style="margin-top:12px">⚠️ 참고용이에요. 납부 비율·횟수·시기, 중도금대출 한도·금리·이자 부담 방식은 단지마다 달라요. 정확한 금액은 <b>모집공고문의 납부 일정</b>과 대출 약정서로 확인하세요. 이자는 실행된 날부터 입주 때까지 단리로 계산한 추정치이고, 취득세·등기비·중개수수료·발코니 확장비·옵션비는 포함하지 않았어요.</p>
+</div>
+<p>🧮 함께 쓰는 계산기: <a href="/loan/">주택담보대출 계산기</a> (입주 때 받을 대출 한도) · <a href="/subscription/">청약 가점 계산기</a> · <a href="/acquisition-tax/">취득세 계산기</a> · <a href="/brokerage/">중개수수료 계산기</a></p>
+<p>🏠 <a href="https://home.hanbogi.com/subscription/">부동산 알리미 청약 일정</a>에서 접수 중인 단지의 분양가·안전마진을 보고, 여기서 자금 계획을 세워 보세요.</p>
+
+<h2>계산 방법</h2>
+<div class="card">
+<p><b>계약금</b> = 분양가 × 계약금 비율 (계약 때 한 번). <b>중도금</b> = 분양가 × 중도금 비율을 회차 수로 나눈 금액을 정해진 간격으로 냄. <b>잔금</b> = 분양가 − 계약금 − 중도금 (입주 때).</p>
+<p><b>중도금대출</b>은 중도금 회차마다 나눠 실행돼요. 대출이 중도금보다 적으면 나머지는 내 돈으로 내요. 이자는 각 회차 대출금 × 금리 × (입주까지 남은 개월 ÷ 12)의 합계(단리)예요.</p>
+<p><b>입주 때 필요한 돈</b> = 잔금 + 중도금대출 원금 (이자후불제면 이자도 포함). 입주 때 받을 주택담보대출을 빼면 부족한 현금이 나와요.</p>
+<p><b>내 돈으로 준비할 총액</b> = 계약금 + 대출로 못 낸 중도금 + 입주 때 부족한 돈 + 이자(내가 내는 경우).</p>
+<p class="hint">기준일 2026년 9월 29일. 무이자·이자후불제·시행사 대납은 단지 조건이에요. 계산기 로직은 단순이자 모델이고 실제 은행 산정 방식과 몇 만 원 차이가 날 수 있어요.</p>
+</div>
+
+<h2>자주 묻는 질문</h2>
+<div class="card">
+<p><b>Q. 중도금은 언제, 얼마나 내나요?</b><br>민간 아파트 분양은 보통 계약금 10%, 중도금 60%(6회에 나눠 10%씩, 약 4~6개월 간격), 잔금 30%로 냅니다. 공공분양·조합 물량은 비율과 횟수가 달라 모집공고문의 납부 일정표가 기준입니다.</p>
+<p><b>Q. 중도금대출 이자는 어떻게 내나요?</b><br>중도금대출은 회차마다 나눠 실행되고, 실행된 날부터 입주(잔금) 때까지 이자가 붙습니다. 시행사가 이자를 대신 내는 무이자, 입주 때 한꺼번에 내는 이자후불제, 매달 본인이 내는 방식이 있어 단지마다 다릅니다.</p>
+<p><b>Q. 입주할 때 중도금대출은 어떻게 되나요?</b><br>입주 때 중도금대출 원금은 갚아야 하고, 보통 주택담보대출(잔금대출)로 갈아탑니다. 이때 LTV·DSR·대출 한도가 새로 적용돼 예상보다 적게 나올 수 있으니 주택담보대출 계산기로 미리 확인해야 합니다.</p>
+</div>
+</main>
+<footer>© 한눈 계산기 · <a href="/">다른 계산기</a> · <a href="/about.html">사이트 소개·계산 근거</a> · <a href="/privacy.html">개인정보처리방침</a>
+<p class="net">한보기 네트워크: <a href="https://home.hanbogi.com">부동산 알리미</a> · <a href="https://talk.hanbogi.com">한눈 여행회화</a> · <a href="https://grant.hanbogi.com">정부 지원금 찾기</a> · <a href="https://benefit.hanbogi.com">혜택 알리미</a> · <a href="https://license.hanbogi.com">자격증 한눈에</a> · <a href="https://hanbogi.com">오늘의 게임</a> · <a href="https://stay.hanbogi.com">오늘의 숙소</a> · <a href="https://gadget.hanbogi.com">기기 비교소</a></p></footer>
+<script src="calc.js"></script>
+<script>
+const $=s=>document.querySelector(s), val=n=>(document.querySelector('input[name='+n+']:checked')||{}).value;
+const num=v=>+String(v).replace(/[^0-9.]/g,'')||0, won=v=>Math.round(v).toLocaleString('ko-KR')+'원';
+const man=v=>(v>=10000?Math.floor(v/10000).toLocaleString('ko-KR')+'억 ':'')+(v%10000?(v%10000).toLocaleString('ko-KR')+'만':'')+' 원';
+document.querySelectorAll('input.num').forEach(el=>el.addEventListener('input',()=>{const n=num(el.value);el.value=n?n.toLocaleString('ko-KR'):'';}));
+const upBal=()=>{$('#bal').value=Math.max(0,100-num($('#down').value)-num($('#mid').value))+'%';};
+['#down','#mid'].forEach(s=>$(s).addEventListener('input',upBal));
+function run(){
+  const price=num($('#price').value)*1e4;
+  if(!price){alert('분양가를 입력해 주세요');return;}
+  const dp=num($('#down').value)/100, mp=num($('#mid').value)/100;
+  if(dp+mp>1){alert('계약금과 중도금 합이 100%를 넘어요');return;}
+  const iv=val('int'), rounds=Math.max(1,Math.round(num($('#rounds').value))||6);
+  const r=calc({price,downPct:dp,midPct:mp,rounds,interval:num($('#interval').value)||4,months:num($('#months').value)||36,
+    loanPct:num($('#loanPct').value)/100,rate:num($('#rate').value)/100,free:iv==='free',deferred:iv==='deferred',mortgage:num($('#mortgage').value)*1e4});
+  $('#rsum').textContent='분양가 '+man(price/1e4).trim()+' · 계약금 '+Math.round(dp*100)+'% · 중도금 '+Math.round(mp*100)+'% ('+rounds+'회) · 잔금 '+Math.round((1-dp-mp)*100)+'%';
+  $('#rcash').textContent=won(r.cashNeeded);
+  const row=(k,v)=>'<tr><th>'+k+'</th><td class="n">'+v+'</td></tr>';
+  $('#rtab').innerHTML=row('계약금 (계약 때)',won(r.down))+row('중도금 합계',won(r.mid))+row('　└ 중도금대출로 내는 몫',won(r.loan))+row('　└ 내 돈으로 내는 몫',won(r.ownMid))
+    +row('잔금 (입주 때)',won(r.balance))+row('중도금대출 이자 합계',iv==='free'?'무이자':won(r.interest)+(iv==='deferred'?' <span class="sub">입주 때 함께 납부</span>':''))
+    +row('입주 때 한꺼번에 낼 돈',won(r.moveIn)+' <span class="sub">잔금 + 대출 원금'+(iv==='deferred'?' + 이자':'')+'</span>')
+    +($('#mortgage').value?row('입주 주담대를 빼면 부족한 돈',won(r.shortfall)):'');
+  $('#rsch').innerHTML='<tr><th>구분</th><th class="n">납부월</th><th class="n">납부액</th><th class="n">대출</th><th class="n">내 돈</th></tr>'
+    +'<tr><td>계약금</td><td class="n">계약 때</td><td class="n">'+won(r.down)+'</td><td class="n">-</td><td class="n">'+won(r.down)+'</td></tr>'
+    +r.schedule.map(s=>'<tr><td>중도금 '+s.n+'회</td><td class="n">계약 후 '+s.month+'개월</td><td class="n">'+won(s.amt)+'</td><td class="n">'+won(s.loan)+'</td><td class="n">'+won(s.own)+'</td></tr>').join('')
+    +'<tr><td>잔금</td><td class="n">입주 때</td><td class="n">'+won(r.balance)+'</td><td class="n">-</td><td class="n">'+won(r.balance)+'</td></tr>';
+  $('#rnote').textContent=iv==='pay'?'중도금대출이 모두 실행된 뒤 매달 내는 이자는 약 '+won(r.monthlyPeak)+'이에요 (금리 '+$('#rate').value+'%).':'';
+  $('#res').classList.add('show'); $('#res').scrollIntoView({behavior:'smooth',block:'start'});
+}
+</script>
+</body></html>
