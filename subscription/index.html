@@ -2,7 +2,7 @@
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="naver-site-verification" content="21421c877a507dea4b5be99d5ec0d9e9fd8d7b50" />
 <title>청약 가점 계산기 2026 | 84점 가점·1순위·특별공급 자격 확인 | 한눈 계산기</title>
-<meta name="description" content="생년월일, 혼인신고일, 부양가족 수, 청약통장 가입일만 넣으면 민영주택 청약 가점(84점 만점)을 바로 계산합니다. 배우자 통장 합산, 지역별 1순위 조건(투기과열·청약과열)과 예치금, 신혼부부·생애최초·다자녀·노부모 특별공급 소득 기준 판별까지.">
+<meta name="description" content="생년월일, 혼인신고일, 부양가족 수, 청약통장 가입일만 넣으면 민영주택 청약 가점(84점 만점)을 바로 계산합니다. 배우자 통장 합산, 지역별 1순위 조건(투기과열·청약과열)과 예치금, 신혼부부·생애최초·다자녀·노부모 특별공급 소득 기준 판별과 신혼희망타운 배점까지.">
 <link rel="canonical" href="https://calc.hanbogi.com/subscription/">
 <meta property="og:title" content="청약 가점 계산기 2026">
 <meta property="og:description" content="84점 만점 가점과 1순위 여부, 예치금, 특별공급 자격(신혼부부·생애최초·다자녀·노부모)을 한 번에 확인해요.">
@@ -84,6 +84,12 @@
 <div><label>세대 월평균소득 <span class="hint">(만 원, 세전·세대원 합계)</span></label><input type="text" id="inc" class="num" inputmode="numeric" placeholder="예: 700"></div>
 <div><label>세대 부동산가액 <span class="hint">(만 원, 모르면 비움)</span></label><input type="text" id="asset" class="num" inputmode="numeric"></div>
 </div>
+<div class="grp">신혼희망타운 배점 <span class="hint">(공공분양 · 위 소득·자녀 입력과 함께 계산해요)</span></div>
+<div class="row2">
+<div><label>막내 자녀 나이 <span class="hint">(태아는 2세 이하)</span></label><select id="young"><option value="none">자녀 없음</option><option value="le2">2세 이하</option><option value="3to6">3~6세</option><option value="ge7">7세 이상</option></select></div>
+<div><label>해당 시·도 연속 거주기간</label><select id="resY"><option value="0">1년 미만</option><option value="1">1년 이상 2년 미만</option><option value="2">2년 이상</option></select></div>
+<div><label>청약통장 납입 횟수 <span class="hint">(비우면 가입 개월 수로 추정)</span></label><input type="text" id="pay" class="num" inputmode="numeric" placeholder="예: 24"></div>
+</div>
 <div class="chk">
 <label><input type="checkbox" id="dual"> 맞벌이</label>
 <label><input type="checkbox" id="anyKid"> 혼인 중 출산·임신·입양한 자녀 있음</label>
@@ -102,6 +108,7 @@
 <h2 style="margin-top:20px">1순위 여부</h2><div id="r1"></div>
 <h2 style="margin-top:20px">특별공급 자격 <span class="hint">민영주택 기준</span></h2><div style="overflow-x:auto"><table id="sp"></table></div>
 <p class="hint" id="spnote"></p>
+<h2 style="margin-top:20px">신혼희망타운 배점 <span class="hint">공공분양 · 공공주택 특별법 시행규칙 별표 6의3</span></h2><div id="ht"></div>
 <p class="warn">⚠️ 참고용이에요. 부양가족 인정 여부(등재 기간·주택 소유·해외 체류 등)와 소형·저가주택 무주택 인정은 서류로 판정돼요. 최종 점수는 <a href="https://www.applyhome.co.kr" rel="nofollow">청약홈</a>에서 꼭 확인하세요. 가점을 잘못 넣어 당첨되면 부적격 처리돼요.</p>
 <p>👉 <a href="/loan/">주택담보대출 계산기</a> · 👉 <a href="https://benefit.hanbogi.com/category/%EC%A3%BC%EA%B1%B0%C2%B7%EC%B2%AD%EC%95%BD">혜택 알리미 주거·청약</a></p>
 <p>🏠 <a href="https://home.hanbogi.com/">부동산 알리미</a>에서 우리 동네 아파트 실거래가·전세가율 보기 · <a href="https://home.hanbogi.com/subscription/">이번 달 청약 일정</a> · <a href="https://home.hanbogi.com/lh/">LH 분양·임대 공고</a></p>
@@ -132,6 +139,25 @@
 <tr><td>배우자 통장 (가입기간의 50% 적용)</td><td>1년 미만 1점 · 1~2년 2점 · 2년 이상 3점</td></tr>
 </table>
 <p class="hint">배우자 점수를 더해도 통장 항목은 최대 17점이에요.</p>
+</div>
+
+<h2>신혼희망타운 배점표 (공공분양)</h2>
+<div class="card">
+<p>신혼희망타운은 민영 84점 가점제가 아니라 <b>공공주택 특별법 시행규칙 별표 6의3</b>의 배점표를 써요. 30%(가목) → 60%(나목) 순으로 점수 높은 순, 동점은 추첨이고 나머지는 추첨이에요. 1·2순위는 없어요.</p>
+<table>
+<tr><th>가목 (30%) · 혼인 2년 이내·2세 이하 자녀 · 9점</th><th>3점</th><th>2점</th><th>1점</th></tr>
+<tr><td>소득 (도시근로자 월평균 대비)</td><td>70% 이하 (맞벌이 80%)</td><td>100% 이하 (맞벌이 110%)</td><td>초과</td></tr>
+<tr><td>해당 시·도 연속 거주</td><td>2년 이상</td><td>1~2년</td><td>1년 미만</td></tr>
+<tr><td>청약통장 납입횟수</td><td>24회 이상</td><td>12~23회</td><td>6~11회</td></tr>
+</table>
+<table style="margin-top:12px">
+<tr><th>나목 (60%) · 혼인 2~7년·3~6세 자녀 · 12점</th><th>3점</th><th>2점</th><th>1점</th></tr>
+<tr><td>미성년 자녀 수</td><td>3명 이상</td><td>2명</td><td>1명</td></tr>
+<tr><td>무주택기간</td><td>3년 이상</td><td>1~3년</td><td>1년 미만</td></tr>
+<tr><td>해당 시·도 연속 거주</td><td>2년 이상</td><td>1~2년</td><td>1년 미만</td></tr>
+<tr><td>청약통장 납입횟수</td><td>24회 이상</td><td>12~23회</td><td>6~11회</td></tr>
+</table>
+<p class="hint">자격: 혼인 7년 이내 또는 6세 이하 자녀가 있는 무주택 세대 · 통장 가입 6개월·6회 납입 · 소득 도시근로자 월평균 130%(맞벌이 200%, 배점은 맞벌이 140%까지). 근거: 공공주택 특별법 시행규칙 제19조·별표 6의3(2026.6.22 개정본, 국가법령정보센터 확인 2026-09-29). 배점 기준은 2025~2026년에 바뀐 적이 없어요. 공공임대형(통합공공임대·행복주택) 신혼희망타운은 배점 없이 추첨으로 읽히지만 단지 공고문으로 확인하세요.</p>
 </div>
 
 <h2>민영주택 1순위 조건</h2>
@@ -255,6 +281,15 @@ function run(){
     `<p class="hint">이 지역 ${SUB.areas[si.areaIdx]} 1순위 선정 방식: ${si.areaIdx===0?'60㎡ 이하 '+gajeomShare(60,q.reg)+' / 60~85㎡ '+gajeomShare(84,q.reg):gajeomShare(area,q.reg)}. ${q.notes.join(' ')}</p>`;
   $('#sp').innerHTML='<tr><th>유형</th><th>판정</th><th>구간·순위 / 모자란 조건</th></tr>'+S.list.map(x=>`<tr><td><b>${x.name}</b></td><td class="${x.ok?'ok':'no'}">${x.ok?'가능':'어려움'}</td><td>${x.ok?[x.tier,x.rank].filter(Boolean).join(' · '):x.why.join(' ')}${x.note?` <span class="hint">${x.note}</span>`:''}</td></tr>`).join('');
   $('#spnote').innerHTML=`소득은 세대원(성년) 전원의 모집공고일 직전 연도 월평균 소득이에요. 기준표는 청약홈 게시 '2025년도 도시근로자 월평균소득'(${SUB.checked} 확인)으로, 공고마다 적용 연도가 다를 수 있어요. 특별공급은 한 세대 평생 1회예요.`;
+  const H=hopeTown({base,married,marriage:$('#marriage').value,kids:si.kids,anyKid:si.anyKid,young:$('#young').value,homeless:si.homeless,homeMonths:r.homeMonths,resYears:+$('#resY').value,
+    acct:si.acct,payCnt:$('#pay').value.trim()?num($('#pay').value):null,income:si.income,size:si.size,dual:si.dual});
+  const pts=P=>P.parts.map(p=>p[0]+' '+p[1]).join(' + ');
+  $('#ht').innerHTML=H.ok?`<p class="ok">✅ 신청 자격이 돼요 · <b>${H.stage==='다목'?'다목(추첨) 물량':H.stage+' 물량'}</b> 대상</p>`+
+    (H.stage==='가목'?`<p><b>가목 (30% 물량) ${H.A.score}점 / 9점</b> <span class="hint">(${pts(H.A)})</span></p><p><b>나목 (60% 물량) ${H.B.score}점 / 12점</b> <span class="hint">(${pts(H.B)})</span> — 가목에서 떨어지면 나목에서 다시 경쟁해요.</p>`:
+     H.stage==='나목'?`<p><b>나목 (60% 물량) ${H.B.score}점 / 12점</b> <span class="hint">(${pts(H.B)})</span></p>`:
+     `<p>소득이 ${H.capScore.toLocaleString('ko-KR')}원(배점 대상 한도)을 넘거나 조건에 맞는 단계가 없어 배점 없이 <b>추첨</b>으로만 경쟁해요.</p>`)+
+    `<p class="hint">소득은 도시근로자 월평균소득의 ${H.pct}% 예요. 동점이면 추첨이고, 1·2순위는 없어요. 총자산 기준(소득 3분위 순자산 평균의 105% 이내, 자녀에 따라 115~125%)은 통계청 발표치 연동이라 계산하지 않아요. 공고문에서 확인하세요.</p>`:
+    `<p class="no">❌ 지금은 어려워요</p><ul>${H.why.map(x=>'<li>'+x+'</li>').join('')}</ul>`;
   $('#res').classList.add('show'); $('#res').scrollIntoView({behavior:'smooth',block:'start'});
 }
 </script>

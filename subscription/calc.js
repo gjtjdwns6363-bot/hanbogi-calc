@@ -124,3 +124,34 @@ function special(i) {
   return { rank1: r1, list: out };
 }
 if (typeof module !== 'undefined') Object.assign(module.exports, { SUB, rank1, special, isRegulated, depositGroup, incomeLimit, gajeomShare });
+
+// ---------------- 신혼희망타운 공공분양 배점 (2026-09-29 추가) ----------------
+// 근거: 공공주택 특별법 시행규칙 제19조제4항·별표 6의3 (2026.6.22 개정본, 국가법령정보센터 확인 2026-09-29). 주택공급에 관한 규칙이 아니다.
+// 선정: 30%(가목, 혼인 2년 이내·2세 이하 자녀) 배점 → 60%(나목, 혼인 2~7년·3~6세 자녀 + 가목 탈락자) 배점 → 나머지 추첨. 동점은 추첨, 1·2순위 없음.
+// i: {base, married, marriage, kids, young('none'|'le2'|'3to6'|'ge7' 막내 나이), homeless, homeMonths, resYears(시·도 연속 거주 0/1/2년), acct, payCnt, income(원), size, dual}
+function hopeTown(i) {
+  const why = [], base = i.base;
+  const mm = i.married && i.marriage ? months(i.marriage, base) : -1;
+  const y = (i.kids | 0) > 0 || i.anyKid ? i.young || 'ge7' : 'none';
+  const child6 = y === 'le2' || y === '3to6';
+  if (mm < 0) why.push('혼인신고를 한 부부만 계산해요(예비신혼부부·한부모는 공고문 확인).');
+  else if (mm >= 84 && !child6) why.push('혼인 7년이 지났고 6세 이하 자녀도 없어요.');
+  if (!i.homeless) why.push('세대원 전원이 무주택이어야 해요.');
+  const pay = i.payCnt != null ? i.payCnt : i.acct ? months(i.acct, base) : 0;
+  if (!i.acct || months(i.acct, base) < 6 || pay < 6) why.push('청약통장 가입 6개월이 지나고 6회 이상 납입해야 해요.');
+  const capAll = incomeLimit(i.size, i.dual ? 200 : 130), capScore = incomeLimit(i.size, i.dual ? 140 : 130);
+  if (i.income > capAll) why.push(`세대 월평균소득이 ${i.dual ? 200 : 130}%(${capAll.toLocaleString('ko-KR')}원)를 넘어요.`);
+  if (why.length) return { ok: false, why, stage: null };
+  const pct = i.income / incomeLimit(i.size, 100) * 100;
+  const incS = pct <= (i.dual ? 80 : 70) ? 3 : pct <= (i.dual ? 110 : 100) ? 2 : 1;
+  const resS = i.resYears >= 2 ? 3 : i.resYears >= 1 ? 2 : 1;
+  const payS = pay >= 24 ? 3 : pay >= 12 ? 2 : 1;
+  const kidS = Math.min(3, i.kids | 0), homeS = i.homeMonths >= 36 ? 3 : i.homeMonths >= 12 ? 2 : 1;
+  const A = { score: incS + resS + payS, max: 9, parts: [['소득', incS], ['시·도 거주', resS], ['통장 납입', payS]] };
+  const B = { score: kidS + homeS + resS + payS, max: 12, parts: [['미성년 자녀', kidS], ['무주택기간', homeS], ['시·도 거주', resS], ['통장 납입', payS]] };
+  const inA = key(plusYears(i.marriage, 2)) >= key(base) || y === 'le2', inB = mm < 84 || child6;
+  const scored = i.income <= capScore;
+  const stage = !scored ? '다목' : inA ? '가목' : inB ? '나목' : '다목';
+  return { ok: true, why, stage, A, B, scored, pct: Math.round(pct), pay, capScore };
+}
+if (typeof module !== 'undefined') Object.assign(module.exports, { hopeTown });

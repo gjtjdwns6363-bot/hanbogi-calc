@@ -75,4 +75,18 @@ a.ok(special({ ...P, income: 2e7, kids: 2 }).list.find(x => x.key === 'multi').o
 // 노부모: 65세 이상 3년 부양 + 1순위 + 세대주
 a.ok(special({ ...P, income: 9e6, parent65: true }).list.find(x => x.key === 'parents').ok);
 a.ok(!special({ ...P, income: 9e6, parent65: true, head: false }).list.find(x => x.key === 'parents').ok);
+// 신혼희망타운 (별표 6의3)
+const { hopeTown } = require('./calc.js');
+const HB = { base: '2026-09-29', married: true, marriage: '2025-03-01', kids: 1, anyKid: true, young: 'le2', homeless: true, homeMonths: 40, resYears: 2, acct: '2022-01-01', payCnt: 30, income: 6e6, size: 3, dual: false };
+let h = hopeTown(HB); // 3인 100% = 7,533,763 → 6,000,000은 79.6% → 소득 2점
+a.equal(h.stage, '가목'); a.equal(h.A.score, 2 + 3 + 3); a.equal(h.B.score, 1 + 3 + 3 + 3);
+h = hopeTown({ ...HB, income: 5e6 }); a.equal(h.A.parts[0][1], 3); // 66%
+h = hopeTown({ ...HB, dual: true, income: 6e6 }); a.equal(h.A.parts[0][1], 3); // 맞벌이 80% 이하
+h = hopeTown({ ...HB, marriage: '2022-01-01', young: '3to6' }); a.equal(h.stage, '나목'); // 혼인 2년 초과
+h = hopeTown({ ...HB, marriage: '2018-01-01', young: 'ge7', kids: 1 }); a.ok(!h.ok); // 7년 초과·자녀 7세 이상
+h = hopeTown({ ...HB, marriage: '2018-01-01', young: '3to6' }); a.equal(h.stage, '나목'); // 7년 넘어도 6세 이하 자녀
+h = hopeTown({ ...HB, income: 1.05e7 }); a.ok(!h.ok); // 130%(9,794,892) 초과
+h = hopeTown({ ...HB, income: 1.1e7, dual: true }); a.equal(h.stage, '다목'); // 맞벌이 200% 이내지만 140% 초과 → 추첨
+h = hopeTown({ ...HB, payCnt: 5 }); a.ok(!h.ok);
+h = hopeTown({ ...HB, payCnt: null, acct: '2025-01-01' }); a.equal(h.A.parts[2][1], 2); // 납입횟수 비면 가입 20개월 → 20회 → 2점
 console.log('subscription calc: all tests passed');
