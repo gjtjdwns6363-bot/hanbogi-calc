@@ -78,8 +78,16 @@ header .hn-b{width:auto;margin:0;padding:5px 11px;font-size:.85rem;font-weight:6
 .hn-qres{list-style:none;margin:6px 0 0;padding:4px;background:var(--card);border:1px solid var(--line);border-radius:12px}
 .hn-qres a{display:block;padding:9px 10px;border-radius:8px;text-decoration:none;color:var(--ink)}
 .hn-qres a:hover,.hn-qres li:first-child a{background:var(--bg)}
-.hn-top{margin:0;padding-left:1.6em;columns:2;column-gap:24px}
-.hn-top li{padding:3px 0;break-inside:avoid}
+.hn-top{margin:0;padding:0;list-style:none;columns:2;column-gap:24px}
+.hn-top li{display:flex;align-items:center;gap:8px;padding:5px 0;break-inside:avoid}
+.hn-top li a{flex:1;min-width:0;text-decoration:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hn-rk{flex:none;width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:#fff;background:#b9c0c8}
+.hn-rk.r1{background:#d4a017}.hn-rk.r2{background:#8e9aa6}.hn-rk.r3{background:#b0703a}
+.hn-v,.hn-new{flex:none;margin-left:6px;font-size:.72rem;font-weight:600;white-space:nowrap;vertical-align:middle}
+.hn-v{color:var(--muted)}
+.hn-new{padding:1px 6px;border-radius:6px;background:#e6f4ea;color:#1e7b3a}
+.hn-cur{font-size:1.05rem;margin-left:4px}
+.hn-views{margin:-4px 0 10px}
 @media (max-width:480px){.hn-top{columns:1}}
 .hn-chips{display:flex;flex-wrap:wrap;gap:8px}
 .hn-chip{display:inline-block;padding:7px 12px;border:1px solid var(--brand);border-radius:999px;text-decoration:none;font-size:.9rem;background:var(--card)}
@@ -92,4 +100,4 @@ header .hn-b{width:auto;margin:0;padding:5px 11px;font-size:.85rem;font-weight:6
 .hn-notes li{padding:6px 0;border-top:1px solid var(--line)}
 .hn-notes li:first-child{border-top:0}
 .hn-notes time{color:var(--muted);font-size:.85rem;margin-right:8px}
-@media (prefers-color-scheme:dark){.hn-nav a.on{background:#16302f}.hn-toast{background:#e8edf2;color:#12161b}}
+@media (prefers-color-scheme:dark){.hn-nav a.on{background:#16302f}.hn-new{background:#173222;color:#7fd39a}.hn-toast{background:#e8edf2;color:#12161b}}

@@ -3,7 +3,7 @@
 (() => {
 // [주소, 아이콘, 이름, 분류, 짧은 설명, 검색어]
 const C = [
-  ['/loan/', '🏠', '주택담보대출 이자 계산기', '대출·부동산', '대출 한도·월 상환액·정책대출', '주담대 LTV DSR 한도 디딤돌 신생아 특례 보금자리론 원리금 이자 중도상환'],
+  ['/loan/', '🏦', '주택담보대출 이자 계산기', '대출·부동산', '대출 한도·월 상환액·정책대출', '주담대 LTV DSR 한도 디딤돌 신생아 특례 보금자리론 원리금 이자 중도상환'],
   ['/jeonse-loan/', '🔑', '전세대출 계산기', '대출·부동산', '전세 이자·임대료 월 부담', '전세자금 버팀목 임대 이자 월세 대출'],
   ['/down-payment/', '🏗️', '청약 중도금 계산기', '대출·부동산', '계약금·중도금·잔금 일정', '분양 계약금 잔금 중도금대출 입주'],
   ['/subscription/', '🏢', '청약 가점 계산기', '대출·부동산', '84점 가점·특별공급 자격', '청약 점수 가점 특별공급 신혼희망타운 생애최초 다자녀 통장'],
@@ -12,8 +12,8 @@ const C = [
   ['/salary/', '💵', '연봉 실수령액 계산기', '급여·노동', '세후 월급·4대보험', '월급 연봉 세후 4대보험 소득세 실수령 실수령액'],
   ['/hourly/', '⏰', '알바 시급·주휴수당 계산기', '급여·노동', '주휴·야간·연장 수당', '최저시급 시급 주휴 야간 아르바이트 알바 월급'],
   ['/severance/', '📦', '퇴직금 계산기', '급여·노동', '퇴직금·퇴직소득세·IRP', '퇴직금 퇴직소득세 IRP 평균임금 퇴사'],
-  ['/unemployment/', '🧾', '실업급여 계산기', '급여·노동', '구직급여 금액·받는 기간', '실업급여 구직급여 고용보험 수급 자진퇴사 퇴사'],
-  ['/year-end-tax/', '📑', '연말정산 환급 계산기', '세금', '환급액·공제 항목별 비교', '연말정산 13월의 월급 카드 공제 의료비 교육비 환급'],
+  ['/unemployment/', '☂️', '실업급여 계산기', '급여·노동', '구직급여 금액·받는 기간', '실업급여 구직급여 고용보험 수급 자진퇴사 퇴사'],
+  ['/year-end-tax/', '🧾', '연말정산 환급 계산기', '세금', '환급액·공제 항목별 비교', '연말정산 13월의 월급 카드 공제 의료비 교육비 환급'],
   ['/acquisition-tax/', '🏷️', '부동산 취득세 계산기', '세금', '주택 취득세·감면·중과', '취득세 주택 아파트 생애최초 감면 다주택 중과 조정대상지역'],
   ['/capital-gains/', '📈', '양도소득세 계산기', '세금', '양도세·비과세·장기보유공제', '양도세 양도소득세 1세대1주택 비과세 장기보유특별공제 일시적 2주택'],
   ['/eitc/', '💰', '근로·자녀장려금 계산기', '지원금', '장려금 예상액·신청 시기', '근로장려금 자녀장려금 장려금 EITC 반기 신청'],
@@ -23,15 +23,15 @@ const C = [
 const CATS = ['대출·부동산', '급여·노동', '세금', '지원금', '자동차'];
 // 검색에만 나오는 표·양식 페이지
 const X = [
-  ['/salary/list/', '📋', '연봉별 실수령액 표', '급여·노동', '', '연봉표 월급표'],
-  ['/severance/list/', '📋', '근속연수별 퇴직금 표', '급여·노동', '', '퇴직금표'],
-  ['/hourly/list/', '📋', '주 근무시간별 알바 월급 표', '급여·노동', '', '알바 월급표 시급'],
-  ['/loan/list/', '📋', '대출 금액별 월 상환액 표', '대출·부동산', '', '주담대 이자표'],
-  ['/brokerage/list/', '📋', '금액별 복비 표', '대출·부동산', '', '중개수수료표'],
-  ['/acquisition-tax/list/', '📋', '집값별 취득세 표', '세금', '', '아파트 취득세표'],
-  ['/capital-gains/list/', '📋', '양도차익별 양도세 표', '세금', '', '양도세표'],
+  ['/salary/list/', '📊', '연봉별 실수령액 표', '급여·노동', '', '연봉표 월급표'],
+  ['/severance/list/', '🗂️', '근속연수별 퇴직금 표', '급여·노동', '', '퇴직금표'],
+  ['/hourly/list/', '🗓️', '주 근무시간별 알바 월급 표', '급여·노동', '', '알바 월급표 시급'],
+  ['/loan/list/', '📉', '대출 금액별 월 상환액 표', '대출·부동산', '', '주담대 이자표'],
+  ['/brokerage/list/', '📐', '금액별 복비 표', '대출·부동산', '', '중개수수료표'],
+  ['/acquisition-tax/list/', '🧮', '집값별 취득세 표', '세금', '', '아파트 취득세표'],
+  ['/capital-gains/list/', '💹', '양도차익별 양도세 표', '세금', '', '양도세표'],
   ['/year-end-tax/list/', '📋', '총급여별 연말정산 예상표', '세금', '', '연말정산표'],
-  ['/car/list/', '📋', '차종별 신차 가격표', '자동차', '', '차값 가격표 트림'],
+  ['/car/list/', '🚙', '차종별 신차 가격표', '자동차', '', '차값 가격표 트림'],
   ['/free/', '📥', '무료 엑셀 양식', '양식', '', '엑셀 양식 가계부 경조사 이사 결혼 장부 다운로드'],
 ];
 const REL = {
@@ -57,6 +57,13 @@ const esc = s => String(s).replace(/[&<>"']/g, ch => '&#' + ch.charCodeAt(0) + '
 const $ = s => document.querySelector(s);
 const path = location.pathname, sec = '/' + path.split('/')[1] + '/', cur = byUrl(sec), home = path === '/' || path === '/index.html';
 const NAME = cur ? cur[2] : document.title.split('|')[0].trim();
+const ALL = [...C, ...X], me = ALL.find(c => c[0] === path) || cur, icon = u => (ALL.find(c => c[0] === u) || [])[1] || '';
+
+// 조회수: /stats.json(GA4 실제 조회수, 매일 06:30 갱신 — STATS.md). 50회 미만·데이터 없음은 NEW, 파일을 못 읽으면 아무것도 안 붙인다
+let ST = null;
+const views = u => ST && ST.views && ST.views[u] && ST.views[u].total;
+const short = n => n >= 1e4 ? +(n / 1e4).toFixed(1) + '만' : n >= 1e3 ? +(n / 1e3).toFixed(1) + '천' : String(n);
+const badge = u => !ST ? '' : views(u) >= 50 ? `<span class="hn-v" title="누적 조회 ${views(u).toLocaleString('ko-KR')}회">👁 ${short(views(u))}</span>` : '<span class="hn-new">NEW</span>';
 
 // 저장소 (기기에만 저장, 막혀 있어도 페이지는 동작)
 const load = (k, d) => { try { return JSON.parse(localStorage.getItem(k)) || d; } catch (e) { return d; } };
@@ -75,7 +82,7 @@ const share = (title, url) => navigator.share ? navigator.share({ title, url }).
 
 // 상단바
 const h = $('header');
-if (h) h.innerHTML = `<div class="hn-bar"><a class="hn-logo" href="/">한눈 계산기</a>${cur ? '<a class="hn-back" href="/#all">← 전체<span class="hn-t"> 계산기</span></a>' : ''}<span class="hn-sp"></span>` +
+if (h) h.innerHTML = `<div class="hn-bar"><a class="hn-logo" href="/">한눈 계산기</a>${cur ? '<a class="hn-back" href="/#all">← 전체<span class="hn-t"> 계산기</span></a>' : ''}${me ? `<span class="hn-cur" title="${esc(me[2])}">${me[1]}</span>` : ''}<span class="hn-sp"></span>` +
   '<button type="button" class="hn-b" data-a="my" aria-label="내 계산기">⭐<span class="hn-t"> 내 계산기</span></button>' +
   '<button type="button" class="hn-b" data-a="share" aria-label="공유">↗<span class="hn-t"> 공유</span></button>' +
   '<button type="button" class="hn-b" data-a="menu" aria-label="전체 메뉴">☰<span class="hn-t"> 전체</span></button></div>';
@@ -92,7 +99,7 @@ function menu() {
   const a = (u, t) => `<a href="${u}"${u === sec || u === path ? ' class="on" aria-current="page"' : ''}>${t}</a>`;
   dlg('hn-menu', 'hn-drawer', head('전체 메뉴') + '<nav class="hn-nav"><h3>바로가기</h3>' +
     a('/', '🏠 홈') + a('/free/', '📥 무료 엑셀 양식') + a('/updates.html', '📝 업데이트 노트') + a('/about.html', 'ℹ️ 사이트 소개') +
-    CATS.map(k => `<h3>${k}</h3>` + C.filter(c => c[3] === k).map(c => a(c[0], c[1] + ' ' + c[2])).join('')).join('') + '</nav>').showModal();
+    CATS.map(k => `<h3>${k}</h3>` + C.filter(c => c[3] === k).map(c => a(c[0], c[1] + ' ' + c[2] + badge(c[0]))).join('')).join('') + '</nav>').showModal();
 }
 let tab = 'fav';
 function my() {
@@ -178,6 +185,22 @@ if (cur && main && REL[sec]) {
   const at = res && [...main.querySelectorAll('h2')].find(x => res.compareDocumentPosition(x) & Node.DOCUMENT_POSITION_FOLLOWING);
   at ? at.before(s) : main.append(s);
 }
+
+// 홈 많이 찾는 계산기(조회수 순 10개)·분야별 카드·계산기 제목 아래 조회수
+function stats() {
+  const top = $('.hn-top');
+  if (top) {
+    const base = [...top.querySelectorAll('a')].map(a => a.getAttribute('href'));
+    let list = [...base, ...C.map(c => c[0]).filter(u => !base.includes(u))];
+    if (ST) list.sort((a, b) => (views(b) || 0) - (views(a) || 0));  // 같은 수면 원래 순서 유지(안정 정렬)
+    top.innerHTML = list.slice(0, 10).map((u, i) => `<li><span class="hn-rk r${i + 1}">${i + 1}</span><a href="${u}">${icon(u)} ${byUrl(u)[2]}</a>${badge(u)}</li>`).join('');
+  }
+  document.querySelectorAll('.hn-cat a[href]').forEach(a => { const b = a.querySelector('b'), u = a.getAttribute('href');
+    if (b && !a.dataset.hn) { a.dataset.hn = 1; b.insertAdjacentHTML('afterbegin', icon(u) + ' '); if (byUrl(u)) b.insertAdjacentHTML('beforeend', badge(u)); } });
+  const h1 = $('main h1'), n = cur && path === sec && views(sec);
+  if (h1 && n >= 50) h1.insertAdjacentHTML('afterend', `<p class="hint hn-views">누적 조회 ${n.toLocaleString('ko-KR')}회 · 기준 ${esc(ST.updated)}</p>`);
+}
+fetch('/stats.json', { cache: 'no-cache' }).then(r => r.ok ? r.json() : null).catch(() => null).then(j => { ST = j && j.views ? j : null; stats(); });
 
 // 버튼 동작 (한곳에서 처리)
 document.addEventListener('click', e => {
