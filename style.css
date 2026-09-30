@@ -101,3 +101,5 @@ header .hn-b{width:auto;margin:0;padding:5px 11px;font-size:.85rem;font-weight:6
 .hn-notes li:first-child{border-top:0}
 .hn-notes time{color:var(--muted);font-size:.85rem;margin-right:8px}
 @media (prefers-color-scheme:dark){.hn-nav a.on{background:#16302f}.hn-new{background:#173222;color:#7fd39a}.hn-toast{background:#e8edf2;color:#12161b}}
+.hn-steps{margin:.4em 0 0;padding-left:1.4em;line-height:1.8}.hn-steps li{margin:.35em 0}
+.hn-inst-line{margin:.6em 0 0;text-align:center}.hn-inst-line .hn-b{font-size:.95em}

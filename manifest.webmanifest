@@ -1,0 +1,16 @@
+{
+  "name": "한눈 계산기",
+  "short_name": "한눈 계산기",
+  "description": "대출·연봉·퇴직금·세금·지원금을 입력 몇 개로 바로 계산하는 무료 계산기 모음",
+  "lang": "ko",
+  "start_url": "/?src=app",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1f5c5c",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

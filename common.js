@@ -80,10 +80,31 @@ function copy(u) {
 }
 const share = (title, url) => navigator.share ? navigator.share({ title, url }).catch(() => {}) : copy(url);
 
+// 홈 화면에 추가: 크롬·엣지·삼성인터넷은 설치 창을 바로 띄우고, 아이폰·카톡 인앱·PC는 방법을 안내한다
+const standalone = matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+let deferred = null;
+addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferred = e; });
+addEventListener('appinstalled', () => { deferred = null; toast('홈 화면에 추가했어요'); document.querySelectorAll('[data-a=install]').forEach(b => b.remove()); });
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(() => {});
+function install() {
+  if (deferred) { const d = deferred; deferred = null; Promise.resolve().then(() => d.prompt()).catch(guide); return; }
+  guide();
+}
+function guide() {
+  const ua = navigator.userAgent, ios = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1),
+    inapp = /KAKAOTALK|NAVER|Instagram|FBAN|FBAV|Line\//i.test(ua), android = /Android/.test(ua), mac = /Mac/.test(navigator.platform || ua);
+  const steps = inapp ? ['앱 안의 브라우저에서는 추가가 안 돼요.', `오른쪽 위(또는 아래) <b>⋯</b> 메뉴 → <b>${ios ? 'Safari' : '다른 브라우저'}로 열기</b>`, '열린 브라우저에서 이 버튼을 다시 눌러 주세요.']
+    : ios ? ['Safari 아래쪽 <b>공유 버튼(□↑)</b>을 누르세요.', '목록을 올려 <b>홈 화면에 추가</b>를 누르세요.', '오른쪽 위 <b>추가</b>를 누르면 끝!']
+    : android ? ['브라우저 오른쪽 위 <b>⋮</b> 메뉴를 누르세요.', '<b>홈 화면에 추가</b> 또는 <b>앱 설치</b>를 누르세요.', '바탕화면에 한눈 계산기 아이콘이 생겨요.']
+    : [`<b>${mac ? '⌘' : 'Ctrl'} + D</b>를 누르면 북마크에 저장돼요.`, '크롬·엣지는 주소창 오른쪽 <b>설치 아이콘(⊕)</b>으로 앱처럼 설치할 수도 있어요.', '북마크바에 두면 한 번에 열려요.'];
+  dlg('hn-inst', '', head('📲 홈 화면에 추가') + '<ol class="hn-steps">' + steps.map(s => `<li>${s}</li>`).join('') + '</ol><p class="hint hn-note">추가해 두면 앱처럼 한 번에 열리고, 내 계산기 기록도 그대로 이어져요.</p>').showModal();
+}
+
 // 상단바
 const h = $('header');
 if (h) h.innerHTML = `<div class="hn-bar"><a class="hn-logo" href="/">한눈 계산기</a>${cur ? '<a class="hn-back" href="/#all">← 전체<span class="hn-t"> 계산기</span></a>' : ''}${me ? `<span class="hn-cur" title="${esc(me[2])}">${me[1]}</span>` : ''}<span class="hn-sp"></span>` +
   '<button type="button" class="hn-b" data-a="my" aria-label="내 계산기">⭐<span class="hn-t"> 내 계산기</span></button>' +
+  (standalone ? '' : '<button type="button" class="hn-b" data-a="install" aria-label="홈 화면에 추가">📲<span class="hn-t"> 홈 화면에 추가</span></button>') +
   '<button type="button" class="hn-b" data-a="share" aria-label="공유">↗<span class="hn-t"> 공유</span></button>' +
   '<button type="button" class="hn-b" data-a="menu" aria-label="전체 메뉴">☰<span class="hn-t"> 전체</span></button></div>';
 
@@ -209,6 +230,7 @@ document.addEventListener('click', e => {
   if (a === 'menu') menu();
   else if (a === 'my') my();
   else if (a === 'share') share(document.title, location.href);
+  else if (a === 'install') install();
   else if (a === 'close') b.closest('dialog').close();
   else if (a === 'tab') { tab = b.dataset.t; my(); }
   else if (a === 'del') { if (tab === 'fav') { const f = favs(); delete f[b.dataset.u]; save('hn_fav', f); } else save('hn_recent', recents().filter(x => x.u !== b.dataset.u)); my(); favRow(); syncFav(); }
@@ -221,6 +243,7 @@ document.addEventListener('click', e => {
 });
 function syncFav() { const f = favs(); document.querySelectorAll('.hn-act').forEach(x => { const b = x.querySelector('[data-a=fav]'); if (b) b.textContent = f[x.dataset.u] ? '★ 저장됨' : '☆ 내 계산기에 저장'; }); }
 
-window.HN = { done, C, CATS };
+window.HN = { done, C, CATS, guide };
+if (standalone) document.querySelectorAll("[data-a=install]").forEach(b => b.remove());
 restore();
 })();
