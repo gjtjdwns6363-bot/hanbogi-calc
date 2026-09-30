@@ -9,7 +9,7 @@
 <meta property="og:url" content="https://calc.hanbogi.com/eitc/">
 <meta property="og:type" content="website"><meta property="og:site_name" content="한눈 계산기"><meta property="og:locale" content="ko_KR">
 <meta property="og:image" content="https://calc.hanbogi.com/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/favicon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/style.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/favicon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/style.css"><script src="/common.js" defer></script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5424435978828190" crossorigin="anonymous"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-19F8RF6971"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-19F8RF6971");</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
@@ -25,6 +25,7 @@
 {"@type":"HowToStep","name":"재산과 신청 시기 고르기","text":"가구원 재산 합계(1.7억 미만·1.7억~2.4억·2.4억 이상)와 정기·기한 후 신청을 고르면 감액이 반영됩니다."},
 {"@type":"HowToStep","name":"결과 확인","text":"근로장려금, 자녀 1명당 자녀장려금, 합계와 예상 지급 시기를 확인하고 홈택스·손택스나 ARS(1544-9944)로 신청합니다."}]}</script>
 <style>.sub{font-size:.85rem;color:var(--muted)}td.n,th.n{text-align:right;white-space:nowrap}#hh{margin-top:8px;font-weight:600;color:var(--brand)}</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"한눈 계산기","item":"https://calc.hanbogi.com/"},{"@type":"ListItem","position":2,"name":"근로·자녀장려금 계산기","item":"https://calc.hanbogi.com/eitc/"}]}</script>
 </head>
 <body>
 <header><a href="/">한눈 계산기</a></header>
@@ -158,7 +159,7 @@ function run(){
   $('#notes').textContent=r.notes.join(' ');
   $('#when').innerHTML=r.eitc+r.ctc?(late?'📅 기한 후 신청은 <b>2026년 12월 1일까지</b>이고, 신청일부터 <b>4개월 안에</b> 지급돼요.':'📅 정기신청분은 2026년 8월 27일에 지급됐어요. 신청했다면 홈택스에서 심사 결과를 확인하세요.')+
     (!b&&!g&&w&&r.eitc?' 근로소득만 있다면 2026년 소득분은 <b>반기 신청</b>도 할 수 있어요(하반기분 2027년 3월 신청 → 6월 정산).':''):'';
-  $('#res').classList.add('show'); $('#res').scrollIntoView({behavior:'smooth',block:'start'});
+  $('#res').classList.add('show'); $('#res').scrollIntoView({behavior:'smooth',block:'start'}); window.HN&&HN.done('#res');
 }
 </script>
 </body></html>

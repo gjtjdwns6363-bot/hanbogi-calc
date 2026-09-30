@@ -2,7 +2,7 @@
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="naver-site-verification" content="21421c877a507dea4b5be99d5ec0d9e9fd8d7b50" />
 <title>한눈 계산기 | 대출·연봉·퇴직금·청약·지원금 계산기 모음</title>
-<meta name="description" content="주택담보대출·자동차 할부·연봉 실수령액·퇴직금·청약 가점·전월세 전환·근로장려금을 한눈에 계산하는 무료 계산기 모음.">
+<meta name="description" content="주택담보대출·전세대출·자동차 할부·연봉 실수령액·퇴직금·실업급여·연말정산·취득세·양도세·청약 가점·근로장려금까지 16가지를 입력 몇 개로 계산하는 무료 계산기 모음. 계산 결과를 링크로 저장·공유할 수 있어요.">
 <link rel="canonical" href="https://calc.hanbogi.com/">
 <meta property="og:title" content="한눈 계산기 — 대출·연봉·퇴직금·청약·지원금 계산기 모음">
 <meta property="og:description" content="주택담보대출·연봉 실수령액·퇴직금·청약 가점·근로장려금·취득세를 입력 몇 개로 바로 계산하는 무료 계산기 모음.">
@@ -10,33 +10,80 @@
 <meta property="og:type" content="website"><meta property="og:site_name" content="한눈 계산기"><meta property="og:locale" content="ko_KR">
 <meta property="og:image" content="https://calc.hanbogi.com/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"한눈 계산기","alternateName":["한보기 계산기","calc.hanbogi.com"],"url":"https://calc.hanbogi.com/","inLanguage":"ko-KR"}</script>
-<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/favicon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/style.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/favicon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/style.css"><script src="/common.js" defer></script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5424435978828190" crossorigin="anonymous"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-19F8RF6971"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-19F8RF6971");</script>
 </head>
 <body><header><a href="/">한눈 계산기</a></header>
 <main>
 <h1>한눈 계산기</h1>
-<p class="lead">복잡한 지원금·세금 기준을 입력 몇 개로 계산해요. 입력값은 저장하지 않아요.</p>
-<div class="tools">
-<a class="card" href="/loan/"><b>🏠 주택담보대출 이자 계산기</b><br><span class="hint">LTV·스트레스 DSR 대출 한도 · 은행별 금리 비교 · 정책대출 자격 · 월 상환액·중도상환</span></a>
-<a class="card" href="/car/"><b>🚗 자동차 할부·리스·장기렌트 계산기</b><br><span class="hint">국산·수입 26개 브랜드 183개 차종 가격 자동 입력 · 전기차 지역별 보조금 · 은행 금리 · 할부·리스·렌트 비교</span></a>
-<a class="card" href="/eitc/"><b>💰 근로장려금·자녀장려금 계산기</b><br><span class="hint">가구 유형 자동 판정 · 업종별 조정률 · 재산 감액 · 반기 신청 비교</span></a>
-<a class="card" href="/hourly/"><b>⏰ 알바 시급·주휴수당 계산기</b><br><span class="hint">1분 단위 근무시간 · 주휴수당 · 야간·연장 가산 · 수습 90% · 3.3%와 4대보험 비교</span></a>
-<a class="card" href="/salary/"><b>💵 연봉 실수령액 계산기</b><br><span class="hint">비과세 식대·청년 감면·퇴직금 포함 연봉 · 실수령액 역산 · 회사 부담 4대보험</span></a>
-<a class="card" href="/severance/"><b>📦 퇴직금 계산기</b><br><span class="hint">퇴직소득세 단계별 · IRP로 받을 때 세금 · 근속연수별 퇴직금 표</span></a>
-<a class="card" href="/subscription/"><b>🏢 청약 가점 계산기</b><br><span class="hint">84점 가점 · 1순위 판별·예치금 · 신혼·생애최초·다자녀 특별공급 자격</span></a>
-<a class="card" href="/rent/"><b>🔁 전월세 전환 계산기</b><br><span class="hint">전세↔월세 전환율 · 갱신 5% 상한 · 전세 기회비용 비교</span></a>
-<a class="card" href="/jeonse-loan/"><b>🏠 전세대출 계산기</b><br><span class="hint">월 이자 · 공공임대 월 임대료 + 이자 합산 · 내 돈으로 필요한 금액</span></a>
-<a class="card" href="/unemployment/"><b>🧾 실업급여 계산기</b><br><span class="hint">수급 일정 달력 · 소정급여일수 · 조기재취업수당 · 자진 퇴사 인정 사유</span></a>
-<a class="card" href="/parental-leave/"><b>👶 육아휴직 급여 계산기</b><br><span class="hint">6+6 부모육아휴직 · 부부 조합별 총액 · 근로시간 단축 · 배우자 출산휴가</span></a>
-<a class="card" href="/year-end-tax/"><b>📑 연말정산 환급 계산기</b><br><span class="hint">2026년 귀속 · 카드 사용처별·의료비·교육비 · 맞벌이 몰아주기 비교 · 총급여별 표</span></a>
-<a class="card" href="/acquisition-tax/"><b>🏷️ 부동산 취득세 계산기</b><br><span class="hint">시군구별 조정대상지역 자동 판정 · 생애최초·출산 감면 · 오피스텔·상가·토지</span></a>
-<a class="card" href="/capital-gains/"><b>📈 양도소득세 계산기</b><br><span class="hint">지역 자동 중과 판정 · 일시적 2주택 · 장기보유공제 표 · 양도차익별 세액표</span></a>
-<a class="card" href="/brokerage/"><b>🤝 중개수수료(복비) 계산기</b><br><span class="hint">매매·전세·월세 상한요율 · 오피스텔·상가 · 협의 요율 비교</span></a>
-<a class="card" href="/down-payment/"><b>🏗️ 청약 중도금 계산기</b><br><span class="hint">계약금·중도금·잔금 일정 · 중도금대출 이자 · 입주 때 필요한 돈</span></a>
+<p class="lead">대출 이자, 연봉 실수령액, 퇴직금, 세금, 정부 지원금처럼 기준이 복잡한 금액을 입력 몇 개로 바로 계산하는 무료 계산기 모음이에요. 입력값은 서버로 보내지 않고 이 화면에서만 계산해요.</p>
+
+<div class="hn-search" role="search">
+<input type="search" id="hn-q" placeholder="🔍 계산기 검색 (예: 퇴직금, 취득세, 월급)" aria-label="계산기 검색" autocomplete="off" enterkeyhint="go">
+<ul id="hn-qres" class="hn-qres" hidden></ul>
 </div>
-<p class="hint">📋 금액별로 보기: <a href="/salary/list/">연봉별 실수령액</a> · <a href="/acquisition-tax/list/">집값별 취득세</a> · <a href="/hourly/list/">주 근무시간별 알바 월급</a> · <a href="/brokerage/list/">금액별 복비</a></p>
+
+<div id="hn-favrow" hidden><h2>⭐ 내 즐겨찾기</h2><div class="hn-chips"></div></div>
+
+<h2>많이 찾는 계산기</h2>
+<!-- 순위만 표시(숫자 없음). 2주 정기 업데이트 때 GA4 페이지 조회수 순으로 손으로 바꾼다 (UPDATE.md 참고) -->
+<div class="card"><ol class="hn-top">
+<li><a href="/salary/">연봉 실수령액 계산기</a></li>
+<li><a href="/loan/">주택담보대출 이자 계산기</a></li>
+<li><a href="/severance/">퇴직금 계산기</a></li>
+<li><a href="/unemployment/">실업급여 계산기</a></li>
+<li><a href="/year-end-tax/">연말정산 환급 계산기</a></li>
+<li><a href="/car/">자동차 할부·리스·렌트 계산기</a></li>
+<li><a href="/hourly/">알바 시급·주휴수당 계산기</a></li>
+<li><a href="/acquisition-tax/">부동산 취득세 계산기</a></li>
+<li><a href="/parental-leave/">육아휴직 급여 계산기</a></li>
+<li><a href="/subscription/">청약 가점 계산기</a></li>
+</ol></div>
+
+<h2 id="all">분야별 계산기</h2>
+<div class="tools">
+<div class="card hn-cat"><h3>🏠 대출·부동산</h3>
+<a href="/loan/"><b>주택담보대출 이자 계산기</b><span class="hint">LTV·스트레스 DSR 대출 한도 · 은행별 금리 비교 · 정책대출 자격 · 월 상환액·중도상환</span></a>
+<a href="/jeonse-loan/"><b>전세대출 계산기</b><span class="hint">월 이자 · 공공임대 월 임대료 + 이자 합산 · 내 돈으로 필요한 금액</span></a>
+<a href="/down-payment/"><b>청약 중도금 계산기</b><span class="hint">계약금·중도금·잔금 일정 · 중도금대출 이자 · 입주 때 필요한 돈</span></a>
+<a href="/subscription/"><b>청약 가점 계산기</b><span class="hint">84점 가점 · 1순위 판별·예치금 · 신혼·생애최초·다자녀 특별공급 자격</span></a>
+<a href="/rent/"><b>전월세 전환 계산기</b><span class="hint">전세↔월세 전환율 · 갱신 5% 상한 · 전세 기회비용 비교</span></a>
+<a href="/brokerage/"><b>중개수수료(복비) 계산기</b><span class="hint">매매·전세·월세 상한요율 · 오피스텔·상가 · 협의 요율 비교</span></a>
+</div>
+<div class="card hn-cat"><h3>💵 급여·노동</h3>
+<a href="/salary/"><b>연봉 실수령액 계산기</b><span class="hint">비과세 식대·청년 감면·퇴직금 포함 연봉 · 실수령액 역산 · 회사 부담 4대보험</span></a>
+<a href="/hourly/"><b>알바 시급·주휴수당 계산기</b><span class="hint">1분 단위 근무시간 · 주휴수당 · 야간·연장 가산 · 수습 90% · 3.3%와 4대보험 비교</span></a>
+<a href="/severance/"><b>퇴직금 계산기</b><span class="hint">퇴직소득세 단계별 · IRP로 받을 때 세금 · 근속연수별 퇴직금 표</span></a>
+<a href="/unemployment/"><b>실업급여 계산기</b><span class="hint">수급 일정 달력 · 소정급여일수 · 조기재취업수당 · 자진 퇴사 인정 사유</span></a>
+</div>
+<div class="card hn-cat"><h3>📑 세금</h3>
+<a href="/year-end-tax/"><b>연말정산 환급 계산기</b><span class="hint">2026년 귀속 · 카드 사용처별·의료비·교육비 · 맞벌이 몰아주기 비교 · 총급여별 표</span></a>
+<a href="/acquisition-tax/"><b>부동산 취득세 계산기</b><span class="hint">시군구별 조정대상지역 자동 판정 · 생애최초·출산 감면 · 오피스텔·상가·토지</span></a>
+<a href="/capital-gains/"><b>양도소득세 계산기</b><span class="hint">지역 자동 중과 판정 · 일시적 2주택 · 장기보유공제 표 · 양도차익별 세액표</span></a>
+</div>
+<div class="card hn-cat"><h3>💰 지원금</h3>
+<a href="/eitc/"><b>근로·자녀장려금 계산기</b><span class="hint">가구 유형 자동 판정 · 업종별 조정률 · 재산 감액 · 반기 신청 비교</span></a>
+<a href="/parental-leave/"><b>육아휴직 급여 계산기</b><span class="hint">6+6 부모육아휴직 · 부부 조합별 총액 · 근로시간 단축 · 배우자 출산휴가</span></a>
+</div>
+<div class="card hn-cat"><h3>🚗 자동차</h3>
+<a href="/car/"><b>자동차 할부·리스·장기렌트 계산기</b><span class="hint">국산·수입 26개 브랜드 183개 차종 가격 자동 입력 · 전기차 지역별 보조금 · 은행 금리 · 할부·리스·렌트 비교</span></a>
+<a href="/car/list/"><b>차종별 신차 가격표</b><span class="hint">트림별 가격 · 월 납입금</span></a>
+</div>
+</div>
+<p class="hint">📋 금액별로 보기: <a href="/salary/list/">연봉별 실수령액</a> · <a href="/acquisition-tax/list/">집값별 취득세</a> · <a href="/hourly/list/">주 근무시간별 알바 월급</a> · <a href="/brokerage/list/">금액별 복비</a> · <a href="/severance/list/">근속연수별 퇴직금</a> · <a href="/loan/list/">대출 금액별 월 상환액</a></p>
+
+<h2>무료 양식</h2>
+<a class="card" href="/free/" style="display:block;text-decoration:none;color:inherit"><b>📥 무료 엑셀 양식 내려받기</b><br><span class="hint">가계부 · 경조사 장부 · 이사 체크리스트 · 결혼 준비 · 가게 장부</span></a>
+
+<h2>업데이트 노트</h2>
+<div class="card"><ul class="hn-notes">
+<li><time datetime="2026-09-30">2026.09.30</time>상단 메뉴 개편 · 내 계산기(즐겨찾기·최근 계산) · 결과 링크 공유 · 함께 쓰면 좋은 계산기</li>
+<li><time datetime="2026-09-30">2026.09.30</time>무료 엑셀 양식 5종 추가</li>
+<li><time datetime="2026-09-29">2026.09.29</time>전세대출 계산기 추가 · 청약 가점에 신혼희망타운 배점 추가</li>
+<li><time datetime="2026-09-29">2026.09.29</time>청약 중도금 계산기 추가</li>
+</ul><p class="hint" style="margin:8px 0 0"><a href="/updates.html">업데이트 노트 전체 보기 →</a></p></div>
+
 <h2>관련 블로그</h2>
 <div class="card"><a href="https://benefit.hanbogi.com">혜택 알리미</a> · 청년·신혼·육아·세금 혜택 정리<br><a href="https://license.hanbogi.com">자격증 한눈에</a> · 시험 일정·합격률 정리</div>
 </main>

@@ -45,7 +45,7 @@ function page({ url, title, desc, ogTitle, body, crumb }) {
 <meta property="og:url" content="${SITE}${url}">
 ${OG}
 ${crumbs(url.endsWith('/list/') ? [calc] : [calc, [ln, `/${dir}/list/`]], url, crumb || title.split(' — ')[0])}
-<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/favicon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/style.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/favicon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/style.css"><script src="/common.js" defer></script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5424435978828190" crossorigin="anonymous"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-19F8RF6971"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-19F8RF6971");</script>
 <style>.sub{font-size:.85rem;color:var(--muted)}td.n,th.n{text-align:right;white-space:nowrap}tr.me td{background:#eaf4f4;font-weight:700}@media (prefers-color-scheme:dark){tr.me td{background:#16302f}}</style>

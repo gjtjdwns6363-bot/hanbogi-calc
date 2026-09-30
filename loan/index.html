@@ -9,7 +9,7 @@
 <meta property="og:url" content="https://calc.hanbogi.com/loan/">
 <meta property="og:type" content="website"><meta property="og:site_name" content="한눈 계산기"><meta property="og:locale" content="ko_KR">
 <meta property="og:image" content="https://calc.hanbogi.com/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/favicon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/style.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/favicon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/style.css"><script src="/common.js" defer></script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5424435978828190" crossorigin="anonymous"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-19F8RF6971"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-19F8RF6971");</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
@@ -29,6 +29,7 @@
 .row2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}.row2 label{margin-top:8px}td.n,th.n{text-align:right;white-space:nowrap}.sub{font-size:.85rem;color:var(--muted)}.pick{cursor:pointer}.pick:hover{background:#eaf4f4}.ok{color:var(--ok);font-weight:700}.no{color:var(--accent);font-weight:700}details summary{cursor:pointer;font-weight:600;margin-top:14px}tr.me td{background:#eaf4f4;font-weight:700}
 .btn2{background:var(--brand)}svg text{fill:var(--muted);font-size:11px}.lg span{display:inline-block;width:10px;height:10px;border-radius:2px;margin:0 4px 0 10px}
 @media (prefers-color-scheme:dark){.pick:hover,tr.me td{background:#16302f}}</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"한눈 계산기","item":"https://calc.hanbogi.com/"},{"@type":"ListItem","position":2,"name":"주택담보대출 이자 계산기","item":"https://calc.hanbogi.com/loan/"}]}</script>
 </head>
 <body>
 <header><a href="/">한눈 계산기</a></header>
@@ -240,7 +241,7 @@ function limit(){
     (years>L.term?'수도권·규제지역 주담대 만기는 30년까지라 30년으로 계산했어요. ':'')+
     '규제 기준 '+REG.updated+'. 은행별 심사(신용점수, 소득 인정 방식, 방공제 등)로 실제 한도는 더 적을 수 있어요.';
   policyCheck(income,price,owned,first);
-  $('#lres').classList.add('show'); $('#lres').scrollIntoView({behavior:'smooth',block:'start'});
+  $('#lres').classList.add('show'); $('#lres').scrollIntoView({behavior:'smooth',block:'start'}); window.HN&&HN.done('#lres');
 }
 function policyCheck(income,price,owned,first){
   const nw=$('#lnew').checked, baby=$('#lbaby').checked, dual=$('#ldual').checked, kids=+val('kids'), none=owned==='none';
@@ -335,7 +336,7 @@ function run(){
   } else $('#ppBox').innerHTML='';
   let rows='<tr><th>연차</th><th>낸 원금</th><th>낸 이자</th><th>남은 원금</th></tr>';
   for(let y=0;y<years;y++){const yr=s.rows.slice(y*12,y*12+12);rows+=`<tr><td>${y+1}년</td><td>${won(yr.reduce((a,r)=>a+r.prin,0))}</td><td>${won(yr.reduce((a,r)=>a+r.int,0))}</td><td>${won(yr[yr.length-1].bal)}</td></tr>`}
-  $('#sched').innerHTML=rows; $('#res').classList.add('show'); $('#res').scrollIntoView({behavior:'smooth',block:'start'});
+  $('#sched').innerHTML=rows; $('#res').classList.add('show'); $('#res').scrollIntoView({behavior:'smooth',block:'start'}); window.HN&&HN.done('#res');
 }
 
 // ---------- ③ 은행 금리 ----------

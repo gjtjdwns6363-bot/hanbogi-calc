@@ -9,7 +9,7 @@
 <meta property="og:url" content="https://calc.hanbogi.com/hourly/">
 <meta property="og:type" content="website"><meta property="og:site_name" content="한눈 계산기"><meta property="og:locale" content="ko_KR">
 <meta property="og:image" content="https://calc.hanbogi.com/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/favicon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/style.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/favicon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/style.css"><script src="/common.js" defer></script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5424435978828190" crossorigin="anonymous"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-19F8RF6971"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-19F8RF6971");</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
@@ -26,6 +26,7 @@
 {"@type":"HowToStep","name":"월급 환산과 공제","text":"주휴 포함 주급에 4.345주를 곱해 월급을 구하고, 3.3% 또는 4대보험·소득세를 뺍니다."}]}</script>
 <style>.sub{font-size:.85rem;color:var(--muted)}#jtab td,#jtab th{font-size:.85rem;text-align:right}#jtab th:first-child,#jtab td:first-child{text-align:left}
 .tsel{display:flex;gap:6px;align-items:center}.tsel select{padding:10px 6px}#week td,#week th{padding:4px;font-size:.85rem}#week select{padding:8px 2px;font-size:.9rem}.jn{font-weight:700}.jn.no{color:var(--accent)}.jn.ok{color:var(--ok)}</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"한눈 계산기","item":"https://calc.hanbogi.com/"},{"@type":"ListItem","position":2,"name":"알바 시급·주휴수당 계산기","item":"https://calc.hanbogi.com/hourly/"}]}</script>
 </head>
 <body>
 <header><a href="/">한눈 계산기</a></header>
@@ -202,7 +203,7 @@ function run(){
   if(tax==='ins') h+=row('국민연금',d.pension,'4.75%')+row('건강보험',d.health,'3.595%')+row('장기요양',d.care,'건보료의 13.14%')+row('고용보험',d.employ,'0.9%')+row('소득세',d.income,'간이세액표')+row('지방소득세',d.local,'소득세의 10%');
   if(tax!=='none') h+=row('공제 합계',d.total)+`<tr><th>세후 월 급여</th><td><b>${won(d.net)}</b></td></tr>`;
   $('#rtab').innerHTML=h+cmpRows(r.month,'월');
-  $('#res').classList.add('show'); $('#res').scrollIntoView({behavior:'smooth',block:'start'}); table(wage);
+  $('#res').classList.add('show'); $('#res').scrollIntoView({behavior:'smooth',block:'start'}); window.HN&&HN.done('#res'); table(wage);
 }
 function runPeriod(wage,mode){
   const five=val('five')==='1', full=val('full')==='1', tax=val('tax'), weeks=+$('#weeks').value;
@@ -226,7 +227,7 @@ function runPeriod(wage,mode){
   if(tax==='ins') h+=row('국민연금',d.pension,'4.75%')+row('건강보험',d.health,'3.595%')+row('장기요양',d.care,'건보료의 13.14%')+row('고용보험',d.employ,'0.9%')+row('소득세',d.income,'간이세액표')+row('지방소득세',d.local,'소득세의 10%');
   if(tax!=='none') h+=row('공제 합계',d.total)+`<tr><th>세후 ${wl} 급여</th><td><b>${won(d.net)}</b></td></tr>`;
   $('#rtab').innerHTML=h+cmpRows(r.total,wl);
-  $('#res').classList.add('show'); $('#res').scrollIntoView({behavior:'smooth',block:'start'}); table(wage);
+  $('#res').classList.add('show'); $('#res').scrollIntoView({behavior:'smooth',block:'start'}); window.HN&&HN.done('#res'); table(wage);
 }
 table(HOURLY.wage);
 {const h=+new URLSearchParams(location.search).get("h");if(h>0&&h<=40){$("#s0").value="09:00";$("#e0").value=hhmm(540+Math.round(h*12));$("#b0").value=0;$("#nd").value=5;run();}}

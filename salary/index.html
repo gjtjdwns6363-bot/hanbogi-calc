@@ -9,7 +9,7 @@
 <meta property="og:url" content="https://calc.hanbogi.com/salary/">
 <meta property="og:type" content="website"><meta property="og:site_name" content="한눈 계산기"><meta property="og:locale" content="ko_KR">
 <meta property="og:image" content="https://calc.hanbogi.com/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/favicon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/style.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/favicon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/style.css"><script src="/common.js" defer></script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5424435978828190" crossorigin="anonymous"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-19F8RF6971"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-19F8RF6971");</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
@@ -27,6 +27,7 @@
 {"@type":"HowToStep","name":"소득세·지방소득세 빼기","text":"근로소득 간이세액표에서 과세 급여와 공제대상가족 수로 소득세를 찾고, 8~20세 자녀 공제와 중소기업 취업자 감면을 빼고 10%를 지방소득세로 더합니다."},
 {"@type":"HowToStep","name":"실수령액","text":"월급에서 4대보험과 소득세·지방소득세를 모두 뺀 금액이 매달 통장에 들어오는 실수령액입니다."}]}</script>
 <style>.sub{font-size:.85rem;color:var(--muted)}#stab td,#stab th{font-size:.85rem;text-align:right}#stab th:first-child,#stab td:first-child{text-align:left}.tsel{display:flex;gap:6px;align-items:center}#rtab td.n,#rtab th.n{text-align:right;white-space:nowrap}</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"한눈 계산기","item":"https://calc.hanbogi.com/"},{"@type":"ListItem","position":2,"name":"연봉 실수령액 계산기","item":"https://calc.hanbogi.com/salary/"}]}</script>
 </head>
 <body>
 <header><a href="/">한눈 계산기</a></header>
@@ -160,7 +161,7 @@ function run(){
     `<tr><th>월 실수령액</th><td class="n" colspan="2"><b>${won(r.net)}</b></td><td class="sub">세전 ${won(gross)} − 공제 합계</td></tr>`+
     `<tr><th>연 실수령액</th><td class="n" colspan="2"><b>${won(yr.net)}</b></td><td class="sub">12개월 합계${o.sme?` · 감면 연 ${won(yr.cut)}(한도 200만 원)`:''}${d===13?' · 퇴직금 1년치 '+won(gross)+'은 퇴직할 때 따로':''}</td></tr>`+
     `<tr><th>회사 총인건비 (연)</th><td class="n" colspan="2"><b>${won(yearGross+e.total*12+(d===13?0:gross))}</b></td><td class="sub">세전 급여 ${won(gross*12)} + 4대보험 회사 몫 ${won(e.total*12)} + 퇴직금 적립 ${won(gross)}(월급 1개월치)</td></tr>`;
-  $('#res').classList.add('show'); $('#res').scrollIntoView({behavior:'smooth',block:'start'}); table();
+  $('#res').classList.add('show'); $('#res').scrollIntoView({behavior:'smooth',block:'start'}); window.HN&&HN.done('#res'); table();
 }
 table();
 {const q=+new URLSearchParams(location.search).get("amt");if(q>0){$("#amt").value=q.toLocaleString("ko-KR");run();}}

@@ -9,7 +9,7 @@
 <meta property="og:url" content="https://calc.hanbogi.com/capital-gains/">
 <meta property="og:type" content="website"><meta property="og:site_name" content="한눈 계산기"><meta property="og:locale" content="ko_KR">
 <meta property="og:image" content="https://calc.hanbogi.com/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/favicon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/style.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/favicon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/style.css"><script src="/common.js" defer></script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5424435978828190" crossorigin="anonymous"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-19F8RF6971"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-19F8RF6971");</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
@@ -25,6 +25,7 @@
 {"@type":"HowToStep","name":"장기보유특별공제","text":"보유 3년 이상이면 표1(연 2%) 또는 1주택 2년 거주 시 표2(보유·거주 각 연 4%)를 뺍니다. 조정대상지역 다주택 중과는 공제가 없습니다."},
 {"@type":"HowToStep","name":"세율 적용","text":"기본공제 250만 원을 뺀 과세표준에 기본세율 6~45%(단기 70%·60%, 중과 +20%p·+30%p)를 곱하고 지방소득세 10%를 더합니다."}]}</script>
 <style>.sub{font-size:.85rem;color:var(--muted)}.row2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}.row2 label{margin-top:8px}details summary{cursor:pointer;font-weight:600;margin-top:14px}.adjy{color:#b3261e;font-weight:600}.adjn{color:#1b7f5a;font-weight:600}td.n,th.n{text-align:right;white-space:nowrap}</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"한눈 계산기","item":"https://calc.hanbogi.com/"},{"@type":"ListItem","position":2,"name":"양도소득세 계산기","item":"https://calc.hanbogi.com/capital-gains/"}]}</script>
 </head>
 <body>
 <header><a href="/">한눈 계산기</a></header>
@@ -224,7 +225,7 @@ function run(){
     if(r.heavy) notes.push('조정대상지역 공고 전 계약·중과 제외 주택이면 "중과 제외 대상"을 예로 바꿔 보세요.');
   }
   $('#rnote').textContent=notes.join(' ');
-  $('#res').classList.add('show'); $('#res').scrollIntoView({behavior:'smooth',block:'start'});
+  $('#res').classList.add('show'); $('#res').scrollIntoView({behavior:'smooth',block:'start'}); window.HN&&HN.done('#res');
 }
 </script>
 </body></html>

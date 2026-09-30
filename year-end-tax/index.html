@@ -9,7 +9,7 @@
 <meta property="og:url" content="https://calc.hanbogi.com/year-end-tax/">
 <meta property="og:type" content="website"><meta property="og:site_name" content="한눈 계산기"><meta property="og:locale" content="ko_KR">
 <meta property="og:image" content="https://calc.hanbogi.com/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/favicon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/style.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/favicon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/style.css"><script src="/common.js" defer></script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5424435978828190" crossorigin="anonymous"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-19F8RF6971"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-19F8RF6971");</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
@@ -25,6 +25,7 @@
 {"@type":"HowToStep","name":"세액공제 항목 입력","text":"보험료, 의료비(일반·본인 등·난임), 교육비, 기부금, 월세, 연금저축·IRP, 주택청약 납입액을 넣습니다."},
 {"@type":"HowToStep","name":"결과 확인","text":"결정세액과 이미 낸 세금을 비교해 환급액 또는 추가 납부액을 확인하고, 맞벌이라면 부양가족 배분 비교를 봅니다."}]}</script>
 <style>.sub{font-size:.85rem;color:var(--muted)}.grp{margin-top:18px;padding-top:6px;border-top:1px dashed var(--line);font-weight:700;color:var(--brand)}.row2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}.row2 label{margin-top:8px}.row3{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:8px}details summary{cursor:pointer;font-weight:600;margin-top:14px}td.n,th.n{text-align:right;white-space:nowrap}.chk{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px}.chk label{margin:0;font-weight:500}tr.best td{background:#eaf4f4;font-weight:700}@media (prefers-color-scheme:dark){tr.best td{background:#16302f}}</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"한눈 계산기","item":"https://calc.hanbogi.com/"},{"@type":"ListItem","position":2,"name":"연말정산 환급 계산기","item":"https://calc.hanbogi.com/year-end-tax/"}]}</script>
 </head>
 <body>
 <header><a href="/">한눈 계산기</a></header>
@@ -303,7 +304,7 @@ function run(){
     :t.k==='card'?`체크카드·현금영수증으로 약 ${man(t.room/1e4).trim()} 더 쓰면 카드 공제 한도(${man(c.cap/1e4).trim()})를 채워요.`
     :`카드 사용액이 총급여 25%(${man(c.min/1e4).trim()})보다 ${man(Math.ceil(t.room/1e4)).trim()} 적어 카드 공제가 없어요.`);
   $('#rtips').innerHTML=T.length?'<h3 style="font-size:1rem;margin:14px 0 6px">💡 연말까지 더 받을 수 있는 방법</h3><ul>'+T.map(x=>'<li>'+x+'</li>').join('')+'</ul>':'';
-  $('#res').classList.add('show'); $('#res').scrollIntoView({behavior:'smooth',block:'start'});
+  $('#res').classList.add('show'); $('#res').scrollIntoView({behavior:'smooth',block:'start'}); window.HN&&HN.done('#res');
   if(!num($('#cA').value)){ $('#cA').value=(g/1e4).toLocaleString('ko-KR'); $('#cAc').value=$('#credit').value; $('#cAd').value=$('#debit').value; }
 }
 function runCouple(){

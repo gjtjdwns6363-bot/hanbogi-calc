@@ -9,13 +9,14 @@
 <meta property="og:url" content="https://calc.hanbogi.com/jeonse-loan/">
 <meta property="og:type" content="website"><meta property="og:site_name" content="한눈 계산기"><meta property="og:locale" content="ko_KR">
 <meta property="og:image" content="https://calc.hanbogi.com/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/favicon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/style.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/favicon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/style.css"><script src="/common.js" defer></script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5424435978828190" crossorigin="anonymous"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-19F8RF6971"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-19F8RF6971");</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
 {"@type":"Question","name":"전세대출 월 이자는 어떻게 계산하나요?","acceptedAnswer":{"@type":"Answer","text":"만기일시상환이면 대출금 × 연 금리 ÷ 12입니다. 예를 들어 8천만 원을 연 4%로 빌리면 월 이자는 약 26만 7천 원입니다. 원리금균등이면 원금이 함께 줄어 월 납입액이 더 커집니다."}},
 {"@type":"Question","name":"공공임대주택은 월 임대료와 대출 이자를 둘 다 내나요?","acceptedAnswer":{"@type":"Answer","text":"임대보증금을 대출로 마련하면 매달 월 임대료와 대출 이자를 함께 냅니다. 보증금만 있는 일반 전세는 월 임대료가 없어 이자만 냅니다. 공고문에 보증금과 월 임대료가 함께 적혀 있는 임대주택이 해당됩니다."}},
 {"@type":"Question","name":"임대보증금을 전부 대출받을 수 있나요?","acceptedAnswer":{"@type":"Answer","text":"대출 상품마다 보증금 대비 비율과 금액 한도가 정해져 있어 보통 전액은 안 됩니다. 나머지는 자기 자금으로 내야 합니다. 이 계산기는 비율과 한도를 직접 넣어 필요한 자기 자금을 보여 줍니다."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"한눈 계산기","item":"https://calc.hanbogi.com/"},{"@type":"ListItem","position":2,"name":"전세대출 계산기","item":"https://calc.hanbogi.com/jeonse-loan/"}]}</script>
 </head>
 <body>
 <header><a href="/">한눈 계산기</a></header>
@@ -132,7 +133,7 @@ function run(){
   else t+=`<tr><th>${years}년 총 이자</th><td>${won(r.totalInt)}</td></tr>`;
   $('#rtab').innerHTML=t;
   $('#rnote').textContent=r.loan<dep*Math.min(100,+$('#ratio').value)/100-1?'대출 한도 때문에 비율보다 적게 빌리는 것으로 계산했어요.':'';
-  $('#res').classList.add('show'); $('#res').scrollIntoView({behavior:'smooth',block:'start'});
+  $('#res').classList.add('show'); $('#res').scrollIntoView({behavior:'smooth',block:'start'}); window.HN&&HN.done('#res');
 }
 </script>
 </body></html>

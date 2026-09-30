@@ -9,7 +9,7 @@
 <meta property="og:url" content="https://calc.hanbogi.com/parental-leave/">
 <meta property="og:type" content="website"><meta property="og:site_name" content="한눈 계산기"><meta property="og:locale" content="ko_KR">
 <meta property="og:image" content="https://calc.hanbogi.com/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/favicon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/style.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/favicon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/style.css"><script src="/common.js" defer></script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5424435978828190" crossorigin="anonymous"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-19F8RF6971"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-19F8RF6971");</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
@@ -24,6 +24,7 @@
 {"@type":"HowToStep","name":"월별 급여와 부부 합계 확인","text":"1~3개월 250만, 4~6개월 200만, 7개월부터 160만 원 상한과 6+6 특례가 반영된 월별 금액, 부부 휴직 조합별 총액을 봅니다."},
 {"@type":"HowToStep","name":"고용24에서 신청","text":"휴직 시작 1개월 뒤부터 매달 또는 한꺼번에 고용24에서 신청하고, 휴직이 끝난 뒤 12개월 안에 신청해야 합니다."}]}</script>
 <style>.sub{font-size:.85rem;color:var(--muted)}#rtab td,#rtab th,#stab td,#stab th{text-align:right}#rtab th:first-child,#rtab td:first-child,#stab th:first-child,#stab td:first-child{text-align:left}</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"한눈 계산기","item":"https://calc.hanbogi.com/"},{"@type":"ListItem","position":2,"name":"육아휴직 급여 계산기","item":"https://calc.hanbogi.com/parental-leave/"}]}</script>
 </head>
 <body>
 <header><a href="/">한눈 계산기</a></header>
@@ -156,7 +157,7 @@ function run(){
     $('#ctab').innerHTML='<tr><th>나 + 배우자</th><th>내 급여</th><th>배우자 급여</th><th>합계</th></tr>'+combos(wage,b).map(c=>`<tr><td>${c.m1}개월 + ${c.m2}개월${c.m2&&c.m1>=6&&c.m2>=6?' <span class="sub">6+6</span>':''}</td><td>${won(c.me)}</td><td>${won(c.sp)}</td><td><b>${won(c.total)}</b></td></tr>`).join('');
     $('#combo').style.display=''; } else $('#combo').style.display='none';
   $('#rnote').textContent=(note+' 육아휴직 급여는 비과세라 이 금액 그대로 받아요.').trim();
-  $('#res').classList.add('show'); $('#res').scrollIntoView({behavior:'smooth',block:'start'});
+  $('#res').classList.add('show'); $('#res').scrollIntoView({behavior:'smooth',block:'start'}); window.HN&&HN.done('#res');
 }
 {const w=+new URLSearchParams(location.search).get('wage'); if(w>0){ $('#wage').value=w.toLocaleString('ko-KR'); $('#wage2').value=w.toLocaleString('ko-KR'); }}
 document.querySelectorAll('input[name=sme]').forEach(r=>r.onchange=()=>$('#res2').classList.contains('show')&&run2());
@@ -173,7 +174,7 @@ function run2(){
     row('회사 월급 (시간 비례 가정)',won(s.keep))+row('월급 + 단축 급여',`<b>${won(s.keep+s.pay)}</b> <span class="sub">(단축 전 ${won(wage)}의 ${Math.round((s.keep+s.pay)/wage*100)}%)</span>`);
   const sp=spouseLeave(wage,val('sme')==='1');
   $('#r3tab').innerHTML=row('20일분 통상임금',won(sp.full))+row('고용보험 지원',won(sp.gov)+(val('sme')==='1'?' <span class="sub">(상한 1,684,210원)</span>':' <span class="sub">(대규모 기업은 지원 없음)</span>'))+row('회사가 주는 금액',won(sp.employer));
-  $('#res2').classList.add('show'); $('#res2').scrollIntoView({behavior:'smooth',block:'start'});
+  $('#res2').classList.add('show'); $('#res2').scrollIntoView({behavior:'smooth',block:'start'}); window.HN&&HN.done('#res2');
 }
 </script>
 </body></html>

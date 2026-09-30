@@ -9,7 +9,7 @@
 <meta property="og:url" content="https://calc.hanbogi.com/car/">
 <meta property="og:type" content="website"><meta property="og:site_name" content="한눈 계산기"><meta property="og:locale" content="ko_KR">
 <meta property="og:image" content="https://calc.hanbogi.com/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/favicon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/style.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/favicon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/style.css"><script src="/common.js" defer></script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5424435978828190" crossorigin="anonymous"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-19F8RF6971"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-19F8RF6971");</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
@@ -17,6 +17,7 @@
 {"@type":"Question","name":"할부, 리스, 장기렌트 중 무엇이 싼가요?","acceptedAnswer":{"@type":"Answer","text":"계약 기간 동안 낸 돈만 보면 리스·렌트가 적어 보이지만 만기에 차가 남지 않습니다. 할부는 차가 내 것이 되므로 만기 차량 가치를 빼고 비교해야 합니다. 렌트는 보험료·자동차세·정비가 포함된 대신 금리(수수료)가 더 높은 편입니다."}},
 {"@type":"Question","name":"유예할부는 무엇인가요?","acceptedAnswer":{"@type":"Answer","text":"차값의 일부를 만기에 한 번에 갚기로 미뤄 두고, 나머지만 매달 나눠 내는 할부입니다. 월 납입금은 줄지만 유예금에도 이자가 붙어 총이자는 늘어납니다."}}]}</script>
 <style>.sub{font-size:.85rem;color:var(--muted)}.prodlist td,.prodlist th{font-size:.85rem}.pick{cursor:pointer}.pick:hover{background:#eaf4f4}.row2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}.row2 label{margin-top:8px}td.n,th.n{text-align:right;white-space:nowrap}details summary{cursor:pointer;font-weight:600;margin-top:14px}@media (prefers-color-scheme:dark){.pick:hover{background:#16302f}}</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"한눈 계산기","item":"https://calc.hanbogi.com/"},{"@type":"ListItem","position":2,"name":"자동차 할부·리스·렌트 계산기","item":"https://calc.hanbogi.com/car/"}]}</script>
 </head>
 <body>
 <header><a href="/">한눈 계산기</a></header>
@@ -208,7 +209,7 @@ function run(){
    c('운용리스',L.pay,L.deposit,L.pay*n+ex*n,`반납 시 보증금 환급 · 인수하려면 ${won(L.residual)}`)+
    c('장기렌트',R.pay,R.deposit,R.outlay,`반납 시 보증금 환급 · 보험·세금·정비 포함`);
   $('#cnote').innerHTML=`가정: 리스 연 ${lr}%, 렌트 연 ${rr}%(수수료 포함 환산), 보증금 ${dep}%, 잔존가치 ${res}%(${n}개월), 보험·세금·정비 월 ${won(ex)}(할부·리스는 따로 낸다고 보고 총지출에 더함). 리스는 취득세 ${truck?5:kind==='light'?4:7}%(감면 반영), 렌트는 영업용 4%를 회사가 내고 월 납입에 나눠 넣었어요. 할부는 만기에 차가 남으니 총지출에서 차 가치를 빼고 비교하세요.${used?' 중고차 리스·렌트는 상품이 적고 조건 차이가 커요.':''}`;
-  $('#res').classList.add('show'); $('#res').scrollIntoView({behavior:'smooth',block:'start'});
+  $('#res').classList.add('show'); $('#res').scrollIntoView({behavior:'smooth',block:'start'}); window.HN&&HN.done('#res');
 }
 
 // 주소 파라미터로 미리 채우기: ?maker=현대&model=avante&trim=0 (trim은 번호 또는 이름)
