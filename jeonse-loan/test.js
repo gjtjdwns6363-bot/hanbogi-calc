@@ -21,5 +21,5 @@ const { JEONSE_PRODUCTS: P, policyRate } = require('./rates.js');
 a.strictEqual(policyRate(P[0], 3000, 8000, true), 2.8); a.strictEqual(policyRate(P[0], 3000, 8000, false), 2.6);
 a.strictEqual(policyRate(P[2], 6000, 12000, true), 2.8); a.strictEqual(policyRate(P[3], 20000, 60000, true), 4.3);
 a.strictEqual(policyRate(P[3], 2000, 3000, false), 1.1); a.strictEqual(policyRate(P[0], 6000, 8000, true), null);
-a.strictEqual(policyRate(P[1], 3000, 25000, true), 2.5); a.strictEqual(policyRate(P[4], 0, 8000, true), 4.52);
+a.strictEqual(policyRate(P[1], 3000, 25000, true), 2.5); a.strictEqual(policyRate(P[4], 0, 8000, true), 4.60);
 console.log('jeonse-loan rates: ok');

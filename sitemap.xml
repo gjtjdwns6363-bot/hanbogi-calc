@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url><loc>https://calc.hanbogi.com/</loc><lastmod>2026-09-30</lastmod></url>
+<url><loc>https://calc.hanbogi.com/</loc><lastmod>2026-10-01</lastmod></url>
 <url><loc>https://calc.hanbogi.com/eitc/</loc><lastmod>2026-09-27</lastmod></url>
-<url><loc>https://calc.hanbogi.com/loan/</loc><lastmod>2026-09-27</lastmod></url>
-<url><loc>https://calc.hanbogi.com/car/</loc><lastmod>2026-09-27</lastmod></url>
+<url><loc>https://calc.hanbogi.com/loan/</loc><lastmod>2026-10-01</lastmod></url>
+<url><loc>https://calc.hanbogi.com/car/</loc><lastmod>2026-10-01</lastmod></url>
 <url><loc>https://calc.hanbogi.com/salary/</loc><lastmod>2026-09-27</lastmod></url>
 <url><loc>https://calc.hanbogi.com/severance/</loc><lastmod>2026-09-27</lastmod></url>
 <url><loc>https://calc.hanbogi.com/subscription/</loc><lastmod>2026-09-29</lastmod></url>
 <url><loc>https://calc.hanbogi.com/rent/</loc><lastmod>2026-09-27</lastmod></url>
-<url><loc>https://calc.hanbogi.com/jeonse-loan/</loc><lastmod>2026-09-29</lastmod></url>
+<url><loc>https://calc.hanbogi.com/jeonse-loan/</loc><lastmod>2026-10-01</lastmod></url>
 <url><loc>https://calc.hanbogi.com/unemployment/</loc><lastmod>2026-09-27</lastmod></url>
 <url><loc>https://calc.hanbogi.com/parental-leave/</loc><lastmod>2026-09-27</lastmod></url>
 <url><loc>https://calc.hanbogi.com/year-end-tax/</loc><lastmod>2026-09-27</lastmod></url>
@@ -19,7 +19,7 @@
 <url><loc>https://calc.hanbogi.com/hourly/</loc><lastmod>2026-09-27</lastmod></url>
 <url><loc>https://calc.hanbogi.com/privacy.html</loc><lastmod>2026-09-30</lastmod></url>
 <url><loc>https://calc.hanbogi.com/about.html</loc><lastmod>2026-09-27</lastmod></url>
-<url><loc>https://calc.hanbogi.com/updates.html</loc><lastmod>2026-09-30</lastmod></url>
+<url><loc>https://calc.hanbogi.com/updates.html</loc><lastmod>2026-10-01</lastmod></url>
 <!-- car -->
 <url><loc>https://calc.hanbogi.com/car/casper/</loc><lastmod>2026-09-27</lastmod></url>
 <url><loc>https://calc.hanbogi.com/car/casper-electric/</loc><lastmod>2026-09-27</lastmod></url>
@@ -206,22 +206,6 @@
 <url><loc>https://calc.hanbogi.com/car/gmc-hummer-ev-suv/</loc><lastmod>2026-09-27</lastmod></url>
 <url><loc>https://calc.hanbogi.com/car/list/</loc><lastmod>2026-09-27</lastmod></url>
 <!-- /car -->
-<!-- loan -->
-<url><loc>https://calc.hanbogi.com/loan/5000/</loc><lastmod>2026-09-27</lastmod></url>
-<url><loc>https://calc.hanbogi.com/loan/10000/</loc><lastmod>2026-09-27</lastmod></url>
-<url><loc>https://calc.hanbogi.com/loan/15000/</loc><lastmod>2026-09-27</lastmod></url>
-<url><loc>https://calc.hanbogi.com/loan/20000/</loc><lastmod>2026-09-27</lastmod></url>
-<url><loc>https://calc.hanbogi.com/loan/25000/</loc><lastmod>2026-09-27</lastmod></url>
-<url><loc>https://calc.hanbogi.com/loan/30000/</loc><lastmod>2026-09-27</lastmod></url>
-<url><loc>https://calc.hanbogi.com/loan/35000/</loc><lastmod>2026-09-27</lastmod></url>
-<url><loc>https://calc.hanbogi.com/loan/40000/</loc><lastmod>2026-09-27</lastmod></url>
-<url><loc>https://calc.hanbogi.com/loan/50000/</loc><lastmod>2026-09-27</lastmod></url>
-<url><loc>https://calc.hanbogi.com/loan/60000/</loc><lastmod>2026-09-27</lastmod></url>
-<url><loc>https://calc.hanbogi.com/loan/70000/</loc><lastmod>2026-09-27</lastmod></url>
-<url><loc>https://calc.hanbogi.com/loan/80000/</loc><lastmod>2026-09-27</lastmod></url>
-<url><loc>https://calc.hanbogi.com/loan/100000/</loc><lastmod>2026-09-27</lastmod></url>
-<url><loc>https://calc.hanbogi.com/loan/list/</loc><lastmod>2026-09-27</lastmod></url>
-<!-- /loan -->
 <!-- benefit -->
 <url><loc>https://calc.hanbogi.com/eitc/single/</loc><lastmod>2026-09-27</lastmod></url>
 <url><loc>https://calc.hanbogi.com/eitc/one-earner/</loc><lastmod>2026-09-27</lastmod></url>
@@ -563,4 +547,20 @@
 <url><loc>https://calc.hanbogi.com/brokerage/list/</loc><lastmod>2026-09-27</lastmod></url>
 <!-- /longtail -->
 <url><loc>https://calc.hanbogi.com/free/</loc></url>
+<!-- loan -->
+<url><loc>https://calc.hanbogi.com/loan/5000/</loc><lastmod>2026-10-01</lastmod></url>
+<url><loc>https://calc.hanbogi.com/loan/10000/</loc><lastmod>2026-10-01</lastmod></url>
+<url><loc>https://calc.hanbogi.com/loan/15000/</loc><lastmod>2026-10-01</lastmod></url>
+<url><loc>https://calc.hanbogi.com/loan/20000/</loc><lastmod>2026-10-01</lastmod></url>
+<url><loc>https://calc.hanbogi.com/loan/25000/</loc><lastmod>2026-10-01</lastmod></url>
+<url><loc>https://calc.hanbogi.com/loan/30000/</loc><lastmod>2026-10-01</lastmod></url>
+<url><loc>https://calc.hanbogi.com/loan/35000/</loc><lastmod>2026-10-01</lastmod></url>
+<url><loc>https://calc.hanbogi.com/loan/40000/</loc><lastmod>2026-10-01</lastmod></url>
+<url><loc>https://calc.hanbogi.com/loan/50000/</loc><lastmod>2026-10-01</lastmod></url>
+<url><loc>https://calc.hanbogi.com/loan/60000/</loc><lastmod>2026-10-01</lastmod></url>
+<url><loc>https://calc.hanbogi.com/loan/70000/</loc><lastmod>2026-10-01</lastmod></url>
+<url><loc>https://calc.hanbogi.com/loan/80000/</loc><lastmod>2026-10-01</lastmod></url>
+<url><loc>https://calc.hanbogi.com/loan/100000/</loc><lastmod>2026-10-01</lastmod></url>
+<url><loc>https://calc.hanbogi.com/loan/list/</loc><lastmod>2026-10-01</lastmod></url>
+<!-- /loan -->
 </urlset>
