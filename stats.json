@@ -1,6 +1,6 @@
-{"updated":"2026-10-01","views":{
+{"updated":"2026-10-02","views":{
 "/loan/":{"total":13,"d30":13},
-"/car/":{"total":11,"d30":11},
+"/car/":{"total":12,"d30":12},
 "/hourly/":{"total":6,"d30":6},
 "/rent/":{"total":6,"d30":6},
 "/salary/":{"total":6,"d30":6},
@@ -8,7 +8,7 @@
 "/brokerage/":{"total":4,"d30":4},
 "/jeonse-loan/":{"total":3,"d30":3},
 "/severance/":{"total":3,"d30":3},
-"/subscription/":{"total":3,"d30":3},
+"/subscription/":{"total":4,"d30":4},
 "/down-payment/":{"total":2,"d30":2},
 "/unemployment/":{"total":2,"d30":2},
 "/acquisition-tax/":{"total":1,"d30":1},
