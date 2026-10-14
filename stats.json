@@ -1,4 +1,4 @@
-{"updated":"2026-10-14","views":{
+{"updated":"2026-10-15","views":{
 "/loan/":{"total":16,"d30":16},
 "/car/":{"total":20,"d30":20},
 "/hourly/":{"total":12,"d30":12},
@@ -6,13 +6,13 @@
 "/salary/":{"total":7,"d30":7},
 "/jeonse-loan/":{"total":6,"d30":6},
 "/rent/":{"total":6,"d30":6},
-"/eitc/":{"total":5,"d30":5},
+"/eitc/":{"total":6,"d30":6},
 "/brokerage/":{"total":4,"d30":4},
 "/parental-leave/":{"total":4,"d30":4},
 "/unemployment/":{"total":4,"d30":4},
 "/severance/":{"total":3,"d30":3},
 "/down-payment/":{"total":2,"d30":2},
 "/year-end-tax/":{"total":2,"d30":2},
-"/acquisition-tax/":{"total":1,"d30":1},
+"/acquisition-tax/":{"total":3,"d30":3},
 "/capital-gains/":{"total":0,"d30":0}
 }}
