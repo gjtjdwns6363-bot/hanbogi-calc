@@ -1,9 +1,9 @@
-{"updated":"2026-10-18","views":{
+{"updated":"2026-10-19","views":{
 "/loan/":{"total":16,"d30":16},
-"/car/":{"total":21,"d30":21},
-"/hourly/":{"total":24,"d30":24},
+"/car/":{"total":23,"d30":23},
+"/hourly/":{"total":25,"d30":25},
 "/subscription/":{"total":10,"d30":10},
-"/salary/":{"total":7,"d30":7},
+"/salary/":{"total":8,"d30":8},
 "/jeonse-loan/":{"total":6,"d30":6},
 "/rent/":{"total":6,"d30":6},
 "/eitc/":{"total":6,"d30":6},
@@ -14,5 +14,5 @@
 "/down-payment/":{"total":2,"d30":2},
 "/year-end-tax/":{"total":2,"d30":2},
 "/acquisition-tax/":{"total":4,"d30":4},
-"/capital-gains/":{"total":0,"d30":0}
+"/capital-gains/":{"total":1,"d30":1}
 }}
