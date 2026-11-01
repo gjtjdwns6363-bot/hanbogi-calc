@@ -1,4 +1,4 @@
-{"updated":"2026-11-01","views":{
+{"updated":"2026-11-02","views":{
 "/loan/":{"total":18,"d30":2},
 "/car/":{"total":40,"d30":24},
 "/hourly/":{"total":25,"d30":18},
@@ -9,7 +9,7 @@
 "/eitc/":{"total":6,"d30":1},
 "/brokerage/":{"total":20,"d30":16},
 "/parental-leave/":{"total":4,"d30":3},
-"/unemployment/":{"total":5,"d30":3},
+"/unemployment/":{"total":5,"d30":2},
 "/severance/":{"total":6,"d30":3},
 "/down-payment/":{"total":5,"d30":3},
 "/year-end-tax/":{"total":9,"d30":8},
