@@ -36,6 +36,11 @@ assert.strictEqual(tempOk('2020-01-01', '2024-06-01', '2027-06-02'), false); // 
 assert.strictEqual(tempOk('2024-01-01', '2024-12-31', '2026-01-01'), false); // 종전 취득 1년이 안 돼 신규 취득
 assert.strictEqual(tempOk('2024-01-01', '2025-01-01', '2026-01-01'), true);
 assert.strictEqual(tempOk('2024-01-01', '', '2026-01-01'), false);
+// 조정→조정 (2026-08-04 이후 신규 취득, 2026-10-01 이후 양도): 2년
+assert.strictEqual(tempOk('2020-01-01', '2026-09-01', '2028-09-01', true), true);
+assert.strictEqual(tempOk('2020-01-01', '2026-09-01', '2028-09-02', true), false);
+assert.strictEqual(tempOk('2020-01-01', '2026-09-01', '2028-09-02', false), true); // 비조정이면 3년
+assert.strictEqual(tempOk('2020-01-01', '2026-08-03', '2029-08-03', true), true);  // 8-03 이전 취득은 종전 3년
 // 일시적 2주택 요건을 채우면 1주택처럼 12억 이하 비과세
 assert.strictEqual(c({ kind: 'one', sale: 9e8, buy: 5e8, acq: '2020-01-01' }).status, 'free');
 // 장특공 표2 보유·거주 각 연 4% (10년 이상 40%+40%), 거주 2년 8%는 보유 3년 이상일 때만
