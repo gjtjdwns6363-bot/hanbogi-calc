@@ -17,13 +17,13 @@ const ld = o => '<script type="application/ld+json">' + JSON.stringify({ '@conte
 const crumbs = list => ld({ '@type': 'BreadcrumbList', itemListElement: [['한눈 계산기', '/'], ...list].map(([name, u], i) => ({ '@type': 'ListItem', position: i + 1, name, item: SITE + u })) });
 const faq = qa => ld({ '@type': 'FAQPage', mainEntity: qa.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) });
 
-function page({ url, title, desc, body, crumb, qa }) {
+function page({ url, title, desc, body, crumb, qa, noindex }) {
   return `<!doctype html>
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="naver-site-verification" content="21421c877a507dea4b5be99d5ec0d9e9fd8d7b50" />
 <title>${esc(title)} | 한눈 계산기</title>
 <meta name="description" content="${esc(desc)}">
-<link rel="canonical" href="${SITE}${url}">
+<link rel="canonical" href="${SITE}${url}">${noindex ? '\n<meta name="robots" content="noindex,follow">' : ''}
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(desc)}">
 <meta property="og:url" content="${SITE}${url}">
@@ -80,6 +80,8 @@ for (const [t, slug, name, def] of HH) {
 
 // ── 육아휴직: 월급별 ──
 const WAGES = []; for (let m = 200; m <= 500; m += 10) WAGES.push(m);
+// 2026-11-04: 10만원 간격은 숫자만 다른 거의 같은 글(250만원 이상은 1~12개월 급여가 상한이라 똑같다) → WAGE_STEP 배수만 색인, 나머지 noindex·사이트맵 제외
+const WAGE_STEP = 50;
 const combosNote = '자녀 생후 18개월 안에 부부 모두 쓰는 경우(6+6 특례), 배우자 월급도 같다고 가정';
 WAGES.forEach((m, i) => {
   const wage = m * 1e4, url = `/parental-leave/wage-${m}/`;
@@ -90,7 +92,7 @@ WAGES.forEach((m, i) => {
   const desc = `월 통상임금 ${m}만 원이면 육아휴직 급여는 1~3개월 월 ${manw(solo.rows[0].pay)}, 4~6개월 ${manw(solo.rows[3].pay)}, 7개월부터 ${manw(solo.rows[6].pay)}이고 12개월 총 ${manw(t12)}이에요. 6+6 부모육아휴직 부부 합계 ${manw(six.total * 2)}, 근로시간 단축·배우자 출산휴가 급여까지 정리했어요.`;
   const mrows = solo.rows.map((r, j) => `<tr><td>${r.m}개월째</td><td class="n">${won(r.pay)}</td><td class="n">${j < 6 ? won(six.rows[j].pay) : '—'}</td><td class="n">${won(single.rows[j].pay)}</td></tr>`).join('');
   const nav = [WAGES[i - 1], WAGES[i + 1]].map((w, k) => w ? `<a href="/parental-leave/wage-${w}/">${k ? '' : '← '}월급 ${w}만원${k ? ' →' : ''}</a>` : '<span></span>').join('');
-  out.push([url, page({ url, title, desc, crumb: [['육아휴직 급여 계산기', '/parental-leave/'], ['월급별 육아휴직 급여', '/parental-leave/wage/'], [`월급 ${m}만원`, url]],
+  out.push([url, page({ url, title, desc, noindex: m % WAGE_STEP > 0, crumb: [['육아휴직 급여 계산기', '/parental-leave/'], ['월급별 육아휴직 급여', '/parental-leave/wage/'], [`월급 ${m}만원`, url]],
     qa: [[`월급 ${m}만원이면 육아휴직 급여는 얼마인가요?`, `월 통상임금 ${m}만 원 기준 2026년 육아휴직 급여는 1~3개월째 월 ${won(solo.rows[0].pay)}, 4~6개월째 ${won(solo.rows[3].pay)}, 7개월째부터 ${won(solo.rows[6].pay)}이고, 12개월 합계 ${won(t12)}입니다. 사후지급금 없이 휴직 중 전액 받고 비과세입니다.`],
       [`월급 ${m}만원 부부가 6+6으로 쓰면 얼마인가요?`, `자녀 생후 18개월 안에 부부 모두 6개월씩 쓰면 한 사람당 ${won(six.total)}, 부부 합계 ${won(six.total * 2)}입니다.`]],
     body: `<h1>월급 ${m}만원 육아휴직 급여 (2026년)</h1>
@@ -129,5 +131,5 @@ for (const dir of ['eitc', 'parental-leave']) for (const d of fs.readdirSync(pat
 for (const [url, html] of out) { const d = path.join(ROOT, url); fs.mkdirSync(d, { recursive: true }); fs.writeFileSync(path.join(d, 'index.html'), html); }
 const today = new Date().toLocaleDateString('sv-SE'), smPath = path.join(ROOT, 'sitemap.xml');
 const sm = fs.readFileSync(smPath, 'utf8').replace(/<!-- benefit -->[\s\S]*<!-- \/benefit -->\n/, '');
-fs.writeFileSync(smPath, sm.replace('</urlset>', '<!-- benefit -->\n' + out.map(([u]) => `<url><loc>${SITE}${u}</loc><lastmod>${today}</lastmod></url>`).join('\n') + '\n<!-- /benefit -->\n</urlset>'));
+fs.writeFileSync(smPath, sm.replace('</urlset>', '<!-- benefit -->\n' + out.filter(([, html]) => !html.includes('content="noindex')).map(([u]) => `<url><loc>${SITE}${u}</loc><lastmod>${today}</lastmod></url>`).join('\n') + '\n<!-- /benefit -->\n</urlset>'));
 console.log(`생성 ${out.length}쪽: 장려금 가구 유형 ${HH.length}, 육아휴직 월급별 ${WAGES.length} + 목록 1`);

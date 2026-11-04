@@ -20,6 +20,9 @@ const pct = r => +(r * 100).toFixed(4) + '%';
 // 중개수수료 금액 목록(만원) — 취득세 페이지에서도 링크한다
 const BRK_SALE = [10000, 15000, 20000, 25000, 30000, 35000, 40000, 50000, 60000, 70000, 80000, 90000, 100000, 110000, 120000, 130000, 140000, 150000, 170000, 200000];
 const BRK_JEON = [5000, 7000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 50000, 60000, 70000, 80000, 90000, 100000];
+// 2026-11-04: 연봉 100만원·근무시간 1시간 간격 페이지는 숫자만 다른 거의 같은 글이라 이 간격 배수만 색인한다.
+// 나머지는 noindex,follow + sitemap.xml 제외(주소·목록·앞뒤 링크는 그대로)
+const SAL_STEP = 500, HRS_STEP = 5;
 
 // 공유 미리보기(og)·네트워크 푸터 — 계산기 index.html·about.html·privacy.html에도 같은 내용이 들어 있다
 const OG = `<meta property="og:type" content="website"><meta property="og:site_name" content="한눈 계산기"><meta property="og:locale" content="ko_KR">
@@ -32,14 +35,14 @@ const crumbs = (list, url, title) => '<script type="application/ld+json">' + JSO
   itemListElement: [['한눈 계산기', '/'], ...list, [title, url]].map(([name, u], i) => ({ '@type': 'ListItem', position: i + 1, name, item: SITE + u })) }).replace(/</g, '\\u003c') + '</script>';
 const CALC = { salary: ['연봉 실수령액 계산기', '연봉별 실수령액 표'], 'acquisition-tax': ['취득세 계산기', '집값별 취득세 표'], hourly: ['알바 시급·주휴수당 계산기', '근무시간별 알바 월급 표'], brokerage: ['중개수수료 계산기', '금액별 복비 표'] };
 
-function page({ url, title, desc, ogTitle, body, crumb }) {
+function page({ url, title, desc, ogTitle, body, crumb, noindex }) {
   const dir = url.split('/')[1], [cn, ln] = CALC[dir], calc = [cn, `/${dir}/`];
   return `<!doctype html>
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="naver-site-verification" content="21421c877a507dea4b5be99d5ec0d9e9fd8d7b50" />
 <title>${esc(title)} | 한눈 계산기</title>
 <meta name="description" content="${esc(desc)}">
-<link rel="canonical" href="${SITE}${url}">
+<link rel="canonical" href="${SITE}${url}">${noindex ? '\n<meta name="robots" content="noindex,follow">' : ''}
 <meta property="og:title" content="${esc(ogTitle || title)}">
 <meta property="og:description" content="${esc(desc)}">
 <meta property="og:url" content="${SITE}${url}">
@@ -81,7 +84,7 @@ SAL.forEach((y, i) => {
   const rate = (1 - r.net * 12 / (y * 1e4)) * 100;
   const title = `연봉 ${kr(y, true)} 실수령액 2026 — 월 ${manw(r.net).replace('약 ', '')} (4대보험·세금 공제)`;
   write(salHref(y), page({
-    url: salHref(y), title,
+    url: salHref(y), title, noindex: y % SAL_STEP > 0,
     desc: `연봉 ${name}이면 2026년 기준 4대보험과 소득세를 빼고 월 ${won(r.net)}, 1년에 ${won(r.net * 12)}을 받아요. 공제 항목별 금액, 부양가족 1~4명·비과세 식대 유무에 따른 실수령액 비교.`,
     body: `<h1>연봉 ${name} 실수령액 (2026년)</h1>
 <p class="lead">연봉 ${name}은 세전 월급 ${won(gross)}이에요. 국민연금·건강보험·장기요양·고용보험과 소득세·지방소득세를 빼면 <b>매달 ${won(r.net)}</b>이 통장에 들어와요. (비과세 식대 월 20만원, 공제대상가족 본인 1명 기준)</p>
@@ -197,7 +200,7 @@ HRS.forEach((h, i) => {
   const juhuTxt = r.juhuOk ? `주 소정근로시간이 15시간 이상이라 개근하면 주휴수당 (${h} ÷ 40) × 8 × ${won(HOURLY.wage)} = <b>${won(r.juhu)}</b>이 매주 붙어요.`
     : `주 15시간 미만이라 주휴수당이 없어요(근로기준법 제18조제3항). 주 15시간으로 늘리면 주휴수당 ${won(r15.juhu)}이 붙어 월급이 ${won(r15.month)}이 돼요.`;
   write(hrHref(h), page({
-    url: hrHref(h),
+    url: hrHref(h), noindex: h % HRS_STEP > 0,
     title: `주 ${h}시간 알바 월급 2026 — ${r.juhuOk ? '주휴수당 포함' : '주휴수당 없이'} ${manw(r.month)}`,
     desc: `2026년 최저시급 ${won(HOURLY.wage)}으로 주 ${h}시간 일하면 주급 ${won(r.weekJ)}, 월급 ${won(r.month)}(4.345주)이에요. 주휴수당 ${r.juhuOk ? won(r.juhu) + ' 포함' : '미해당'}, 3.3% 공제 후 ${won(biz.net)}, 2027년 시급 기준 금액까지.`,
     body: `<h1>주 ${h}시간 알바 월급 (2026년 최저시급)</h1>
@@ -297,6 +300,6 @@ for (const [url, html] of out) { const d = path.join(ROOT, url); fs.mkdirSync(d,
 // sitemap.xml: 표시 사이의 생성분만 교체
 const today = new Date().toLocaleDateString('sv-SE'), smPath = path.join(ROOT, 'sitemap.xml');
 const sm = fs.readFileSync(smPath, 'utf8').replace(/<!-- longtail -->[\s\S]*<!-- \/longtail -->\n/, '');
-const block = '<!-- longtail -->\n' + out.map(([u]) => `<url><loc>${SITE}${u}</loc><lastmod>${today}</lastmod></url>`).join('\n') + '\n<!-- /longtail -->\n';
+const block = '<!-- longtail -->\n' + out.filter(([, html]) => !html.includes('content="noindex')).map(([u]) => `<url><loc>${SITE}${u}</loc><lastmod>${today}</lastmod></url>`).join('\n') + '\n<!-- /longtail -->\n';
 fs.writeFileSync(smPath, sm.replace('</urlset>', block + '</urlset>'));
 console.log(`생성 ${out.length}쪽: 연봉 ${SAL.length}, 취득세 ${ACQ.length}, 알바 ${HRS.length}, 복비 매매 ${BRK_SALE.length}·전세 ${BRK_JEON.length}, 목록 4`);
