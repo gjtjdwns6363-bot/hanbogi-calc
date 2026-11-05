@@ -1,11 +1,11 @@
-{"updated":"2026-11-05","views":{
+{"updated":"2026-11-06","views":{
 "/loan/":{"total":24,"d30":8},
 "/car/":{"total":51,"d30":35},
-"/hourly/":{"total":35,"d30":28},
+"/hourly/":{"total":35,"d30":27},
 "/subscription/":{"total":11,"d30":7},
 "/salary/":{"total":26,"d30":20},
 "/jeonse-loan/":{"total":7,"d30":1},
-"/rent/":{"total":7,"d30":1},
+"/rent/":{"total":8,"d30":2},
 "/eitc/":{"total":6,"d30":1},
 "/brokerage/":{"total":20,"d30":16},
 "/parental-leave/":{"total":4,"d30":0},
