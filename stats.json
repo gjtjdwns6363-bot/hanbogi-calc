@@ -1,10 +1,10 @@
-{"updated":"2026-11-14","views":{
-"/loan/":{"total":33,"d30":17},
-"/car/":{"total":65,"d30":45},
-"/hourly/":{"total":37,"d30":13},
-"/subscription/":{"total":15,"d30":7},
-"/salary/":{"total":40,"d30":33},
-"/jeonse-loan/":{"total":9,"d30":3},
+{"updated":"2026-11-15","views":{
+"/loan/":{"total":30,"d30":14},
+"/car/":{"total":67,"d30":47},
+"/hourly/":{"total":36,"d30":12},
+"/subscription/":{"total":15,"d30":6},
+"/salary/":{"total":39,"d30":32},
+"/jeonse-loan/":{"total":7,"d30":1},
 "/rent/":{"total":8,"d30":2},
 "/eitc/":{"total":6,"d30":0},
 "/brokerage/":{"total":31,"d30":27},
