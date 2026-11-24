@@ -192,7 +192,7 @@ if (q && qres) {
     qres.innerHTML = m.length ? m.map(c => `<li><a href="${c[0]}">${c[1]} ${c[2]} <span class="hint">${c[3]}</span></a></li>`).join('') : '<li class="hn-empty">찾는 계산기가 없어요. 다른 말로 검색해 보세요.</li>';
     qres.hidden = false;
   });
-  q.addEventListener('keydown', e => { const a = qres.querySelector('a'); if (e.key === 'Enter' && a) { e.preventDefault(); location.href = a.href; } });
+  q.addEventListener('keydown', e => { const a = qres.querySelector('a'); if (e.key === 'Enter' && a) { e.preventDefault(); if (e.isComposing || e.keyCode === 229) return; location.href = a.href; } });
 }
 favRow();
 
