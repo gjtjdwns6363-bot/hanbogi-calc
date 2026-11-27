@@ -1,6 +1,6 @@
-{"updated":"2026-11-27","views":{
+{"updated":"2026-11-28","views":{
 "/loan/":{"total":38,"d30":21},
-"/car/":{"total":90,"d30":53},
+"/car/":{"total":95,"d30":57},
 "/hourly/":{"total":38,"d30":13},
 "/subscription/":{"total":15,"d30":4},
 "/salary/":{"total":41,"d30":20},
@@ -13,6 +13,6 @@
 "/severance/":{"total":7,"d30":1},
 "/down-payment/":{"total":6,"d30":1},
 "/year-end-tax/":{"total":27,"d30":20},
-"/acquisition-tax/":{"total":17,"d30":9},
-"/capital-gains/":{"total":3,"d30":2}
+"/acquisition-tax/":{"total":17,"d30":7},
+"/capital-gains/":{"total":3,"d30":0}
 }}
